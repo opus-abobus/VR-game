@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LowPolyWaterMaterial
+  m_Shader: {fileID: 4800000, guid: 16516895e8a79bf49a6562c3c3b84cbf, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ShoreTex:
+        m_Texture: {fileID: 2800000, guid: 5fbcffe9c2077f04186883cb39275fcc, type: 3}
+        m_Scale: {x: 120, y: 123104.5}
+        m_Offset: {x: 3, y: 30}
+    m_Ints: []
+    m_Floats:
+    - _Shininess: 10
+    - _isInnerAlphaBlendOrColor: 0
+    m_Colors:
+    - _BaseColor: {r: 0.39279994, g: 0.8584906, b: 0.74663013, a: 0.5}
+    - _BumpDirection: {r: 1, g: 3123123, b: -1, a: 123}
+    - _BumpTiling: {r: 12, g: 12, b: 123, a: 3}
+    - _Foam: {r: 0.1, g: 0.375, b: 123, a: 123}
+    - _InvFadeParemeter: {r: 0.2, g: 0.39, b: 2.27, a: 1}
+    - _SpecColor: {r: 0.7316779, g: 0.7924528, b: 0.4448202, a: 1}
+  m_BuildTextureStacks: []
+--- !u!1002 &2100001
+EditorExtensionImpl:
+  serializedVersion: 6
