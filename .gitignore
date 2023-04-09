@@ -3,7 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-*.dylib
 # User-specific files
 *.rsuser
 *.suo
@@ -18,7 +17,29 @@
 # Mono auto generated files
 mono_crash.*
 
+#added------------------
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+[Aa]ssets/Plugins/Editor/JetBrains*
+sysinfo.txt
+*.apk
+*.aab
+*.unitypackage
+*.app
+crashlytics-build.properties
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+*.tgitignore
+#------------------------------------
+
 # Build results
+[Ll]ibrary/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -75,7 +96,7 @@ StyleCopReport.xml
 *_p.c
 *_h.h
 *.ilk
-# ---------------------------------- *.meta
+*.meta
 *.obj
 *.iobj
 *.pch
