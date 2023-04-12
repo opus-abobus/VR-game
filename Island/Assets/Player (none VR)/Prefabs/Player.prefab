@@ -61,14 +61,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 9183915272255125172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76640cc39ee0b6146befedb865920e57, type: 3}
+  m_Script: {fileID: 11500000, guid: e99d1d20285f3f34688a4fab40a88b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 9183915273051889993}
+  playerCamera: {fileID: 0}
   mouseSensitivity: 4
   walkSpeed: 6
   gravity: -13
-  lockCursor: 0
+  lockCursor: 1
   moveSmoothTime: 0.3
   mouseSmoothTime: 0.03
 --- !u!1 &9183915273051889998
