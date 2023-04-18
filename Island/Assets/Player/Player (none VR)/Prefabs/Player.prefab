@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99d1d20285f3f34688a4fab40a88b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 9183915273051889993}
+  playerCamera: {fileID: 0}
   mouseSensitivity: 4
   walkSpeed: 6
   gravity: -13
