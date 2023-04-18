@@ -57,6 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Import\Simple Water Shader\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Import\GameObjectBrush\Scripts\Editor\GameObjectBrushEditor.cs" />
+    <Compile Include="Assets\Import\GameObjectBrush\Scripts\Editor\AddObjectPopup.cs" />
+    <Compile Include="Assets\Import\GameObjectBrush\Scripts\Editor\BrushObject.cs" />
+    <Compile Include="Assets\Import\GameObjectBrush\Scripts\Editor\BrushCollection.cs" />
+    <Compile Include="Assets\Import\GameObjectBrush\Scripts\Editor\StringPopupDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
