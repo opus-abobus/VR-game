@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3E6BD960-4786-EBE4-3BCE-8CA6547C93DB}</ProjectGuid>
+    <ProjectGuid>{BEE2399B-DE37-F668-4565-49865685AFE8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>SteamVR</AssemblyName>

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{47443B3C-179D-A76F-028A-1F9FD968C472}</ProjectGuid>
+    <ProjectGuid>{A95298D2-8996-2BCB-0AF3-8BDDF469F362}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -854,27 +854,27 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{0FB48730-735B-7151-022B-867DB8DC6701}</Project>
+      <Project>{88E606B3-B1AF-D610-E06B-BCFB0D960D53}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Input_Editor.csproj">
-      <Project>{EAF0A16C-EA9B-65F6-81C9-4F01CB033C2C}</Project>
+      <Project>{DFB36B10-3B6F-A73D-E6E4-BDBD022306FD}</Project>
       <Name>SteamVR_Input_Editor</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Actions.csproj">
-      <Project>{3FF8D47C-82E1-ACA6-4ED1-E1BDFF58297A}</Project>
+      <Project>{87538162-0E88-9987-D379-04C038AFB049}</Project>
       <Name>SteamVR_Actions</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR.csproj">
-      <Project>{0260BBF5-C29B-6B62-DE33-36F8BFE6E7B1}</Project>
+      <Project>{E48233D8-6DC2-A1CA-EED1-8DC06F651BFA}</Project>
       <Name>SteamVR</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
-      <Project>{F02CA232-DFD3-E2AE-8E46-ABF6C4A10A2A}</Project>
+      <Project>{DA533410-A159-CFB9-82DB-BDEFC1B00B1E}</Project>
       <Name>SteamVR_Windows_EditorHelper</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Editor.csproj">
-      <Project>{FBE41B23-A52D-894E-EB1A-65218A6CC37D}</Project>
+      <Project>{2BC56494-3725-1B94-7C34-2380937E60C8}</Project>
       <Name>SteamVR_Editor</Name>
     </ProjectReference>
   </ItemGroup>

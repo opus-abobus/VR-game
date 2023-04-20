@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0260BBF5-C29B-6B62-DE33-36F8BFE6E7B1}</ProjectGuid>
+    <ProjectGuid>{E48233D8-6DC2-A1CA-EED1-8DC06F651BFA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>SteamVR</AssemblyName>
@@ -931,7 +931,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
-      <Project>{F02CA232-DFD3-E2AE-8E46-ABF6C4A10A2A}</Project>
+      <Project>{DA533410-A159-CFB9-82DB-BDEFC1B00B1E}</Project>
       <Name>SteamVR_Windows_EditorHelper</Name>
     </ProjectReference>
   </ItemGroup>
