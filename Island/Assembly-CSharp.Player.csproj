@@ -64,6 +64,8 @@
   <ItemGroup>
     <None Include="Assets\Asset Store\Skybox\Readme.txt" />
     <None Include="Assets\Asset Store\Skybox\ReleaseNotes.txt" />
+    <None Include="Assets\Asset Store\Wind\Documentation\LPW_Log.txt" />
+    <None Include="Assets\Asset Store\Wind\Assets\Shaders\ASE\LPW_Vegetation.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
