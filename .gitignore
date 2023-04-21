@@ -36,7 +36,7 @@ sysinfo.txt
 crashlytics-build.properties
 [Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 *.tgitignore
-[Aa]ssets/[Aa]sset*Store/GameObjectBrush/
+#[Aa]ssets/[Aa]sset*Store/GameObjectBrush/
 #------------------------------------
 
 # Build results
