@@ -57,10 +57,11 @@
     <Analyzer Include="C:\Users\maxer\GitHub\VR-game\Island\Assets\VR\SteamVR\Input\Plugins\JSON.NET\Valve.Newtonsoft.Json.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Player (none VR)\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Scripts\ExportTerrain.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset Store\Skybox\Readme.txt" />
