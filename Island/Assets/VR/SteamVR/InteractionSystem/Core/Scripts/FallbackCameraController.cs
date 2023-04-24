@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -17,7 +18,7 @@ namespace Valve.VR.InteractionSystem
 		public float shiftSpeed = 16.0f;
 		public bool showInstructions = true;
 
-		private Vector3 startEulerAngles;
+        private Vector3 startEulerAngles;
 		private Vector3 startMousePosition;
 		private float realTime;
 
@@ -75,7 +76,7 @@ namespace Valve.VR.InteractionSystem
 
 			transform.position += transform.TransformDirection( delta );
 
-			Vector3 mousePosition = Input.mousePosition;
+            Vector3 mousePosition = Input.mousePosition;
 
 			if ( Input.GetMouseButtonDown( 1 ) /* right mouse */)
 			{

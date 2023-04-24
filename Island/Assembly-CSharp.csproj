@@ -61,6 +61,12 @@
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Scripts\ExportTerrain.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerInteractions.cs" />
+    <Compile Include="Assets\Scripts\DetacheInteractable.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\fixed\banana &amp; tree\BananaDrop.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\fixed\bush &amp; berry\ToggleGravity.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\fixed\bush &amp; berry\SpawnManager.cs" />
+    <Compile Include="Assets\Scripts\GameTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset Store\Skybox\Readme.txt" />

@@ -13,13 +13,16 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 4.0f;
     bool checkWalk = false;
 
+    public Transform fallbackVR;
+    //public Transform fallbackVRParent;
     public bool UseKeyboard = false;
+    public bool UseMouseLook = false;
     // Поля для перемещения игрока, используя стрелки клавиатуры
     [Header("Перемещение с помощью Home, End, PgDn и Del")]
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
     public float keyboardWalkSpeed = 6.0f;
     public float gravity = -13.0f;
-    public Transform fallbackVRCamera;
+    //public Transform fallbackVRCamera;
     float velocityY = 0.0f;
     Vector2 currentDir = Vector2.zero;
     Vector2 currentDirVelocity = Vector2.zero;
@@ -38,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
         if (UseKeyboard) {
             UseKeyboardMovement();
         }
+        if (UseMouseLook) {
+            UpdateMouseLook();
+        }
     }
     void SmoothMovement() {
         if (m_Boolen.GetStateDown(SteamVR_Input_Sources.RightHand)) {
@@ -55,7 +61,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     void UseKeyboardMovement() {
-        //Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        /*fallbackVR.parent = null;
+        transform.Rotate(Vector3.up * fallbackVR.localEulerAngles.y);
+        fallbackVR.parent = fallbackVRParent;*/
+
         int _w, _a, _s, _d;
         if (Input.GetKey(KeyCode.Home)) _w = 1;
         else _w = 0;
@@ -66,11 +75,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.PageDown)) _d = 1;
         else _d = 0;
         Vector2 targetDir = new Vector2(_a + _d, _w + _s);
-
-        transform.localEulerAngles = fallbackVRCamera.localEulerAngles;
-        //Vector3 v3 = transform.localEulerAngles;
-        //float rayDist = 10.0f;
-        //Debug.DrawRay(v3, new Vector3(v3.x, v3.y, v3.z + rayDist), Color.red);
 
         targetDir.Normalize();
 
@@ -83,5 +87,26 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * keyboardWalkSpeed + Vector3.up * velocityY;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    [SerializeField, Range(1.0f, 10.0f)] float mouseSensitivity = 4.0f;
+    [SerializeField][Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
+
+    Vector2 currentMouseDelta = Vector2.zero;
+    Vector2 currentMouseDeltaVelocity = Vector2.zero;
+    float cameraPitch = 0.0f;
+    void UpdateMouseLook() {
+            if (!(Input.GetMouseButton(1) || Input.GetMouseButtonDown(1))) {
+
+                Vector2 targetMouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+                currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
+
+                cameraPitch -= currentMouseDelta.y * mouseSensitivity;
+                cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);
+
+                fallbackVR.localEulerAngles = Vector3.right * cameraPitch;
+                transform.Rotate(currentMouseDelta.x * mouseSensitivity * Vector3.up);
+            }
     }
 }
