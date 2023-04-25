@@ -30,7 +30,7 @@ public class GameTime : MonoBehaviour
     float sunIntensity, moonIntensity;
 
     Vector3 defaultAngles;
-    float _elapsedTime = 0f;
+    //float _elapsedTime = 0f;
 
     private void Start() {
         defaultAngles = Sun.transform.localEulerAngles;
