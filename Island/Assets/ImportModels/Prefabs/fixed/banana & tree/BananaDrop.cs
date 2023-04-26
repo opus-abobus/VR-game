@@ -62,11 +62,15 @@ public class BananaDrop : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
         if (collision.gameObject == ground) {
             SpawnBanana();
             Destroy(bananaPart);
         }
+    }
+    [SerializeField] BananaRipening bananaRipening;
+    private void OnDestroy() {
+        bananaRipening.isBananasFallen = true;
     }
 
     void SpawnBanana() {
