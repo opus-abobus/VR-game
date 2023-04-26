@@ -195,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 277191969363123104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0476137, y: 0.219, z: 1.9083776}
-  m_LocalScale: {x: 0.20126396, y: 0.20126396, z: 0.20126396}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6634042305974992470}
@@ -220,6 +220,7 @@ MonoBehaviour:
   BananaPart: {fileID: 3121648360897377439}
   UnripeBananas: {fileID: 680393176227514703}
   allowRipening: 1
+  ripeProgressPhase: 0
   phaseTimeInSeconds: 4
 --- !u!1 &305145082863486662
 GameObject:
@@ -6597,6 +6598,7 @@ MonoBehaviour:
   bananaPart: {fileID: 3121648360897377439}
   banana: {fileID: 6019332497948652815, guid: ccd76ee1b8d17394c8a30c14fed4e34e, type: 3}
   ground: {fileID: 0}
+  bananaRipening: {fileID: 1305999175548346634}
 --- !u!54 &5938440877115475350
 Rigidbody:
   m_ObjectHideFlags: 0
