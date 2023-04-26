@@ -68,6 +68,7 @@
     <Compile Include="Assets\ImportModels\Prefabs\fixed\banana &amp; tree\BananaRipening.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Scripts\ExportTerrain.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\fixed\banana &amp; tree\BananaTreeGrowth.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset Store\Wind\Documentation\LPW_Log.txt" />

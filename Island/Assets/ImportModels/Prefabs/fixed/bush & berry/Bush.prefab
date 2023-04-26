@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 2754078098704051524}
   - component: {fileID: 4812270736717962959}
   m_Layer: 0
-  m_Name: Bush
+  m_Name: Leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -649,7 +649,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5170468696877817062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9106282, y: 0.43746352, z: -1.5745484}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -670,7 +670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93da22654f9bd94e9e90ce877d15c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnedBerries: -1
+  minBerries: 1
+  maxBerries: 8
   spawnPoints:
   - {fileID: 3270259969728256290}
   - {fileID: 1551560637559162053}
@@ -702,6 +703,9 @@ MonoBehaviour:
   spawnPrefab: {fileID: 8728107940583962584, guid: 505f0401c1c798b4ea7f3ebef2f9818e,
     type: 3}
   parent: {fileID: 2251187663908788475}
+  allowRespawnBerries: 1
+  minTimeToSpawn: 1
+  maxTimeToSpawn: 4
 --- !u!1 &5527274405156993928
 GameObject:
   m_ObjectHideFlags: 0

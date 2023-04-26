@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BananaDrop : MonoBehaviour
 {
@@ -45,6 +46,9 @@ public class BananaDrop : MonoBehaviour
             if (ground == null) {
                 Debug.LogError("У бананов нет ссылки на землю");
             }
+        }
+        else if (SceneManager.GetActiveScene().name == "Mechanic test") {
+            ground = GameObject.FindGameObjectWithTag("ground");
         }
     }
 
