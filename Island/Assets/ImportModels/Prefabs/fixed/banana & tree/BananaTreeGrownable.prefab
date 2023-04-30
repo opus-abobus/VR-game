@@ -955,7 +955,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1572917051013538834}
   - component: {fileID: 8843193474890912451}
-  - component: {fileID: 5693274125757368726}
   - component: {fileID: -7609106783775112972}
   m_Layer: 0
   m_Name: BananaTreeGrownable
@@ -971,9 +970,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2206710035770343080}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.053334948, y: 0.06239183, z: 2.5755749}
+  m_LocalScale: {x: 0.040507182, y: 0.040507182, z: 0.040507182}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4708475895899675486}
@@ -1000,22 +999,6 @@ MonoBehaviour:
   allowRipening: 1
   ripeProgressPhase: 0
   phaseTimeInSeconds: 4
---- !u!111 &5693274125757368726
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2206710035770343080}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 6f4c4da290089d64b8971e1ced9f7af3, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 6f4c4da290089d64b8971e1ced9f7af3, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &-7609106783775112972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,7 +1012,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowGrowth: 1
-  growthMultiplier: 1
+  GrowthRatio: 3
+  useRandomGrowthTime: 1
+  timeToGrowthInSeconds: 10
+  MinTimeToGrowthInSeconds: 7
+  MaxTimeToGrowthInSeconds: 10
+  growningProgress: 0
 --- !u!1 &2239936891950649807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1783,91 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2994479582331879384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3231134385760345721}
+  - component: {fileID: 5104382364499681710}
+  - component: {fileID: 2894935601492346457}
+  m_Layer: 0
+  m_Name: Banana
+  m_TagString: banana
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3231134385760345721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994479582331879384}
+  m_LocalRotation: {x: -0.53709495, y: 0.71049416, z: 0.44772652, w: -0.079170965}
+  m_LocalPosition: {x: 0.025993422, y: -0.078181505, z: 0.118812084}
+  m_LocalScale: {x: 2.082467, y: 2.0824664, z: 2.082467}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8412643957664898097}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5104382364499681710
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994479582331879384}
+  m_Mesh: {fileID: 3216447080179446721, guid: 99871ae9e11d5294484f38ac36f2bb6d, type: 3}
+--- !u!23 &2894935601492346457
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994479582331879384}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -6428446903544404196, guid: 99871ae9e11d5294484f38ac36f2bb6d, type: 3}
+  - {fileID: 670553534268366489, guid: 1987cbc382430324b9ae1cc6bfac11f3, type: 3}
+  - {fileID: -9120070891885167230, guid: 1987cbc382430324b9ae1cc6bfac11f3, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2995727503670167094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,91 +2222,6 @@ CapsuleCollider:
   m_Height: 0.06
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3166195589775855600
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3362318477568847441}
-  - component: {fileID: 4947338309211197830}
-  - component: {fileID: 3049765820170761841}
-  m_Layer: 0
-  m_Name: Banana
-  m_TagString: banana
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3362318477568847441
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3166195589775855600}
-  m_LocalRotation: {x: -0.53709495, y: 0.71049416, z: 0.44772652, w: -0.079170965}
-  m_LocalPosition: {x: 0.025993422, y: -0.078181505, z: 0.118812084}
-  m_LocalScale: {x: 2.082467, y: 2.0824664, z: 2.082467}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8412643957664898097}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4947338309211197830
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3166195589775855600}
-  m_Mesh: {fileID: 3216447080179446721, guid: 99871ae9e11d5294484f38ac36f2bb6d, type: 3}
---- !u!23 &3049765820170761841
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3166195589775855600}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -6428446903544404196, guid: 99871ae9e11d5294484f38ac36f2bb6d, type: 3}
-  - {fileID: 670553534268366489, guid: 1987cbc382430324b9ae1cc6bfac11f3, type: 3}
-  - {fileID: -9120070891885167230, guid: 1987cbc382430324b9ae1cc6bfac11f3, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3200131704446604225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,7 +4200,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3062234601037346339}
-  - {fileID: 3362318477568847441}
+  - {fileID: 3231134385760345721}
   - {fileID: 4933605047889158705}
   - {fileID: 1908767981367722580}
   - {fileID: 4895251827599749500}

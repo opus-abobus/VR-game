@@ -6,52 +6,52 @@ using UnityEngine;
 public class BananaTreeGrowth : MonoBehaviour
 {
     [SerializeField] bool allowGrowth = true;
-    [SerializeField, Range(0.01f, 1)] float growthSpeed = 1f;
-    [SerializeField] bool randomizeSpeed = true;
-    [SerializeField] int changeSpeedAfterSeconds = 5;
+    [Tooltip("Коэффициент роста: начальный рост к концу роста увеличится на это число")]
+    [SerializeField, Range(1f, 10f)] float GrowthRatio = 3;
+
+    [SerializeField] bool useRandomGrowthTime = true;
+    [SerializeField] float timeToGrowthInSeconds = 5;
+    [SerializeField] float MinTimeToGrowthInSeconds = 3;
+    [SerializeField] float MaxTimeToGrowthInSeconds = 10;
 
     BananaRipening ripeningInstance = null;
-    Animation animation;
+
+    Vector3 startScale, endScale;
+    Vector3 deltaScale;
+    IEnumerator _growningProcess;
+
     private void Awake() {
+        startScale = transform.localScale;
+        endScale = startScale * GrowthRatio;
+
+        if (startScale.y >= endScale.y) this.enabled = false;
+
         ripeningInstance = GetComponent<BananaRipening>();
-        animation = GetComponent<Animation>();
 
         if (allowGrowth) {
             ripeningInstance.enabled = false;
-            StartCoroutine(ChangeAnimationSpeed());
+
+            if (useRandomGrowthTime) {
+                timeToGrowthInSeconds = Random.Range(MinTimeToGrowthInSeconds, MaxTimeToGrowthInSeconds);
+            }
+            deltaScale = endScale - startScale;
+            _growningProcess = GrowningProcess(); StartCoroutine(_growningProcess);
         }
-        else
-            animation.enabled = false;
-        //StartCoroutine(FirstRoutine());
     }
 
-    Vector3 _oldScale;
-    bool isAnimEnded = false;
+    [SerializeField, Range(0, 1)] float growningProgress = 0;
     private void Update() {
-        if (transform.localScale == _oldScale) {
-            isAnimEnded = true;
+        if (growningProgress >= 1) {
+            StopCoroutine(_growningProcess);
+            ripeningInstance.enabled = true;
+            this.enabled = false;
         }
-        _oldScale = transform.localScale;
-        //if (_oldScale == null) _oldScale = transform.localScale;
-        Debug.Log(isAnimEnded);
     }
-    int i = 0;
-    IEnumerator ChangeAnimationSpeed() {
-        print("cr call " + i);
-        i++;
-        while (!isAnimEnded) {
-            yield return new WaitForSeconds(changeSpeedAfterSeconds);
-            foreach (AnimationState state in animation) {
-                if (!randomizeSpeed)
-                    state.speed = growthSpeed;
-                else {
-                    state.speed = Random.Range(0.1f, 1);
-                }
-            }
+    IEnumerator GrowningProcess() {
+        while (true) {
+            growningProgress += Time.deltaTime / timeToGrowthInSeconds;
+            transform.localScale = startScale + deltaScale * growningProgress;
             yield return null;
         }
     }
-    /*IEnumerator StartRipening() {
-
-    }*/
 }
