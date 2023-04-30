@@ -60,6 +60,7 @@
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\fixed\bush &amp; berry\ToggleGravity.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\fixed\banana &amp; tree\BananaDrop.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\fixed\cocount &amp; palm\CocountSpawner.cs" />
     <Compile Include="Assets\Scripts\DetacheInteractable.cs" />
     <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Scripts\ExportTerrain.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\fixed\banana &amp; tree\BananaTreeGrowth.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\fixed\cocount &amp; palm\CocountSplit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset Store\Wind\Documentation\LPW_Log.txt" />
