@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7741288802237840419}
   - component: {fileID: 7741288802237840418}
   - component: {fileID: 427732573610864463}
+  - component: {fileID: 2301421421863410105}
   m_Layer: 0
   m_Name: Berry
   m_TagString: berry
@@ -232,7 +233,19 @@ MonoBehaviour:
   restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2301421421863410105}
+        m_TargetAssemblyTypeName: SetEatability, Assembly-CSharp
+        m_MethodName: set_IsEatable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls:
@@ -248,6 +261,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2301421421863410105}
+        m_TargetAssemblyTypeName: SetEatability, Assembly-CSharp
+        m_MethodName: set_IsEatable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeldUpdate:
     m_PersistentCalls:
       m_Calls: []
@@ -262,5 +287,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcb0013f3432d3a4b8830bd759839e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2301421421863410105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8728107940583962584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa83a4a4f84a2747bfb8d314a4df1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

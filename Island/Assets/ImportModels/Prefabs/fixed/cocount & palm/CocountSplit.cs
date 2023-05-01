@@ -7,10 +7,6 @@ public class CocountSplit : MonoBehaviour
     [SerializeField] GameObject coconutUp, coconutDown;
 
     int splitChance = 5;
-    public int SplitChance {
-        get { return splitChance; } 
-        set { splitChance = value; }
-    }
 
     bool wasDetachedFromHand;
     public bool WasDetachedFromHand {
@@ -19,7 +15,6 @@ public class CocountSplit : MonoBehaviour
             wasDetachedFromHand = value;
         }
     }
-
     
     private void OnCollisionEnter(Collision collision) {
         if (wasDetachedFromHand) {

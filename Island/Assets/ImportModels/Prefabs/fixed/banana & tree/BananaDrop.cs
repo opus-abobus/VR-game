@@ -37,7 +37,7 @@ public class BananaDrop : MonoBehaviour
         tags.Add("banana");
         tags.Add("berry");
         tags.Add("rock");
-        tags.Add("cocount");
+        tags.Add("cocount"); tags.Add("coconut");
     }
 
     private void Start() {
