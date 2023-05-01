@@ -9,4 +9,32 @@ public class SetEatability : MonoBehaviour
         get { return isEatable; }
         set { isEatable = value; }
     }
+
+    public int nutritionalValue = 5;
+    [SerializeField] bool useDefaultNutritionalValues = false;
+
+    private void Awake() {
+        if (useDefaultNutritionalValues) SetDefaultNutritionalValues();
+    }
+
+    void SetDefaultNutritionalValues() {
+        switch (this.gameObject.tag) {
+            case "berry": {
+                    nutritionalValue = 2;
+                    break;
+                }
+            case "banana": {
+                    nutritionalValue = 7;
+                    break;
+                }
+            case "cocount": {
+                    nutritionalValue = 5;
+                    break;
+                }
+            case "coconut": {
+                    nutritionalValue = 5;
+                    break;
+                }
+        }
+    }
 }
