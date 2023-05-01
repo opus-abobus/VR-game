@@ -11,7 +11,7 @@ public class CocountSpawner : MonoBehaviour
     [SerializeField] int minTimeToSpawn = 5;
     [SerializeField] int maxTimeToSpawnInSeconds = 10;
 
-    Mesh _mesh;
+    MeshRenderer _meshRenderer;
     Vector3 boundsSize;
     IEnumerator _CocountSpawning;
     private void Awake() {
@@ -21,8 +21,8 @@ public class CocountSpawner : MonoBehaviour
             GameObject parentObj = new GameObject("SpawnedCocounts");
             parent = parentObj.transform;
         }
-        _mesh = GetComponent<MeshFilter>().sharedMesh;
-        boundsSize = _mesh.bounds.size;
+        _meshRenderer = GetComponent<MeshRenderer>();
+        boundsSize = _meshRenderer.bounds.size / 2;
 
         _CocountSpawning = CocountSpawning();
         StartCoroutine(_CocountSpawning);
@@ -39,7 +39,7 @@ public class CocountSpawner : MonoBehaviour
         while (true) {
             if (useRandomTimeSpawn) timeToSpawnInSeconds = Random.Range(minTimeToSpawn, maxTimeToSpawnInSeconds + 1);
 
-            Vector3 randPoint = Random.insideUnitCircle;
+            Vector3 randPoint = Random.insideUnitSphere;
             Vector3 spawnPos = transform.position + MultiplyVectors(randPoint, boundsSize);
             GameObject _cocountInstance = Instantiate(cocount, spawnPos, cocount.transform.rotation);
             _cocountInstance.transform.parent = parent;

@@ -10,6 +10,7 @@ TagManager:
   - berry
   - ground
   - cocount
+  - rock
   layers:
   - Default
   - TransparentFX
