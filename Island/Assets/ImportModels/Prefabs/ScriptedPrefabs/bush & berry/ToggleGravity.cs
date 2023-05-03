@@ -9,7 +9,7 @@ public class ToggleGravity : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.name != "Bush")
+        //if (collision.gameObject.name != "Bush")
             rb.useGravity = true;
     }
 }

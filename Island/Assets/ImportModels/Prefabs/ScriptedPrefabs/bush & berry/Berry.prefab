@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7741288802237840418}
   - component: {fileID: 427732573610864463}
   - component: {fileID: 2301421421863410105}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Berry
   m_TagString: berry
   m_Icon: {fileID: 0}
