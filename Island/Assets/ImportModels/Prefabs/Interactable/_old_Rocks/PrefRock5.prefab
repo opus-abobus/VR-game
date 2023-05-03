@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7389023543898189665}
   - component: {fileID: 5847025089106911428}
   - component: {fileID: 8556902097832072206}
-  - component: {fileID: 5125100957468110368}
   - component: {fileID: 1254273070}
   - component: {fileID: 1254273068}
   - component: {fileID: 1254273069}
   - component: {fileID: 1254273071}
+  - component: {fileID: 264782193}
   m_Layer: 0
   m_Name: PrefRock5
   m_TagString: rock
@@ -88,20 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5125100957468110368
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7908538026894882267}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.013456484
-  m_Height: 0.038752582
-  m_Direction: 0
-  m_Center: {x: -0.0014076292, y: -0.0010084768, z: 0.0018423855}
 --- !u!54 &1254273070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -239,3 +225,17 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
+--- !u!64 &264782193
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7908538026894882267}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4013275331872712965, guid: 19e142d902882774b83c86a993436243, type: 3}
