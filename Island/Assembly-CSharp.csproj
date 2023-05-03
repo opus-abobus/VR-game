@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\ImportModels\Prefabs\Interactable\SetKinematicAfterSleep.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\bush &amp; berry\BerrySpawnManager.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\SetEatability.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\bush &amp; berry\ToggleGravity.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\banana &amp; tree\BananaDrop.cs" />
+    <Compile Include="Assets\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\cocount &amp; palm\CocountSpawner.cs" />
     <Compile Include="Assets\Scripts\DetacheInteractable.cs" />
     <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
@@ -72,7 +74,6 @@
     <Compile Include="Assets\Scripts\GameTime.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\banana &amp; tree\BananaRipening.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
-    <Compile Include="Assets\Scripts\ExportTerrain.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\banana &amp; tree\BananaTreeGrowth.cs" />
   </ItemGroup>
   <ItemGroup>
