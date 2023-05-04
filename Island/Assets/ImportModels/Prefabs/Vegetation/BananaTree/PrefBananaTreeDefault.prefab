@@ -470,8 +470,8 @@ MonoBehaviour:
   maxBananasToSpawn: -1
   bananaPart: {fileID: 2978214856322827682}
   banana: {fileID: 6019332497948652815, guid: ccd76ee1b8d17394c8a30c14fed4e34e, type: 3}
-  ground: {fileID: 0}
-  bananaRipening: {fileID: 0}
+  ground: {fileID: 928172562501944998, guid: e3d6729eddce96241b94db16379aa6f3, type: 3}
+  bananaRipening: {fileID: 3871907363092699984}
 --- !u!54 &2731215666095887688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3409,7 +3409,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5668788170693331272, guid: e20a4c458158b4949b1da8b96ba194f3, type: 3}
 --- !u!1 &5103055315168916522
@@ -4183,6 +4183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6545574269833833857}
   - component: {fileID: 3871907363092699984}
+  - component: {fileID: 3314744635284862579}
   m_Layer: 0
   m_Name: PrefBananaTreeDefault
   m_TagString: Untagged
@@ -4226,6 +4227,25 @@ MonoBehaviour:
   allowRipening: 1
   ripeProgressPhase: 0
   phaseTimeInSeconds: 4
+--- !u!114 &3314744635284862579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880959710971148091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e843fa336cb446c44b45a30b9cb51d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowGrowth: 1
+  GrowthRatio: 3
+  useRandomGrowthTime: 1
+  timeToGrowthInSeconds: 5
+  MinTimeToGrowthInSeconds: 3
+  MaxTimeToGrowthInSeconds: 10
+  growningProgress: 0
 --- !u!1 &6680302074269819610
 GameObject:
   m_ObjectHideFlags: 0

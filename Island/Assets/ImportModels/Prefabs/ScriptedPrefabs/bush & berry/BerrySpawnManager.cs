@@ -4,75 +4,107 @@ using UnityEngine;
 
 public class BerrySpawnManager : MonoBehaviour
 {
-    public int minBerries = 1;
-    public int maxBerries = -1;
     public Transform[] spawnPoints;
     public GameObject spawnPrefab;
     public Transform parent;
 
+    //for global spawn settings
+    public bool useSpawnGlobalSettings = true;
+    public GameObject globalSpawnSettings;
+    
+    //start spawn properties
+    public bool useRandomAmount = false;
+    public int minBerriesOnStart = 1;
+    public int maxBerriesOnStart = 10;
+    
+    //respawn properties
     public bool allowRespawnBerries = true;
+    public int timeoutForSpawnPointInSeconds = 3;
+    public int minTimeToRespawn = 1;
+    public int maxTimeToRespawn = 4;
 
-    int spawnCount = 0;
-    bool allowSpawnPerform;
+    Dictionary<int, bool> spawnPointsDictionary;    //коллекци€ дл€ хранени€ информации о точках, в которых был осуществлен спавн:
+                                                    //false - точка свободна, true - точка зан€та
+    void InitSpawnPointsDictionary() {
+        spawnPointsDictionary = new Dictionary<int, bool>();
+        for (int i = 0; i < spawnPoints.Length; i++) {
+            spawnPointsDictionary.Add(i, false);
+        }
+    }
     private void Awake() {
         if (spawnPoints != null) {
-            allowSpawnPerform = true;
+            if (useSpawnGlobalSettings && globalSpawnSettings != null) {
+
+            }
+            
+            else {
+                if (minBerriesOnStart > maxBerriesOnStart) minBerriesOnStart = maxBerriesOnStart;
+                if (minBerriesOnStart < 0) minBerriesOnStart = 0;
+                if (maxBerriesOnStart > spawnPoints.Length) maxBerriesOnStart = spawnPoints.Length;
+            }
+            InitSpawnPointsDictionary();
+
             SpawnBerries();
-            timeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
         }
-        else allowSpawnPerform = false;
+        else {
+            Debug.LogAssertion("” куста отсутствуют точки спавна €год");
+        }
     }
+
+    IEnumerator _respawnInstance;
     private void Start() {
-        if (allowRespawnBerries && allowSpawnPerform)
-            StartCoroutine(RespawnBerries());
-    }
-
-    float _elapsedTime = 0;
-    public float minTimeToSpawn = 1;
-    public float maxTimeToSpawn = 4;
-    float timeToSpawn;
-    private void Update() {
-        _elapsedTime += Time.deltaTime;
-        if (_elapsedTime > timeToSpawn) {
-            timeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-            _elapsedTime = 0;
+        if (allowRespawnBerries) {
+            _respawnInstance = RespawnBerries();
+            StartCoroutine(_respawnInstance);
         }
     }
-    IEnumerator RespawnBerries() {
-        if (maxBerries == -1)
-            spawnCount = Random.Range(minBerries, spawnPoints.Length + 1);
-        else
-            spawnCount = Random.Range(minBerries, maxBerries + 1);
 
-        int spawnPoint, lastPoint = -1;
+    IEnumerator RespawnBerries() {
+        yield return null;  //проупстить один кадр
+        int timeToRespawn;
+        while (true) {
+            timeToRespawn = Random.Range(minTimeToRespawn, maxTimeToRespawn);
+            yield return new WaitForSeconds(timeToRespawn);
+            SpawnBerries(false);
+        }
+    }
+    void SpawnBerries(bool isSpawnOnStart = true) {
+        int spawnCount;
+        if (isSpawnOnStart) {
+            if (useRandomAmount) spawnCount = Random.Range(0, spawnPoints.Length + 1);
+            else spawnCount = Random.Range(minBerriesOnStart, maxBerriesOnStart);
+        }
+        else {
+            spawnCount = 1;
+        }
+        int spawnPoint;
+        GameObject obj;
         while (spawnCount > 0) {
             spawnPoint = Random.Range(0, spawnPoints.Length);
-            if (spawnPoint == lastPoint) continue;
 
-            yield return new WaitForSeconds(timeToSpawn);
-            Instantiate(spawnPrefab, spawnPoints[spawnPoint].position, Quaternion.identity, parent);
+            if (spawnPointsDictionary[spawnPoint]) {
+                continue;
+            }
 
-            lastPoint = spawnPoint;
+            obj = Instantiate(spawnPrefab, spawnPoints[spawnPoint].position, Quaternion.identity, parent);
+            spawnPointsDictionary[spawnPoint] = true;   // сохранение значени€ флага спавна в точке
+            StartCoroutine(RespawnCountdown(spawnPoint));
+
+            if (!isSpawnOnStart) StartCoroutine(DestroyConflictBerry(obj));     //если респавн€ща€с€ €года смещает уже вис€щую на кусте, то она удалитс€
+
             spawnCount--;
         }
     }
-    void SpawnBerries() {
-        if (allowSpawnPerform) {
-            if (maxBerries == -1)
-                spawnCount = Random.Range(minBerries, spawnPoints.Length + 1);
-            else
-                spawnCount = Random.Range(minBerries, maxBerries + 1);
+    IEnumerator RespawnCountdown(int index) {
+        yield return new WaitForSeconds(timeoutForSpawnPointInSeconds);
+        spawnPointsDictionary[index] = false;
+    }
+    IEnumerator DestroyConflictBerry(GameObject gameObject) {
+        Vector3 startPos = gameObject.transform.localPosition;
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForSecondsRealtime(Physics.sleepThreshold);
 
-            int spawnPoint, lastPoint = -1;
-            while (spawnCount > 0) {
-                spawnPoint = Random.Range(0, spawnPoints.Length);
-                if (spawnPoint == lastPoint) continue;
-
-                Instantiate(spawnPrefab, spawnPoints[spawnPoint].position, Quaternion.identity, parent);
-
-                lastPoint = spawnPoint;
-                spawnCount--;
-            }
-        }
+        if (gameObject.transform.localPosition != startPos)
+            Destroy(gameObject);
     }
 }
