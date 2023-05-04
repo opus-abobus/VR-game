@@ -65,6 +65,7 @@
     <Compile Include="Assets\Asset Store\GameObjectBrush\Scripts\Editor\BrushObject.cs" />
     <Compile Include="Assets\Asset Store\GameObjectBrush\Scripts\Editor\AddObjectPopup.cs" />
     <Compile Include="Assets\Editor\ExportTerrain.cs" />
+    <Compile Include="Assets\Editor\ReplaceWithPrefab.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

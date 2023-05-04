@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class SetKinematicAfterSleep : MonoBehaviour
+public class InteractableManager : MonoBehaviour
 {
     [SerializeField, Range(1, 100)] int setKinematicAfterSeconds = 3;
     
@@ -11,6 +13,12 @@ public class SetKinematicAfterSleep : MonoBehaviour
     private void Awake() {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
+    }
+
+    bool isPickedUp = false;
+    public bool IsPickedUp {
+        get { return isPickedUp; }
+        set { isPickedUp = value; }
     }
 
     public bool IsKinematic {

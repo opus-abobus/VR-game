@@ -17,10 +17,8 @@ public class CocountSpawner : MonoBehaviour
     private void Awake() {
         GetComponent<MeshRenderer>().enabled = false;
         if (cocount == null) { Debug.LogError("” спавнера кокосов отсутствует ссылка на кокос"); this.enabled = false; }
-        if (parent == null) {
-            GameObject parentObj = new GameObject("SpawnedCocounts");
-            parent = parentObj.transform;
-        }
+        if (parent == null) { GameObject parentObj = new GameObject("SpawnedCocounts"); parent = parentObj.transform; }
+
         _meshRenderer = GetComponent<MeshRenderer>();
         boundsSize = _meshRenderer.bounds.size / 2;
 

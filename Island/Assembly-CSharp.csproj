@@ -56,9 +56,10 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ImportModels\Prefabs\Interactable\SetKinematicAfterSleep.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\Interactable\InteractableManager.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\bush &amp; berry\BerrySpawnManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\S.O.S_\Placeholding.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\SetEatability.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
