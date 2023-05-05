@@ -8,9 +8,9 @@ public class BerrySpawnManager : MonoBehaviour
     public GameObject spawnPrefab;
     public Transform parent;
 
-    //for global spawn settings
-    public bool useSpawnGlobalSettings = true;
-    public GameObject globalSpawnSettings;
+    //for global settings
+    public bool useGlobalSettings = true;
+    public GameSettings globalSettings;
     
     //start spawn properties
     public bool useRandomAmount = false;
@@ -31,17 +31,28 @@ public class BerrySpawnManager : MonoBehaviour
             spawnPointsDictionary.Add(i, false);
         }
     }
+    void SetupGlobalSettings() {
+        timeoutForSpawnPointInSeconds = globalSettings.timeoutBerryRespawnInSeconds;
+
+        minBerriesOnStart = globalSettings.minBerriesOnStart;
+        maxBerriesOnStart = globalSettings.maxBerriesOnStart;
+
+        if (globalSettings.useRandomBerryRespawnTime) {
+            minTimeToRespawn = globalSettings.minTimeToRespawnBerryInSeconds;
+            maxTimeToRespawn = globalSettings.maxTimeToRespawnBerryInSeconds;
+        }
+        else {
+            minTimeToRespawn = maxTimeToRespawn = globalSettings.timeToRespawnBerryInSeconds;
+        }
+    }
     private void Awake() {
         if (spawnPoints != null) {
-            if (useSpawnGlobalSettings && globalSpawnSettings != null) {
+            if (useGlobalSettings && globalSettings != null) SetupGlobalSettings();
 
-            }
-            
-            else {
-                if (minBerriesOnStart > maxBerriesOnStart) minBerriesOnStart = maxBerriesOnStart;
-                if (minBerriesOnStart < 0) minBerriesOnStart = 0;
-                if (maxBerriesOnStart > spawnPoints.Length) maxBerriesOnStart = spawnPoints.Length;
-            }
+            if (minBerriesOnStart < 0) minBerriesOnStart = 0;
+            if (maxBerriesOnStart > spawnPoints.Length) maxBerriesOnStart = spawnPoints.Length;
+            if (minBerriesOnStart > maxBerriesOnStart) minBerriesOnStart = maxBerriesOnStart;
+
             InitSpawnPointsDictionary();
 
             SpawnBerries();
