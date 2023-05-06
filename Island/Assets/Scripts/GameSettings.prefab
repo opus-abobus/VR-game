@@ -62,3 +62,11 @@ MonoBehaviour:
   maxPhaseRipeDurationInSeconds: 350
   minBananasToDrop: 6
   maxBananasToDrop: 15
+  minCoconutsOnStart: 0
+  maxCoconutsOnStart: 3
+  minTimeToRespawnCoconutInSeconds: 720
+  maxTimeToRespawnCoconutInSeconds: 960
+  chanceToSpawnOnStart: 0.3
+  nutritionalValue_Berry: 5
+  nutritionalValue_Coconut: 5
+  nutritionalValue_Banana: 5

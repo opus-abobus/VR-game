@@ -30,22 +30,25 @@ public class BananaRipening : MonoBehaviour
             phaseTimeInSeconds = globalSettings.ripePhaseDurationInSeconds;
     }
     void SetRandomTreeState() {
-        switch (UnityEngine.Random.Range(1, 4)) {
-            case 1: {
+        switch (UnityEngine.Random.Range(1, 6)) {   
+        // 0,4 - вероятность "пустого" дерева или незрелого плода, // 0,2 - вероятность созревшего плода
+            case 1:
+            case 2: {
                     // не имеет плода и ветки
                     BananaPart.SetActive(true);
                     Branch.SetActive(false);
                     UnripeBananas.SetActive(false);
                     break;
                 }
-            case 2: {
+            case 3:
+            case 4: {
                     // имеет несозревший плод
                     UnripeBananas.SetActive(true);
                     BananaPart.SetActive(false);
                     Branch.SetActive(false);
                     break;
                 }
-            case 3: {
+            case 5: {
                     // имеет созревший плод
                     UnripeBananas.SetActive(false);
                     BananaPart.SetActive(true);

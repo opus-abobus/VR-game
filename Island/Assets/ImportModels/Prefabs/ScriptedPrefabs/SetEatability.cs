@@ -10,29 +10,33 @@ public class SetEatability : MonoBehaviour
         set { isEatable = value; }
     }
 
+    [SerializeField] GameSettings globalSettings;
+    public bool useGlobalSettings = true;
+
     public int nutritionalValue = 5;
-    [SerializeField] bool useDefaultNutritionalValues = false;
 
     private void Awake() {
-        if (useDefaultNutritionalValues) SetDefaultNutritionalValues();
+        SetNutritionalValue();
     }
-
-    void SetDefaultNutritionalValues() {
+    void SetNutritionalValue() {
         switch (this.gameObject.tag) {
             case "berry": {
-                    nutritionalValue = 2;
+                    if (useGlobalSettings && globalSettings != null) {
+                        nutritionalValue = globalSettings.nutritionalValue_Berry;
+                    }
                     break;
                 }
             case "banana": {
-                    nutritionalValue = 7;
+                    if (useGlobalSettings && globalSettings != null) {
+                        nutritionalValue = globalSettings.nutritionalValue_Banana;
+                    }
                     break;
                 }
-            case "cocount": {
-                    nutritionalValue = 5;
-                    break;
-                }
+            case "cocount":
             case "coconut": {
-                    nutritionalValue = 5;
+                    if (useGlobalSettings && globalSettings != null) {
+                        nutritionalValue = globalSettings.nutritionalValue_Coconut;
+                    }
                     break;
                 }
         }

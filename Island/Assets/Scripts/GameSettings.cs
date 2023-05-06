@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
-    // ------------------   ягоды   ---------------------------------
+    // ---------------------       ягоды      -----------------------
     [Header("Настройки спавна и респавна ягод")]
     [Range(0, 100)] public int minBerriesOnStart;
     [Range(0, 100)] public int maxBerriesOnStart;
@@ -17,7 +17,7 @@ public class GameSettings : MonoBehaviour
     [Range(1, 100000)] public int maxTimeToRespawnBerryInSeconds;
     //---------------------------------------------------------------
 
-    // ------------------   банановые деревья   ---------------------------------
+    // ------------------       банановые деревья   -----------------------------
     [Header("Настройки роста банановых пальм")]
     public bool useRandomBananaTreeStartScale = true;
     [Range(0.5f, 1)] public float minBananaTreeScale = 1;
@@ -36,6 +36,18 @@ public class GameSettings : MonoBehaviour
     [Range(1, 100)] public int maxBananasToDrop = 10;
     //---------------------------------------------------------------------------
 
-    //[Header("Настройка кокосовых пальм")]
+    // -------------------------  кокосовые пальмы  ---------------------
+    [Header("Настройка спавна и респавна кокосов")]
+    [Range(0, 100)] public int minCoconutsOnStart = 0;
+    [Range(0, 100)] public int maxCoconutsOnStart = 4;
+    [Range(1, 100000)] public int minTimeToRespawnCoconutInSeconds;
+    [Range(1, 100000)] public int maxTimeToRespawnCoconutInSeconds;
+    [Range(0, 1)] public float chanceToSpawnOnStart = 0.4f;
 
+    // -----------------  параметры питательности объектов еды  -----------------
+    [Header("Параметры питательности объектов еды")]
+    [Range(0, 100)] public int nutritionalValue_Berry = 5;
+    [Range(0, 100)] public int nutritionalValue_Coconut = 5;
+    [Range(0, 100)] public int nutritionalValue_Banana = 5;
+    //---------------------------------------------------------------------------
 }
