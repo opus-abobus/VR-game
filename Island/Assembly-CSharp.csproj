@@ -56,25 +56,25 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ImportModels\Prefabs\Interactable\SetKinematicAfterSleep.cs" />
-    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Bush &amp; Berry\BerrySpawnManager.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\Interactable\InteractableManager.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Banana &amp; Tree\BananaRipening.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Banana &amp; Tree\BananaDrop.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\S.O.S_\Placeholding.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\SetEatability.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Cocount &amp; Palm\CocountSplit.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Bush &amp; Berry\ToggleGravity.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
-    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Banana &amp; Tree\BananaDrop.cs" />
     <Compile Include="Assets\Scripts\EscapeMenu.cs" />
-    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Cocount &amp; Palm\CocountSpawner.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Banana &amp; Tree\BananaTreeGrowth.cs" />
+    <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\DetacheInteractable.cs" />
     <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\GameTime.cs" />
-    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Banana &amp; Tree\BananaRipening.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
-    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\Banana &amp; Tree\BananaTreeGrowth.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset Store\Wind\Documentation\LPW_Log.txt" />

@@ -15,19 +15,60 @@ public class BananaRipening : MonoBehaviour
     [SerializeField] GameObject UnripeBananas;
     [SerializeField] bool allowRipening = true;
 
-    bool isRipening;
+    [SerializeField] bool useGlobalSettings = true;
+    [SerializeField] GameSettings globalSettings;
+
     BananaTreeStates treeState;
+
+    GameObject BananaPart_prefab = null;
+
+    void SetupGlobalSettings() {
+        SetRandomTreeState();
+        if (globalSettings.useRandomRipePhaseDuration)
+            phaseTimeInSeconds = UnityEngine.Random.Range(globalSettings.minPhaseRipeDurationInSeconds, globalSettings.maxPhaseRipeDurationInSeconds);
+        else
+            phaseTimeInSeconds = globalSettings.ripePhaseDurationInSeconds;
+    }
+    void SetRandomTreeState() {
+        switch (UnityEngine.Random.Range(1, 4)) {
+            case 1: {
+                    // не имеет плода и ветки
+                    BananaPart.SetActive(true);
+                    Branch.SetActive(false);
+                    UnripeBananas.SetActive(false);
+                    break;
+                }
+            case 2: {
+                    // имеет несозревший плод
+                    UnripeBananas.SetActive(true);
+                    BananaPart.SetActive(false);
+                    Branch.SetActive(false);
+                    break;
+                }
+            case 3: {
+                    // имеет созревший плод
+                    UnripeBananas.SetActive(false);
+                    BananaPart.SetActive(true);
+                    Branch.SetActive(true);
+                    break;
+                }
+        }
+    }
 
     private void Awake() {
         if (allowRipening) {
+
+            if (useGlobalSettings && globalSettings != null) SetupGlobalSettings();
+
             if (Branch == null) { Debug.LogError("Отсутствует ссылка на ветку"); return; }
-            if (BananaPart == null) { Debug.LogError("Отсутствует ссылка на зрелый плод"); return; }
+            //if (BananaPart == null) { Debug.LogError("Отсутствует ссылка на зрелый плод"); return; }
             if (UnripeBananas == null) { Debug.LogError("Отсутствует ссылка на незрелый плод"); return; }
-            
+
             BananaPart_prefab = Instantiate(BananaPart, BananaPart.transform.position, BananaPart.transform.rotation, Branch.transform);
             BananaPart_prefab.SetActive(false);
 
             DetermineRipeState();
+            //print(this.name + " " + treeState);
         }
         else GetComponent<BananaRipening>().enabled = false;
     }
@@ -35,25 +76,31 @@ public class BananaRipening : MonoBehaviour
     [Range(0, 1), SerializeField] float ripeProgressPhase = 0;
     [SerializeField] float phaseTimeInSeconds = 4;
 
-    float _elapsedPhaseTime = 0;
+    //float _elapsedPhaseTime = 0;
     private void Update() {
         if (allowRipening) {
             RipeProcess();
         }
     }
 
-    GameObject BananaPart_prefab = null;
+    [NonSerialized] public bool isBananasFallen = false;
     void RipeProcess() {
         if (treeState == BananaTreeStates.ripe && !isBananasFallen) { return; }
-        if (treeState == BananaTreeStates.ripe && isBananasFallen) { treeState = BananaTreeStates.fallen; _elapsedPhaseTime = 0; return; }
+        if (treeState == BananaTreeStates.ripe && isBananasFallen) { 
+            treeState = BananaTreeStates.fallen; 
+            //_elapsedPhaseTime = 0; 
+            return; 
+        }
+        
+        //_elapsedPhaseTime += Time.deltaTime;
+        //ripeProgressPhase = _elapsedPhaseTime / phaseTimeInSeconds;
+        ripeProgressPhase += Time.deltaTime / phaseTimeInSeconds;
+        //bool isNextPhase = ripeProgressPhase > 1f ? true : false;
 
-        _elapsedPhaseTime += Time.deltaTime;
-        ripeProgressPhase = _elapsedPhaseTime / phaseTimeInSeconds;
-        bool isNextPhase = ripeProgressPhase > 1f ? true : false;
-
-        if (isNextPhase) {
+        if (ripeProgressPhase > 1.0f) {
             switch (treeState) {
                 case BananaTreeStates.empty: {
+                        print(this.name + "в анрайп");
                         treeState = BananaTreeStates.hasUnripePart;
                         Branch.SetActive(false);
                         BananaPart.SetActive(false);
@@ -68,7 +115,10 @@ public class BananaRipening : MonoBehaviour
                         break;
                     }
                 case BananaTreeStates.fallen: {
-                        if (BananaPart == null) { BananaPart = Instantiate(BananaPart_prefab, BananaPart_prefab.transform.position, BananaPart_prefab.transform.rotation, Branch.transform); }
+                        if (BananaPart == null) {
+                            BananaPart = Instantiate(BananaPart_prefab, BananaPart_prefab.transform.position, BananaPart_prefab.transform.rotation, Branch.transform);
+                            //BananaPart.GetComponent<BananaDrop>().bananaRipening = this;
+                        }
 
                         treeState = BananaTreeStates.empty;
                         isBananasFallen = false;
@@ -78,7 +128,8 @@ public class BananaRipening : MonoBehaviour
                         break;
                     }
             }
-            _elapsedPhaseTime = 0;
+            //_elapsedPhaseTime = 0;
+            ripeProgressPhase = 0;
         }
     }
 
@@ -90,15 +141,17 @@ public class BananaRipening : MonoBehaviour
         fallen
     }
 
-    [NonSerialized] public bool isBananasFallen = false;
+    
     void DetermineRipeState() {
         bool isActiveUnripe = UnripeBananas.activeInHierarchy;
+        print("isActiveUnripe" + isActiveUnripe);
 
         if (isBananasFallen) { treeState = BananaTreeStates.fallen; return; }
         if (isActiveUnripe) { treeState = BananaTreeStates.hasUnripePart; return; }
         if (BananaPart.activeInHierarchy) { treeState = BananaTreeStates.ripe; return; }
 
         bool isActiveBranch = Branch.activeInHierarchy;
+        //print("isActiveBranch" + isActiveBranch);
         if (isActiveBranch) { treeState = BananaTreeStates.hasEmptyBranch; return; }
         if (!(isActiveBranch || isActiveUnripe)) { treeState = BananaTreeStates.empty; return; }
         else Debug.LogAssertion("Состояние дерева не было определено");

@@ -6,31 +6,34 @@ using UnityEngine.SceneManagement;
 
 public class BananaDrop : MonoBehaviour
 {
-    //[Tooltip("Объекты, которые можно кидать в бананы, чтобы они падали")]
-    //public GameObject[] throwingObjects;
     public int maxBananasToSpawn = -1;
-    public GameObject bananaPart;
     public GameObject banana;
     public GameObject ground;
+
+    [SerializeField] bool useGlobalSettings = true;
+    [SerializeField] GameSettings globalSettings;
+    int bananaAmount = 0;
 
     List <string> tags;
 
     Rigidbody rb;
-    BoxCollider collider;
+    BoxCollider _collider;
 
     private void Awake() {
         tags = new List<string>();
-        /*if (throwingObjects != null) {
-            foreach (var obj in throwingObjects) {
-                tags.Add(obj.tag);
-            }
-        }*/
         AddThrowingObjects();
 
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        collider = GetComponent<BoxCollider>();
-        collider.isTrigger = true;
+        _collider = GetComponent<BoxCollider>();
+        _collider.isTrigger = true;
+
+        if (useGlobalSettings && globalSettings != null) {
+            bananaAmount = Random.Range(globalSettings.minBananasToDrop, globalSettings.maxBananasToDrop);
+        }
+        else {
+            bananaAmount = Random.Range(0, maxBananasToSpawn);
+        }
     }
 
     void AddThrowingObjects() {
@@ -62,40 +65,32 @@ public class BananaDrop : MonoBehaviour
     }
     private void DropBanana() {
         rb.useGravity = true;
-        collider.isTrigger = false;
+        _collider.isTrigger = false;
     }
 
     private void OnCollisionEnter(Collision collision) {
-        //Debug.Log(collision.gameObject.name);
         if (collision.gameObject == ground) {
-            SpawnBanana();
-            Destroy(bananaPart);
+            Vector3 spawnPoint = collision.GetContact(0).point;
+            SpawnBanana(spawnPoint);
+            Destroy(this.gameObject);
         }
     }
-    [SerializeField] BananaRipening bananaRipening;
+    [SerializeField] public BananaRipening bananaRipening;
     private void OnDestroy() {
+        //print(spawnedBanana.transform.position + "  origin: " + transform.position);
         bananaRipening.isBananasFallen = true;
     }
-
-    void SpawnBanana() {
-        Vector3 spawnPoint = transform.position;
-
-        float l_Bound = collider.bounds.min.x - collider.bounds.extents.x;
-        float r_Bound = collider.bounds.min.x + collider.bounds.extents.x;
-
-        int bananaAmount;
+    void SpawnBanana(Vector3 spawnPoint) {
+        /*int bananaAmount;
         if (maxBananasToSpawn != -1) bananaAmount = maxBananasToSpawn;
-        else bananaAmount = Random.Range(1, 5);
+        else bananaAmount = Random.Range(1, 5);*/
 
         for (int i = 0; i < bananaAmount; i++) {
-            spawnPoint = new Vector3(Random.Range(l_Bound, r_Bound), spawnPoint.y, spawnPoint.z);
-            GameObject spawnedBanana = Instantiate(banana, spawnPoint, Quaternion.identity);
-            spawnedBanana.transform.localScale = transform.lossyScale;
-
-            Rigidbody bananaRb = spawnedBanana.GetComponent<Rigidbody>();
-            if (bananaRb != null) {
-                bananaRb.AddForceAtPosition(-Vector3.right, spawnPoint);
-            }
+            spawnPoint.y += _collider.size.y / 2;
+            GameObject spawnedBanana = Instantiate(banana, spawnPoint, Random.rotation);
+            spawnedBanana.transform.parent = this.gameObject.transform.parent;
+            print(spawnedBanana.transform.position + "  origin: " + transform.position);
+            //spawnedBanana.transform.localScale = transform.lossyScale;
         }
     }
 }
