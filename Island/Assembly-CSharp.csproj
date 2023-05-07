@@ -61,11 +61,11 @@
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\banana &amp; tree\BananaDrop.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\bush &amp; berry\BerrySpawnManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
-    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\S.O.S_\Placeholding.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\Interactable\SOS\Placeholding.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\SetEatability.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
-    <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\S.O.S_\SOS_Manager.cs" />
+    <Compile Include="Assets\ImportModels\Prefabs\Interactable\SOS\SOS_Manager.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\cocount &amp; palm\CocountSplit.cs" />
     <Compile Include="Assets\ImportModels\Prefabs\ScriptedPrefabs\bush &amp; berry\ToggleGravity.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />

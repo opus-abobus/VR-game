@@ -209,7 +209,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2410825888455463255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 295977dced7fa004ba6ab298793261db, type: 3}
+  m_Script: {fileID: 11500000, guid: f89a9c94e8dceaf4598c652e5e5bedbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxBananasToSpawn: -1
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5045858847164333713}
   - component: {fileID: 5045858847164333719}
-  - component: {fileID: 5045858847164333712}
+  - component: {fileID: 2364181453385500321}
   m_Layer: 0
   m_Name: BananaTreeBananaGrownable
   m_TagString: Untagged
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5570298871915848747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d45c735bee71641822571258ad2b51, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c2f32ad1998f5d4b915073438935802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Branch: {fileID: 5633936142164834277}
@@ -276,7 +276,7 @@ MonoBehaviour:
     type: 3}
   ripeProgressPhase: 0
   phaseTimeInSeconds: 4
---- !u!114 &5045858847164333712
+--- !u!114 &2364181453385500321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,17 +285,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5570298871915848747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e843fa336cb446c44b45a30b9cb51d77, type: 3}
+  m_Script: {fileID: 11500000, guid: f8508abe61e1d054380017a28fc8f82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   allowGrowth: 1
-  GrowthRatio: 1.18
+  GrowthRatio: 3
   useGlobalSettings: 1
   globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
     type: 3}
   useRandomGrowthTime: 1
-  timeToGrowthInSeconds: 10
-  MinTimeToGrowthInSeconds: 7
+  timeToGrowthInSeconds: 5
+  MinTimeToGrowthInSeconds: 3
   MaxTimeToGrowthInSeconds: 10
   growningProgress: 0
 --- !u!1 &5592869015085161873
@@ -414,7 +414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4400395325377801070
 Transform:
   m_ObjectHideFlags: 0

@@ -349,7 +349,7 @@ MonoBehaviour:
   - {fileID: 836252420823202469}
   - {fileID: 117781297077230836}
   - {fileID: 6122010783432243337}
-  spawnPrefab: {fileID: 1438709704091104556, guid: 9552d07f282510144a84845adcbdbcf6,
+  spawnPrefab: {fileID: 1438709704091104556, guid: 353413fb8930cfc4a94fc8438c8a24a9,
     type: 3}
   parent: {fileID: 628984547693193523}
   useGlobalSettings: 1

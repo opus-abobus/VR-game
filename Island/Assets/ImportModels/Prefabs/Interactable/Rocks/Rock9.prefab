@@ -297,3 +297,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setKinematicAfterSeconds: 3
+  rb: {fileID: 7734924202771963855}

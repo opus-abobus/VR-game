@@ -50,4 +50,6 @@ public class GameSettings : MonoBehaviour
     [Range(0, 100)] public int nutritionalValue_Coconut = 5;
     [Range(0, 100)] public int nutritionalValue_Banana = 5;
     //---------------------------------------------------------------------------
+
+    // -----------------  параметры объектов эвакуации  -------------------------
 }

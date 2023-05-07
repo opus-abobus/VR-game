@@ -6,17 +6,20 @@ using Valve.VR.InteractionSystem;
 
 public class Placeholding : MonoBehaviour
 {
+    [SerializeField] SOS_Manager manager;
+
     [SerializeField] MeshFilter _meshFilter;
     [SerializeField] MeshRenderer _meshRenderer;
     [SerializeField] MeshCollider _collider;
 
-    [NonSerialized] public bool isReplaced = false;
+    public delegate void onPlaceholding();
+    public event onPlaceholding OnPlaceholding;
 
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<InteractableManager>().IsPickedUp) {
             string tag = other.tag;
             if (tag == "rock" || tag == "cocount" || tag == "coconut") {
-                isReplaced = true;
+                OnPlaceholding?.Invoke();
 
                 Destroy(other.GetComponent<VelocityEstimator>());
                 Destroy(other.GetComponent<Throwable>());
