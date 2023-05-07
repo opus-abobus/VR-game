@@ -1225,7 +1225,7 @@ GameObject:
   - component: {fileID: 1659748607}
   - component: {fileID: 383460492}
   m_Layer: 0
-  m_Name: Player 2.0
+  m_Name: VR Player
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

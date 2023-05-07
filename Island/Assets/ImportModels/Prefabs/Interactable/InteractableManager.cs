@@ -9,9 +9,10 @@ public class InteractableManager : MonoBehaviour
 {
     [SerializeField, Range(1, 100)] int setKinematicAfterSeconds = 3;
     
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
+
     private void Awake() {
-        rb = GetComponent<Rigidbody>();
+        if (rb == null) rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
     }
 
@@ -30,8 +31,6 @@ public class InteractableManager : MonoBehaviour
         set { this.gameObject.isStatic = value; }
     }
 
-    bool isGrounded;
-    
     void SetKinematicThis(bool value) {
         if (value) {
             IsKinematic = true;
@@ -41,6 +40,8 @@ public class InteractableManager : MonoBehaviour
         }
     }
 
+    bool isGrounded;
+    bool CR_running = false;
     private void FixedUpdate() {
         if (isGrounded) {
             if (!CR_running) { 
@@ -64,8 +65,7 @@ public class InteractableManager : MonoBehaviour
             isGrounded = false;
         }
     }
-
-    bool CR_running = false;
+    
     IEnumerator DetermineIsSleeping() {
         CR_running = true;
         float _elapsedTime = 0;

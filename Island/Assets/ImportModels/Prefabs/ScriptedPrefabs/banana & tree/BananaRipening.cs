@@ -147,7 +147,7 @@ public class BananaRipening : MonoBehaviour
     
     void DetermineRipeState() {
         bool isActiveUnripe = UnripeBananas.activeInHierarchy;
-        print("isActiveUnripe" + isActiveUnripe);
+        //print("isActiveUnripe" + isActiveUnripe);
 
         if (isBananasFallen) { treeState = BananaTreeStates.fallen; return; }
         if (isActiveUnripe) { treeState = BananaTreeStates.hasUnripePart; return; }

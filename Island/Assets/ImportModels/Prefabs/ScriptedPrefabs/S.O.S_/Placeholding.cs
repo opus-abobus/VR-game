@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,14 @@ public class Placeholding : MonoBehaviour
     [SerializeField] MeshRenderer _meshRenderer;
     [SerializeField] MeshCollider _collider;
 
+    [NonSerialized] public bool isReplaced = false;
+
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<InteractableManager>().IsPickedUp) {
             string tag = other.tag;
             if (tag == "rock" || tag == "cocount" || tag == "coconut") {
+                isReplaced = true;
+
                 Destroy(other.GetComponent<VelocityEstimator>());
                 Destroy(other.GetComponent<Throwable>());
                 Destroy(other.GetComponent<Interactable>());
