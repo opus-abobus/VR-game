@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBananasToSpawn: -1
   banana: {fileID: 2775151058504319297, guid: 602f5f66d196cc24aa45bd9813012983, type: 3}
-  ground: {fileID: 928172562501944998, guid: e3d6729eddce96241b94db16379aa6f3, type: 3}
+  ground: {fileID: 0}
   useGlobalSettings: 1
   globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
     type: 3}

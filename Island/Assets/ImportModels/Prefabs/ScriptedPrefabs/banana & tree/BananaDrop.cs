@@ -44,15 +44,7 @@ public class BananaDrop : MonoBehaviour
     }
 
     private void Start() {
-        if (ground == null) {
-            ground = GameObject.FindGameObjectWithTag("ground");
-            if (ground == null) {
-                Debug.LogError("У бананов нет ссылки на землю");
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Mechanic test") {
-            ground = GameObject.FindGameObjectWithTag("ground");
-        }
+        ground = Ground.ground;
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -89,7 +81,7 @@ public class BananaDrop : MonoBehaviour
             spawnPoint.y += _collider.size.y / 2;
             GameObject spawnedBanana = Instantiate(banana, spawnPoint, Random.rotation);
             spawnedBanana.transform.parent = this.gameObject.transform.parent;
-            print(spawnedBanana.transform.position + "  origin: " + transform.position);
+            //print(spawnedBanana.transform.position + "  origin: " + transform.position);
             //spawnedBanana.transform.localScale = transform.lossyScale;
         }
     }
