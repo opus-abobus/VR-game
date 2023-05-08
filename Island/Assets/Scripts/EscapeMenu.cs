@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class EscapeMenu : MonoBehaviour
 {
     private void Awake() {
-        timeScale = Time.timeScale;
+        startTimeScale = Time.timeScale;
     }
 
     private bool pauseGame;
@@ -34,14 +34,14 @@ public class EscapeMenu : MonoBehaviour
     public void Resume()
     {
         pauseGameMenu.SetActive(false);
-        Time.timeScale = timeScale;
+        Time.timeScale = startTimeScale;
         pauseGame = false;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    float timeScale;
+    float startTimeScale;
     public void Pause()
     {
         pauseGameMenu.SetActive(true);
@@ -51,7 +51,7 @@ public class EscapeMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        Time.timeScale = timeScale;
+        Time.timeScale = startTimeScale;
         SceneManager.LoadScene("Menu");
     }
 }
