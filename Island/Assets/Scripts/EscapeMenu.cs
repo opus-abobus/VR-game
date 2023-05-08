@@ -7,6 +7,7 @@ public class EscapeMenu : MonoBehaviour
 {
     private void Awake() {
         startTimeScale = Time.timeScale;
+        AudioListener.pause = false;
     }
 
     private bool pauseGame;
@@ -39,6 +40,8 @@ public class EscapeMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        AudioListener.pause = false;
     }
 
     float startTimeScale;
@@ -47,6 +50,8 @@ public class EscapeMenu : MonoBehaviour
         pauseGameMenu.SetActive(true);
         Time.timeScale = 0;
         pauseGame = true;
+
+        AudioListener.pause = true;
     }
 
     public void LoadMenu()
