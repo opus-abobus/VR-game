@@ -16,7 +16,8 @@ public class Placeholding : MonoBehaviour
     public event onPlaceholding OnPlaceholding;
 
     private void OnTriggerEnter(Collider other) {
-        if (other.GetComponent<InteractableManager>().IsPickedUp) {
+        InteractableManager manager = other.GetComponent<InteractableManager>();
+        if (manager != null && manager.IsPickedUp) {
             string tag = other.tag;
             if (tag == "rock" || tag == "cocount" || tag == "coconut") {
                 OnPlaceholding?.Invoke();

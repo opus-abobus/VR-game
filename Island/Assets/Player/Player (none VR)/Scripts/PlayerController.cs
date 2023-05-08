@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
         cameraPitch -= currentMouseDelta.y * mouseSensitivity;
         cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);
-        
+
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;
         transform.Rotate(currentMouseDelta.x * mouseSensitivity * Vector3.up);
     }
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         targetDir.Normalize();
 
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime);
-        
+
         if (controller.isGrounded) {
             velocityY = 0.0f;
         }

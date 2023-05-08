@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerEating : MonoBehaviour
 {
+    [SerializeField] Transform playerCamera;
+
     List<string> tagsWithEatableObjects = new List<string> { "berry", "banana", "cocount", "coconut" };
     [SerializeField] HungerSystem hungerSystem;
 
     private void Awake() {
+        if (playerCamera == null) { Debug.LogAssertion("player camera null reference exception"); }
+        else { this.gameObject.transform.position = playerCamera.position; }
         if (hungerSystem == null) { Debug.LogError("hungerSystem instance null reference exception"); }
     }
 

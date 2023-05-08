@@ -103,7 +103,6 @@ public class BananaRipening : MonoBehaviour
         if (ripeProgressPhase > 1.0f) {
             switch (treeState) {
                 case BananaTreeStates.empty: {
-                        print(this.name + "ג אםנאין");
                         treeState = BananaTreeStates.hasUnripePart;
                         Branch.SetActive(false);
                         BananaPart.SetActive(false);
