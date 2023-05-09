@@ -1492,6 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845ca7545087515489d92e17b7e6c563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   hungerSystem: {fileID: 383460492}
 --- !u!1 &5940623897964832446
 GameObject:

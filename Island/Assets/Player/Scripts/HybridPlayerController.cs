@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HybridPlayerController : MonoBehaviour
-{
+public class HybridPlayerController : MonoBehaviour {
     [SerializeField] Transform playerCamera;
+
+    [Header("Настройки управления игроком")]
     [SerializeField, Range(1.0f, 10.0f)] float mouseSensitivity = 4.0f;
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float gravity = -13.0f;
@@ -24,6 +24,9 @@ public class HybridPlayerController : MonoBehaviour
     [SerializeField] Transform playerHand;
     [SerializeField] Transform VRFallbackObjects;
     //------------------------------------
+
+    public bool canvasFollowsCamera = false;
+    [SerializeField] Transform canvas;
 
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
@@ -71,20 +74,31 @@ public class HybridPlayerController : MonoBehaviour
     Vector3 startPosCam, startRotCam;
     Vector3 startPosHead, startRotHead;
     Vector3 startPosHand, startRotHand;
+    Vector3 startPosCanvas, startRotCanvas;
     void SetupTransformForFreeCamera(bool isFree) {
         if (isFree) {
             startPosCam = playerCamera.localPosition; startRotCam = playerCamera.localEulerAngles;
             startPosHead = playerHead.localPosition; startRotHead = playerHead.localEulerAngles;
             startPosHand = playerHand.localPosition; startRotHand = playerHand.localEulerAngles;
+            startPosCanvas = canvas.localPosition; startRotCanvas = canvas.localEulerAngles;
 
-            playerHead.parent = playerCamera;
+            if (headFollowsCamera) playerHead.parent = playerCamera;
+            if (canvasFollowsCamera) canvas.parent = playerCamera;
+
             playerHand.parent = playerCamera;
         }
         else {
             playerCamera.localPosition = startPosCam; playerCamera.localEulerAngles = startRotCam; //playerCamera.localScale = Vector3.one;
 
-            playerHead.parent = VRFallbackObjects;
-            playerHead.localPosition = startPosHead; playerHead.localEulerAngles = startRotHead; //playerHead.localScale = Vector3.one;
+            if (headFollowsCamera) {
+                playerHead.parent = VRFallbackObjects;
+                playerHead.localPosition = startPosHead; playerHead.localEulerAngles = startRotHead; //playerHead.localScale = Vector3.one;
+            }
+
+            if (canvasFollowsCamera) {
+                canvas.parent.parent = VRFallbackObjects;
+                canvas.localPosition = startPosCanvas; canvas.localEulerAngles = startRotCanvas;
+            }
 
             playerHand.parent = VRFallbackObjects;
             playerHand.localPosition = startPosHand; playerHand.localEulerAngles = startRotHand; //playerHand.localScale = Vector3.one;
@@ -127,6 +141,7 @@ public class HybridPlayerController : MonoBehaviour
         Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + Vector3.up * velocityY;
         controller.Move(velocity * Time.deltaTime);
     }
+
 
     Vector3 startEulerAngles;
     Vector3 startMousePosition;

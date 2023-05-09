@@ -68,24 +68,47 @@
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Prefabs\SOS_Manager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Prefabs\CocountSplit.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Prefabs\ToggleGravity.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Prefabs\ToggleOnGravity.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
     <Compile Include="Assets\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Prefabs\BananaTreeGrowth.cs" />
+    <Compile Include="Assets\UI\Inventory\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Prefabs\CocountSpawner.cs" />
     <Compile Include="Assets\Scripts\DetacheInteractable.cs" />
     <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\GameTime.cs" />
-    <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
-    <Compile Include="Assets\UI\Inventoty.cs" />
-    <Compile Include="Assets\Player\Scripts\FreeCameraController.cs" />
     <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
+    <Compile Include="Assets\Player\Scripts\FreeCameraController.cs" />
+    <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
+    <Compile Include="Assets\UI\Inventory\InventorySlotManager.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Optimization.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Asset Store\Wind\Documentation\LPW_Log.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Asset Store\Wind\Assets\Shaders\ASE\LPW_Vegetation.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Inventoty : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
+    [SerializeField] Transform panelWithSlots;
+
     private void Awake() {
-        this.gameObject.SetActive(false);
+        
     }
-
-
 }

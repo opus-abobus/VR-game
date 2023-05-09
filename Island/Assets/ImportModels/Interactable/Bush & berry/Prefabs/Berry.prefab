@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7455189176503863500}
   - component: {fileID: 3811750333778922434}
   - component: {fileID: 9207195679080054636}
+  - component: {fileID: 6512031264760468246}
   m_Layer: 6
   m_Name: Berry
   m_TagString: berry
@@ -231,6 +232,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 6512031264760468246}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: set_IsPickedUp
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls:
@@ -249,6 +262,18 @@ MonoBehaviour:
       - m_Target: {fileID: 9207195679080054636}
         m_TargetAssemblyTypeName: SetEatability, Assembly-CSharp
         m_MethodName: set_IsEatable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6512031264760468246}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: set_IsPickedUp
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -301,5 +326,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa83a4a4f84a2747bfb8d314a4df1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
+    type: 3}
+  useGlobalSettings: 1
   nutritionalValue: 5
-  useDefaultNutritionalValues: 0
+--- !u!114 &6512031264760468246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438709704091104556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b8510b2032ee4ba2826d15e1caa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteInInvenory: {fileID: 21300000, guid: 308a97e22de8c5345bc3dfbcaf74759f, type: 3}
