@@ -13,7 +13,7 @@ public class SetEatability : MonoBehaviour
     [SerializeField] GameSettings globalSettings;
     public bool useGlobalSettings = true;
 
-    public int nutritionalValue = 5;
+    public float nutritionalValue = (float) 5 / 100;
 
     private void Awake() {
         SetNutritionalValue();
@@ -22,20 +22,20 @@ public class SetEatability : MonoBehaviour
         switch (this.gameObject.tag) {
             case "berry": {
                     if (useGlobalSettings && globalSettings != null) {
-                        nutritionalValue = globalSettings.nutritionalValue_Berry;
+                        nutritionalValue = (float) globalSettings.nutritionalValue_Berry / 100;
                     }
                     break;
                 }
             case "banana": {
                     if (useGlobalSettings && globalSettings != null) {
-                        nutritionalValue = globalSettings.nutritionalValue_Banana;
+                        nutritionalValue = (float) globalSettings.nutritionalValue_Banana / 100;
                     }
                     break;
                 }
             case "cocount":
             case "coconut": {
                     if (useGlobalSettings && globalSettings != null) {
-                        nutritionalValue = globalSettings.nutritionalValue_Coconut;
+                        nutritionalValue = (float) globalSettings.nutritionalValue_Coconut / 100;
                     }
                     break;
                 }

@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
         canvas.SetActive(false);
     }
 
-    public bool isInvenoryOpen = false;
+    [HideInInspector] public bool isInvenoryOpen = false;
     private void Update() {
         if (Input.GetKeyDown(KeyCode.I)) {
             if (isInvenoryOpen) {

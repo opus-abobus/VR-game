@@ -61,8 +61,14 @@ public class InventorySlotManager : MonoBehaviour {
             wasPickedUpFromSlot = true;
             panelWithSlotsManager.readyToPlace = false;
             isEmpty = true;
-            hand.AttachObject(storedObject, GrabTypes.Grip);
+            hand.AttachObject(storedObject, GrabTypes.Grip, Hand.AttachmentFlags.VelocityMovement);
             panelWithSlotsManager.readyToPlace = false;
+
+            SetEatability _component1 = storedObject.GetComponent<SetEatability>();
+            if (_component1 != null) { _component1.IsEatable = true; }
+            InteractableManager _component2 = storedObject.GetComponent<InteractableManager>();
+            if (_component2 != null) { _component2.IsPickedUp = true; }
+
             //StartCoroutine(resetVelocity(3));
             storedObject = null;
         }
