@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 4419468085221777394}
   - component: {fileID: 999755556493527264}
   - component: {fileID: 2491607306099262027}
+  - component: {fileID: 1068386876}
   m_Layer: 0
   m_Name: CoconutDown
   m_TagString: cocount
@@ -262,12 +263,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1068386876}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: set_IsPickedUp
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2491607306099262027}
         m_TargetAssemblyTypeName: SetEatability, Assembly-CSharp
         m_MethodName: set_IsEatable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1068386876}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: set_IsPickedUp
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -312,6 +337,19 @@ MonoBehaviour:
     type: 3}
   useGlobalSettings: 1
   nutritionalValue: 5
+--- !u!114 &1068386876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465292275209502153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b8510b2032ee4ba2826d15e1caa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteInInvenory: {fileID: 21300000, guid: 84b0799a2a115f340a1e3659eed70016, type: 3}
 --- !u!1 &4330422335106794841
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +367,7 @@ GameObject:
   - component: {fileID: 3196732510518834355}
   - component: {fileID: 5620796087605320617}
   - component: {fileID: 2890556841765823741}
+  - component: {fileID: 1120902166}
   m_Layer: 0
   m_Name: CoconutUp
   m_TagString: cocount
@@ -529,12 +568,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1068386876}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: set_IsPickedUp
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2890556841765823741}
         m_TargetAssemblyTypeName: SetEatability, Assembly-CSharp
         m_MethodName: set_IsEatable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1068386876}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: set_IsPickedUp
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -593,6 +656,19 @@ MonoBehaviour:
     type: 3}
   useGlobalSettings: 1
   nutritionalValue: 5
+--- !u!114 &1120902166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330422335106794841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b8510b2032ee4ba2826d15e1caa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteInInvenory: {fileID: 21300000, guid: 84b0799a2a115f340a1e3659eed70016, type: 3}
 --- !u!1 &6212277536901898882
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +687,7 @@ GameObject:
   - component: {fileID: 1511818549669821623}
   - component: {fileID: 2404892114248783574}
   - component: {fileID: 1017893720648844289}
+  - component: {fileID: 1862796937}
   m_Layer: 0
   m_Name: Coconut
   m_TagString: cocount
@@ -815,7 +892,7 @@ MonoBehaviour:
   onPickUp:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1017893720648844289}
+      - m_Target: {fileID: 1862796937}
         m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
         m_MethodName: set_IsPickedUp
         m_Mode: 6
@@ -842,7 +919,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1017893720648844289}
+      - m_Target: {fileID: 1862796937}
         m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
         m_MethodName: set_IsPickedUp
         m_Mode: 6
@@ -901,3 +978,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteInInvenory: {fileID: 21300000, guid: c30f421931ebcde419303fb71f4bf186, type: 3}
+--- !u!114 &1862796937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6212277536901898882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b8510b2032ee4ba2826d15e1caa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteInInvenory: {fileID: 0}

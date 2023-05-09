@@ -34,19 +34,28 @@ public class InventorySlotManager : MonoBehaviour {
     }
 
     GameObject storedObject = null;
-
+    bool isReadyToPlaceAgaing = false;
     
     private void OnTriggerEnter(Collider other) {
-        print(other.gameObject);
-        if (isEmpty) {
-            string tag = other.tag;
-            print(tag);
-            if (tag == "berry" || tag == "cocount" || tag == "coconut" || tag == "rock"
-                || tag == "banana" || tag == "signalGun") {
-                storedObject = other.gameObject;
-                SetImageSource(other.GetComponent<InteractableManager>().spriteInInvenory);
-                other.gameObject.SetActive(false);
+        if (isEmpty && storedObject == null) {
+            InteractableManager manager = other.GetComponent<InteractableManager>();
+            if (manager != null && manager.IsPickedUp) {
+                string tag = other.tag;
+                print(tag);
+                if (tag == "berry" || tag == "cocount" || tag == "coconut" || tag == "rock"
+                    || tag == "banana" || tag == "signalGun") {
+                    storedObject = other.gameObject;
+                    SetImageSource(manager.spriteInInvenory);
+                    other.gameObject.SetActive(false);
+                }
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        InteractableManager manager = other.GetComponent<InteractableManager>();
+        if (manager != null && manager.IsPickedUp) {
+            isReadyToPlaceAgaing = true;
         }
     }
 
@@ -56,6 +65,7 @@ public class InventorySlotManager : MonoBehaviour {
             _image.color = _oldColor;
             storedObject.SetActive(true);
             hand.AttachObject(storedObject, GrabTypes.Grip);
+            storedObject = null;
         }
     }
 

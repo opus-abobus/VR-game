@@ -65,6 +65,7 @@
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Prefabs\Placeholding.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SetEatability.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\UI\Inventory\InventorySlotManager.cs" />
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Prefabs\SOS_Manager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Prefabs\CocountSplit.cs" />
@@ -80,10 +81,9 @@
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\GameTime.cs" />
     <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Optimization.cs" />
     <Compile Include="Assets\Player\Scripts\FreeCameraController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
-    <Compile Include="Assets\UI\Inventory\InventorySlotManager.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Optimization.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
