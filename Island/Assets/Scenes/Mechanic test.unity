@@ -1490,18 +1490,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4069ac3b4e35f1946a9896c557ab6c84, type: 3}
---- !u!114 &1741203456 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 383460492, guid: 613065de16dd9ed4db7f97ca423b84c4,
-    type: 3}
-  m_PrefabInstance: {fileID: 492937026}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a3592ec39364341985fdb433887cc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!108 &1765226951 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 7853748600427433997, guid: d4e7bd586d9f4d1488345282642f0d2e,
@@ -2415,11 +2403,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7081922616875481640, guid: 373cb11b299cb7f43942266156cd1d07,
-        type: 3}
-      propertyPath: hungerSystem
-      value: 
-      objectReference: {fileID: 1741203456}
     - target: {fileID: 7081922617802539465, guid: 373cb11b299cb7f43942266156cd1d07,
         type: 3}
       propertyPath: m_Name

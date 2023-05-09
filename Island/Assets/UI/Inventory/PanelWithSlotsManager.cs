@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class PanelWithSlotsManager : MonoBehaviour
 {
-    [HideInInspector] public bool readyToPlace;
-
-    private void OnTriggerEnter(Collider other) {
-        InteractableManager manager = other.GetComponent<InteractableManager>();
-        if (manager != null && manager.IsPickedUp) {
-            print("pickedUp");
-            readyToPlace = false;
-        }
-            
-    }
+    [HideInInspector] public bool readyToPlace = true;
 
     private void OnTriggerExit(Collider other) {
         InteractableManager manager = other.GetComponent<InteractableManager>();
         if (manager != null && manager.IsPickedUp) {
-            print("pickedUp");
+            StartCoroutine(waitForFixedUpdates(3));
             readyToPlace = true;
         }
-            
+    }
+    IEnumerator waitForFixedUpdates(int frames) {
+        for (int i = 0; i < frames; i++) {
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class InventorySlotManager : MonoBehaviour {
-    //[SerializeField] InventoryManager inventoryManager;
-
     [SerializeField] PanelWithSlotsManager panelWithSlotsManager;
     [SerializeField] Hand hand;
 
     UIElement uIElement;
 
-    Button button;
     Image _image;
     Sprite _oldSprite;
     Color _oldColor;
 
     private void Start() {
-        button = GetComponent<Button>();
         uIElement = GetComponent<UIElement>();
         _image = GetComponent<Image>();
         _oldSprite = _image.sprite;
@@ -37,58 +34,49 @@ public class InventorySlotManager : MonoBehaviour {
     GameObject storedObject = null;
     
     private void OnTriggerEnter(Collider other) {
-        /*if (isEmpty && storedObject == null) {
-            InteractableManager manager = other.GetComponent<InteractableManager>();
-            if (manager != null && manager.IsPickedUp) {
-                string tag = other.tag;
-                print(tag);
-                if (tag == "berry" || tag == "cocount" || tag == "coconut" || tag == "rock"
-                    || tag == "banana" || tag == "signalGun") {
-                    storedObject = other.gameObject;
-                    SetImageSource(manager.spriteInInvenory);
-                    other.gameObject.SetActive(false);
-                }
-            }
-        }*/
-
         if (isEmpty) {
             InteractableManager manager = other.GetComponent<InteractableManager>();
-            if (manager != null && manager.IsPickedUp) {
+            print(manager.IsPickedUp);
+            //if (manager != null && manager.IsPickedUp) {
+            if (manager != null && hand.currentAttachedObject == other.gameObject) {
                 print("from slot: " + wasPickedUpFromSlot + "  ready: " + panelWithSlotsManager.readyToPlace);
                 if ((wasPickedUpFromSlot && panelWithSlotsManager.readyToPlace) || (wasPickedUpFromSlot == false)) {
                     storedObject = other.gameObject;
                     SetImageSource(manager.spriteInInvenory);
                     hand.DetachObject(storedObject);
-                    other.gameObject.SetActive(false);
                     wasPickedUpFromSlot = false;
+                    other.gameObject.SetActive(false);
                 }
             }
         }
     }
 
-    /*private void OnTriggerExit(Collider other) {
-        InteractableManager manager = other.GetComponent<InteractableManager>();
-        if (manager != null && manager.IsPickedUp) {
-
-        }
-    }*/
-
     bool wasPickedUpFromSlot = false;
     public void OnHandPressedSlot() {
-        if (!isEmpty && storedObject != null) {
+        if (!isEmpty) {
             _image.sprite = _oldSprite;
             _image.color = _oldColor;
             storedObject.SetActive(true);
+            storedObject.transform.position = hand.transform.position;
             wasPickedUpFromSlot = true;
+            panelWithSlotsManager.readyToPlace = false;
+            isEmpty = true;
             hand.AttachObject(storedObject, GrabTypes.Grip);
-            wasPickedUpFromSlot = true;
-            //panelWithSlotsManager.readyToPlace = false;
+            panelWithSlotsManager.readyToPlace = false;
+            //StartCoroutine(resetVelocity(3));
             storedObject = null;
         }
     }
 
     public void InvokeSlotButton() {
-        //button.onClick.Invoke();
-        uIElement.onHandClick.Invoke(hand);
+        if (!isEmpty)
+            uIElement.onHandClick.Invoke(hand);
+    }
+
+    IEnumerator resetVelocity(int frames) {
+        for (int i = 0; i < frames; i++) {
+            storedObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

@@ -2134,7 +2134,7 @@ GameObject:
   - component: {fileID: 7081922616277910112}
   - component: {fileID: 7081922616277910115}
   - component: {fileID: 917474759}
-  - component: {fileID: 5087269805161517804}
+  - component: {fileID: 8098558664111500819}
   - component: {fileID: 5087269805161517805}
   m_Layer: 5
   m_Name: Panel
@@ -2231,7 +2231,7 @@ MonoBehaviour:
   m_Spacing: {x: 7.9, y: 20.7}
   m_Constraint: 0
   m_ConstraintCount: 4
---- !u!65 &5087269805161517804
+--- !u!65 &8098558664111500819
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2242,7 +2242,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 185.15, y: 136.19, z: 10.17}
+  m_Size: {x: 194.3, y: 140.78, z: 17.8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5087269805161517805
 MonoBehaviour:
@@ -3009,6 +3009,7 @@ GameObject:
   - component: {fileID: 7081922616875481641}
   - component: {fileID: 7081922616875481640}
   - component: {fileID: 2132934553}
+  - component: {fileID: 5087269805161517804}
   m_Layer: 0
   m_Name: HeadCollider
   m_TagString: Untagged
@@ -3073,7 +3074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 7081922616971153905}
-  hungerSystem: {fileID: 0}
+  hungerSystem: {fileID: 5087269805161517804}
 --- !u!212 &2132934553
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3126,6 +3127,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5087269805161517804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081922616875481642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a3592ec39364341985fdb433887cc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondsPerPercent: 20
+  startSatiety: 70
 --- !u!1 &7081922616918236638
 GameObject:
   m_ObjectHideFlags: 0
@@ -3871,6 +3886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelWithSlots: {fileID: 7081922616277910125}
+  canvas: {fileID: 7081922617396596577}
 --- !u!114 &9216028824873523787
 MonoBehaviour:
   m_ObjectHideFlags: 0
