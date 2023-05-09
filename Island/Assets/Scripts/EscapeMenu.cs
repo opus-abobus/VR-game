@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class EscapeMenu : MonoBehaviour
 {
+    private void Awake() {
+        startTimeScale = Time.timeScale;
+        AudioListener.pause = false;
+    }
+
     private bool pauseGame;
     [SerializeField] GameObject pauseGameMenu;
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseGame)
             {
@@ -30,23 +35,28 @@ public class EscapeMenu : MonoBehaviour
     public void Resume()
     {
         pauseGameMenu.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = startTimeScale;
         pauseGame = false;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        AudioListener.pause = false;
     }
 
+    float startTimeScale;
     public void Pause()
     {
         pauseGameMenu.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0;
         pauseGame = true;
+
+        AudioListener.pause = true;
     }
 
     public void LoadMenu()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = startTimeScale;
         SceneManager.LoadScene("Menu");
     }
 }
