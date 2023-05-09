@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7734924202771963843}
   - component: {fileID: 7734924202771963852}
   - component: {fileID: 7734924202771963853}
+  - component: {fileID: 8299186101879423532}
   m_Layer: 0
   m_Name: Rock9
   m_TagString: rock
@@ -296,5 +297,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22b8510b2032ee4ba2826d15e1caa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteInInvenory: {fileID: 21300000, guid: 1cc4adde8e1ae014db61e7238bade8cb, type: 3}
+--- !u!114 &8299186101879423532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464313159474897560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd6ea022aacb1f47877138676e5ea00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceKinematics: 1
   setKinematicAfterSeconds: 3
   rb: {fileID: 7734924202771963855}
+  isGrounded: 0
