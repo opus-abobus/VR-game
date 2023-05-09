@@ -6,9 +6,9 @@ using Valve.VR.InteractionSystem;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] Transform panelWithSlots;
+    public GameObject panelWithSlots;
 
     private void Awake() {
-        
+
     }
 }

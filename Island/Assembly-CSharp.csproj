@@ -84,6 +84,7 @@
     <Compile Include="Assets\ImportModels\Interactable\Optimization.cs" />
     <Compile Include="Assets\Player\Scripts\FreeCameraController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
+    <Compile Include="Assets\UI\Inventory\PanelWithSlotsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

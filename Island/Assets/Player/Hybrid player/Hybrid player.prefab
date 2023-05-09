@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelWithSlotsManager: {fileID: 5087269805161517805}
   hand: {fileID: 7081922616138207824}
 --- !u!65 &597774727
 BoxCollider:
@@ -477,6 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelWithSlotsManager: {fileID: 5087269805161517805}
   hand: {fileID: 7081922616138207824}
 --- !u!65 &705860088
 BoxCollider:
@@ -737,6 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelWithSlotsManager: {fileID: 5087269805161517805}
   hand: {fileID: 7081922616138207824}
 --- !u!65 &1411835636
 BoxCollider:
@@ -997,6 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelWithSlotsManager: {fileID: 5087269805161517805}
   hand: {fileID: 7081922616138207824}
 --- !u!65 &1443283430
 BoxCollider:
@@ -1257,6 +1261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelWithSlotsManager: {fileID: 5087269805161517805}
   hand: {fileID: 7081922616138207824}
 --- !u!65 &2139261674
 BoxCollider:
@@ -2129,6 +2134,8 @@ GameObject:
   - component: {fileID: 7081922616277910112}
   - component: {fileID: 7081922616277910115}
   - component: {fileID: 917474759}
+  - component: {fileID: 5087269805161517804}
+  - component: {fileID: 5087269805161517805}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -2224,6 +2231,32 @@ MonoBehaviour:
   m_Spacing: {x: 7.9, y: 20.7}
   m_Constraint: 0
   m_ConstraintCount: 4
+--- !u!65 &5087269805161517804
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081922616277910125}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 185.15, y: 136.19, z: 10.17}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5087269805161517805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081922616277910125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d18c42407a0b2348838800278187a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readyToPlace: 0
 --- !u!1 &7081922616299403303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2821,6 +2854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelWithSlotsManager: {fileID: 5087269805161517805}
   hand: {fileID: 7081922616138207824}
 --- !u!114 &191460988
 MonoBehaviour:
@@ -3836,7 +3870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c00bbffe9a3b94b86f8489e624bf9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelWithSlots: {fileID: 7081922616277910114}
+  panelWithSlots: {fileID: 7081922616277910125}
 --- !u!114 &9216028824873523787
 MonoBehaviour:
   m_ObjectHideFlags: 0

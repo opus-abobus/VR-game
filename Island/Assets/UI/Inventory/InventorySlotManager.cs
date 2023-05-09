@@ -7,6 +7,7 @@ using Valve.VR.InteractionSystem;
 public class InventorySlotManager : MonoBehaviour {
     //[SerializeField] InventoryManager inventoryManager;
 
+    [SerializeField] PanelWithSlotsManager panelWithSlotsManager;
     [SerializeField] Hand hand;
 
     UIElement uIElement;
@@ -34,10 +35,9 @@ public class InventorySlotManager : MonoBehaviour {
     }
 
     GameObject storedObject = null;
-    bool isReadyToPlaceAgaing = false;
     
     private void OnTriggerEnter(Collider other) {
-        if (isEmpty && storedObject == null) {
+        /*if (isEmpty && storedObject == null) {
             InteractableManager manager = other.GetComponent<InteractableManager>();
             if (manager != null && manager.IsPickedUp) {
                 string tag = other.tag;
@@ -49,22 +49,40 @@ public class InventorySlotManager : MonoBehaviour {
                     other.gameObject.SetActive(false);
                 }
             }
+        }*/
+
+        if (isEmpty) {
+            InteractableManager manager = other.GetComponent<InteractableManager>();
+            if (manager != null && manager.IsPickedUp) {
+                print("from slot: " + wasPickedUpFromSlot + "  ready: " + panelWithSlotsManager.readyToPlace);
+                if ((wasPickedUpFromSlot && panelWithSlotsManager.readyToPlace) || (wasPickedUpFromSlot == false)) {
+                    storedObject = other.gameObject;
+                    SetImageSource(manager.spriteInInvenory);
+                    hand.DetachObject(storedObject);
+                    other.gameObject.SetActive(false);
+                    wasPickedUpFromSlot = false;
+                }
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other) {
+    /*private void OnTriggerExit(Collider other) {
         InteractableManager manager = other.GetComponent<InteractableManager>();
         if (manager != null && manager.IsPickedUp) {
-            isReadyToPlaceAgaing = true;
-        }
-    }
 
+        }
+    }*/
+
+    bool wasPickedUpFromSlot = false;
     public void OnHandPressedSlot() {
         if (!isEmpty && storedObject != null) {
             _image.sprite = _oldSprite;
             _image.color = _oldColor;
             storedObject.SetActive(true);
+            wasPickedUpFromSlot = true;
             hand.AttachObject(storedObject, GrabTypes.Grip);
+            wasPickedUpFromSlot = true;
+            //panelWithSlotsManager.readyToPlace = false;
             storedObject = null;
         }
     }
