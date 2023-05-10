@@ -12,22 +12,28 @@ public class EscapeMenu : MonoBehaviour
 
     private bool pauseGame;
     [SerializeField] GameObject pauseGameMenu;
+    [SerializeField] GameObject overlay;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseGame)
+            HungerSystem hungerSystem = new HungerSystem();
+
+            if (!hungerSystem.IsGameOver)
             {
-                Resume();
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else
-            {
-                Pause();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                if (pauseGame)
+                {
+                    Resume();
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                else
+                {
+                    Pause();
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
             }
         }
     }
@@ -42,6 +48,7 @@ public class EscapeMenu : MonoBehaviour
         Cursor.visible = false;
 
         AudioListener.pause = false;
+        overlay.SetActive(true);
     }
 
     float startTimeScale;
@@ -52,6 +59,7 @@ public class EscapeMenu : MonoBehaviour
         pauseGame = true;
 
         AudioListener.pause = true;
+        overlay.SetActive(false);
     }
 
     public void LoadMenu()
