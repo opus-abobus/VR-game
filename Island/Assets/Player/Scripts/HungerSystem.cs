@@ -12,7 +12,16 @@ public class HungerSystem : MonoBehaviour
 
     [SerializeField] Image healthBar;
     [SerializeField] Image satietyBar;
-    
+
+    [SerializeField] GameObject overlay;
+    [SerializeField] GameObject deathScreen;
+
+    bool isGameOver = false;
+    public bool IsGameOver { 
+        get { return isGameOver; }
+        set { isGameOver = value; }
+    }
+
     float satiety, health;
     public float Satiety {
         get { return satiety; }
@@ -90,7 +99,17 @@ public class HungerSystem : MonoBehaviour
     }
 
     IEnumerator ShowScreenOfPlayerDeath() {
+        isGameOver = true;
+
         Debug.Log("Player died from starving");
         yield return null;
+
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        deathScreen.SetActive(true);
+        overlay.SetActive(false);
     }
 }
