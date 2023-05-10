@@ -19,7 +19,6 @@ public class PlayerEating : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) {
         var tag = collision.gameObject.tag;
-        print(hand.currentAttachedObject);
         foreach (var item in tagsWithEatableObjects) {
             
             if (tag == item && collision.gameObject.GetComponent<SetEatability>().IsEatable) {

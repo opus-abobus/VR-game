@@ -8,7 +8,6 @@ public class BananaDrop : MonoBehaviour
 {
     public int maxBananasToSpawn = -1;
     public GameObject banana;
-    public GameObject ground;
 
     [SerializeField] bool useGlobalSettings = true;
     [SerializeField] GameSettings globalSettings;
@@ -43,10 +42,6 @@ public class BananaDrop : MonoBehaviour
         tags.Add("cocount"); tags.Add("coconut");
     }
 
-    private void Start() {
-        ground = Ground.ground;
-    }
-
     private void OnTriggerEnter(Collider other) {
         foreach (var tag in tags) {
             if (other.tag == tag) {
@@ -61,7 +56,7 @@ public class BananaDrop : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject == ground) {
+        if (collision.gameObject.CompareTag("ground")) {
             Vector3 spawnPoint = collision.GetContact(0).point;
             SpawnBanana(spawnPoint);
             Destroy(this.gameObject);
@@ -69,20 +64,13 @@ public class BananaDrop : MonoBehaviour
     }
     [SerializeField] public BananaRipening bananaRipening;
     private void OnDestroy() {
-        //print(spawnedBanana.transform.position + "  origin: " + transform.position);
         bananaRipening.isBananasFallen = true;
     }
     void SpawnBanana(Vector3 spawnPoint) {
-        /*int bananaAmount;
-        if (maxBananasToSpawn != -1) bananaAmount = maxBananasToSpawn;
-        else bananaAmount = Random.Range(1, 5);*/
-
         for (int i = 0; i < bananaAmount; i++) {
             spawnPoint.y += _collider.size.y / 2;
             GameObject spawnedBanana = Instantiate(banana, spawnPoint, Random.rotation);
             spawnedBanana.transform.parent = this.gameObject.transform.parent;
-            //print(spawnedBanana.transform.position + "  origin: " + transform.position);
-            //spawnedBanana.transform.localScale = transform.lossyScale;
         }
     }
 }

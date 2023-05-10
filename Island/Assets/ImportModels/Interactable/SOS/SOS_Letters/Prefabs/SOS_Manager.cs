@@ -10,6 +10,9 @@ public class SOS_Manager : MonoBehaviour
 
     int placeholderCount = 0;
 
+    [HideInInspector] public static float dayTimeChance = 0.1f;
+    [HideInInspector] public static float nightTimeChance = 0.01f;
+
     private void Awake() {
         placeholdings = new Placeholding[rocks.Length];
         int i = 0;
@@ -24,13 +27,15 @@ public class SOS_Manager : MonoBehaviour
     void UpdatePlaceholderCount() {
         placeholderCount++;
     }
+
+    [HideInInspector] public bool isSOSLayedOut = false;
     IEnumerator SOS_controller() {
         while (true) {
             if (transform.childCount == placeholderCount) {
-                print("layed out!");
+                isSOSLayedOut = true;
                 break;
             }
             yield return null;
-        } 
+        }
     }
 }

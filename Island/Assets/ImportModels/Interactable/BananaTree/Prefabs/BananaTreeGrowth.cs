@@ -63,7 +63,6 @@ public class BananaTreeGrowth : MonoBehaviour
             StopCoroutine(_growningProcess);
             ripeningInstance.enabled = true;
             Destroy(this);
-            //this.enabled = false;
         }
     }
     IEnumerator GrowningProcess() {

@@ -80,7 +80,7 @@ public class HungerSystem : MonoBehaviour
 
     bool CrDmgRunning = false;
     IEnumerator DamageFromStarvingProcess() {
-        print("start");
+        //print("start");
         CrDmgRunning = true;
         yield return new WaitForSeconds(secondsPerHealthPoint);
         while (true) {

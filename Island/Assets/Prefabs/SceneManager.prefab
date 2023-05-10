@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2440104536246825183}
   - component: {fileID: 2440104536246825182}
+  - component: {fileID: 2440104536494456738}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d33ed6ce9b92846a7511dc467dac22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeDayInSeconds: 60
+  timeDayInSeconds: 300
   timeProgress: 0
   SunCurve:
     serializedVersion: 2
@@ -310,8 +311,23 @@ MonoBehaviour:
     m_RotationOrder: 4
   DaySkybox: {fileID: 2100000, guid: a536f2c5a627040459ddaeaa598e4877, type: 2}
   NightSkybox: {fileID: 2100000, guid: 08343439050b38f40b49ca17ffc0ccfe, type: 2}
-  Sun: {fileID: 7853748600427433997, guid: d4e7bd586d9f4d1488345282642f0d2e, type: 3}
-  Moon: {fileID: 7849611857346849359, guid: 48c988eda32d66e4e97a94f0f7d6ce82, type: 3}
+  Sun: {fileID: 0}
+  Moon: {fileID: 0}
+--- !u!114 &2440104536494456738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2440104536246825181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2be5e7d7ff2994a91e056d9b836e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SOSLetters:
+  - {fileID: 0}
+  gameTime: {fileID: 2440104536246825182}
 --- !u!1 &2440104536913913305
 GameObject:
   m_ObjectHideFlags: 0

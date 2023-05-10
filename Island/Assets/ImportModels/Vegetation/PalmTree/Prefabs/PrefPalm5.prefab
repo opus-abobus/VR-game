@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5225172363925144299
 Transform:
@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6890594855587044453
 Transform:
@@ -93,7 +93,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5118851960575959050
 Transform:
@@ -290,6 +290,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Palm5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7a9a2814ba0ab2b449775549633508b5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a9a2814ba0ab2b449775549633508b5, type: 3}

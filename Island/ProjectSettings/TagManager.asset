@@ -11,6 +11,8 @@ TagManager:
   - ground
   - cocount
   - rock
+  - signalGun
+  - signalRocket
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - UI
   - berry
   - bush
-  - 
-  - 
+  - gun
+  - bullet
   - 
   - 
   - 
