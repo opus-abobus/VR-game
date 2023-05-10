@@ -105,6 +105,9 @@ public class HybridPlayerController : MonoBehaviour {
         }
     }
 
+    [SerializeField] EscapeMenu escapeMenu;
+    [SerializeField] HungerSystem hungerSystem;
+
     void UpdateMouseLook() {
         if (!alwaysShowCursor) {
             if (Input.GetMouseButton(1)) {
@@ -112,8 +115,15 @@ public class HybridPlayerController : MonoBehaviour {
                 Cursor.visible = true;
             }
             else {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                if (escapeMenu.PauseGame || hungerSystem.IsGameOver)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+                else {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
             }
         }
 
