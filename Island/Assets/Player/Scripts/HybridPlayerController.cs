@@ -104,7 +104,7 @@ public class HybridPlayerController : MonoBehaviour {
             playerHand.localPosition = startPosHand; playerHand.localEulerAngles = startRotHand; //playerHand.localScale = Vector3.one;
         }
     }
-
+    [SerializeField] EscapeMenu escapeMenu;
     void UpdateMouseLook() {
         if (!alwaysShowCursor) {
             if (Input.GetMouseButton(1)) {
@@ -112,8 +112,14 @@ public class HybridPlayerController : MonoBehaviour {
                 Cursor.visible = true;
             }
             else {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                if (!escapeMenu.pauseGame) {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                else {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
             }
         }
 

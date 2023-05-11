@@ -10,7 +10,7 @@ public class EscapeMenu : MonoBehaviour
         AudioListener.pause = false;
     }
 
-    private bool pauseGame;
+    public bool pauseGame;
     [SerializeField] GameObject pauseGameMenu;
     [SerializeField] GameObject overlay;
 
@@ -30,9 +30,9 @@ public class EscapeMenu : MonoBehaviour
                 }
                 else
                 {
-                    Pause();
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
+                    Pause();
                 }
             }
         }

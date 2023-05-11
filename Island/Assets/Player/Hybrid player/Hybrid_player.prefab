@@ -1900,7 +1900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3328483740481838313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1997,12 +1997,12 @@ GameObject:
   - component: {fileID: 3948825385164816899}
   - component: {fileID: 4094602301306868425}
   m_Layer: 5
-  m_Name: CanvasMenu
+  m_Name: CanvasPauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6603465615087087083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2427,7 +2427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2488,7 +2488,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5632371616499651761}
         m_TargetAssemblyTypeName: EscapeMenu, Assembly-CSharp
         m_MethodName: LoadMenu
         m_Mode: 1
@@ -2621,7 +2621,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5632371616499651761}
         m_TargetAssemblyTypeName: EscapeMenu, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
@@ -3126,7 +3126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5998556294482664186
 Transform:
   m_ObjectHideFlags: 0
@@ -4608,9 +4608,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7081922617202447580}
-  - component: {fileID: 7081922617202447571}
-  - component: {fileID: 7081922617202447570}
-  - component: {fileID: 8292198776462841290}
+  - component: {fileID: 1523147484}
+  - component: {fileID: 1523147485}
+  - component: {fileID: 1523147486}
   m_Layer: 0
   m_Name: InputModule
   m_TagString: Untagged
@@ -4633,35 +4633,7 @@ Transform:
   m_Father: {fileID: 7081922616221297837}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7081922617202447571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081922617202447583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 0
-  m_DragThreshold: 0
---- !u!114 &7081922617202447570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081922617202447583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9e05292e0d62b542ac5bba92674a86d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
---- !u!114 &8292198776462841290
+--- !u!114 &1523147484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4702,6 +4674,34 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &1523147485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081922617202447583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e05292e0d62b542ac5bba92674a86d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+--- !u!114 &1523147486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081922617202447583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
 --- !u!1 &7081922617396596577
 GameObject:
   m_ObjectHideFlags: 0
@@ -4715,7 +4715,7 @@ GameObject:
   - component: {fileID: 7081922617396596581}
   - component: {fileID: 7081922617396596580}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasInventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4960,7 +4960,7 @@ Transform:
   m_GameObject: {fileID: 7081922617802539465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.6570503, y: 1.9846939, z: -0.01871258}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7081922616221297837}
@@ -5005,7 +5005,7 @@ MonoBehaviour:
   hmdTransforms:
   - {fileID: 7081922616971153905}
   hands:
-  - {fileID: 0}
+  - {fileID: 7081922616138207824}
   headCollider: {fileID: 7081922616875481646}
   rigSteamVR: {fileID: 0}
   rig2DFallback: {fileID: 7081922616221297836}
@@ -5043,6 +5043,7 @@ MonoBehaviour:
   VRFallbackObjects: {fileID: 7081922616221297837}
   canvasFollowsCamera: 0
   canvas: {fileID: 7081922617396596582}
+  escapeMenu: {fileID: 5632371616499651761}
 --- !u!114 &4142315001822169248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5076,8 +5077,8 @@ MonoBehaviour:
   startHealth: 0.242
   healthBar: {fileID: 690374860}
   satietyBar: {fileID: 705305219}
-  overlay: {fileID: 0}
-  deathScreen: {fileID: 0}
+  overlay: {fileID: 1803542959}
+  deathScreen: {fileID: 2080674228350906676}
 --- !u!114 &5632371616499651761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5090,8 +5091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e212855943b744fb1f37d50c59ab3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseGameMenu: {fileID: 0}
-  overlay: {fileID: 0}
+  pauseGame: 0
+  pauseGameMenu: {fileID: 2222237658139456651}
+  overlay: {fileID: 1803542959}
 --- !u!82 &6101228385787518669
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5613,7 +5615,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5632371616499651761}
         m_TargetAssemblyTypeName: EscapeMenu, Assembly-CSharp
         m_MethodName: LoadMenu
         m_Mode: 1
