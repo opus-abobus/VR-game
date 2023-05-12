@@ -106,8 +106,6 @@ public class HungerSystem : MonoBehaviour
 
         Time.timeScale = 0;
         AudioListener.pause = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
 
         deathScreen.SetActive(true);
         overlay.SetActive(false);

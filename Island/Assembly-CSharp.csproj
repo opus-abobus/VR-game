@@ -71,10 +71,11 @@
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Prefabs\CocountSplit.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Prefabs\ToggleOnGravity.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
-    <Compile Include="Assets\Scripts\EscapeMenu.cs" />
+    <Compile Include="Assets\Player\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Prefabs\BananaTreeGrowth.cs" />
     <Compile Include="Assets\UI\Inventory\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\GameSettings.cs" />
+    <Compile Include="Assets\Scripts\DeadScreen.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Prefabs\CocountSpawner.cs" />
     <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />

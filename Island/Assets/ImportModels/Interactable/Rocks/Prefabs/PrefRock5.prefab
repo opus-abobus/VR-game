@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 5019914853152167284}
   - component: {fileID: 1353811243288822592}
   - component: {fileID: 33327632}
-  - component: {fileID: 1820789243438746949}
   m_Layer: 0
   m_Name: PrefRock5
   m_TagString: rock
@@ -314,19 +313,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteInInvenory: {fileID: 21300000, guid: 1cc4adde8e1ae014db61e7238bade8cb, type: 3}
---- !u!114 &1820789243438746949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450892176921178429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd6ea022aacb1f47877138676e5ea00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceKinematics: 1
-  setKinematicAfterSeconds: 3
-  rb: {fileID: 7209879276525478923}
-  isGrounded: 0

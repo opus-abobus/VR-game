@@ -10,6 +10,9 @@ public class Optimization : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     private void Awake() {
+        //if (!forceKinematics) this.enabled = false;
+        //DestroyImmediate(this);
+
         if (rb == null) rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
     }

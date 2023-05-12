@@ -28,6 +28,8 @@ public class HybridPlayerController : MonoBehaviour {
     public bool canvasFollowsCamera = false;
     [SerializeField] Transform canvas;
 
+    [SerializeField] SpriteRenderer headSpriteRenderer;
+
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
     CharacterController controller = null;
@@ -42,6 +44,7 @@ public class HybridPlayerController : MonoBehaviour {
         controller = GetComponent<CharacterController>();
         startRotCam = Vector3.zero;
         _freeCamera = FreeCamera();
+        headSpriteRenderer.enabled = false;
     }
 
     IEnumerator _freeCamera;
@@ -77,6 +80,8 @@ public class HybridPlayerController : MonoBehaviour {
     Vector3 startPosCanvas, startRotCanvas;
     void SetupTransformForFreeCamera(bool isFree) {
         if (isFree) {
+            headSpriteRenderer.enabled = true;
+
             startPosCam = playerCamera.localPosition; startRotCam = playerCamera.localEulerAngles;
             startPosHead = playerHead.localPosition; startRotHead = playerHead.localEulerAngles;
             startPosHand = playerHand.localPosition; startRotHand = playerHand.localEulerAngles;
@@ -88,6 +93,8 @@ public class HybridPlayerController : MonoBehaviour {
             playerHand.parent = playerCamera;
         }
         else {
+            headSpriteRenderer.enabled = false;
+
             playerCamera.localPosition = startPosCam; playerCamera.localEulerAngles = startRotCam; //playerCamera.localScale = Vector3.one;
 
             if (headFollowsCamera) {
@@ -104,7 +111,10 @@ public class HybridPlayerController : MonoBehaviour {
             playerHand.localPosition = startPosHand; playerHand.localEulerAngles = startRotHand; //playerHand.localScale = Vector3.one;
         }
     }
+
     [SerializeField] EscapeMenu escapeMenu;
+    [SerializeField] HungerSystem hungerSystem;
+
     void UpdateMouseLook() {
         if (!alwaysShowCursor) {
             if (Input.GetMouseButton(1)) {
@@ -112,13 +122,14 @@ public class HybridPlayerController : MonoBehaviour {
                 Cursor.visible = true;
             }
             else {
-                if (!escapeMenu.pauseGame) {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                }
-                else {
+                if (escapeMenu.PauseGame || hungerSystem.IsGameOver)
+                {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
+                }
+                else {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                 }
             }
         }

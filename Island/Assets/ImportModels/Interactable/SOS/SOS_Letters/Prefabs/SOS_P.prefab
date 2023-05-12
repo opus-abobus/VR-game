@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6874558406792326251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.36, y: 0.57, z: -14.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 544724838509466978}
@@ -93,6 +93,7 @@ MonoBehaviour:
   - {fileID: 7965134221025951688}
   - {fileID: 7965134220104104369}
   - {fileID: 7965134219274434647}
+  isSOSLayedOut: 0
 --- !u!1001 &6027575120652192047
 PrefabInstance:
   m_ObjectHideFlags: 0
