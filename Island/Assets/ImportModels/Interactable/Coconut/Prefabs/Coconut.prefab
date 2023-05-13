@@ -687,7 +687,6 @@ GameObject:
   - component: {fileID: 1511818549669821623}
   - component: {fileID: 2404892114248783574}
   - component: {fileID: 1017893720648844289}
-  - component: {fileID: 1862796937}
   m_Layer: 0
   m_Name: Coconut
   m_TagString: cocount
@@ -892,7 +891,7 @@ MonoBehaviour:
   onPickUp:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1862796937}
+      - m_Target: {fileID: 1017893720648844289}
         m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
         m_MethodName: set_IsPickedUp
         m_Mode: 6
@@ -919,7 +918,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1862796937}
+      - m_Target: {fileID: 1017893720648844289}
         m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
         m_MethodName: set_IsPickedUp
         m_Mode: 6
@@ -978,16 +977,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteInInvenory: {fileID: 21300000, guid: c30f421931ebcde419303fb71f4bf186, type: 3}
---- !u!114 &1862796937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6212277536901898882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e22b8510b2032ee4ba2826d15e1caa1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteInInvenory: {fileID: 0}

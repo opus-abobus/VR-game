@@ -479,7 +479,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5476,10 +5476,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc2d53d4cf31714899a1be736b783cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 0}
   interactable: {fileID: 2772939391602831252}
   audioClip: {fileID: 8300000, guid: 9decdbfb8c260924d98732147f84d70f, type: 3}
   audioSource: {fileID: 2772939391602831263}
+  rocketParticleSystem: {fileID: 2772939391504466515}
+  rocketFireEffectDuration: 20
   explosionForce: 40000
   fireAction:
     actionPath: /actions/default/in/GrabGrip

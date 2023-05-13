@@ -36,10 +36,7 @@ public class InventorySlotManager : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (isEmpty) {
             InteractableManager manager = other.GetComponent<InteractableManager>();
-            print(manager.IsPickedUp);
-            //if (manager != null && manager.IsPickedUp) {
             if (manager != null && hand.currentAttachedObject == other.gameObject) {
-                print("from slot: " + wasPickedUpFromSlot + "  ready: " + panelWithSlotsManager.readyToPlace);
                 if ((wasPickedUpFromSlot && panelWithSlotsManager.readyToPlace) || (wasPickedUpFromSlot == false)) {
                     storedObject = other.gameObject;
                     SetImageSource(manager.spriteInInvenory);

@@ -6,10 +6,11 @@ using Valve.VR.InteractionSystem;
 
 public class SignalGun : MonoBehaviour
 {
-    [SerializeField] Hand hand;
     [SerializeField] Interactable interactable;
     [SerializeField] AudioClip audioClip;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] ParticleSystem rocketParticleSystem;
+    public int rocketFireEffectDuration = 20;
 
     public float explosionForce = 20000;
     public SteamVR_Action_Boolean fireAction;
@@ -17,6 +18,7 @@ public class SignalGun : MonoBehaviour
     Rigidbody rb_rocket;
 
     bool isLoaded = true;
+
     private void Start() {
         rb_rocket = rocket.GetComponent<Rigidbody>();
     }
@@ -43,17 +45,26 @@ public class SignalGun : MonoBehaviour
 
             isLoaded = false;
 
-            if (hand != null) {
-                hand.DetachObject(rocket.gameObject, false);
-            }
+            interactable.attachedToHand.DetachObject(rocket.gameObject, false);
 
             rocket.parent = null;
             rb_rocket.isKinematic = false;
             explosionPos = bottomPart.position;
             rb_rocket.AddExplosionForce(rb_rocket.mass * explosionForce, explosionPos, 10);
+
+            StartCoroutine(RocketFire());
         }
     }
 
+    IEnumerator RocketFire() {
+        rocketParticleSystem.Play();
+        yield return new WaitForSeconds(rocketFireEffectDuration);
+        rocketParticleSystem.Stop();
+        yield return null;
+    }
+
+
+    //---------------
     [HideInInspector] public static float dayTimeChance = 0.3f;
     [HideInInspector] public static float nightTimeChance = 0.35f;
 }

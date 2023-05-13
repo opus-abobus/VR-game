@@ -3205,7 +3205,7 @@ MonoBehaviour:
   uiInteractAction:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
-  useHoverSphere: 0
+  useHoverSphere: 1
   hoverSphereTransform: {fileID: 0}
   hoverSphereRadius: 0.05
   hoverLayerMask:
@@ -3220,7 +3220,7 @@ MonoBehaviour:
   fingerJointHoverRadius: 0.05
   objectAttachmentPoint: {fileID: 0}
   noSteamVRFallbackCamera: {fileID: 7081922616971153908}
-  noSteamVRFallbackMaxDistanceNoItem: 10
+  noSteamVRFallbackMaxDistanceNoItem: 12
   noSteamVRFallbackMaxDistanceWithItem: 0.5
   renderModelPrefab: {fileID: 8040082821618902266, guid: df28d07454932f34da2d202b9f3b6868,
     type: 3}
