@@ -109,6 +109,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paporotnic4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 04e05a26bc2d8a44f83a384fdd09e5ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e05a26bc2d8a44f83a384fdd09e5ed, type: 3}
 --- !u!4 &2165181115263871607 stripped

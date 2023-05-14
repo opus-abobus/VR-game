@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6065371086910420689
 Transform:
@@ -115,7 +115,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -233,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -351,7 +351,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -469,7 +469,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -587,7 +587,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -705,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -823,7 +823,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -941,7 +941,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1059,7 +1059,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1177,7 +1177,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1295,7 +1295,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1413,7 +1413,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1531,7 +1531,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1649,7 +1649,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1767,7 +1767,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1885,7 +1885,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2003,7 +2003,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2121,7 +2121,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2239,7 +2239,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2357,7 +2357,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2475,7 +2475,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2593,7 +2593,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2711,7 +2711,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2829,7 +2829,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Rock_P
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}

@@ -3,7 +3,22 @@ guid: 1987cbc382430324b9ae1cc6bfac11f3
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bananas
+    second: {fileID: 2100000, guid: c709f3e286eaca34d894cd196c06585e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pop
+    second: {fileID: 2100000, guid: ef99338f15e365e4aaf5e05ca5b78118, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pop1
+    second: {fileID: 2100000, guid: ef99338f15e365e4aaf5e05ca5b78118, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +103,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.03
+    globalScale: 3
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

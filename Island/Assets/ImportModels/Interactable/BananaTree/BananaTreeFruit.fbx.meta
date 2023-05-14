@@ -3,7 +3,22 @@ guid: 41d1f51b4008ff8419069e6eeeb104c0
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Banana
+    second: {fileID: 2100000, guid: 07ba4af36edc91c4e9454d9755607a3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown
+    second: {fileID: 2100000, guid: 2a59b27a24b7edb4bb2bfbb2c370b26f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green
+    second: {fileID: 2100000, guid: e4b64ff1223154a418fe5f55bd4ac49a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +103,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.03
+    globalScale: 3
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

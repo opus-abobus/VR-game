@@ -95,7 +95,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5881152368490595596, guid: d62f67dba492d7745b779585dd032915, type: 3}
 --- !u!1 &1924548024805263545
@@ -112,7 +112,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1296630525158674947
 Transform:
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 1586210765687045436}
   m_Layer: 0
   m_Name: DarkGround
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -429,7 +429,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3909233067320746374, guid: d62f67dba492d7745b779585dd032915, type: 3}
 --- !u!1 &5324790496602964662
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 3341279404749874905}
   m_Layer: 0
   m_Name: Sand
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
