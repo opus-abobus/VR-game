@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
+    public static GameSettings instance;
+
+    private void Awake() {
+        instance = this;
+    }
+
     // ---------------------       ягоды      -----------------------
     [Header("Настройки спавна и респавна ягод")]
     [Range(0, 100)] public int minBerriesOnStart;
@@ -52,4 +58,10 @@ public class GameSettings : MonoBehaviour
     //---------------------------------------------------------------------------
 
     // -----------------  параметры объектов эвакуации  -------------------------
+    [Header("Параметры предметов для эвакуации")]
+    [Range(0, 100)] public int rocketChance = 25;
+    [Range(0, 100)] public int sosRocksChance = 1;
+    [Range(0, 100)] public int bonfireChance = 5;
+    public int bonfireDuration = 100;
+    //---------------------------------------------------------------------------
 }

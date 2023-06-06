@@ -7,6 +7,8 @@ using UnityEngine;
 //[ExecuteInEditMode]
 public class GameTime : MonoBehaviour
 {
+    public static GameTime instance;
+
     //[SerializeField] Gradient LightGradient;
     //[SerializeField] Gradient ambientLightGradient;
 
@@ -31,6 +33,9 @@ public class GameTime : MonoBehaviour
 
     Vector3 defaultAngles;
     //float _elapsedTime = 0f;
+    private void Awake() {
+        instance = this;
+    }
 
     private void Start() {
         defaultAngles = Sun.transform.localEulerAngles;
@@ -61,5 +66,22 @@ public class GameTime : MonoBehaviour
 
         //Sun.color = LightGradient.Evaluate(timeProgress);
         //RenderSettings.ambientLight = ambientLightGradient.Evaluate(timeProgress);
+        //PrintTime();
     }
+
+    /*void PrintTime() {
+        int hours, minutes;
+
+        hours = Mathf.FloorToInt(timeProgress / (1 / 24)); print("h = " + timeProgress / 24);
+        if (hours == 24) hours = 0;
+
+        minutes = Mathf.FloorToInt(timeProgress / (1 / 24 / 60)); print("m = " + (timeProgress / (1 / 24 / 60);
+        if (minutes == 60) minutes = 0;
+
+        string hoursPart = hours.ToString(); if (hours < 10) hoursPart = "0" + hours;
+        string minutesPart = minutes.ToString(); if (minutes < 10) minutesPart = "0" + minutes;
+
+        string timeStr = hoursPart + ":" + minutesPart;
+        print("time: " + timeStr);
+    }*/
 }

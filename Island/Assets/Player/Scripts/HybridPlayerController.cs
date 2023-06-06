@@ -159,7 +159,6 @@ public class HybridPlayerController : MonoBehaviour {
         controller.Move(velocity * Time.deltaTime);
     }
 
-
     Vector3 startEulerAngles;
     Vector3 startMousePosition;
     IEnumerator FreeCamera() {

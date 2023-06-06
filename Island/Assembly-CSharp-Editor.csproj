@@ -62,10 +62,10 @@
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
     <Compile Include="Assets\Asset Store\Wind\Assets\Scripts\Editor\LPVegetation_MaterialInspector.cs" />
     <Compile Include="Assets\Editor\Object2Terrain.cs" />
+    <Compile Include="Assets\Editor\ExportTerrain.cs" />
     <Compile Include="Assets\Asset Store\GameObjectBrush\Scripts\Editor\GameObjectBrushEditor.cs" />
     <Compile Include="Assets\Asset Store\GameObjectBrush\Scripts\Editor\BrushObject.cs" />
     <Compile Include="Assets\Asset Store\GameObjectBrush\Scripts\Editor\AddObjectPopup.cs" />
-    <Compile Include="Assets\Editor\ExportTerrain.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -791,6 +791,9 @@
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AdaptivePerformance.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>
@@ -803,20 +806,23 @@
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AdaptivePerformance">
+      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="PPv2URPConverters">
-      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.OculusQuestSupport.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Profiling.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Management.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.XR.Management.Editor.dll</HintPath>
@@ -830,14 +836,23 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
+      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Subsystem.Registration">
       <HintPath>Library\ScriptAssemblies\Unity.Subsystem.Registration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AdaptivePerformance.UI.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.UI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
@@ -856,6 +871,9 @@
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
@@ -889,6 +907,9 @@
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AdaptivePerformance.Profiler.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Profiler.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>

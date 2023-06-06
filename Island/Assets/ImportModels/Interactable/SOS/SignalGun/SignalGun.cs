@@ -16,11 +16,13 @@ public class SignalGun : MonoBehaviour
     public SteamVR_Action_Boolean fireAction;
     public Transform rocket, bottomPart;
     Rigidbody rb_rocket;
+    RocketShot rocketShot;
 
     bool isLoaded = true;
 
     private void Start() {
         rb_rocket = rocket.GetComponent<Rigidbody>();
+        rocketShot = rocket.GetComponent<RocketShot>();
     }
     
     private void Update() {
@@ -52,6 +54,7 @@ public class SignalGun : MonoBehaviour
             explosionPos = bottomPart.position;
             rb_rocket.AddExplosionForce(rb_rocket.mass * explosionForce, explosionPos, 10);
 
+            rocketShot.isFired = true;
             StartCoroutine(RocketFire());
         }
     }

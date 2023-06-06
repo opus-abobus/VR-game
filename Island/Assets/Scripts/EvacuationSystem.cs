@@ -4,29 +4,125 @@ using UnityEngine;
 
 public class EvacuationSystem : MonoBehaviour
 {
-    public GameObject[] _SOSLetters;
-    public GameTime gameTime;
+    public static EvacuationSystem instance;
+    public bool useGlobalSettings = true;
 
-    SOS_Manager[] managers;
+    public int rocketChance = 25;
+    public int sosRocksChance = 1;
+    public int bonfireChance = 5;
+    public int bonfireDuration = 100;
+
+    GameSettings globalSettings;
+    List<EvacItem> evacItems;
+    bool isEvacuated = false;
+
     private void Awake() {
-        managers = new SOS_Manager[_SOSLetters.Length];
-        int i = 0;
-        foreach (var obj in _SOSLetters) {
-            managers.SetValue(obj.GetComponent<SOS_Manager>(), i);
-            i++;
-        }
+        instance = this;
+        //GameSettings.instance.sosRocksChance = 100;
+        //print("fsd: " + GameSettings.instance.sosRocksChance);
+        GameSettings.instance.bonfireChance = 25;
+        print("fsd: " + GameSettings.instance.bonfireChance + "\ndur: " + GameSettings.instance.bonfireDuration);
     }
 
-    void Update()
-    {
-        foreach (var manager in managers) {
-            if (manager.isSOSLayedOut) {
-                AttemptToEscape();
+    public class EvacItem {
+        int duration;
+        int evacChance;
+        bool isActive;
+        TypesOfItems type;
+
+        public enum TypesOfItems {
+            rocket, bonfire, sosRocks
+        }
+
+        public EvacItem(TypesOfItems type, bool useGlobalSettings = true) {
+            this.type = type;
+
+            switch (type) {
+                case TypesOfItems.sosRocks: {
+                        duration = -1;
+                        isActive = false;
+                        if (useGlobalSettings) {
+                            evacChance = GameSettings.instance.sosRocksChance;
+                        }
+                        else {
+                            evacChance = instance.sosRocksChance;
+                        }
+                        break;
+                    }
+                case TypesOfItems.rocket: {
+                        duration = 0;
+                        isActive = false;
+                        if (useGlobalSettings) {
+                            evacChance = GameSettings.instance.rocketChance;
+                        }
+                        else {
+                            evacChance = instance.rocketChance;
+                        }
+                        break;
+                    }
+                case TypesOfItems.bonfire: {
+                        isActive = false;
+                        if (useGlobalSettings) {
+                            duration = GameSettings.instance.bonfireDuration;
+                            evacChance = GameSettings.instance.bonfireChance;
+                        }
+                        else {
+                            duration = instance.bonfireDuration;
+                            evacChance = instance.bonfireChance;
+                        }
+                        break;
+                    }
             }
         }
+
+        IEnumerator EvacuationProcess() {
+            yield return new WaitForSeconds(1);
+            int elapsedTime = 0;
+            while (true) {
+                RouletteWheelSelection();
+
+                if (instance.isEvacuated) break;
+
+                if (elapsedTime >= duration && duration != -1) {
+                    break;
+                }
+                yield return new WaitForSeconds(1);
+                elapsedTime += 1;
+                yield return null;
+            }
+            isActive = false;
+            instance.evacItems.Remove(this);
+        }
+
+        void RouletteWheelSelection() {
+            int failChance = 100 - evacChance;
+            int rnd = Random.Range(0, evacChance + failChance);
+            print("chance: " + rnd);
+            print("type: " + type);
+            while (rnd >= 0) {
+                rnd -= evacChance;
+                if (rnd <= 0) {
+                    // sucess!
+                    instance.isEvacuated = true;
+                    print("Evacuated");
+                    break;
+                }
+                rnd -= failChance;
+            }
+        }
+        public void ActivateItem() {
+            isActive = true;
+            instance.StartCoroutine(EvacuationProcess());
+        }
     }
 
-    void AttemptToEscape() {
-        
+    public void AddEvacItem(EvacItem.TypesOfItems type, bool useGlobalSettings = true) {
+        if (evacItems == null || evacItems.Count == 0) {
+            evacItems = new List<EvacItem>();
+        }
+
+        EvacItem item = new EvacItem(type);
+        evacItems.Add(item);
+        item.ActivateItem();
     }
 }

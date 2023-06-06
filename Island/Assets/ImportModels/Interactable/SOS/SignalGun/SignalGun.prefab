@@ -180,9 +180,10 @@ GameObject:
   - component: {fileID: 2772939390781011717}
   - component: {fileID: 2772939390781011722}
   - component: {fileID: 2772939390781011723}
+  - component: {fileID: 9937770}
   m_Layer: 9
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: signalRocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,6 +284,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7204647971529134275, guid: a033a7c32f7f3ac4490bf62e1bb55844, type: 3}
+--- !u!114 &9937770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772939390781011721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd9bc8bf1659d545af8d946f782f69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFired: 0
 --- !u!1 &2772939391134334315
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,10 @@ EditorBuildSettings:
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 6d2696c54096cd2479b7f33b9ae9497c,
       type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b240f2412a232644aaffa8300b6bbde9,
+      type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: ab4e9acfaeb499a47a6690fdbb87d7a9, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 8f96042a0e8829a4887d89f8e1ecd597,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 45b80be78ab72684f80448c174f5b6e3,
