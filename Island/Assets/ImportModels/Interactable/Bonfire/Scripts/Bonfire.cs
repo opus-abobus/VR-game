@@ -10,7 +10,7 @@ public class Bonfire : MonoBehaviour
     [HideInInspector] public bool isFired = false;
 
     private void OnCollisionEnter(Collision collision) {
-        if (!isFired && collision.gameObject.name == "Lighter") {
+        if (!isFired && collision.gameObject.tag == "lighter") {
             if (collision.gameObject.GetComponent<Lighter>().isFired) {
                 isFired = true;
                 particleSystem.Play();

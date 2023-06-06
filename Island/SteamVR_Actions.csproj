@@ -59,10 +59,10 @@
     <Compile Include="Assets\VR\SteamVR\SteamVR_Input\SteamVR_Input_Initialization.cs" />
     <Compile Include="Assets\VR\SteamVR\SteamVR_Input\SteamVR_Input_Actions.cs" />
     <Compile Include="Assets\VR\SteamVR\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_buggy.cs" />
-    <Compile Include="Assets\VR\SteamVR\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_platformer.cs" />
-    <Compile Include="Assets\VR\SteamVR\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_default.cs" />
     <Compile Include="Assets\VR\SteamVR\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_mixedreality.cs" />
     <Compile Include="Assets\VR\SteamVR\SteamVR_Input\SteamVR_Input_ActionSets.cs" />
+    <Compile Include="Assets\VR\SteamVR\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_platformer.cs" />
+    <Compile Include="Assets\VR\SteamVR\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_default.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\VR\SteamVR\SteamVR_Input\SteamVR_Actions.asmdef" />

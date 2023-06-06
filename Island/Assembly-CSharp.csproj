@@ -57,39 +57,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ImportModels\Interactable\InteractableManager.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaRipening.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaDrop.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\BerrySpawnManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Scripts\Placeholding.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Lighter\Lighter.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Coconut\Scripts\CocountSplit.cs" />
-    <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaTreeGrowth.cs" />
-    <Compile Include="Assets\Scripts\GameSettings.cs" />
-    <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\UI\Inventory\PanelWithSlotsManager.cs" />
-    <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Optimization_Deprecated.cs" />
-    <Compile Include="Assets\Scripts\ItemSpawnManager.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaRipening.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\BerrySpawnManager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SetEatability.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Lighter\Lighter.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\SignalGun.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\UI\Inventory\InventorySlotManager.cs" />
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Scripts\SOS_Manager.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Coconut\Scripts\CocountSplit.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\ToggleOnGravity.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
     <Compile Include="Assets\Player\Scripts\EscapeMenu.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaTreeGrowth.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\RocketShot.cs" />
     <Compile Include="Assets\UI\Inventory\InventoryManager.cs" />
+    <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\DeadScreen.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Scripts\CocountSpawner.cs" />
+    <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\UI\Inventory\PanelWithSlotsManager.cs" />
     <Compile Include="Assets\Player\Scripts\FootstepSound.cs" />
     <Compile Include="Assets\Scripts\EvacuationSystem.cs" />
     <Compile Include="Assets\Scripts\GameTime.cs" />
+    <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Optimization_Deprecated.cs" />
+    <Compile Include="Assets\Scripts\ItemSpawnManager.cs" />
     <Compile Include="Assets\Player\Scripts\EndGameScreen.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -793,9 +793,6 @@
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.AdaptivePerformance.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>
@@ -808,23 +805,20 @@
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.AdaptivePerformance">
-      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.OculusQuestSupport.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Profiling.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Management.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.XR.Management.Editor.dll</HintPath>
@@ -838,23 +832,14 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
-      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="PPv2URPConverters">
-      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Subsystem.Registration">
       <HintPath>Library\ScriptAssemblies\Unity.Subsystem.Registration.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AdaptivePerformance.UI.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.UI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
@@ -873,9 +858,6 @@
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
@@ -909,9 +891,6 @@
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AdaptivePerformance.Profiler.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Profiler.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>

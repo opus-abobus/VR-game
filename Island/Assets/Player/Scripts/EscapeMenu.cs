@@ -7,6 +7,7 @@ public class EscapeMenu : MonoBehaviour {
     private void Awake() {
         startTimeScale = Time.timeScale;
         AudioListener.pause = false;
+        Resume();
     }
 
     [HideInInspector] public bool pauseGame;
