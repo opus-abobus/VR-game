@@ -59,9 +59,9 @@ public class GameSettings : MonoBehaviour
 
     // -----------------  параметры объектов эвакуации  -------------------------
     [Header("Параметры предметов для эвакуации")]
-    [Range(0, 100)] public int rocketChance = 25;
-    [Range(0, 100)] public int sosRocksChance = 1;
-    [Range(0, 100)] public int bonfireChance = 5;
+    [Range(0, 100)] public float rocketChance = 1;
+    [Range(0, 100)] public float sosRocksChance = 1;
+    [Range(0, 100)] public float bonfireChance = 1;
     public int bonfireDuration = 100;
     public int chanceTickRateInSeconds = 30;
     public int signalGunsAmount = 1;
