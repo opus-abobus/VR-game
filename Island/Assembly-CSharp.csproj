@@ -69,6 +69,7 @@
     <Compile Include="Assets\UI\Inventory\PanelWithSlotsManager.cs" />
     <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Optimization_Deprecated.cs" />
+    <Compile Include="Assets\Scripts\ItemSpawnManager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaRipening.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\BerrySpawnManager.cs" />
@@ -88,9 +89,8 @@
     <Compile Include="Assets\Player\Scripts\FootstepSound.cs" />
     <Compile Include="Assets\Scripts\EvacuationSystem.cs" />
     <Compile Include="Assets\Scripts\GameTime.cs" />
-    <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Player\Scripts\EndGameScreen.cs" />
-    <Compile Include="Assets\Scripts\ItemSpawnManager.cs" />
+    <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
