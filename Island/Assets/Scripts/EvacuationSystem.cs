@@ -26,7 +26,7 @@ public class EvacuationSystem : MonoBehaviour
 
     public class EvacItem {
         int duration;
-        int evacChance;
+        float evacChance;
         bool isActive;
 
         Bonfire bonfire = null;
@@ -103,8 +103,8 @@ public class EvacuationSystem : MonoBehaviour
         }
 
         void RouletteWheelSelection() {
-            int failChance = 100 - evacChance;
-            int rnd = Random.Range(0, evacChance + failChance);
+            float failChance = 100 - evacChance;
+            float rnd = Random.Range(0, evacChance + failChance);
             //print("chance: " + rnd);
             print("type: " + type);
             while (rnd >= 0) {
