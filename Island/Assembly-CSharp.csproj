@@ -68,6 +68,7 @@
     <Compile Include="Assets\UI\Inventory\PanelWithSlotsManager.cs" />
     <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Optimization_Deprecated.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaRipening.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\BerrySpawnManager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SetEatability.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Scripts\SOS_Manager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\ToggleOnGravity.cs" />
     <Compile Include="Assets\Player\Scripts\EscapeMenu.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\RocketShot.cs" />
     <Compile Include="Assets\UI\Inventory\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\DeadScreen.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Scripts\CocountSpawner.cs" />
@@ -86,8 +88,7 @@
     <Compile Include="Assets\Scripts\EvacuationSystem.cs" />
     <Compile Include="Assets\Scripts\GameTime.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\RocketShot.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\SOS\Lighter\Lighter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

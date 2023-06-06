@@ -12,7 +12,6 @@ public class EvacuationSystem : MonoBehaviour
     public int bonfireChance = 5;
     public int bonfireDuration = 100;
 
-    GameSettings globalSettings;
     List<EvacItem> evacItems;
     bool isEvacuated = false;
 
@@ -20,21 +19,25 @@ public class EvacuationSystem : MonoBehaviour
         instance = this;
         //GameSettings.instance.sosRocksChance = 100;
         //print("fsd: " + GameSettings.instance.sosRocksChance);
-        GameSettings.instance.bonfireChance = 25;
-        print("fsd: " + GameSettings.instance.bonfireChance + "\ndur: " + GameSettings.instance.bonfireDuration);
+        /*GameSettings.instance.bonfireChance = 25;
+        print("chance: " + GameSettings.instance.bonfireChance + "\ndur: " + GameSettings.instance.bonfireDuration);*/
+
     }
 
     public class EvacItem {
         int duration;
         int evacChance;
         bool isActive;
+
+        Bonfire bonfire = null;
+
         TypesOfItems type;
 
         public enum TypesOfItems {
             rocket, bonfire, sosRocks
         }
 
-        public EvacItem(TypesOfItems type, bool useGlobalSettings = true) {
+        public EvacItem(TypesOfItems type, Bonfire bonfire = null, bool useGlobalSettings = true) {
             this.type = type;
 
             switch (type) {
@@ -62,6 +65,7 @@ public class EvacuationSystem : MonoBehaviour
                     }
                 case TypesOfItems.bonfire: {
                         isActive = false;
+                        this.bonfire = bonfire;
                         if (useGlobalSettings) {
                             duration = GameSettings.instance.bonfireDuration;
                             evacChance = GameSettings.instance.bonfireChance;
@@ -81,9 +85,13 @@ public class EvacuationSystem : MonoBehaviour
             while (true) {
                 RouletteWheelSelection();
 
-                if (instance.isEvacuated) break;
+                if (instance.isEvacuated) {
+                    if (bonfire != null) { bonfire.particleSystem.Stop(); bonfire.audioSource.Stop(); bonfire.isFired = false; }
+                    break;
+                }
 
                 if (elapsedTime >= duration && duration != -1) {
+                    if (bonfire != null) { bonfire.particleSystem.Stop(); bonfire.audioSource.Stop(); bonfire.isFired = false; }
                     break;
                 }
                 yield return new WaitForSeconds(1);
@@ -97,14 +105,14 @@ public class EvacuationSystem : MonoBehaviour
         void RouletteWheelSelection() {
             int failChance = 100 - evacChance;
             int rnd = Random.Range(0, evacChance + failChance);
-            print("chance: " + rnd);
+            //print("chance: " + rnd);
             print("type: " + type);
             while (rnd >= 0) {
                 rnd -= evacChance;
                 if (rnd <= 0) {
                     // sucess!
                     instance.isEvacuated = true;
-                    print("Evacuated");
+                    print("Evacuated by " + type);
                     break;
                 }
                 rnd -= failChance;
@@ -116,12 +124,12 @@ public class EvacuationSystem : MonoBehaviour
         }
     }
 
-    public void AddEvacItem(EvacItem.TypesOfItems type, bool useGlobalSettings = true) {
+    public void AddEvacItem(EvacItem.TypesOfItems type, Bonfire bonfire = null, bool useGlobalSettings = true) {
         if (evacItems == null || evacItems.Count == 0) {
             evacItems = new List<EvacItem>();
         }
 
-        EvacItem item = new EvacItem(type);
+        EvacItem item = new EvacItem(type, bonfire);
         evacItems.Add(item);
         item.ActivateItem();
     }

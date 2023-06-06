@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Bonfire : MonoBehaviour
 {
-    bool isFired = false;
+    [SerializeField] public ParticleSystem particleSystem;
+    [SerializeField] public AudioSource audioSource;
 
-    private void Start() {
-        //isFired = true;
-    }
+    [HideInInspector] public bool isFired = false;
 
-    private void Update() {
-        /*if (isFired && Input.GetKeyDown(KeyCode.F)) {
-            print("pressed");
-            EvacuationSystem.instance.AddEvacItem(EvacuationSystem.EvacItem.TypesOfItems.bonfire);
-        }*/
+    private void OnCollisionEnter(Collision collision) {
+        if (!isFired && collision.gameObject.name == "Lighter") {
+            if (collision.gameObject.GetComponent<Lighter>().isFired) {
+                isFired = true;
+                particleSystem.Play();
+                audioSource.Play();
+
+                EvacuationSystem.instance.AddEvacItem(EvacuationSystem.EvacItem.TypesOfItems.bonfire, this);
+            }
+        }
     }
 }
