@@ -63,5 +63,8 @@ public class GameSettings : MonoBehaviour
     [Range(0, 100)] public int sosRocksChance = 1;
     [Range(0, 100)] public int bonfireChance = 5;
     public int bonfireDuration = 100;
+    public int chanceTickRateInSeconds = 30;
+    public int signalGunsAmount = 1;
+    public int bonfiresAmount = 4;
     //---------------------------------------------------------------------------
 }

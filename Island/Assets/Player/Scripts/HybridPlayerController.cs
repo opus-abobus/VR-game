@@ -114,6 +114,7 @@ public class HybridPlayerController : MonoBehaviour {
 
     [SerializeField] EscapeMenu escapeMenu;
     [SerializeField] HungerSystem hungerSystem;
+    //[SerializeField] EndGameScreen endGameScreen;
 
     void UpdateMouseLook() {
         if (!alwaysShowCursor) {
@@ -122,7 +123,7 @@ public class HybridPlayerController : MonoBehaviour {
                 Cursor.visible = true;
             }
             else {
-                if (escapeMenu.PauseGame || hungerSystem.IsGameOver)
+                if (escapeMenu.PauseGame || hungerSystem.IsGameOver || EvacuationSystem.instance.isEvacuated)
                 {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;

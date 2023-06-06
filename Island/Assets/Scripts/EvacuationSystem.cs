@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,10 @@ public class EvacuationSystem : MonoBehaviour
     public int bonfireChance = 5;
     public int bonfireDuration = 100;
 
+    public int chanceTickRate = 60;
+
     List<EvacItem> evacItems;
-    bool isEvacuated = false;
+    [HideInInspector] public bool isEvacuated = false;
 
     private void Awake() {
         instance = this;
@@ -39,6 +42,8 @@ public class EvacuationSystem : MonoBehaviour
 
         public EvacItem(TypesOfItems type, Bonfire bonfire = null, bool useGlobalSettings = true) {
             this.type = type;
+
+            if (useGlobalSettings) instance.chanceTickRate = GameSettings.instance.chanceTickRateInSeconds;
 
             switch (type) {
                 case TypesOfItems.sosRocks: {
@@ -77,6 +82,7 @@ public class EvacuationSystem : MonoBehaviour
                         break;
                     }
             }
+            print("type: " + type + "   chance: " + evacChance);
         }
 
         IEnumerator EvacuationProcess() {
@@ -90,12 +96,14 @@ public class EvacuationSystem : MonoBehaviour
                     break;
                 }
 
+                yield return new WaitForSeconds(instance.chanceTickRate);
+                elapsedTime += instance.chanceTickRate;
+
                 if (elapsedTime >= duration && duration != -1) {
                     if (bonfire != null) { bonfire.particleSystem.Stop(); bonfire.audioSource.Stop(); bonfire.isFired = false; }
                     break;
                 }
-                yield return new WaitForSeconds(1);
-                elapsedTime += 1;
+
                 yield return null;
             }
             isActive = false;
@@ -104,7 +112,7 @@ public class EvacuationSystem : MonoBehaviour
 
         void RouletteWheelSelection() {
             int failChance = 100 - evacChance;
-            int rnd = Random.Range(0, evacChance + failChance);
+            int rnd = UnityEngine.Random.Range(0, evacChance + failChance);
             //print("chance: " + rnd);
             print("type: " + type);
             while (rnd >= 0) {
