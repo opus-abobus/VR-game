@@ -73,6 +73,7 @@
     <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
     <Compile Include="Assets\Player\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaTreeGrowth.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\RocketShot.cs" />
     <Compile Include="Assets\UI\Inventory\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\DeadScreen.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\Scripts\GameTime.cs" />
     <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Optimization_Deprecated.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
   </ItemGroup>
   <ItemGroup>
