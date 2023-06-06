@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,31 +6,34 @@ using UnityEngine.UI;
 
 public class DeadScreen : MonoBehaviour
 {
-    Color image;
-
     [SerializeField] HungerSystem hungerSystem;
+    [SerializeField] Image image;
 
     private void Start()
     {
-        image = GetComponent<SpriteRenderer>().color;
+
     }
 
-    /*IEnumerator VisibleSprite()
+    [SerializeField] private float fadeTime;
+    private YieldInstruction fadeInstruction = new YieldInstruction();
+    IEnumerator FadeIn(Image image)
     {
-        for (float f = 0.05f; f <= 1f; f += 0.05f)
+        float elapsedTime = 0.0f;
+        Color c = image.color;
+        while (elapsedTime < fadeTime)
         {
-            Color color = image.color;
-            color.a = f;
-            image.color = new Color(255, 255, 255, f);
-            yield return new WaitForSeconds(0.05f);
+            yield return fadeInstruction;
+            elapsedTime += Time.deltaTime;
+            c.a = Mathf.Clamp01(elapsedTime / fadeTime);
+            image.color = c;
         }
-    }*/
+    }
 
     public void StartVisible()
     {
         if (hungerSystem.IsGameOver)
         {
-            StartCoroutine("VisibleSprite");
+            StartCoroutine(FadeIn(image));
         }
     }
 }
