@@ -271,8 +271,7 @@ MonoBehaviour:
   UnripeBananas: {fileID: 5592869015085161873}
   allowRipening: 1
   useGlobalSettings: 1
-  globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
-    type: 3}
+  globalSettings: {fileID: 0}
   ripeProgressPhase: 0
   phaseTimeInSeconds: 4
 --- !u!114 &2364181453385500321
@@ -290,8 +289,7 @@ MonoBehaviour:
   allowGrowth: 1
   GrowthRatio: 3
   useGlobalSettings: 1
-  globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
-    type: 3}
+  globalSettings: {fileID: 0}
   useRandomGrowthTime: 1
   timeToGrowthInSeconds: 5
   MinTimeToGrowthInSeconds: 3

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cocount: {fileID: 6212277536901898882, guid: b64a4ae56956d044d99866339835aaa6, type: 3}
-  parent: {fileID: 6101685696588613165, guid: 742573f8c5358cd408fa513679c99d67, type: 3}
+  parent: {fileID: 0}
   useGlobalSettings: 1
   globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
     type: 3}

@@ -70,3 +70,10 @@ MonoBehaviour:
   nutritionalValue_Berry: 5
   nutritionalValue_Coconut: 5
   nutritionalValue_Banana: 5
+  rocketChance: 25
+  sosRocksChance: 1
+  bonfireChance: 3
+  bonfireDuration: 100
+  chanceTickRateInSeconds: 30
+  signalGunsAmount: 2
+  bonfiresAmount: 4

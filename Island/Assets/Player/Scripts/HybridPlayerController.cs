@@ -30,6 +30,8 @@ public class HybridPlayerController : MonoBehaviour {
 
     [SerializeField] SpriteRenderer headSpriteRenderer;
 
+    [SerializeField] AudioSource audioSource;
+
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
     CharacterController controller = null;
@@ -45,6 +47,7 @@ public class HybridPlayerController : MonoBehaviour {
         startRotCam = Vector3.zero;
         _freeCamera = FreeCamera();
         headSpriteRenderer.enabled = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     IEnumerator _freeCamera;
@@ -54,12 +57,16 @@ public class HybridPlayerController : MonoBehaviour {
             if (freeCamera) {
                 freeCamera = false;
 
+                audioSource.mute = false;
+
                 StopCoroutine(_freeCamera);
 
                 SetupTransformForFreeCamera(false);
             }
             else {
                 freeCamera = true;
+
+                audioSource.mute = true;
 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -114,7 +121,6 @@ public class HybridPlayerController : MonoBehaviour {
 
     [SerializeField] EscapeMenu escapeMenu;
     [SerializeField] HungerSystem hungerSystem;
-    //[SerializeField] EndGameScreen endGameScreen;
 
     void UpdateMouseLook() {
         if (!alwaysShowCursor) {
