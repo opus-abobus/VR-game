@@ -63,7 +63,7 @@
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Scripts\Placeholding.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SetEatability.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\SOS\Lighter\Lighter.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Lighter\Lighter.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\SignalGun.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\UI\Inventory\InventorySlotManager.cs" />
@@ -87,6 +87,8 @@
     <Compile Include="Assets\Scripts\GameTime.cs" />
     <Compile Include="Assets\Player\Scripts\HybridPlayerController.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Optimization_Deprecated.cs" />
+    <Compile Include="Assets\Scripts\ItemSpawnManager.cs" />
+    <Compile Include="Assets\Player\Scripts\EndGameScreen.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
   </ItemGroup>
