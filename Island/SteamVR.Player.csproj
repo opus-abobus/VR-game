@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BEE2399B-DE37-F668-4565-49865685AFE8}</ProjectGuid>
+    <ProjectGuid>{3E6BD960-4786-EBE4-3BCE-8CA6547C93DB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>SteamVR</AssemblyName>
@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\VR\SteamVR\InteractionSystem\Samples\Scripts\CustomSkeletonHelper.cs" />
+    <Compile Include="Assets\VR\SteamVR\Scripts\SteamVR_Ears.cs" />
     <Compile Include="Assets\VR\SteamVR\InteractionSystem\Core\Scripts\Hand.cs" />
     <Compile Include="Assets\VR\SteamVR\InteractionSystem\Hints\Scripts\ControllerButtonHints.cs" />
     <Compile Include="Assets\VR\SteamVR\Input\BehaviourUnityEvents\SteamVR_Behaviour_Skeleton_ConnectedChangedEvent.cs" />
@@ -234,7 +235,6 @@
     <Compile Include="Assets\VR\SteamVR\Input\SteamVR_Action_Out.cs" />
     <Compile Include="Assets\VR\SteamVR\Input\SteamVR_Action_Boolean.cs" />
     <Compile Include="Assets\VR\SteamVR\Input\SteamVR_DefaultAction.cs" />
-    <Compile Include="Assets\VR\SteamVR\Scripts\SteamVR_Ears.cs" />
     <Compile Include="Assets\VR\SteamVR\Input\SteamVR_Behaviour_Single.cs" />
   </ItemGroup>
   <ItemGroup>

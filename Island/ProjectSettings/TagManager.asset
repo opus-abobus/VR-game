@@ -10,6 +10,10 @@ TagManager:
   - berry
   - ground
   - cocount
+  - rock
+  - signalGun
+  - signalRocket
+  - lighter
   layers:
   - Default
   - TransparentFX
@@ -17,11 +21,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - berry
+  - bush
+  - gun
+  - bullet
+  - rocketZone
   - 
   - 
   - 

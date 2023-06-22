@@ -1,9 +1,54 @@
 fileFormatVersion: 2
-guid: a3916acfb31ff7e49b2142fbdbc3c2b4
+guid: d62f67dba492d7745b779585dd032915
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base
+    second: {fileID: 2100000, guid: df8a92b3d94d31749a4f75688a135b13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkGround
+    second: {fileID: 2100000, guid: 8cf42314011a9104cbf0865b82299b05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkMountains
+    second: {fileID: 2100000, guid: 96b35c3dd7abd1647b6cc5dbdbaa0490, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkSand
+    second: {fileID: 2100000, guid: d2dfd1421c3df294699f007db18940d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: f63f32c20992661419ca18ca9227ff6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 0f578a5ce38cc1e43a3eca0cdb38ba13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightGrass
+    second: {fileID: 2100000, guid: b7cf71d72cfd30f44b27f7c65794fc61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mountains
+    second: {fileID: 2100000, guid: 599fdcb73ffcf6f43ab82f0c2c64fe89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sand
+    second: {fileID: 2100000, guid: edff2472241b4494abb7aa19f6322052, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
