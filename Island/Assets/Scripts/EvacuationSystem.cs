@@ -43,14 +43,14 @@ public class EvacuationSystem : MonoBehaviour
         public EvacItem(TypesOfItems type, Bonfire bonfire = null, bool useGlobalSettings = true) {
             this.type = type;
 
-            if (useGlobalSettings) instance.chanceTickRate = GameSettings.instance.chanceTickRateInSeconds;
+            if (useGlobalSettings) instance.chanceTickRate = GameSettings.Instance.chanceTickRateInSeconds;
 
             switch (type) {
                 case TypesOfItems.sosRocks: {
                         duration = -1;
                         isActive = false;
                         if (useGlobalSettings) {
-                            evacChance = GameSettings.instance.sosRocksChance;
+                            evacChance = GameSettings.Instance.sosRocksChance;
                         }
                         else {
                             evacChance = instance.sosRocksChance;
@@ -61,7 +61,7 @@ public class EvacuationSystem : MonoBehaviour
                         duration = 0;
                         isActive = false;
                         if (useGlobalSettings) {
-                            evacChance = GameSettings.instance.rocketChance;
+                            evacChance = GameSettings.Instance.rocketChance;
                         }
                         else {
                             evacChance = instance.rocketChance;
@@ -72,8 +72,8 @@ public class EvacuationSystem : MonoBehaviour
                         isActive = false;
                         this.bonfire = bonfire;
                         if (useGlobalSettings) {
-                            duration = GameSettings.instance.bonfireDuration;
-                            evacChance = GameSettings.instance.bonfireChance;
+                            duration = GameSettings.Instance.bonfireDuration;
+                            evacChance = GameSettings.Instance.bonfireChance;
                         }
                         else {
                             duration = instance.bonfireDuration;

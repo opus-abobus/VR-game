@@ -1,13 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
-    public static GameSettings instance;
+    public static GameSettings Instance;
+
+    public static event Action onAwakeEnded;
 
     private void Awake() {
-        instance = this;
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else {
+            Destroy(gameObject);
+        }
+
+        onAwakeEnded?.Invoke();
     }
 
     // ---------------------       €годы      -----------------------

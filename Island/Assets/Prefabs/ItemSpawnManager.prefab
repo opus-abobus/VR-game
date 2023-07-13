@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 0}
   lighterPrefab: {fileID: 700691506648160877, guid: dc56ae1764ebcdc47bffe066821a83cf,
     type: 3}
+  lighterAmount: 1
   signalGunSpawnPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -82,10 +83,6 @@ MonoBehaviour:
     type: 3}
   signalGunAmount: 1
   bonfireSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

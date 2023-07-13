@@ -1,105 +1,150 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
 public class ItemSpawnManager : MonoBehaviour
 {
+    public static ItemSpawnManager Instance;
+
     public bool useGlobalSettings = true;
 
+    //------------------------LIGHTERS------------------------
     [SerializeField] Transform[] lighterSpawnPoints;
     [SerializeField] GameObject lighterPrefab;
+    public int lighterAmount = 1;
+    //--------------------------------------------------------
 
+    //----------------------SIGNAL GUNS-----------------------
     [SerializeField] Transform[] signalGunSpawnPoints;
     [SerializeField] GameObject signalGunPrefab;
     public int signalGunAmount = 1;
+    //--------------------------------------------------------
 
+    //----------------------BONFIRES--------------------------
     [SerializeField] Transform[] bonfireSpawnPoints;
     [SerializeField] GameObject bonfirePrefab;
     public int bonfireAmount = 3;
+    //--------------------------------------------------------
 
-    Dictionary<int, bool> lighterSpawnPointsDictionary;
-    Dictionary<int, bool> signalGunSpawnPointsDictionary;
-    Dictionary<int, bool> bonfireSpawnPointsDictionary;
-
-    void InitLighterSpawnPointsDictionary() {
-        lighterSpawnPointsDictionary = new Dictionary<int, bool>();
-        for (int i = 0; i < lighterSpawnPoints.Length; i++) {
-            lighterSpawnPointsDictionary.Add(i, false);
-        }
+    public enum ItemType {
+        lighter, signalGun, bonfire
     }
+    public class ItemSpawner {
+        Transform[] spawnPoints;
+        GameObject itemPrefab;
+        int amount;
+        Dictionary<int, bool> spawnPointsDictionary;
+        public ItemType ItemType { get; private set; }
 
-    void InitSignalGunSpawnPoints() {
-        signalGunSpawnPointsDictionary = new Dictionary<int, bool>();
-        for (int i = 0; i < signalGunSpawnPoints.Length; i++) {
-            signalGunSpawnPointsDictionary.Add(i, false);
-        }
-    }
+        public ItemSpawner (ItemType itemType) {
+            ItemType = itemType;
 
-    void InitBonfireSpawnPoints() {
-        bonfireSpawnPointsDictionary = new Dictionary<int, bool>();
-        for (int i = 0; i < bonfireSpawnPoints.Length; i++) {
-            bonfireSpawnPointsDictionary.Add(i, false);
-        }
-    }
-
-    void SpawnLighter() {
-        if (lighterSpawnPoints != null) {
-            int spawnPoint = Random.Range(0, lighterSpawnPoints.Length);
-            Instantiate(lighterPrefab, lighterSpawnPoints[spawnPoint].position, Quaternion.identity);
-        }
-    }
-
-    void SpawnSignalGun() {
-        if (useGlobalSettings) {
-            signalGunAmount = GameSettings.instance.signalGunsAmount;
-        }
-
-        int spawnPoint, count = signalGunAmount;
-
-        while (count > 0) {
-            spawnPoint = Random.Range(0, signalGunSpawnPoints.Length);
-
-            if (signalGunSpawnPointsDictionary[spawnPoint]) {
-                continue;
+            switch (itemType) {
+                case ItemType.bonfire: {
+                        this.itemPrefab = Instance.bonfirePrefab;
+                        this.spawnPoints = Instance.bonfireSpawnPoints;
+                        this.amount = Instance.bonfireAmount;
+                        break;
+                    }
+                case ItemType.signalGun: {
+                        this.itemPrefab = Instance.signalGunPrefab;
+                        this.spawnPoints = Instance.signalGunSpawnPoints;
+                        this.amount = Instance.signalGunAmount;
+                        break;
+                    }
+                case ItemType.lighter: {
+                        this.itemPrefab = Instance.lighterPrefab;
+                        this.spawnPoints = Instance.lighterSpawnPoints;
+                        this.amount = Instance.lighterAmount;
+                        break;
+                    }
             }
 
-            Instantiate(signalGunPrefab, signalGunSpawnPoints[spawnPoint].position, Quaternion.identity);
-            signalGunSpawnPointsDictionary[spawnPoint] = true;
-
-            count--;
-        }
-    }
-
-    void SpawnBonfire() {
-        if (useGlobalSettings) {
-            bonfireAmount = GameSettings.instance.bonfiresAmount;
+            InitSpawnPointsDictionary();
         }
 
-        int spawnPoint, count = bonfireAmount;
+        void InitSpawnPointsDictionary() {
+            spawnPointsDictionary = new Dictionary<int, bool>();
 
-        while (count > 0) {
-            spawnPoint = Random.Range(0, bonfireSpawnPoints.Length);
-
-            if (bonfireSpawnPointsDictionary[spawnPoint]) {
-                continue;
+            for (int i = 0; i < spawnPoints.Length; i++) {
+                spawnPointsDictionary.Add(i, false);
             }
+        }
 
-            Instantiate(bonfirePrefab, bonfireSpawnPoints[spawnPoint].position, Quaternion.identity);
-            bonfireSpawnPointsDictionary[spawnPoint] = true;
+        public void SpawnItems() {
+            if (itemPrefab == null) return;
+            if (amount <= 0) return;
 
-            count--;
+            int totalPoints = spawnPointsDictionary.Count;
+            if (amount > totalPoints) amount = totalPoints;
+
+            int[] points = new int[totalPoints];
+            for (int k = 0; k < totalPoints; k++) { points[k] = k; }
+
+            int spawnPoint;
+
+            int i = 0;
+            while (amount > 0) {
+                int index = UnityEngine.Random.Range(i, totalPoints);
+                spawnPoint = points[index];
+
+                if (spawnPointsDictionary[spawnPoint]) {
+
+                    int a = points[i];
+                    points[i] = spawnPoint;
+                    points[index] = a;
+
+                    i++;
+
+                    spawnPoint = points[UnityEngine.Random.Range(i, totalPoints)];
+                }
+
+                Instantiate(itemPrefab, spawnPoints[spawnPoint].position, itemPrefab.transform.rotation);
+                spawnPointsDictionary[spawnPoint] = true;
+
+                amount--;
+            }
         }
     }
 
-    private void Start() {
-        InitLighterSpawnPointsDictionary();
-        SpawnLighter();
+    ItemSpawner[] itemSpawners;
+    void InitSpawners() {
+        itemSpawners = new ItemSpawner[Enum.GetValues(typeof(ItemType)).Length];
 
-        InitSignalGunSpawnPoints();
-        SpawnSignalGun();
+        int i = 0;
+        foreach (var val in Enum.GetValues(typeof(ItemType)).Cast<ItemType>()) {
+            itemSpawners[i] = new ItemSpawner(val);
+            i++;
+        }
+    }
 
-        InitBonfireSpawnPoints();
-        SpawnBonfire();
+    void SpawnItems() {
+        foreach (var spawner in itemSpawners) {
+            spawner.SpawnItems();
+        }
+    }
+
+    void OnGameSettingsAwakeEnded() {
+        if (useGlobalSettings) {
+            signalGunAmount = GameSettings.Instance.signalGunsAmount;
+            bonfireAmount = GameSettings.Instance.bonfiresAmount;
+        }
+
+        InitSpawners();
+        SpawnItems();
+    }
+
+    private void Awake() {
+        GameSettings.onAwakeEnded += OnGameSettingsAwakeEnded;
+
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else {
+            Destroy(gameObject);
+        }
     }
 }
