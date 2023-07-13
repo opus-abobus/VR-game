@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BananaDrop" Collapsed="true">
-    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIABAAICAAAAIAAECAAAAAAABAACAQAIQABAAAAACEA=</HashCode>
       <FileName>Assets\ImportModels\Interactable\BananaTree\Scripts\BananaDrop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BananaRipening" Collapsed="true">
-    <Position X="8.5" Y="0.5" Width="1.5" />
+    <Position X="8.75" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
+    <NestedTypes>
+      <Enum Name="BananaRipening.BananaTreeStates" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\ImportModels\Interactable\BananaTree\Scripts\BananaRipening.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>ABSgAIAGAAAAIIBAAAAAAAAAAAAAAAgAICABAEBAAEA=</HashCode>
       <FileName>Assets\ImportModels\Interactable\BananaTree\Scripts\BananaRipening.cs</FileName>
@@ -32,14 +39,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BerrySpawnManager" Collapsed="true">
-    <Position X="12" Y="0.5" Width="1.5" />
+    <Position X="10.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABIAgQiACAAIABEIAMAIAACAAACCABBAAAAAEAAAEA=</HashCode>
       <FileName>Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\BerrySpawnManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ToggleOnGravity" Collapsed="true">
-    <Position X="12" Y="1.5" Width="1.5" />
+    <Position X="11.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAEA=</HashCode>
       <FileName>Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\ToggleOnGravity.cs</FileName>
@@ -81,7 +88,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SetEatability" Collapsed="true">
-    <Position X="10.75" Y="4.25" Width="1.5" />
+    <Position X="12.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAACAAAAIAAAAAAgAAAAIAAAAAAAAAAAAAgAAEA=</HashCode>
       <FileName>Assets\ImportModels\Interactable\SetEatability.cs</FileName>
@@ -102,7 +109,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Placeholding" Collapsed="true">
-    <Position X="8.25" Y="4.75" Width="1.5" />
+    <Position X="4.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAAAAEAAAAAAAAQAAADIAAAAA=</HashCode>
       <FileName>Assets\ImportModels\Interactable\SOS\SOS_Letters\Scripts\Placeholding.cs</FileName>
@@ -179,7 +186,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="EvacuationSystem" Collapsed="true">
-    <Position X="10.5" Y="2.75" Width="1.5" />
+    <Position X="11" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAACAAJAAAAAACAAAAQAAABQAAAAAAAAAAAAEEQ=</HashCode>
       <FileName>Assets\Scripts\EvacuationSystem.cs</FileName>
@@ -193,16 +200,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GameTime" Collapsed="true">
-    <Position X="8.5" Y="1.75" Width="1.5" />
+    <Position X="5.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAESEABAAAAAAAIEgAAhBAAAAAAAAAAYAAAEQ=</HashCode>
       <FileName>Assets\Scripts\GameTime.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ItemSpawnManager" Collapsed="true">
-    <Position X="4" Y="2.25" Width="1.5" />
+    <Position X="3" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEA=</HashCode>
+      <HashCode>AAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\ItemSpawnManager.cs</FileName>
     </TypeIdentifier>
   </Class>

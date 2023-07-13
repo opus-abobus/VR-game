@@ -76,4 +76,4 @@ MonoBehaviour:
   bonfireDuration: 100
   chanceTickRateInSeconds: 30
   signalGunsAmount: 2
-  bonfiresAmount: 4
+  bonfiresAmount: 0

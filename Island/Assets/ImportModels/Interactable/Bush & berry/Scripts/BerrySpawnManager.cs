@@ -23,8 +23,11 @@ public class BerrySpawnManager : MonoBehaviour
     public int minTimeToRespawn = 1;
     public int maxTimeToRespawn = 4;
 
-    Dictionary<int, bool> spawnPointsDictionary;    //коллекция для хранения информации о точках, в которых был осуществлен спавн:
-                                                    //false - точка свободна, true - точка занята
+    //коллекция для хранения информации о точках, в которых был осуществлен спавн:
+    //false - точка свободна, true - точка занята
+    Dictionary<int, bool> spawnPointsDictionary;
+    //--
+
     void InitSpawnPointsDictionary() {
         spawnPointsDictionary = new Dictionary<int, bool>();
         for (int i = 0; i < spawnPoints.Length; i++) {
@@ -71,7 +74,8 @@ public class BerrySpawnManager : MonoBehaviour
     }
 
     IEnumerator RespawnBerries() {
-        yield return null;  //проупстить один кадр
+        yield return new WaitForEndOfFrame();
+
         int timeToRespawn;
         while (true) {
             timeToRespawn = Random.Range(minTimeToRespawn, maxTimeToRespawn);

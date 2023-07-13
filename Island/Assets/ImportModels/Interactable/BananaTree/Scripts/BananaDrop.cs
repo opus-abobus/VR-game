@@ -63,9 +63,11 @@ public class BananaDrop : MonoBehaviour
         }
     }
     [SerializeField] public BananaRipening bananaRipening;
+
     private void OnDestroy() {
         bananaRipening.isBananasFallen = true;
     }
+
     void SpawnBanana(Vector3 spawnPoint) {
         for (int i = 0; i < bananaAmount; i++) {
             spawnPoint.y += _collider.size.y / 2;
