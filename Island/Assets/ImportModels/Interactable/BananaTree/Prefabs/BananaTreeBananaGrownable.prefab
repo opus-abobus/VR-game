@@ -212,12 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89a9c94e8dceaf4598c652e5e5bedbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBananasToSpawn: -1
-  banana: {fileID: 2775151058504319297, guid: 602f5f66d196cc24aa45bd9813012983, type: 3}
-  useGlobalSettings: 1
-  globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
-    type: 3}
-  bananaRipening: {fileID: 5045858847164333719}
+  _maxBananasToSpawn: -1
+  _banana: {fileID: 2775151058504319297, guid: 602f5f66d196cc24aa45bd9813012983, type: 3}
 --- !u!1 &5570298871915848747
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,6 +225,7 @@ GameObject:
   - component: {fileID: 5045858847164333713}
   - component: {fileID: 5045858847164333719}
   - component: {fileID: 2364181453385500321}
+  - component: {fileID: 3568736707254614967}
   m_Layer: 0
   m_Name: BananaTreeBananaGrownable
   m_TagString: Untagged
@@ -244,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5570298871915848747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.29, y: 0.01852274, z: -16.12}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -266,14 +263,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2f32ad1998f5d4b915073438935802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Branch: {fileID: 5633936142164834277}
-  BananaPart: {fileID: 2410825888455463255}
-  UnripeBananas: {fileID: 5592869015085161873}
-  allowRipening: 1
-  useGlobalSettings: 1
-  globalSettings: {fileID: 0}
-  ripeProgressPhase: 0
-  phaseTimeInSeconds: 4
+  _branch: {fileID: 5633936142164834277}
+  _bananaPart: {fileID: 2410825888455463255}
+  _unripeBananas: {fileID: 5592869015085161873}
+  _ripeProgressPhase: 0
 --- !u!114 &2364181453385500321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,15 +279,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8508abe61e1d054380017a28fc8f82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowGrowth: 1
-  GrowthRatio: 3
-  useGlobalSettings: 1
-  globalSettings: {fileID: 0}
-  useRandomGrowthTime: 1
-  timeToGrowthInSeconds: 5
-  MinTimeToGrowthInSeconds: 3
-  MaxTimeToGrowthInSeconds: 10
-  growningProgress: 0
+  _allowGrowth: 1
+  _growningProgress: 0
+--- !u!114 &3568736707254614967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570298871915848747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70175b9a4869aaa47ba81d734adbb8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5592869015085161873
 GameObject:
   m_ObjectHideFlags: 0

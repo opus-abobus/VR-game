@@ -33,7 +33,7 @@ public class SOS_Manager : MonoBehaviour
         while (true) {
             if (transform.childCount == placeholderCount) {
                 isSOSLayedOut = true;
-                EvacuationSystem.instance.AddEvacItem(EvacuationSystem.EvacItem.TypesOfItems.sosRocks);
+                EvacuationSystem.Instance.AddEvacItem(EvacuationSystem.EvacItem.TypesOfItems.sosRocks);
 
                 Array.Clear(placeholdings, 0, placeholdings.Length);
 

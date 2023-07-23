@@ -15,7 +15,7 @@ public class EndGameScreen : MonoBehaviour
     }
 
     private void Update() {
-        if (EvacuationSystem.instance.isEvacuated && !isActiveScreen) {
+        if (EvacuationSystem.Instance.isEvacuated && !isActiveScreen) {
             DisplayEndGameScreen();
         }
 
@@ -35,7 +35,7 @@ public class EndGameScreen : MonoBehaviour
 
     bool isActiveScreen = false;
     public void DisplayEndGameScreen() {
-        if (EvacuationSystem.instance.isEvacuated) {
+        if (EvacuationSystem.Instance.isEvacuated) {
             screen_survived.SetActive(true);
             isActiveScreen = true;
         }

@@ -1,37 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Sockets;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class Lighter : MonoBehaviour
 {
-    [SerializeField] Interactable interactable;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] Interactable _interactable;
+    [SerializeField] ParticleSystem _particleSystem;
 
-    public SteamVR_Action_Boolean fireLighterAction;
+    public SteamVR_Action_Boolean _fireLighterAction;
 
     private void Update() {
-        if (interactable.attachedToHand != null) {
-            SteamVR_Input_Sources hand = interactable.attachedToHand.handType;
+        if (_interactable.attachedToHand != null) {
+            SteamVR_Input_Sources hand = _interactable.attachedToHand.handType;
 
-            if (fireLighterAction[hand].stateDown || Input.GetKeyDown(KeyCode.F)) {
-                if (isFired) {
-                    isFired = false;
-                    particleSystem.Stop();
+            if (_fireLighterAction[hand].stateDown || Input.GetKeyDown(KeyCode.F)) {
+                if (_isFired) {
+                    _isFired = false;
+                    _particleSystem.Stop();
                 }
                 else {
-                    isFired = true;
-                    particleSystem.Play();
+                    _isFired = true;
+                    _particleSystem.Play();
                 }
             }
         }
         else {
-            isFired = false;
-            particleSystem.Stop();
+            _isFired = false;
+            _particleSystem.Stop();
         }
     }
 
-   [HideInInspector] public bool isFired = false;
+   [HideInInspector] public bool _isFired = false;
 }

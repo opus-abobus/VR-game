@@ -129,7 +129,7 @@ public class HybridPlayerController : MonoBehaviour {
                 Cursor.visible = true;
             }
             else {
-                if (escapeMenu.PauseGame || hungerSystem.IsGameOver || EvacuationSystem.instance.isEvacuated)
+                if (escapeMenu.PauseGame || hungerSystem.IsGameOver || EvacuationSystem.Instance.isEvacuated)
                 {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;

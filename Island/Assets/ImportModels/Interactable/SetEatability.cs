@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class SetEatability : MonoBehaviour
 {
-    bool isEatable = false;
+    private bool _isEatable = false;
     public bool IsEatable {
-        get { return isEatable; }
-        set { isEatable = value; }
+        get { return _isEatable; }
+        set { _isEatable = value; }
     }
 
-    [SerializeField] GameSettings globalSettings;
-    public bool useGlobalSettings = true;
+    //[SerializeField] GameSettings globalSettings;
+
+    //public bool useGlobalSettings = true;
 
     public float nutritionalValue = (float) 5 / 100;
 
@@ -21,22 +22,16 @@ public class SetEatability : MonoBehaviour
     void SetNutritionalValue() {
         switch (this.gameObject.tag) {
             case "berry": {
-                    if (useGlobalSettings && globalSettings != null) {
-                        nutritionalValue = (float) globalSettings.nutritionalValue_Berry / 100;
-                    }
+                    nutritionalValue = (float) GameSettingsManager.Instance.FoodSettings.BerryNutrVal / 100;
                     break;
                 }
             case "banana": {
-                    if (useGlobalSettings && globalSettings != null) {
-                        nutritionalValue = (float) globalSettings.nutritionalValue_Banana / 100;
-                    }
+                    nutritionalValue = (float) GameSettingsManager.Instance.FoodSettings.BananaNutrVal / 100;
                     break;
                 }
             case "cocount":
             case "coconut": {
-                    if (useGlobalSettings && globalSettings != null) {
-                        nutritionalValue = (float) globalSettings.nutritionalValue_Coconut / 100;
-                    }
+                    nutritionalValue = (float) GameSettingsManager.Instance.FoodSettings.CoconutNutrVal / 100;
                     break;
                 }
         }

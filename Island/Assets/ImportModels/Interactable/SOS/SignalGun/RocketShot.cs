@@ -10,7 +10,7 @@ public class RocketShot : MonoBehaviour
         if (isFired) {
             if (other.name == "RocketZone") {
                 print("detected");
-                EvacuationSystem.instance.AddEvacItem(EvacuationSystem.EvacItem.TypesOfItems.rocket);
+                EvacuationSystem.Instance.AddEvacItem(EvacuationSystem.EvacItem.TypesOfItems.rocket);
                 isFired = false;
             }
         }

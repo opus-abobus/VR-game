@@ -11,6 +11,7 @@ public class ReplaceWithPrefab : EditorWindow
         EditorWindow.GetWindow<ReplaceWithPrefab>();
     }
 
+    [System.Obsolete]
     private void OnGUI()
     {
         prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", prefab, typeof(GameObject), false);

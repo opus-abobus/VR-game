@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253766496786894369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 789.7414, y: 21.29, z: 814.403}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46,47 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93da22654f9bd94e9e90ce877d15c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 1345520546578487873}
-  - {fileID: 8740477325685668865}
-  - {fileID: 8778041082525272382}
-  - {fileID: 9187843015074945943}
-  - {fileID: 1241069694518118838}
-  - {fileID: 9059422923335497140}
-  - {fileID: 1692807885772493353}
-  - {fileID: 5553390646083857637}
-  - {fileID: 4428390879064977967}
-  - {fileID: 216767867598384917}
-  - {fileID: 5934034417141970159}
-  - {fileID: 5586645481785181262}
-  - {fileID: 2843057043486465327}
-  - {fileID: 3258965312484104936}
-  - {fileID: 8301002882907188442}
-  - {fileID: 3856340056697524005}
-  - {fileID: 2851100453913438363}
-  - {fileID: 8491746775052936457}
-  - {fileID: 3902249842368909060}
-  - {fileID: 4238124176631900256}
-  - {fileID: 8963185739537150174}
-  - {fileID: 1646345391583074694}
-  - {fileID: 9068267311202496620}
-  - {fileID: 2334734640848385875}
-  - {fileID: 3000963835708446487}
-  - {fileID: 2566232544667316550}
-  - {fileID: 8559838550330103099}
-  spawnPrefab: {fileID: 1438709704091104556, guid: 353413fb8930cfc4a94fc8438c8a24a9,
+  _spawnPointsRoot: {fileID: 2753978797749560765}
+  _spawnPrefab: {fileID: 1438709704091104556, guid: 353413fb8930cfc4a94fc8438c8a24a9,
     type: 3}
-  parent: {fileID: 3064133903544370305}
-  useGlobalSettings: 1
-  globalSettings: {fileID: 3868046354382034759, guid: 20819c25cbbc8554781a29f69481fe32,
-    type: 3}
-  useRandomAmount: 0
-  minBerriesOnStart: 27
-  maxBerriesOnStart: 27
+  _parent: {fileID: 3064133903544370305}
   allowRespawnBerries: 1
-  timeoutForSpawnPointInSeconds: 1
-  minTimeToRespawn: 2
-  maxTimeToRespawn: 2
+  useRandomAmount: 0
 --- !u!1 &892224057353995195
 GameObject:
   m_ObjectHideFlags: 0

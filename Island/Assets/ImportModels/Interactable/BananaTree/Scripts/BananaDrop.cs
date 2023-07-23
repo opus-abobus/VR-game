@@ -1,49 +1,51 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BananaDrop : MonoBehaviour
 {
-    public int maxBananasToSpawn = -1;
-    public GameObject banana;
+    public int _maxBananasToSpawn = -1;
 
-    [SerializeField] bool useGlobalSettings = true;
-    [SerializeField] GameSettings globalSettings;
-    int bananaAmount = 0;
+    public GameObject _banana;
 
-    List <string> tags;
+    public event Action FallenFruit;
 
-    Rigidbody rb;
-    BoxCollider _collider;
+/*    [SerializeField]
+    private BananaRipening _bananaRipening;*/
+
+    private int _bananaAmount = 0;
+
+    private List <string> _tags;
+
+    private Vector3 _colliderSize;
 
     private void Awake() {
-        tags = new List<string>();
+        Init();
+    }
+
+    public void Init() {
+        _tags = new List<string>();
         AddThrowingObjects();
 
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-        _collider = GetComponent<BoxCollider>();
-        _collider.isTrigger = true;
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<BoxCollider>().isTrigger = true;
 
-        if (useGlobalSettings && globalSettings != null) {
-            bananaAmount = Random.Range(globalSettings.minBananasToDrop, globalSettings.maxBananasToDrop);
-        }
-        else {
-            bananaAmount = Random.Range(0, maxBananasToSpawn);
-        }
+        var bananasSettings = GameSettingsManager.Instance.BananasSettings;
+        _bananaAmount = UnityEngine.Random.Range(bananasSettings.MinBananasToDrop, bananasSettings.MaxBananasToDrop);
     }
 
     void AddThrowingObjects() {
-        tags.Add("banana");
-        tags.Add("berry");
-        tags.Add("rock");
-        tags.Add("cocount"); tags.Add("coconut");
+        _tags.Add("banana");
+        _tags.Add("berry");
+        _tags.Add("rock");
+        _tags.Add("cocount"); _tags.Add("coconut");
     }
 
     private void OnTriggerEnter(Collider other) {
-        foreach (var tag in tags) {
+        if (_tags == null) return;
+
+        foreach (var tag in _tags) {
             if (other.tag == tag) {
                 DropBanana();
                 return;
@@ -51,28 +53,28 @@ public class BananaDrop : MonoBehaviour
         }
     }
     private void DropBanana() {
-        rb.useGravity = true;
-        _collider.isTrigger = false;
+        GetComponent<Rigidbody>().useGravity = true;
+        GetComponent<BoxCollider>().isTrigger = false;
     }
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("ground")) {
             Vector3 spawnPoint = collision.GetContact(0).point;
             SpawnBanana(spawnPoint);
-            Destroy(this.gameObject);
-        }
-    }
-    [SerializeField] public BananaRipening bananaRipening;
 
-    private void OnDestroy() {
-        bananaRipening.isBananasFallen = true;
+            FallenFruit?.Invoke();
+
+            Destroy(gameObject);
+        }
     }
 
     void SpawnBanana(Vector3 spawnPoint) {
-        for (int i = 0; i < bananaAmount; i++) {
-            spawnPoint.y += _collider.size.y / 2;
-            GameObject spawnedBanana = Instantiate(banana, spawnPoint, Random.rotation);
-            spawnedBanana.transform.parent = this.gameObject.transform.parent;
+        _colliderSize = GetComponent<BoxCollider>().size;
+
+        for (int i = 0; i < _bananaAmount; i++) {
+            spawnPoint.y += _colliderSize.y / 2;
+            GameObject spawnedBanana = Instantiate(_banana, spawnPoint, UnityEngine.Random.rotation);
+            spawnedBanana.transform.parent = gameObject.transform.parent;
         }
     }
 }

@@ -57,6 +57,7 @@ namespace GameObjectBrush {
             DontDestroyOnLoad(EditorWindow.GetWindow<GameObjectBrushEditor>("GO Brush " + version));
         }
 
+        [System.Obsolete]
         void OnEnable() {
             //Get last used brush collection
             KeyValuePair<int, BrushCollection> lastUsedBCollInfo = BrushCollection.GetLastUsedBrushCollection();
@@ -68,6 +69,8 @@ namespace GameObjectBrush {
             Instance = this;
             this.autoRepaintOnSceneChange = true;
         }
+
+        [System.Obsolete]
         void OnDestroy() {
             if (brushes != null) {
                 brushes.Save();

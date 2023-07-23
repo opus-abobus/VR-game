@@ -2,73 +2,106 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CocountSpawner : MonoBehaviour
-{
-    [SerializeField] GameObject cocount;
-    [SerializeField] Transform parent;
+public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
+    [SerializeField]
+    private GameObject _coconut;
 
-    public bool useGlobalSettings = true;
-    [SerializeField] GameSettings globalSettings;
+    [SerializeField]
+    private Transform _parent;
 
-    [SerializeField] int minTimeToSpawn = 5;
-    [SerializeField] int maxTimeToSpawn = 10;
+    //[SerializeField] GameSettings globalSettings;
 
-    [SerializeField] MeshRenderer _meshRenderer;
-    [SerializeField] MeshFilter _meshFilter;
+    [SerializeField]
+    private int _minTimeToSpawn = 5;
+    [SerializeField]
+    private int _maxTimeToSpawn = 10;
 
-    int cocountsOnStart = 0;
-    Vector3 boundsSize;
-    IEnumerator _CocountSpawning;
+    [SerializeField]
+    private MeshRenderer _meshRenderer;
+    [SerializeField]
+    private MeshFilter _meshFilter;
+
+    private int _cocountsOnStart = 0;
+
+    private Vector3 _boundsSize;
+
+    private IEnumerator _coconutSpawning;
+
+    private SpawnManager.ISpawner _spawner;
+
+    private bool _hasInitialized = false;
+    bool SpawnManager.ISpawner.HasInitialized { get { return _hasInitialized; } }
+
+    private static bool _hasStarted = false;
+    public static bool HasStarted { get { return _hasStarted; } }
+
     private void Awake() {
-        _meshRenderer.enabled = false;
-        if (cocount == null) { Debug.LogError("” спавнера кокосов отсутствует ссылка на кокос"); this.enabled = false; }
-        if (parent == null) { GameObject parentObj = new GameObject("SpawnedCocounts"); parent = parentObj.transform; }
+        _spawner = this;
+    }
 
-        boundsSize = _meshRenderer.bounds.size / 2;
+    private void Start() {
+        _hasStarted = true;
+    }
+
+    void SpawnManager.ISpawner.Init() {
+        _meshRenderer.enabled = false;
+        if (_coconut == null) { 
+            Debug.LogError("” спавнера кокосов отсутствует ссылка на кокос"); 
+            this.enabled = false; 
+        }
+        if (_parent == null) { 
+            GameObject parentObj = new GameObject("SpawnedCocounts"); 
+            _parent = parentObj.transform; 
+        }
+
+        _boundsSize = _meshRenderer.bounds.size / 2;
         Destroy(_meshRenderer);
         Destroy(_meshFilter);
 
-        if (useGlobalSettings && globalSettings != null) {
-            minTimeToSpawn = globalSettings.minTimeToRespawnCoconutInSeconds;
-            maxTimeToSpawn = globalSettings.maxTimeToRespawnCoconutInSeconds;
-            
-            if (Random.Range(0f, 1) <= globalSettings.chanceToSpawnOnStart)
-                cocountsOnStart = Random.Range(globalSettings.minCoconutsOnStart, globalSettings.maxCoconutsOnStart);
-            else
-                cocountsOnStart = 0;
+        _minTimeToSpawn = GameSettingsManager.Instance.CoconutsSettings.MinTimeToRespawnInSeconds;
+        _maxTimeToSpawn = GameSettingsManager.Instance.CoconutsSettings.MaxTimeToRespawnInSeconds;
+
+        if (Random.Range(0f, 1) <= GameSettingsManager.Instance.CoconutsSettings.ChanceToSpawnOnStart) {
+            _cocountsOnStart = Random.Range(GameSettingsManager.Instance.CoconutsSettings.MinCoconutsOnStart, GameSettingsManager.Instance.CoconutsSettings.MaxCoconutsOnStart);
+        }
+        else {
+            _cocountsOnStart = 0;
         }
 
-        _CocountSpawning = CocountSpawning();
-        StartCoroutine(_CocountSpawning);
+        _hasInitialized = true;
     }
 
-    private void Update() {
-        //if (Input.GetKeyDown(KeyCode.G)) { StopCoroutine(_CocountSpawning); }
+    void SpawnManager.ISpawner.BeginSpawn() {
+        if (!_hasInitialized) {
+            _spawner.Init();
+        }
+
+        _coconutSpawning = CocountSpawning();
+        StartCoroutine(_coconutSpawning);
     }
 
     IEnumerator CocountSpawning() {
-        SpawnCocount(cocountsOnStart);
+        SpawnCocount(_cocountsOnStart);
 
-        int timeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn + 1);
+        int timeToSpawn = Random.Range(_minTimeToSpawn, _maxTimeToSpawn + 1);
         yield return new WaitForSeconds(timeToSpawn);
 
         while (true) {
-            timeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn + 1);
-            SpawnCocount();
+            timeToSpawn = Random.Range(_minTimeToSpawn, _maxTimeToSpawn + 1);
             yield return new WaitForSeconds(timeToSpawn);
+            SpawnCocount();
         }
     }
 
     void SpawnCocount(int amount = 1) {
         while (amount > 0) {
             Vector3 randPoint = Random.insideUnitSphere;
-            Vector3 spawnPos = transform.position + MultiplyVectors(randPoint, boundsSize);
-            GameObject _cocountInstance = Instantiate(cocount, spawnPos, cocount.transform.rotation);
-            _cocountInstance.transform.parent = parent;
+            Vector3 spawnPos = transform.position + MultiplyVectors(randPoint, _boundsSize);
+            GameObject _cocountInstance = Instantiate(_coconut, spawnPos, _coconut.transform.rotation);
+            _cocountInstance.transform.parent = _parent;
             amount--;
         }
     }
-
     Vector3 MultiplyVectors(Vector3 v1, Vector3 v2) {
         return new Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
     }

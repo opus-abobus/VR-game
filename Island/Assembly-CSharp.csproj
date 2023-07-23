@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ImportModels\Interactable\InteractableManager.cs" />
+    <Compile Include="Assets\Scripts\Bootstrap.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaRipening.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaDrop.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\BerrySpawnManager.cs" />
@@ -65,21 +66,28 @@
     <Compile Include="Assets\ImportModels\Interactable\SetEatability.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Lighter\Lighter.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\SignalGun.cs" />
+    <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\UI\Inventory\InventorySlotManager.cs" />
     <Compile Include="Assets\Player\Scripts\HungerSystem.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SOS_Letters\Scripts\SOS_Manager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Scripts\CocountSplit.cs" />
-    <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\ToggleOnGravity.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\Bush &amp; berry\Scripts\Berry.cs" />
+    <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaTreeManager.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerEating.cs" />
     <Compile Include="Assets\Player\Scripts\EscapeMenu.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\ImportModels\Interactable\BananaTree\Scripts\BananaTreeGrowth.cs" />
     <Compile Include="Assets\ImportModels\Interactable\SOS\SignalGun\RocketShot.cs" />
     <Compile Include="Assets\UI\Inventory\InventoryManager.cs" />
-    <Compile Include="Assets\Scripts\GameSettings.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\BananasSettings.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\GameSettings.cs" />
     <Compile Include="Assets\Scripts\DeadScreen.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Coconut\Scripts\CocountSpawner.cs" />
     <Compile Include="Assets\Player\Player (none VR)\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\BerriesSettings.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\PlayerSettings.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\FoodSettings.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\UI\Inventory\PanelWithSlotsManager.cs" />
     <Compile Include="Assets\Player\Scripts\FootstepSound.cs" />
@@ -91,6 +99,9 @@
     <Compile Include="Assets\Player\Scripts\EndGameScreen.cs" />
     <Compile Include="Assets\ImportModels\Interactable\Bonfire\Scripts\Bonfire.cs" />
     <Compile Include="Assets\Asset Store\Simple Water Shader\Resources\WaterReflection.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\EvacSettings.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\CoconutsSettings.cs" />
+    <Compile Include="Assets\Scripts\GameSettings\GameSettingsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

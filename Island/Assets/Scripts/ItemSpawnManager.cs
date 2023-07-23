@@ -128,8 +128,8 @@ public class ItemSpawnManager : MonoBehaviour
 
     void OnGameSettingsAwakeEnded() {
         if (useGlobalSettings) {
-            signalGunAmount = GameSettings.Instance.signalGunsAmount;
-            bonfireAmount = GameSettings.Instance.bonfiresAmount;
+            signalGunAmount = GameSettingsManager.Instance.EvacSettings.SignalGunsAmount;
+            bonfireAmount = GameSettingsManager.Instance.EvacSettings.BonfiresAmount;
         }
 
         InitSpawners();
@@ -137,7 +137,7 @@ public class ItemSpawnManager : MonoBehaviour
     }
 
     private void Awake() {
-        GameSettings.onAwakeEnded += OnGameSettingsAwakeEnded;
+        GameSettingsManager.Instance.EvacSettings.Awaked += OnGameSettingsAwakeEnded;
 
         if (Instance == null) {
             Instance = this;
@@ -146,5 +146,21 @@ public class ItemSpawnManager : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+    }
+
+    public static int GetFreeSpawnPoint(Dictionary<int, bool> spawnPointsDictionary) {
+        var points = new List<int>();
+
+        for (int i = 0; i < spawnPointsDictionary.Count; i++) {
+            if (!spawnPointsDictionary[i]) {
+                points.Add(i);
+            }
+        }
+
+        if (points.Count == 0) {
+            return -1;
+        }
+
+        return points[UnityEngine.Random.Range(0, points.Count)];
     }
 }
