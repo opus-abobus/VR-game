@@ -18,7 +18,6 @@
 mono_crash.*
 
 #added------------------
-[Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
@@ -422,3 +421,7 @@ FodyWeavers.xsd
 *.sln.iml
 .vs/ProjectSettings.json
 .vs/slnx.sqlite
+/Island/*.csproj
+/Island/*.vsconfig
+/Island/*.cd
+/Island/*.sln
