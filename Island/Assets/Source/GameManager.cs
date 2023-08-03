@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
     }
 
     void OnSpawnManagerInitialized() {
-        print("spawn manager initialized.");
+        //print("spawn manager initialized.");
         _spawnManager.OnInitialized -= OnSpawnManagerInitialized;
 
         _evacuationSystem.Initialize();
@@ -44,14 +44,14 @@ public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
 
     void OnEvacSystemInitialized() {
         _evacuationSystem.OnInitialized -= OnEvacSystemInitialized;
-        print("evac system initialized.\nGame manager initialized.");
+        //print("evac system initialized.\nGame manager initialized.");
 
         _playerEating.Initialize();
     }
 
     void OnPlayerEatingInitialized() {
         _playerEating.OnInitialized -= OnPlayerEatingInitialized;
-        print("player eating initialized.");
+        //print("player eating initialized.");
 
         OnInitialized?.Invoke();
     }

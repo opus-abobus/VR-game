@@ -99,7 +99,7 @@ public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
                         break;
                     }
             }
-            print("type: " + type + "   chance: " + _evacChance);
+            //print("type: " + type + "   chance: " + _evacChance);
         }
 
         IEnumerator EvacuationProcess() {
@@ -131,7 +131,7 @@ public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
             int failChance = 100 - _evacChance;
             int rnd = UnityEngine.Random.Range(0, _evacChance + failChance);
             //print("chance: " + rnd);
-            print("type: " + _type);
+            //print("type: " + _type);
             while (rnd >= 0) {
                 rnd -= _evacChance;
                 if (rnd <= 0) {

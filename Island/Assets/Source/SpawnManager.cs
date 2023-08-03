@@ -43,33 +43,33 @@ public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
 
     IEnumerator InitProcess() {
         while (!CocountSpawner.HasStarted) {
-            print("waiting for coco spawner");
+            //print("waiting for coco spawner");
             yield return null;
         }
-        print("coconut spawner script has been started (should be initialized).");
+        //print("coconut spawner script has been started (should be initialized).");
         _coconutSpawners = FindObjectsOfType<CocountSpawner>().ToList();
 
         while (!BerrySpawnManager.HasStarted) {
-            print("waiting for berry spawner");
+            //print("waiting for berry spawner");
             yield return null;
         }
-        print("berry spawner script has been started (should be initialized).");
+        //print("berry spawner script has been started (should be initialized).");
         _berrySpawners = FindObjectsOfType<BerrySpawnManager>().ToList();
 
         while (!BananaTreeManager.HasStarted) {
-            print("waiting for banana spawner");
+            //print("waiting for banana spawner");
             yield return null;
         }
-        print("banana spawner script has been started (should be initialized).");
+        //print("banana spawner script has been started (should be initialized).");
         _bananaSpawners = FindObjectsOfType<BananaTreeManager>().ToList();
 
         Bootstrap.Instance.BootstrapFinished += OnBootstrapFinished;
 
         OnInitialized?.Invoke();
 
-        print("Banana spawners count: " + _bananaSpawners.Count);
-        print("Coconut spawners count: " + _coconutSpawners.Count);
-        print("Berry spawners count: " + _berrySpawners.Count);
+        //print("Banana spawners count: " + _bananaSpawners.Count);
+        //print("Coconut spawners count: " + _coconutSpawners.Count);
+        //print("Berry spawners count: " + _berrySpawners.Count);
 
         yield return null;
     }

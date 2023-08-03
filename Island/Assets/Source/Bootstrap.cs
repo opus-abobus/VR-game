@@ -34,17 +34,17 @@ public class Bootstrap : MonoBehaviour
     }
 
     void OnGameSettingsManagerInitialized() {
-        print("GameSettingsManager has been initialized!");
+        //print("GameSettingsManager has been initialized!");
         _gameSettingsManager.OnInitialized -= OnGameSettingsManagerInitialized;
 
         _gameManager.Initialize();
     }
 
     void OnGameManagerInitialized() {
-        print("GameManager has been initialized!");
+        //print("GameManager has been initialized!");
         _gameManager.OnInitialized -= OnGameManagerInitialized;
 
-        print("Bootstrap finished! Starting spawning...");
+        //print("Bootstrap finished! Starting spawning...");
         BootstrapFinished?.Invoke();
     }
 }

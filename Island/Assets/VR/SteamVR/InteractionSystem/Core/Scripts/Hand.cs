@@ -1107,8 +1107,7 @@ namespace Valve.VR.InteractionSystem
                 attachedObject.SendMessage("HandAttachedUpdate", this, SendMessageOptions.DontRequireReceiver);
             }
 
-            if (hoveringInteractable)
-            {
+            if (hoveringInteractable) {
                 hoveringInteractable.SendMessage("HandHoverUpdate", this, SendMessageOptions.DontRequireReceiver);
             }
         }

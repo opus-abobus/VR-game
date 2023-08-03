@@ -25,7 +25,7 @@ public class HybridPlayerController : MonoBehaviour {
     //------------------------------------
     [Header("Настройки свободной камеры")]
     public bool _allowFreeCamera = true;
-    public bool _headFollowsCamera = true;
+    public bool _headFollowsCamera = false;
     public float _speed = 4.0f;
     public float _shiftSpeed = 16.0f;
     public bool _showInstructions = true;
@@ -59,6 +59,9 @@ public class HybridPlayerController : MonoBehaviour {
 
     private Vector2 _currentMouseDelta = Vector2.zero;
     private Vector2 _currentMouseDeltaVelocity = Vector2.zero;
+
+    IEnumerator _freeCamControl;
+    private bool _freeCamera = false;
 
     private void Start() {
         _controller = GetComponent<CharacterController>();
@@ -103,12 +106,9 @@ public class HybridPlayerController : MonoBehaviour {
                 UpdateMovement();
             }
 
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
     }
-
-    IEnumerator _freeCamControl;
-    private bool _freeCamera = false;
 
     private Vector3 _startPosCam, _startRotCam;
     private Vector3 _startPosHead, _startRotHead;

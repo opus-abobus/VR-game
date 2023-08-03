@@ -337,8 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelWithSlotsManager: {fileID: 0}
-  _hand: {fileID: 0}
+  _hand: {fileID: 7081922616138207824}
 --- !u!65 &597774727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -755,8 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelWithSlotsManager: {fileID: 0}
-  _hand: {fileID: 0}
+  _hand: {fileID: 7081922616138207824}
 --- !u!65 &705860088
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1175,8 +1173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelWithSlotsManager: {fileID: 0}
-  _hand: {fileID: 0}
+  _hand: {fileID: 7081922616138207824}
 --- !u!65 &1411835636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1443,8 +1440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelWithSlotsManager: {fileID: 0}
-  _hand: {fileID: 0}
+  _hand: {fileID: 7081922616138207824}
 --- !u!65 &1443283430
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1859,8 +1855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelWithSlotsManager: {fileID: 0}
-  _hand: {fileID: 0}
+  _hand: {fileID: 7081922616138207824}
 --- !u!65 &2139261674
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3671,7 +3666,7 @@ MonoBehaviour:
   hoverSphereRadius: 0.05
   hoverLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2007
   hoverUpdateInterval: 0.1
   useControllerHoverComponent: 1
   controllerHoverComponent: tip
@@ -3800,7 +3795,6 @@ GameObject:
   - component: {fileID: 7081922616277910115}
   - component: {fileID: 917474759}
   - component: {fileID: 8098558664111500819}
-  - component: {fileID: 5087269805161517805}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -3916,20 +3910,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 194.3, y: 140.78, z: 17.8}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5087269805161517805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081922616277910125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d18c42407a0b2348838800278187a28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  readyToPlace: 0
-  _hand: {fileID: 0}
 --- !u!1 &7081922616299403303
 GameObject:
   m_ObjectHideFlags: 0
@@ -4534,8 +4514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d9b4bcc7453248ac16603746939f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelWithSlotsManager: {fileID: 0}
-  _hand: {fileID: 0}
+  _hand: {fileID: 7081922616138207824}
 --- !u!114 &191460988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5534,9 +5513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c00bbffe9a3b94b86f8489e624bf9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelWithSlots: {fileID: 7081922616277910125}
-  canvas: {fileID: 7081922617396596577}
-  isInvenoryOpen: 0
+  _canvas: {fileID: 7081922617396596577}
 --- !u!114 &9216028824873523787
 MonoBehaviour:
   m_ObjectHideFlags: 0
