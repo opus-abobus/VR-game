@@ -24,6 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6874558406792326251}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.36, y: 0.57, z: -14.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
@@ -54,7 +55,6 @@ Transform:
   - {fileID: 692759687733699565}
   - {fileID: 692759686417883659}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6874558406792326248
 MonoBehaviour:
@@ -68,37 +68,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 496939dbe22c8a44e9611e4ff33bb841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocks:
-  - {fileID: 6961362460926234430}
-  - {fileID: 7965134220059350349}
-  - {fileID: 7965134219345427723}
-  - {fileID: 7965134220246334667}
-  - {fileID: 7965134219125711236}
-  - {fileID: 7965134219039308274}
-  - {fileID: 7965134219102589449}
-  - {fileID: 7965134219286139780}
-  - {fileID: 7965134220137374911}
-  - {fileID: 7965134220051307802}
-  - {fileID: 7965134220273887518}
-  - {fileID: 7965134220890998873}
-  - {fileID: 7965134219047312233}
-  - {fileID: 7965134220537733961}
-  - {fileID: 7965134219220780178}
-  - {fileID: 7965134220929560039}
-  - {fileID: 7965134220003389232}
-  - {fileID: 7965134219274392905}
-  - {fileID: 7965134219306197102}
-  - {fileID: 7965134219937558410}
-  - {fileID: 7965134220836773925}
-  - {fileID: 7965134221025951688}
-  - {fileID: 7965134220104104369}
-  - {fileID: 7965134219274434647}
   isSOSLayedOut: 0
 --- !u!1001 &6027575120652192047
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -115,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -199,16 +175,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686482075342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575120652192047}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219220780178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575120652192047}
   m_PrefabAsset: {fileID: 0}
@@ -217,6 +190,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -233,7 +207,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -317,16 +291,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686570900440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575120741641273}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219125711236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575120741641273}
   m_PrefabAsset: {fileID: 0}
@@ -335,6 +306,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -351,7 +323,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -435,16 +407,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686598101077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575120768884660}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219102589449 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575120768884660}
   m_PrefabAsset: {fileID: 0}
@@ -453,6 +422,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -469,7 +439,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -553,16 +523,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686642958645 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575120814266068}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219047312233 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575120814266068}
   m_PrefabAsset: {fileID: 0}
@@ -571,6 +538,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -587,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -671,16 +639,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686653043630 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575120823268431}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219039308274 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575120823268431}
   m_PrefabAsset: {fileID: 0}
@@ -689,6 +654,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -705,7 +671,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -789,16 +755,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686355314519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121062277302}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219345427723 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121062277302}
   m_PrefabAsset: {fileID: 0}
@@ -807,6 +770,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -823,7 +787,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -907,16 +871,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686382025266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121090162131}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219306197102 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121090162131}
   m_PrefabAsset: {fileID: 0}
@@ -925,6 +886,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -941,7 +903,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1025,16 +987,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686412552664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121120173625}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219286139780 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121120173625}
   m_PrefabAsset: {fileID: 0}
@@ -1043,6 +1002,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1059,7 +1019,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1143,16 +1103,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686417977109 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121125497076}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219274392905 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121125497076}
   m_PrefabAsset: {fileID: 0}
@@ -1161,6 +1118,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1177,7 +1135,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1261,16 +1219,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686417883659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121125537258}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219274434647 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121125537258}
   m_PrefabAsset: {fileID: 0}
@@ -1279,6 +1234,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1295,7 +1251,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1379,16 +1335,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759685643439889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121423653104}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220059350349 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121423653104}
   m_PrefabAsset: {fileID: 0}
@@ -1397,6 +1350,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1413,7 +1367,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1497,16 +1451,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759685651515206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121432350887}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220051307802 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121432350887}
   m_PrefabAsset: {fileID: 0}
@@ -1515,6 +1466,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1531,7 +1483,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1615,16 +1567,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759685686834540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121468613261}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220003389232 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121468613261}
   m_PrefabAsset: {fileID: 0}
@@ -1633,6 +1582,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1649,7 +1599,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1733,16 +1683,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759685754828246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121536737847}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134219937558410 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121536737847}
   m_PrefabAsset: {fileID: 0}
@@ -1751,6 +1698,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1767,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1851,16 +1799,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759687568077634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121738851491}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220273887518 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121738851491}
   m_PrefabAsset: {fileID: 0}
@@ -1869,6 +1814,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -1885,7 +1831,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -1969,16 +1915,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759687591372439 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121761628534}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220246334667 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121761628534}
   m_PrefabAsset: {fileID: 0}
@@ -1987,6 +1930,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2003,7 +1947,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2087,16 +2031,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759687700397795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121871038722}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220137374911 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121871038722}
   m_PrefabAsset: {fileID: 0}
@@ -2105,6 +2046,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2121,7 +2063,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2205,16 +2147,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759687733699565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575121904841740}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220104104369 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575121904841740}
   m_PrefabAsset: {fileID: 0}
@@ -2223,6 +2162,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2239,7 +2179,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2323,16 +2263,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759687312619797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575122019741428}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220537733961 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575122019741428}
   m_PrefabAsset: {fileID: 0}
@@ -2341,6 +2278,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2357,7 +2295,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2441,16 +2379,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759687007287929 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575122251672984}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220836773925 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575122251672984}
   m_PrefabAsset: {fileID: 0}
@@ -2459,6 +2394,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2475,7 +2411,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2559,16 +2495,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686809658772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575122591576693}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134221025951688 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575122591576693}
   m_PrefabAsset: {fileID: 0}
@@ -2577,6 +2510,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2593,7 +2527,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2677,16 +2611,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686916569019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575122696740954}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220929560039 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575122696740954}
   m_PrefabAsset: {fileID: 0}
@@ -2695,6 +2626,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2711,7 +2643,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2795,16 +2727,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &692759686944592389 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6027575122725324260}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7965134220890998873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6027575122725324260}
   m_PrefabAsset: {fileID: 0}
@@ -2813,6 +2742,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6065371086910420689}
     m_Modifications:
     - target: {fileID: 1107426613030944269, guid: 893a5e01f3acf534ca35f9f6ddf55698,
@@ -2829,7 +2759,7 @@ PrefabInstance:
     - target: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
       propertyPath: m_Name
-      value: Rock_P
+      value: Rock_replaceable
       objectReference: {fileID: 0}
     - target: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
         type: 3}
@@ -2913,16 +2843,13 @@ PrefabInstance:
       objectReference: {fileID: 4013275331872712965, guid: 8baa31e846e7876458ffb8d435373fef,
         type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893a5e01f3acf534ca35f9f6ddf55698, type: 3}
 --- !u!4 &544724838509466978 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6501811243275081697, guid: 893a5e01f3acf534ca35f9f6ddf55698,
-    type: 3}
-  m_PrefabInstance: {fileID: 6752112702094377603}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6961362460926234430 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4408998729508605373, guid: 893a5e01f3acf534ca35f9f6ddf55698,
     type: 3}
   m_PrefabInstance: {fileID: 6752112702094377603}
   m_PrefabAsset: {fileID: 0}

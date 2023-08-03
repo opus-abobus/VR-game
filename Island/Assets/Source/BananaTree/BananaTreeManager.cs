@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static SpawnManager;
 
 [RequireComponent(typeof(BananaTreeGrowth), typeof(BananaRipening))]
-public class BananaTreeManager : MonoBehaviour, SpawnManager.ISpawner
+public class BananaTreeManager : MonoBehaviour, ISpawner
 {
     //[SerializeField]
     private BananaRipening _bananaRipening;
@@ -19,7 +17,7 @@ public class BananaTreeManager : MonoBehaviour, SpawnManager.ISpawner
     }
 
     private bool _hasInitialized = false;
-    bool SpawnManager.ISpawner.HasInitialized { get { return _hasInitialized; } }
+    bool ISpawner.HasInitialized { get { return _hasInitialized; } }
 
     private static bool _hasStarted = false;
     public static bool HasStarted { get { return _hasStarted; } }

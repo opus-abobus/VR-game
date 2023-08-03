@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +30,7 @@ public class BananaDrop : MonoBehaviour
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<BoxCollider>().isTrigger = true;
 
-        var bananasSettings = GameSettingsManager.Instance.BananasSettings;
+        WorldSettings.IBananaTreeSettings bananasSettings = GameSettingsManager.Instance.ActiveWorldSettings;
         _bananaAmount = UnityEngine.Random.Range(bananasSettings.MinBananasToDrop, bananasSettings.MaxBananasToDrop);
     }
 

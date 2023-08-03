@@ -3,27 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EvacuationSystem : MonoBehaviour
+public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
 {
     private static EvacuationSystem _instance;
     public static EvacuationSystem Instance { get { return _instance; } }
 
-    public bool useGlobalSettings = true;
+    public event Action OnInitialized; 
 
-    public int rocketChance = 25;
-    public int sosRocksChance = 1;
-    public int bonfireChance = 5;
-    public int bonfireDuration = 100;
+    public bool _useGlobalSettings = true;
 
-    public int chanceTickRate = 60;
+    public int _rocketChance = 25;
+    public int _sosRocksChance = 1;
+    public int _bonfireChance = 5;
+    public int _bonfireDuration = 100;
 
-    [SerializeField]
-    private EvacSettings _evacSettings;
+    public int _chanceTickRate = 60;
 
-    List<EvacItem> evacItems;
-    [HideInInspector] public bool isEvacuated = false;
+    private WorldSettings.IEvacSettings _evacSettings;
 
-    private void Awake() {
+    private List<EvacItem> _evacItems;
+
+    [HideInInspector] 
+    public bool _isEvacuated = false;
+
+    public void Initialize() {
         if (_instance == null) {
             _instance = this;
         }
@@ -31,69 +34,72 @@ public class EvacuationSystem : MonoBehaviour
             Destroy(this);
         }
 
+        _evacSettings = GameSettingsManager.Instance.ActiveWorldSettings;
+
         //GameSettings.instance.sosRocksChance = 100;
         //print("fsd: " + GameSettings.instance.sosRocksChance);
         /*GameSettings.instance.bonfireChance = 25;
         print("chance: " + GameSettings.instance.bonfireChance + "\ndur: " + GameSettings.instance.bonfireDuration);*/
 
+        OnInitialized?.Invoke();
     }
 
     public class EvacItem {
-        int duration;
-        int evacChance;
+        int _duration;
+        int _evacChance;
         //bool isActive;
 
-        Bonfire bonfire = null;
+        Bonfire _bonfire = null;
 
-        TypesOfItems type;
+        TypesOfItems _type;
 
         public enum TypesOfItems {
             rocket, bonfire, sosRocks
         }
 
         public EvacItem(TypesOfItems type, Bonfire bonfire = null, bool useGlobalSettings = true) {
-            this.type = type;
+            this._type = type;
 
-            if (useGlobalSettings) _instance.chanceTickRate = _instance._evacSettings.ChanceTickRateInSeconds;
+            if (useGlobalSettings) _instance._chanceTickRate = _instance._evacSettings.ChanceTickRateInSeconds;
 
             switch (type) {
                 case TypesOfItems.sosRocks: {
-                        duration = -1;
+                        _duration = -1;
                         //isActive = false;
                         if (useGlobalSettings) {
-                            evacChance = _instance._evacSettings.SosRocksChance;
+                            _evacChance = _instance._evacSettings.SosRocksChance;
                         }
                         else {
-                            evacChance = _instance.sosRocksChance;
+                            _evacChance = _instance._sosRocksChance;
                         }
                         break;
                     }
                 case TypesOfItems.rocket: {
-                        duration = 0;
+                        _duration = 0;
                         //isActive = false;
                         if (useGlobalSettings) {
-                            evacChance = _instance._evacSettings.RocketChance;
+                            _evacChance = _instance._evacSettings.RocketChance;
                         }
                         else {
-                            evacChance = _instance.rocketChance;
+                            _evacChance = _instance._rocketChance;
                         }
                         break;
                     }
                 case TypesOfItems.bonfire: {
                         //isActive = false;
-                        this.bonfire = bonfire;
+                        this._bonfire = bonfire;
                         if (useGlobalSettings) {
-                            duration = _instance._evacSettings.BonfireDuration;
-                            evacChance = _instance._evacSettings.BonfireChance;
+                            _duration = _instance._evacSettings.BonfireDuration;
+                            _evacChance = _instance._evacSettings.BonfireChance;
                         }
                         else {
-                            duration = _instance.bonfireDuration;
-                            evacChance = _instance.bonfireChance;
+                            _duration = _instance._bonfireDuration;
+                            _evacChance = _instance._bonfireChance;
                         }
                         break;
                     }
             }
-            print("type: " + type + "   chance: " + evacChance);
+            print("type: " + type + "   chance: " + _evacChance);
         }
 
         IEnumerator EvacuationProcess() {
@@ -102,36 +108,36 @@ public class EvacuationSystem : MonoBehaviour
             while (true) {
                 RouletteWheelSelection();
 
-                if (_instance.isEvacuated) {
-                    if (bonfire != null) { bonfire._particleSystem.Stop(); bonfire._audioSource.Stop(); bonfire._isFired = false; }
+                if (_instance._isEvacuated) {
+                    if (_bonfire != null) { _bonfire.ParticleSystem.Stop(); _bonfire.AudioSource.Stop(); _bonfire._isFired = false; }
                     break;
                 }
 
-                yield return new WaitForSeconds(_instance.chanceTickRate);
-                elapsedTime += _instance.chanceTickRate;
+                yield return new WaitForSeconds(_instance._chanceTickRate);
+                elapsedTime += _instance._chanceTickRate;
 
-                if (elapsedTime >= duration && duration != -1) {
-                    if (bonfire != null) { bonfire._particleSystem.Stop(); bonfire._audioSource.Stop(); bonfire._isFired = false; }
+                if (elapsedTime >= _duration && _duration != -1) {
+                    if (_bonfire != null) { _bonfire.ParticleSystem.Stop(); _bonfire.AudioSource.Stop(); _bonfire._isFired = false; }
                     break;
                 }
 
                 yield return null;
             }
             //isActive = false;
-            _instance.evacItems.Remove(this);
+            _instance._evacItems.Remove(this);
         }
 
         void RouletteWheelSelection() {
-            int failChance = 100 - evacChance;
-            int rnd = UnityEngine.Random.Range(0, evacChance + failChance);
+            int failChance = 100 - _evacChance;
+            int rnd = UnityEngine.Random.Range(0, _evacChance + failChance);
             //print("chance: " + rnd);
-            print("type: " + type);
+            print("type: " + _type);
             while (rnd >= 0) {
-                rnd -= evacChance;
+                rnd -= _evacChance;
                 if (rnd <= 0) {
                     // sucess!
-                    _instance.isEvacuated = true;
-                    print("Evacuated by " + type);
+                    _instance._isEvacuated = true;
+                    print("Evacuated by " + _type);
                     break;
                 }
                 rnd -= failChance;
@@ -144,12 +150,12 @@ public class EvacuationSystem : MonoBehaviour
     }
 
     public void AddEvacItem(EvacItem.TypesOfItems type, Bonfire bonfire = null, bool useGlobalSettings = true) {
-        if (evacItems == null || evacItems.Count == 0) {
-            evacItems = new List<EvacItem>();
+        if (_evacItems == null || _evacItems.Count == 0) {
+            _evacItems = new List<EvacItem>();
         }
 
         EvacItem item = new EvacItem(type, bonfire);
-        evacItems.Add(item);
+        _evacItems.Add(item);
         item.ActivateItem();
     }
 }

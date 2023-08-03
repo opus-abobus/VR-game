@@ -38,7 +38,7 @@ public class BananaRipening : MonoBehaviour
 
         SetRandomTreeState();
 
-        var bananasSettings = GameSettingsManager.Instance.BananasSettings;
+        WorldSettings.IBananaTreeSettings bananasSettings = GameSettingsManager.Instance.ActiveWorldSettings;
 
         if (bananasSettings.UseRandomRipePhaseDuration) {
             _phaseTimeInSeconds = UnityEngine.Random.Range(bananasSettings.MinPhaseRipeDurationInSeconds, bananasSettings.MaxPhaseRipeDurationInSeconds);
@@ -119,7 +119,7 @@ public class BananaRipening : MonoBehaviour
     }
 
 /*    private void Awake() {
-        if (allowRipening) {
+        if (_allowRipening) {
             _bananaPartPrefab = Instantiate(_bananaPart, _bananaPart.transform.position, _bananaPart.transform.rotation, _branch.transform);
             _bananaPartPrefab.SetActive(false);
 
@@ -128,10 +128,10 @@ public class BananaRipening : MonoBehaviour
         else {
             this.enabled = false;
         }
-    }*/
+    }
 
-/*    private void Update() {
-        if (allowRipening) {
+    private void Update() {
+        if (_allowRipening) {
             RipeProcess();
         }
     }*/

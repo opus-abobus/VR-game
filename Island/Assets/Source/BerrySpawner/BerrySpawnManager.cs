@@ -23,7 +23,7 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     [SerializeField]
     private Transform _parent;
 
-    private BerriesSettings _berriesSettings;
+    private WorldSettings.IBerriesSettings _berriesSettings;
 
     //respawn properties
     [SerializeField]
@@ -35,10 +35,11 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     //false - точка свободна, true - точка занята
     private Dictionary<int, bool> spawnPointsDictionary;
     void SpawnManager.ISpawner.Init() {
+        _berriesSettings = GameSettingsManager.Instance.ActiveWorldSettings;
+
         _wasStartSpawn = false;
 
         if (_spawnPointsRoot != null) {
-            _berriesSettings = GameSettingsManager.Instance.BerriesSettings;
 
             InitSpawnPoints();
             InitSpawnPointsDictionary();
@@ -46,7 +47,8 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
             _spawnedBerries = new Berry[_spawnPoints.Length];
 
             _hasInitialized = true;
-            //SpawnBerries();
+            
+            SpawnBerries();
         }
         else {
             Debug.LogAssertion("У куста отсутствуют точки спавна ягод. Скрипт будет уничтожен");

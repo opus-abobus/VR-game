@@ -1,28 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject panelWithSlots;
-    public GameObject canvas;
+    [SerializeField]
+    private GameObject _canvas;
 
     private void Awake() {
-        canvas.SetActive(false);
+        _canvas.SetActive(false);
     }
 
-    [HideInInspector] public bool isInvenoryOpen = false;
+    private bool _isInvenoryOpen = false;
+    public bool IsInventoryOpen { get { return _isInvenoryOpen; } }
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.I)) {
-            if (isInvenoryOpen) {
-                isInvenoryOpen = false;
-                canvas.SetActive(false);
+            if (_isInvenoryOpen) {
+                _isInvenoryOpen = false;
+                _canvas.SetActive(false);
             }
             else {
-                isInvenoryOpen = true;
-                canvas.SetActive(true);
+                _isInvenoryOpen = true;
+                _canvas.SetActive(true);
             }
         }
     }

@@ -1,43 +1,53 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EndGameScreen : MonoBehaviour
 {
-    [SerializeField] GameObject screen_survived;
+    [SerializeField] 
+    private GameObject _screen_survived;
 
-    float startTimeScale;
+    private float _startTimeScale;
 
     private void Awake() {
-        screen_survived.SetActive(false);
-        startTimeScale = Time.timeScale;
+        _screen_survived.SetActive(false);
+        _startTimeScale = Time.timeScale;
     }
 
-    private void Update() {
-        if (EvacuationSystem.Instance.isEvacuated && !isActiveScreen) {
-            DisplayEndGameScreen();
-        }
+    private void Start() {
+        StartCoroutine(UpdateProcess());
+    }
 
-        if (isActiveScreen) {
-            if (Input.GetKeyDown(KeyCode.Escape)) {
-                screen_survived.SetActive(false);
-                isActiveScreen = false;
-                LoadMenu();
+    IEnumerator UpdateProcess() {
+        yield return new WaitForSecondsRealtime(1);
+
+        while (true) {
+            if (EvacuationSystem.Instance._isEvacuated && !_isActiveScreen) {
+                DisplayEndGameScreen();
             }
+
+            if (_isActiveScreen) {
+                if (Input.GetKeyDown(KeyCode.Escape)) {
+                    _screen_survived.SetActive(false);
+                    _isActiveScreen = false;
+                    LoadMenu();
+                }
+            }
+
+            yield return new WaitForEndOfFrame();
         }
     }
 
     public void LoadMenu() {
-        Time.timeScale = startTimeScale;
+        Time.timeScale = _startTimeScale;
         SceneManager.LoadScene("Menu");
     }
 
-    bool isActiveScreen = false;
+    private bool _isActiveScreen = false;
     public void DisplayEndGameScreen() {
-        if (EvacuationSystem.Instance.isEvacuated) {
-            screen_survived.SetActive(true);
-            isActiveScreen = true;
+        if (EvacuationSystem.Instance._isEvacuated) {
+            _screen_survived.SetActive(true);
+            _isActiveScreen = true;
         }
     }
 }

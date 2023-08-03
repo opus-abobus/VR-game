@@ -25,7 +25,7 @@ public class EscapeMenu : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!hungerSystem.IsGameOver && !EvacuationSystem.Instance.isEvacuated)
+            if (!hungerSystem.IsGameOver && !EvacuationSystem.Instance._isEvacuated)
             {
                 if (pauseGame)
                 {

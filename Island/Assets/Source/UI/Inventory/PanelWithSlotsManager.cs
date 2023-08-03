@@ -1,14 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class PanelWithSlotsManager : MonoBehaviour
 {
-    [HideInInspector] public bool readyToPlace = true;
+    [HideInInspector]
+    public bool readyToPlace = true;
 
+    [SerializeField]
+    private Hand _hand;
     private void OnTriggerExit(Collider other) {
-        InteractableManager manager = other.GetComponent<InteractableManager>();
-        if (manager != null && manager.IsPickedUp) {
+        if (other.GetComponent<InventorySlotSprite>() != null && _hand.currentAttachedObject != null) {
             StartCoroutine(waitForFixedUpdates(3));
             readyToPlace = true;
         }

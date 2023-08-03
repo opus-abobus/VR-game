@@ -3,12 +3,17 @@ using UnityEngine;
 public class Bonfire : MonoBehaviour
 {
 #pragma warning disable CS0108
-    [SerializeField] public ParticleSystem _particleSystem;
+    [SerializeField] 
+    private ParticleSystem _particleSystem;
+    public ParticleSystem ParticleSystem { get { return _particleSystem; } }
 #pragma warning restore CS0108
 
-    [SerializeField] public AudioSource _audioSource;
+    [SerializeField]
+    private AudioSource _audioSource;
+    public AudioSource AudioSource { get { return _audioSource; } }
 
-    [HideInInspector] public bool _isFired = false;
+    [HideInInspector] 
+    public bool _isFired = false;
 
     private void OnCollisionEnter(Collision collision) {
         if (!_isFired && collision.gameObject.tag == "lighter") {

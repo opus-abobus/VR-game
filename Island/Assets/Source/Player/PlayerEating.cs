@@ -1,29 +1,65 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class PlayerEating : MonoBehaviour
+public class PlayerEating : MonoBehaviour, Bootstrap.IBootstrap
 {
-    [SerializeField] Hand hand;
-    [SerializeField] Transform playerCamera;
+    public event Action OnInitialized;
 
-    List<string> tagsWithEatableObjects = new List<string> { "berry", "banana", "cocount", "coconut" };
-    [SerializeField] HungerSystem hungerSystem;
+    [SerializeField] 
+    private Hand _hand;
 
-    private void Awake() {
-        if (playerCamera == null) { Debug.LogAssertion("player camera null reference exception"); }
-        else { this.gameObject.transform.position = playerCamera.position; }
-        if (hungerSystem == null) { Debug.LogError("hungerSystem instance null reference exception"); }
+/*    [SerializeField] 
+    private Transform _playerCamera;*/
+
+    private List<string> _tagsWithEatableObjects = new List<string> { "berry", "banana", "cocount", "coconut" };
+
+    [SerializeField]
+    private HungerSystem _hungerSystem;
+
+    private WorldSettings.INutritionSettings _settings;
+
+    private Dictionary<string, float> nutVals = new Dictionary<string, float>();
+
+    public void Initialize() {
+        /*        if (_playerCamera == null) { Debug.LogAssertion("player camera null reference exception"); }
+                else { gameObject.transform.position = _playerCamera.position; }*/
+
+        _settings = GameSettingsManager.Instance.ActiveWorldSettings;
+
+        foreach (var tag in _tagsWithEatableObjects) {
+            float val = 0;
+            switch (tag) {
+                case "berry": {
+                        val = _settings.BerryNutrVal;
+                        break;
+                    }
+                case "cocount":
+                case "coconut": {
+                        val = _settings.CoconutNutrVal;
+                        break;
+                    }
+                case "banana": {
+                        val = _settings.BananaNutrVal;
+                        break;
+                    }
+            }
+            nutVals.Add(tag, val);
+        }
+
+        if (_hungerSystem == null) { Debug.LogError("hungerSystem instance null reference exception"); }
+
+        OnInitialized?.Invoke();
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        var tag = collision.gameObject.tag;
-        foreach (var item in tagsWithEatableObjects) {
+    private void OnTriggerEnter(Collider other) {
+        var tag = other.tag;
+        foreach (var item in _tagsWithEatableObjects) {
             
-            if (tag == item && collision.gameObject.GetComponent<SetEatability>().IsEatable) {
-                hungerSystem.Satiety += collision.gameObject.GetComponent<SetEatability>().nutritionalValue;
-                Destroy(collision.gameObject);
+            if (tag == item) {
+                _hungerSystem.Satiety += nutVals[tag];
+                Destroy(other.gameObject);
             }
         }
     }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
@@ -14,7 +12,13 @@ public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
     [SerializeField]
     private SpawnManager _spawnManager;
 
-    public bool HasInitialized { get; private set; } = false;
+    [SerializeField]
+    private EvacuationSystem _evacuationSystem;
+
+    [SerializeField]
+    private PlayerEating _playerEating;
+
+    public Action OnInitialized;
 
     public void Initialize() {
         if (_instance == null) {
@@ -24,18 +28,31 @@ public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
             Destroy(gameObject);
         }
 
-        StartCoroutine(InitProcess());
+        _spawnManager.OnInitialized += OnSpawnManagerInitialized;
+        _spawnManager.Initialize();
+
+        _evacuationSystem.OnInitialized += OnEvacSystemInitialized;
+        _playerEating.OnInitialized += OnPlayerEatingInitialized;
     }
 
-    IEnumerator InitProcess() {
-        _spawnManager.Initialize();
-        while (!_spawnManager.HasInitialized) {
-            yield return null;
-        }
+    void OnSpawnManagerInitialized() {
         print("spawn manager initialized.");
+        _spawnManager.OnInitialized -= OnSpawnManagerInitialized;
 
-        //Bootstrap.Instance.BootstrapFinished += OnBootstrapFinished;
+        _evacuationSystem.Initialize();
+    }
 
-        HasInitialized = true;
+    void OnEvacSystemInitialized() {
+        _evacuationSystem.OnInitialized -= OnEvacSystemInitialized;
+        print("evac system initialized.\nGame manager initialized.");
+
+        _playerEating.Initialize();
+    }
+
+    void OnPlayerEatingInitialized() {
+        _playerEating.OnInitialized -= OnPlayerEatingInitialized;
+        print("player eating initialized.");
+
+        OnInitialized?.Invoke();
     }
 }

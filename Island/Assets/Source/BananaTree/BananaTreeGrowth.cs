@@ -21,7 +21,7 @@ public class BananaTreeGrowth : MonoBehaviour
     public bool HasInitialized { get; private set; } = false;
 
     public void Init() {
-        var bananasSettings = GameSettingsManager.Instance.BananasSettings;
+        WorldSettings.IBananaTreeSettings bananasSettings = GameSettingsManager.Instance.ActiveWorldSettings;
 
         if (bananasSettings.UseRandomTreeStartScale) {
             _startScale = Vector3.one * UnityEngine.Random.Range(bananasSettings.MinTreeScale, bananasSettings.MaxTreeScale);
@@ -54,7 +54,9 @@ public class BananaTreeGrowth : MonoBehaviour
 
     IEnumerator GrowningProcess() {
         bool ripeningFlag = false;
-        float startRipeningMoment = GameSettingsManager.Instance.BananasSettings.StartRipeningMoment;
+
+        var settings = GameSettingsManager.Instance.ActiveWorldSettings as WorldSettings.IBananaTreeSettings;
+        float startRipeningMoment = settings.StartRipeningMoment;
 
         while (true) {
             if (_growningProgress >= 1) {

@@ -50,20 +50,21 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
 
     void SpawnManager.ISpawner.Init() {
         _meshRenderer.enabled = false;
-        if (_coconut == null) { 
-            Debug.LogError("” спавнера кокосов отсутствует ссылка на кокос"); 
-            this.enabled = false; 
+        if (_coconut == null) {
+            Debug.LogError("” спавнера кокосов отсутствует ссылка на кокос");
+            this.enabled = false;
         }
 
         _boundsSize = _meshRenderer.bounds.size / 2;
         Destroy(_meshRenderer);
         Destroy(_meshFilter);
 
-        _minTimeToSpawn = GameSettingsManager.Instance.CoconutsSettings.MinTimeToRespawnInSeconds;
-        _maxTimeToSpawn = GameSettingsManager.Instance.CoconutsSettings.MaxTimeToRespawnInSeconds;
+        var settings = GameSettingsManager.Instance.ActiveWorldSettings as WorldSettings.ICoconutPalmSettings;
+        _minTimeToSpawn = settings.MinTimeToRespawnInSeconds;
+        _maxTimeToSpawn = settings.MaxTimeToRespawnInSeconds;
 
-        if (Random.Range(0f, 1) <= GameSettingsManager.Instance.CoconutsSettings.ChanceToSpawnOnStart) {
-            _cocountsOnStart = Random.Range(GameSettingsManager.Instance.CoconutsSettings.MinCoconutsOnStart, GameSettingsManager.Instance.CoconutsSettings.MaxCoconutsOnStart);
+        if (Random.Range(0f, 1) <= settings.ChanceToSpawnOnStart) {
+            _cocountsOnStart = Random.Range(settings.MinCoconutsOnStart, settings.MaxCoconutsOnStart);
         }
         else {
             _cocountsOnStart = 0;

@@ -1,34 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CocountSplit : MonoBehaviour
 {
-    [SerializeField] GameObject coconutUp, coconutDown;
-    [SerializeField] Transform coconutBroken;
+    [SerializeField] 
+    private GameObject _coconutUp, _coconutDown;
 
-    int splitChance = 5;
+    [SerializeField]
+    private Transform coconutBroken;
 
-    bool wasDetachedFromHand;
+    private int _splitChance = 5;
+
+    private bool _wasDetachedFromHand;
     public bool WasDetachedFromHand {
-        get { return wasDetachedFromHand; }
-        set { wasDetachedFromHand = value; }
+        get { return _wasDetachedFromHand; }
+        set { _wasDetachedFromHand = value; }
     }
     
     private void OnCollisionEnter(Collision collision) {
-        if (wasDetachedFromHand) {
-            if (Random.Range(0, splitChance) == 0) {    // когда равно 0, то кокос должен расколоться
-                coconutDown.SetActive(true);
-                coconutUp.SetActive(true);
-                coconutDown.transform.parent = coconutBroken;
-                coconutUp.transform.parent = coconutBroken;
+        if (_wasDetachedFromHand) {
+            if (Random.Range(0, _splitChance) == 0) {    // когда равно 0, то кокос должен расколоться
+                _coconutDown.SetActive(true);
+                _coconutUp.SetActive(true);
+                _coconutDown.transform.parent = coconutBroken;
+                _coconutUp.transform.parent = coconutBroken;
                 coconutBroken.parent = transform.parent;
                 Destroy(this.gameObject);
             }
             else {  // иначе увеличить шанс раскалывания
-                splitChance -= 1;
+                _splitChance -= 1;
             }
-            wasDetachedFromHand = false;
+            _wasDetachedFromHand = false;
         }
     }
 }

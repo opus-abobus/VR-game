@@ -17,9 +17,7 @@ public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
     private List<CocountSpawner> _coconutSpawners;
     public List<CocountSpawner> CocountSpawners { get { return _coconutSpawners; } set { _coconutSpawners = value; } }
 
-    public bool HasInitialized { get; private set; } = false;
-
-    public event Action Initialized;
+    public event Action OnInitialized;
 
     public interface ISpawner {
         bool HasInitialized { get; }
@@ -67,8 +65,7 @@ public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
 
         Bootstrap.Instance.BootstrapFinished += OnBootstrapFinished;
 
-        Initialized?.Invoke();
-        HasInitialized = true;
+        OnInitialized?.Invoke();
 
         print("Banana spawners count: " + _bananaSpawners.Count);
         print("Coconut spawners count: " + _coconutSpawners.Count);

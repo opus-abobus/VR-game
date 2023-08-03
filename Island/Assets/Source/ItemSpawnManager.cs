@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -128,8 +127,9 @@ public class ItemSpawnManager : MonoBehaviour
 
     void OnGameSettingsAwakeEnded() {
         if (useGlobalSettings) {
-            signalGunAmount = GameSettingsManager.Instance.EvacSettings.SignalGunsAmount;
-            bonfireAmount = GameSettingsManager.Instance.EvacSettings.BonfiresAmount;
+            var settings = GameSettingsManager.Instance.ActiveWorldSettings as WorldSettings.IEvacSettings;
+            signalGunAmount = settings.SignalGunsAmount;
+            bonfireAmount = settings.BonfiresAmount;
         }
 
         InitSpawners();
@@ -137,7 +137,7 @@ public class ItemSpawnManager : MonoBehaviour
     }
 
     private void Awake() {
-        GameSettingsManager.Instance.EvacSettings.Awaked += OnGameSettingsAwakeEnded;
+        //GameSettingsManager.Instance.EvacSettings.Awaked += OnGameSettingsAwakeEnded;
 
         if (Instance == null) {
             Instance = this;

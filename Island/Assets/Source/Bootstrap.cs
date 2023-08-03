@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
@@ -29,25 +27,22 @@ public class Bootstrap : MonoBehaviour
             return;
         }
 
-        StartCoroutine(InitProcess());
+        _gameSettingsManager.OnInitialized += OnGameSettingsManagerInitialized;
+        _gameManager.OnInitialized += OnGameManagerInitialized;
+
+        _gameSettingsManager.Initialize();
     }
 
-    IEnumerator InitProcess() {
-        while (true) {
-            _gameSettingsManager.Initialize();
-            while (!_gameSettingsManager.HasInitialized) {
-                yield return null;
-            }
-            print("GameSettingsManager has been initialized!");
+    void OnGameSettingsManagerInitialized() {
+        print("GameSettingsManager has been initialized!");
+        _gameSettingsManager.OnInitialized -= OnGameSettingsManagerInitialized;
 
-            _gameManager.Initialize();
-            while (!_gameManager.HasInitialized) {
-                yield return null;
-            }
-            print("GameManager has been initialized!");
+        _gameManager.Initialize();
+    }
 
-            break;
-        }
+    void OnGameManagerInitialized() {
+        print("GameManager has been initialized!");
+        _gameManager.OnInitialized -= OnGameManagerInitialized;
 
         print("Bootstrap finished! Starting spawning...");
         BootstrapFinished?.Invoke();
