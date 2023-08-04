@@ -1,53 +1,46 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class HybridPlayerController : MonoBehaviour, Bootstrap.IBootstrap {
-    [SerializeField] 
+    [SerializeField]
     private Transform _playerCamera;
 
     [Header("Настройки управления игроком")]
-    [SerializeField, Range(1.0f, 10.0f)] 
+    [SerializeField, Range(1.0f, 10.0f)]
     float _mouseSensitivity = 4.0f;
 
-    [SerializeField] 
+    [SerializeField]
     float _walkSpeed = 6.0f;
 
-    [SerializeField] 
+    [SerializeField]
     float _gravity = -13.0f;
 
-    [SerializeField, Range(0.0f, 0.5f)] 
+    [SerializeField, Range(0.0f, 0.5f)]
     float _moveSmoothTime = 0.3f;
     [SerializeField, Range(0.0f, 0.5f)]
     float _mouseSmoothTime = 0.03f;
 
-    public bool _alwaysShowCursor = false;
-
     //------------------------------------
-    [Header("Настройки свободной камеры")]
     public bool _allowFreeCamera = true;
-    public bool _headFollowsCamera = false;
-    public float _speed = 4.0f;
-    public float _shiftSpeed = 16.0f;
-    public bool _showInstructions = true;
 
-    [SerializeField] 
+    public event Action OnFreeCameraActivated;
+
+    [SerializeField]
+    private FreeCameraController _freeCameraController;
+
+    [SerializeField]
     private Transform _playerHead;
-    [SerializeField] 
+    [SerializeField]
     private Transform _playerHand;
-    [SerializeField] 
+    [SerializeField]
     private Transform _VRFallbackObjects;
     //------------------------------------
-
-    public bool _canvasFollowsCamera = false;
-
-    [SerializeField] 
+    [SerializeField]
     private Transform _canvas;
 
-    [SerializeField] 
+    [SerializeField]
     private SpriteRenderer _headSpriteRenderer;
-
-    [SerializeField] 
-    private AudioSource _audioSource;
 
     private float _cameraPitch = 0.0f;
     private float _velocityY = 0.0f;
@@ -59,115 +52,80 @@ public class HybridPlayerController : MonoBehaviour, Bootstrap.IBootstrap {
 
     private Vector2 _currentMouseDelta = Vector2.zero;
     private Vector2 _currentMouseDeltaVelocity = Vector2.zero;
-
-    IEnumerator _freeCamControl;
-    private bool _freeCamera = false;
+    public bool IsFreeCamActive { get; private set; }
 
     void Bootstrap.IBootstrap.Initialize() {
         _controller = GetComponent<CharacterController>();
         _startRotCam = Vector3.zero;
-        _freeCamControl = FreeCamera();
         _headSpriteRenderer.enabled = false;
-        _audioSource = GetComponent<AudioSource>();
+
+        IsFreeCamActive = false;
+
+        if (_freeCameraController == null)
+            _allowFreeCamera = false;
+        else
+            _freeCameraController.Init();
+
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        _freeCameraController.OnFreeCamDisabled += OnFreeCamDisabled;
 
         StartCoroutine(UpdateProcess());
     }
 
     IEnumerator UpdateProcess() {
+        yield return new WaitForEndOfFrame();
+        //print("updating player controller");
+
         while (true) {
-            if (Input.GetKeyDown(KeyCode.Alpha0)) {
-                if (_freeCamera) {
-                    _freeCamera = false;
+            if (_allowFreeCamera && Input.GetKeyDown(KeyCode.Alpha0)) {
+                IsFreeCamActive = true;
 
-                    _audioSource.mute = false;
+                SetupTransformForFreeCamera(true);
 
-                    StopCoroutine(_freeCamControl);
+                OnFreeCameraActivated?.Invoke();
 
-                    SetupTransformForFreeCamera(false);
-                }
-                else {
-                    _freeCamera = true;
-
-                    _audioSource.mute = true;
-
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-
-                    SetupTransformForFreeCamera(true);
-
-                    StartCoroutine(_freeCamControl);
-                }
+                break;
             }
-            if (!_freeCamera) {
-                UpdateMouseLook();
-                UpdateMovement();
-            }
+
+            UpdateMouseLook();
+            UpdateMovement();
 
             yield return null;
         }
+
+        yield return null;
     }
 
     private Vector3 _startPosCam, _startRotCam;
-    private Vector3 _startPosHead, _startRotHead;
     private Vector3 _startPosHand, _startRotHand;
-    private Vector3 _startPosCanvas, _startRotCanvas;
     void SetupTransformForFreeCamera(bool isFree) {
         if (isFree) {
             _headSpriteRenderer.enabled = true;
 
             _startPosCam = _playerCamera.localPosition; _startRotCam = _playerCamera.localEulerAngles;
-            _startPosHead = _playerHead.localPosition; _startRotHead = _playerHead.localEulerAngles;
-            _startPosHand = _playerHand.localPosition; _startRotHand = _playerHand.localEulerAngles;
-            _startPosCanvas = _canvas.localPosition; _startRotCanvas = _canvas.localEulerAngles;
 
-            if (_headFollowsCamera) _playerHead.parent = _playerCamera;
-            if (_canvasFollowsCamera) _canvas.parent = _playerCamera;
+            _startPosHand = _playerHand.localPosition; _startRotHand = _playerHand.localEulerAngles;
 
             _playerHand.parent = _playerCamera;
         }
         else {
             _headSpriteRenderer.enabled = false;
 
-            _playerCamera.localPosition = _startPosCam; _playerCamera.localEulerAngles = _startRotCam; //playerCamera.localScale = Vector3.one;
-
-            if (_headFollowsCamera) {
-                _playerHead.parent = _VRFallbackObjects;
-                _playerHead.localPosition = _startPosHead; _playerHead.localEulerAngles = _startRotHead; //playerHead.localScale = Vector3.one;
-            }
-
-            if (_canvasFollowsCamera) {
-                _canvas.parent.parent = _VRFallbackObjects;
-                _canvas.localPosition = _startPosCanvas; _canvas.localEulerAngles = _startRotCanvas;
-            }
+            _playerCamera.localPosition = _startPosCam; _playerCamera.localEulerAngles = _startRotCam;
 
             _playerHand.parent = _VRFallbackObjects;
-            _playerHand.localPosition = _startPosHand; _playerHand.localEulerAngles = _startRotHand; //playerHand.localScale = Vector3.one;
+            _playerHand.localPosition = _startPosHand; _playerHand.localEulerAngles = _startRotHand;
         }
     }
 
-    [SerializeField] 
-    private EscapeMenu _escapeMenu;
-
-    [SerializeField]
-    private HungerSystem _hungerSystem;
-
     void UpdateMouseLook() {
-        if (!_alwaysShowCursor) {
-            if (Input.GetMouseButton(1)) {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else {
-                if (_escapeMenu.PauseGame || _hungerSystem.IsGameOver || EvacuationSystem.Instance._isEvacuated)
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                }
-                else {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                }
-            }
+        if (Input.GetMouseButton(1)) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         Vector2 targetMouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
@@ -195,74 +153,42 @@ public class HybridPlayerController : MonoBehaviour, Bootstrap.IBootstrap {
         _controller.Move(velocity * Time.deltaTime);
     }
 
-    private Vector3 _startEulerAngles;
-    private Vector3 _startMousePosition;
-    IEnumerator FreeCamera() {
-        while (true) {
-            float forward = 0.0f;
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-                forward += 1.0f;
-            }
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-                forward -= 1.0f;
-            }
-
-            float up = 0.0f;
-            if (Input.GetKey(KeyCode.E)) {
-                up += 1.0f;
-            }
-            if (Input.GetKey(KeyCode.Q)) {
-                up -= 1.0f;
-            }
-
-            float right = 0.0f;
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-                right += 1.0f;
-            }
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-                right -= 1.0f;
-            }
-
-            float currentSpeed = _speed;
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
-                currentSpeed = _shiftSpeed;
-            }
-
-            float realTimeNow = Time.realtimeSinceStartup;
-            float deltaRealTime = realTimeNow - _realTime;
-            _realTime = realTimeNow;
-
-            Vector3 delta = new Vector3(right, up, forward) * currentSpeed * deltaRealTime;
-
-
-            _playerCamera.transform.position += _playerCamera.TransformDirection(delta);
-
-            Vector3 mousePosition = Input.mousePosition;
-
-            if (Input.GetMouseButtonDown(1) /* right mouse */) {
-                _startMousePosition = mousePosition;
-                _startEulerAngles = _playerCamera.localEulerAngles;
-            }
-
-            if (Input.GetMouseButton(1) /* right mouse */) {
-                Vector3 offset = mousePosition - _startMousePosition;
-                _playerCamera.localEulerAngles = _startEulerAngles + new Vector3(-offset.y * 360.0f / Screen.height, offset.x * 360.0f / Screen.width, 0.0f);
-            }
-            yield return null;
+    void OnGameStateChanged() {
+        GameManager.GameStates gameState = GameManager.Instance.State;
+        switch (gameState) {
+            case GameManager.GameStates.ACTIVE: {
+                    if (!IsFreeCamActive)
+                        StartCoroutine(UpdateProcess());
+                    else
+                        OnFreeCameraActivated?.Invoke();
+                    break;
+                }
+            case GameManager.GameStates.DEAD:
+            case GameManager.GameStates.PAUSE: {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    StopAllCoroutines();
+                    break;
+                }
+            default: {
+                    StopAllCoroutines();
+                    break;
+                }
         }
     }
 
-    private float _realTime;
-    private void OnEnable() {
-        _realTime = Time.realtimeSinceStartup;
+    void OnFreeCamDisabled() {
+        IsFreeCamActive = false;
+        SetupTransformForFreeCamera(false);
+
+        //print("OnFreeCamDisabled");
+
+        StopCoroutine(UpdateProcess());
+        StartCoroutine(UpdateProcess());
     }
 
-    void OnGUI() {
-        if (_showInstructions && _freeCamera) {
-            GUI.Label(new Rect(10.0f, 10.0f, 600.0f, 400.0f),
-                "WASD EQ/Arrow Keys to translate the camera\n" +
-                "Right mouse click to rotate the camera\n" +
-                "Left mouse click for standard interactions.\n");
-        }
+    private void OnDisable() {
+        GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        _freeCameraController.OnFreeCamDisabled -= OnFreeCamDisabled;
     }
 }

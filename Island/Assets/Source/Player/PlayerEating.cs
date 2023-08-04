@@ -10,9 +10,6 @@ public class PlayerEating : MonoBehaviour, Bootstrap.IBootstrap
     [SerializeField] 
     private Hand _hand;
 
-/*    [SerializeField] 
-    private Transform _playerCamera;*/
-
     private List<string> _tagsWithEatableObjects = new List<string> { "berry", "banana", "cocount", "coconut" };
 
     [SerializeField]
@@ -23,9 +20,6 @@ public class PlayerEating : MonoBehaviour, Bootstrap.IBootstrap
     private Dictionary<string, float> nutVals = new Dictionary<string, float>();
 
     void Bootstrap.IBootstrap.Initialize() {
-        /*        if (_playerCamera == null) { Debug.LogAssertion("player camera null reference exception"); }
-                else { gameObject.transform.position = _playerCamera.position; }*/
-
         _settings = GameSettingsManager.Instance.ActiveWorldSettings;
 
         foreach (var tag in _tagsWithEatableObjects) {

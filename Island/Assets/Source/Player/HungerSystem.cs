@@ -5,30 +5,41 @@ using UnityEngine.UI;
 
 public class HungerSystem : MonoBehaviour
 {
-    [SerializeField, Tooltip("Сколько секунд пройдет, чтобы вычесть один процент сытости")] int secondsPerPercentSatiety = 2;
-    [SerializeField, Tooltip("Начальная сытость в процентах"), Range(0, 1)] float startSatiety = 0.7f;
-    [SerializeField] int secondsPerHealthPoint = 2;
-    [SerializeField, Range(0, 1f)] float startHealth = 1;
+    [SerializeField, Tooltip("Сколько секунд пройдет, чтобы вычесть один процент сытости")] 
+    private int secondsPerPercentSatiety = 2;
 
-    [SerializeField] Image healthBar;
-    [SerializeField] Image satietyBar;
+    [SerializeField, Tooltip("Начальная сытость в процентах"), Range(0, 1)] 
+    private float startSatiety = 0.7f;
 
-    [SerializeField] GameObject overlay;
-    [SerializeField] GameObject deathScreen;
+    [SerializeField] 
+    private int secondsPerHealthPoint = 2;
 
-    bool isGameOver = false;
+    [SerializeField, Range(0, 1f)] 
+    private float startHealth = 1;
+
+    [SerializeField] 
+    private Image healthBar;
+    [SerializeField] 
+    private Image satietyBar;
+
+    [SerializeField]
+    private GameObject overlay;
+    [SerializeField] 
+    private GameObject deathScreen;
+
+    private bool isGameOver = false;
     public bool IsGameOver { 
         get { return isGameOver; }
         set { isGameOver = value; }
     }
 
-    float satiety, health;
+    private float satiety, health;
     public float Satiety {
         get { return satiety; }
         set { satiety = value; }
     }
 
-    IEnumerator _StarvingProcess, _DamageFromStarvingProcess;
+    private IEnumerator _StarvingProcess, _DamageFromStarvingProcess;
     private void Awake() {
         satiety = startSatiety;
         health = startHealth;
@@ -61,7 +72,7 @@ public class HungerSystem : MonoBehaviour
         UpdateHealthBar();
     }
 
-    bool isDead = false;
+    private bool isDead = false;
     void UpdateHealthBar() {
         if (health > 1.0f) { health = 1.0f; }
 
@@ -87,7 +98,7 @@ public class HungerSystem : MonoBehaviour
         healthBar.fillAmount = health;
     }
 
-    bool CrDmgRunning = false;
+    private bool CrDmgRunning = false;
     IEnumerator DamageFromStarvingProcess() {
         //print("start");
         CrDmgRunning = true;
