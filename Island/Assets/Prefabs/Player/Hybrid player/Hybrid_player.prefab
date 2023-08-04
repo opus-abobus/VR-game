@@ -3795,6 +3795,7 @@ GameObject:
   - component: {fileID: 7081922616277910115}
   - component: {fileID: 917474759}
   - component: {fileID: 8098558664111500819}
+  - component: {fileID: 2467535570658882880}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -3910,6 +3911,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 194.3, y: 140.78, z: 17.8}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2467535570658882880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081922616277910125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f58c6d42d9f45448ce64ae745ba595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hand: {fileID: 7081922616138207824}
 --- !u!1 &7081922616299403303
 GameObject:
   m_ObjectHideFlags: 0
@@ -5488,7 +5502,7 @@ MonoBehaviour:
   _mouseSmoothTime: 0.03
   _alwaysShowCursor: 0
   _allowFreeCamera: 1
-  _headFollowsCamera: 1
+  _headFollowsCamera: 0
   _speed: 4
   _shiftSpeed: 16
   _showInstructions: 1

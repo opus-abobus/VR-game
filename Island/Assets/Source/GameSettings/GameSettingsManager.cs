@@ -18,9 +18,9 @@ public class GameSettingsManager : MonoBehaviour, Bootstrap.IBootstrap {
 
     private static GameSettingsManager _instance;
 
-    public event Action OnInitialized;
+    public event Action OnInitialized, OnActiveWorldSettingsChanged;
 
-    public void Initialize() {
+    void Bootstrap.IBootstrap.Initialize() {
         if (_instance == null) {
             _instance = this;
         }
@@ -45,8 +45,8 @@ public class GameSettingsManager : MonoBehaviour, Bootstrap.IBootstrap {
         OnInitialized?.Invoke();
     }
 
-    void OnWorldSettingsChanged() {
-
+    void OnWorldSettingsChanged(int settingsIndex) {
+        _currentDifficultyPresetId = settingsIndex;
     }
 }
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class HybridPlayerController : MonoBehaviour {
+public class HybridPlayerController : MonoBehaviour, Bootstrap.IBootstrap {
     [SerializeField] 
     private Transform _playerCamera;
 
@@ -63,20 +63,17 @@ public class HybridPlayerController : MonoBehaviour {
     IEnumerator _freeCamControl;
     private bool _freeCamera = false;
 
-    private void Start() {
+    void Bootstrap.IBootstrap.Initialize() {
         _controller = GetComponent<CharacterController>();
         _startRotCam = Vector3.zero;
         _freeCamControl = FreeCamera();
         _headSpriteRenderer.enabled = false;
         _audioSource = GetComponent<AudioSource>();
 
-        //--
         StartCoroutine(UpdateProcess());
     }
 
     IEnumerator UpdateProcess() {
-        yield return new WaitForSecondsRealtime(1);
-
         while (true) {
             if (Input.GetKeyDown(KeyCode.Alpha0)) {
                 if (_freeCamera) {

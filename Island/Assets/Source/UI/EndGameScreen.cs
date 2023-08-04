@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EndGameScreen : MonoBehaviour
+public class EndGameScreen : MonoBehaviour, Bootstrap.IBootstrap
 {
     [SerializeField] 
     private GameObject _screen_survived;
@@ -14,13 +14,11 @@ public class EndGameScreen : MonoBehaviour
         _startTimeScale = Time.timeScale;
     }
 
-    private void Start() {
+    void Bootstrap.IBootstrap.Initialize() {
         StartCoroutine(UpdateProcess());
     }
 
     IEnumerator UpdateProcess() {
-        yield return new WaitForSecondsRealtime(1);
-
         while (true) {
             if (EvacuationSystem.Instance._isEvacuated && !_isActiveScreen) {
                 DisplayEndGameScreen();

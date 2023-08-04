@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
         void BeginSpawn();
     }
 
-    public void Initialize() {
+    void Bootstrap.IBootstrap.Initialize() {
         if (_instance == null) {
             _instance = this;
         }
@@ -61,9 +61,7 @@ public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
             yield return null;
         }
         //print("banana spawner script has been started (should be initialized).");
-        _bananaSpawners = FindObjectsOfType<BananaTreeManager>().ToList();
-
-        Bootstrap.Instance.BootstrapFinished += OnBootstrapFinished;
+        _bananaSpawners = FindObjectsOfType<BananaTreeManager>().ToList(); 
 
         OnInitialized?.Invoke();
 
@@ -71,11 +69,10 @@ public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
         //print("Coconut spawners count: " + _coconutSpawners.Count);
         //print("Berry spawners count: " + _berrySpawners.Count);
 
-        yield return null;
-    }
-
-    private void OnBootstrapFinished() {
+        //!
         StartAllSpawners();
+
+        yield return null;
     }
 
     void StartAllSpawners() {

@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
+using static InventoryPanelController;
 
 public class InventorySlotController : MonoBehaviour {
     [SerializeField]
@@ -18,8 +18,6 @@ public class InventorySlotController : MonoBehaviour {
     public bool IsEmpty { get { return _isEmpty; } }
 
     private GameObject _storedObject = null;
-
-    private bool _readyToPlace = true;
 
     private event Action onItemPlaced, onItemPickedUp;
 
@@ -41,26 +39,25 @@ public class InventorySlotController : MonoBehaviour {
             var inventorySlotSprite = other.GetComponent<InventorySlotSprite>();
             if (_hand.currentAttachedObject == other.gameObject && inventorySlotSprite != null) {
 
-                if (_readyToPlace) {
+                if (ReadyToPlace) {
                     PlaceItem(other.gameObject, inventorySlotSprite.SriteInInventory);
                 }
             }
         }
     }
 
-/*    private void OnTriggerExit(Collider other) {
+    private void OnTriggerExit(Collider other) {
         if (_storedObject == _hand.currentAttachedObject) {
-            _readyToPlace = true;
             _storedObject = null;
         }
-    }*/
+    }
 
     private void OnItemPlaced() {
 
     }
 
     private void OnItemPickedUp() {
-        StartCoroutine(SlotCooldwon());
+
     }
 
     private void SubscribeAll() {
@@ -80,22 +77,9 @@ public class InventorySlotController : MonoBehaviour {
         UnsubscribeAll();
     }
 
-    private void OnDestroy() {
-        UnsubscribeAll();
-    }
-
-    private IEnumerator SlotCooldwon() {
-        for (int i = 0, frames = 10; i < frames; i++) {
-            yield return new WaitForFixedUpdate();
-        }
-
-        _readyToPlace = true;
-    }
-
     void PlaceItem(GameObject item, Sprite sprite) {
         _storedObject = item;
-        _storedObject.SetActive(false);
-
+        
         _isEmpty = false;
 
         SetImageForSlot(sprite);
@@ -103,10 +87,10 @@ public class InventorySlotController : MonoBehaviour {
         if (_hand.currentAttachedObject != null)
             _hand.DetachObject(_storedObject);
 
+        _storedObject.SetActive(false);
+
         onItemPlaced?.Invoke();
     }
-
-
 
     public void OnHandPressedSlot() {
         if (!_isEmpty) {
@@ -118,11 +102,9 @@ public class InventorySlotController : MonoBehaviour {
 
             _isEmpty = true;
 
-            _readyToPlace = false;
+            ReadyToPlace = false;
 
             _hand.AttachObject(_storedObject, GrabTypes.Grip, Hand.AttachmentFlags.VelocityMovement);
-
-            _storedObject = null;
 
             onItemPickedUp?.Invoke();
         }

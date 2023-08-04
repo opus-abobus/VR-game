@@ -22,7 +22,7 @@ public class PlayerEating : MonoBehaviour, Bootstrap.IBootstrap
 
     private Dictionary<string, float> nutVals = new Dictionary<string, float>();
 
-    public void Initialize() {
+    void Bootstrap.IBootstrap.Initialize() {
         /*        if (_playerCamera == null) { Debug.LogAssertion("player camera null reference exception"); }
                 else { gameObject.transform.position = _playerCamera.position; }*/
 

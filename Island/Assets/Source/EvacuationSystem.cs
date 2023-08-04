@@ -26,7 +26,7 @@ public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
     [HideInInspector] 
     public bool _isEvacuated = false;
 
-    public void Initialize() {
+    void Bootstrap.IBootstrap.Initialize() {
         if (_instance == null) {
             _instance = this;
         }

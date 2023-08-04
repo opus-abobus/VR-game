@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f7cad71af29ebb499c59670bae04899, type: 3}
   m_Name: WorldSettings_explorer
   m_EditorClassIdentifier: 
-  difficulty: 0
+  _difficulty: 0
   _minBerriesOnStart: 53
   _maxBerriesOnStart: 100
   _timeoutBerryRespawnInSeconds: 1317
@@ -35,10 +35,10 @@ MonoBehaviour:
   _minBananasToDrop: 13
   _maxBananasToDrop: 26
   _minCoconutsOnStart: 1
-  _maxCoconutsOnStart: 8
+  _maxCoconutsOnStart: 7
   _minTimeToRespawnInSeconds: 7238
   _maxTimeToRespawnInSeconds: 11843
-  _chanceToSpawnOnStart: 0.4
+  _chanceToSpawnOnStart: 0.405
   _bonfireDuration: 100
   _chanceTickRateInSeconds: 30
   _signalGunsAmount: 1

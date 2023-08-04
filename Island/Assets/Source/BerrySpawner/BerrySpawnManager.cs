@@ -7,7 +7,6 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 {
     private bool _wasStartSpawn;
 
-    private SpawnManager.ISpawner _spawner;
     private bool _hasInitialized = false;
     bool SpawnManager.ISpawner.HasInitialized { get { return _hasInitialized; } }
 
@@ -58,6 +57,7 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 
     void SpawnManager.ISpawner.BeginSpawn() {
         if (!_hasInitialized) {
+            SpawnManager.ISpawner _spawner = this;
             _spawner.Init();
         }
 

@@ -50,6 +50,7 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
 
     void SpawnManager.ISpawner.Init() {
         _meshRenderer.enabled = false;
+
         if (_coconut == null) {
             Debug.LogError("” спавнера кокосов отсутствует ссылка на кокос");
             this.enabled = false;

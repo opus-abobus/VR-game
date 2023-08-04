@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
@@ -8,6 +9,21 @@ public class Bootstrap : MonoBehaviour
 
     [SerializeField]
     private GameSettingsManager _gameSettingsManager;
+
+    [SerializeField]
+    private SpawnManager _spawnManager;
+
+    [SerializeField]
+    private EvacuationSystem _evacuationSystem;
+
+    [SerializeField]
+    private HybridPlayerController _hybridPlayerController;
+
+    [SerializeField]
+    private PlayerEating _playerEating;
+
+    [SerializeField]
+    private EndGameScreen _endGameScreen;
 
     private static Bootstrap _instance;
     public static Bootstrap Instance { get { return _instance; } }
@@ -27,24 +43,19 @@ public class Bootstrap : MonoBehaviour
             return;
         }
 
-        _gameSettingsManager.OnInitialized += OnGameSettingsManagerInitialized;
-        _gameManager.OnInitialized += OnGameManagerInitialized;
+        Queue<IBootstrap> bootQueue = new Queue<IBootstrap>();
+        bootQueue.Enqueue(_gameManager);
+        bootQueue.Enqueue(_gameSettingsManager);
+        bootQueue.Enqueue(_spawnManager);
+        bootQueue.Enqueue(_evacuationSystem);
+        bootQueue.Enqueue(_playerEating);
+        bootQueue.Enqueue(_hybridPlayerController);
+        bootQueue.Enqueue(_endGameScreen);
 
-        _gameSettingsManager.Initialize();
-    }
+        while (bootQueue.Count > 0) {
+            bootQueue.Dequeue().Initialize();
+        }
 
-    void OnGameSettingsManagerInitialized() {
-        //print("GameSettingsManager has been initialized!");
-        _gameSettingsManager.OnInitialized -= OnGameSettingsManagerInitialized;
-
-        _gameManager.Initialize();
-    }
-
-    void OnGameManagerInitialized() {
-        //print("GameManager has been initialized!");
-        _gameManager.OnInitialized -= OnGameManagerInitialized;
-
-        //print("Bootstrap finished! Starting spawning...");
         BootstrapFinished?.Invoke();
     }
 }
