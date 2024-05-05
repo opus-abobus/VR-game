@@ -1,9 +1,11 @@
-public class MainMenuState : IAppState {
+public class GameplayState : IAppState {
 
-    private readonly AppContext _context;
-    public MainMenuState(AppContext context) {
+    private AppContext _context;
+
+    public GameplayState(AppContext context) {
         _context = context;
     }
+
     void IAppState.Enter() {
         
     }

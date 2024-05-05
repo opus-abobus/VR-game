@@ -3,36 +3,59 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-public class IntroState : IUpdateableState {
+public class IntroState : IAppState {
 
     private readonly AppContext _context;
+
+    private const string SCENE_NAME = "Intro";
+
     private VideoPlayer _videoPlayer;
-    private bool _isVideoEnded;
+    private bool _isIntroStarted = false;
 
     public IntroState(AppContext context) {
         _context = context;
     }
 
     void IAppState.Enter() {
-        SceneManager.LoadScene("Intro", LoadSceneMode.Single);
-        Debug.Log("Scene loaded");
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
-        _videoPlayer = UnityEngine.Object.FindObjectOfType<VideoPlayer>();
-
-        _videoPlayer.loopPointReached += OnVideoClipEnded;
+        SceneManager.LoadSceneAsync(SCENE_NAME, LoadSceneMode.Single);
     }
 
-    private void OnVideoClipEnded(VideoPlayer videoPlayer) {
-        _isVideoEnded = true;
+    void IAppState.Update() {
+        if (!_isIntroStarted)
+            return;
+
+        if ((Input.anyKey && _videoPlayer.isPlaying) || !_videoPlayer.isPlaying) {
+            _context.SetState(new LoadingMainMenuState(_context));
+        }
     }
 
     void IAppState.Exit() {
-        _videoPlayer.loopPointReached -= OnVideoClipEnded;
+        _videoPlayer.Pause();
     }
 
-    void IUpdateableState.Update() {
-        if (Input.anyKey || _isVideoEnded) {
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
+        if (scene.name != SCENE_NAME)
+            return;
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        _videoPlayer = UnityEngine.Object.FindObjectOfType<VideoPlayer>();
+
+        if (_videoPlayer == null) {
+            throw new NullReferenceException("VideoPlayer was not find in loaded scene.");
         }
+
+        _videoPlayer.started += OnVideoClipStarted;
+
+        if (!_videoPlayer.playOnAwake)
+            _videoPlayer.Play();
+    }
+
+    private void OnVideoClipStarted(VideoPlayer videoPlayer) {
+        _videoPlayer.started -= OnVideoClipStarted;
+
+        _isIntroStarted = true;
     }
 }

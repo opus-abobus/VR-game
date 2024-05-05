@@ -8,6 +8,10 @@ public class AppContext
         CurrentState.Enter();
     }
 
+    public AppContext() {
+        CurrentState = null;
+    }
+
     public AppContext(IAppState appState) {
         CurrentState = appState;
     }

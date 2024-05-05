@@ -1,14 +1,11 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class AppManager : MonoBehaviour
 {
-    public AppManager Instance { get; private set; }
+    public static AppManager Instance { get; private set; }
 
-    //public event Action OnUpdate;
-
-    private AppStateMachine _appStateMachine;
+    private AppContext _appContext;
+    private IAppState _initialState;
 
     private void Awake() {
         if (Instance == null)
@@ -20,21 +17,28 @@ public class AppManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
 
-        _appStateMachine = new AppStateMachine();
-        //_appStateMachine.Init();
+        _appContext = new AppContext();
 
+        _initialState = new IntroState(_appContext);
+    }
+
+    private void Start() {
         PlayIntro();
     }
 
     private void Update() {
-        _appStateMachine.UpdateState();
+        _appContext.CurrentState.Update();
     }
 
     private void PlayIntro() {
-        _appStateMachine.EnterState<IntroState>();
+        _appContext.SetState(_initialState);
     }
 
     private void LoadMainMenu() {
-        _appStateMachine.EnterState<LoadingMainMenuState>();
+        _appContext.SetState(new LoadingMainMenuState(_appContext));
+    }
+
+    public void LoadLevel() {
+        _appContext.SetState(new LoadingLevelState(_appContext));
     }
 }

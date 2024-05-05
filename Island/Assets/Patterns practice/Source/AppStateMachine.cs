@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class AppStateMachine
 {
@@ -45,11 +44,11 @@ public class AppStateMachine
         AppContext.SetState(appState);
     }*/
 
-    public void UpdateState() {
+/*    public void UpdateState() {
         if (AppContext.CurrentState is IUpdateableState) {
             (AppContext.CurrentState as IUpdateableState).Update();
         }
-    }
+    }*/
 
     public void AddState<T>(T state) where T : IAppState {
         if (_states.ContainsKey(typeof(T))) {
