@@ -1,30 +1,26 @@
 using UnityEngine;
 
-public class GameplayState : IAppState {
+namespace AppManagement.FSM.States {
+    public class GameplayState : IAppState {
 
-    private AppContext _context;
+        private AppContext _context;
 
-    public GameplayState(AppContext context) {
-        _context = context;
-    }
-
-    void IAppState.Enter() {
-        if (_context.GetCachedState<GameplayState>() == null) {
-            _context.AddCachedState(this);
+        public GameplayState(AppContext context) {
+            _context = context;
         }
 
-        if (_context.GetCachedState<GamePauseState>() == null) {
-            _context.AddCachedState(new GamePauseState(_context));
-        }
-    }
+        void IAppState.Enter() {
 
-    void IAppState.Update() {
-        if (Input.GetKey(KeyCode.Escape)) {
-            _context.SetState<GamePauseState>();
         }
-    }
 
-    void IAppState.Exit() {
-        
+        void IAppState.Update() {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                _context.RequestStateTransition<GamePauseState>();
+            }
+        }
+
+        void IAppState.Exit() {
+
+        }
     }
 }

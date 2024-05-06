@@ -1,76 +1,73 @@
 using System;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using static LevelSceneLoader;
 
-public class LoadingLevelState : IAppState {
+namespace AppManagement.FSM.States {
+    public class LoadingLevelState : IAppState {
 
-    private AppContext _context;
+        private AppContext _context;
 
-    private const string LOADING_LEVEL_SCENE_NAME = "LevelLoading";
-    private const string LEVEL_SCENE_NAME = "LevelTest";
-    private bool _isLoadSceneLoaded = false;
+        private const string LOADING_LEVEL_SCENE_NAME = "LevelLoading";
+        private const string LEVEL_SCENE_NAME = "LevelTest";
+        private bool _isLoadSceneLoaded = false;
 
-    private LevelSceneLoader _levelSceneLoader;
+        private LevelSceneLoader _levelSceneLoader;
 
-    public LoadingLevelState(AppContext context) {
-        _context = context;
-    }
+        public LoadingLevelState(AppContext context) {
+            _context = context;
+        }
 
-    void IAppState.Enter() {
-        SceneManager.sceneLoaded += LoadingLevel_OnSceneLoaded;
+        void IAppState.Enter() {
+            SceneManager.sceneLoaded += LoadingLevel_OnSceneLoaded;
 
-        SceneManager.LoadSceneAsync(LOADING_LEVEL_SCENE_NAME, LoadSceneMode.Single);
-    }
+            SceneManager.LoadSceneAsync(LOADING_LEVEL_SCENE_NAME, LoadSceneMode.Single);
+        }
 
-    void IAppState.Update() {
-        if (!_isLoadSceneLoaded)
-            return;
+        void IAppState.Update() {
+            if (!_isLoadSceneLoaded)
+                return;
 
-        if (_levelSceneLoader.State == LoadState.loadedAndNotActivated) {
-            if (Input.anyKey) {
-                _levelSceneLoader.ActivateScene();
+            if (_levelSceneLoader.State == LoadState.loadedAndNotActivated) {
+                _context.RequestStateTransition<LevelLoadedState>();
             }
         }
-    }
- 
-    void IAppState.Exit() {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(LEVEL_SCENE_NAME));
-    }
 
-    private void LoadingLevel_OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
-        if (scene.name != LOADING_LEVEL_SCENE_NAME)
-            return;
+        void IAppState.Exit() {
 
-        SceneManager.sceneLoaded -= LoadingLevel_OnSceneLoaded;
-
-        _levelSceneLoader = UnityEngine.Object.FindObjectOfType<LevelSceneLoader>();
-
-        if (_levelSceneLoader == null) {
-            throw new NullReferenceException("LevelSceneLoader component was not find in loaded scene.");
         }
 
-        _isLoadSceneLoaded = true;
+        private void LoadingLevel_OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
+            if (scene.name != LOADING_LEVEL_SCENE_NAME)
+                return;
 
-        _levelSceneLoader.StateChanged += OnLevelLoaderStateChanged;
-        _levelSceneLoader.LoadLevelSceneViaCoroutine(LEVEL_SCENE_NAME, LoadSceneMode.Additive);
-    }
+            SceneManager.sceneLoaded -= LoadingLevel_OnSceneLoaded;
 
-    private void OnLevelLoaderStateChanged(LoadState loadState) {
-        if (loadState == LoadState.loadedAndActivated) {
-            _levelSceneLoader.StateChanged -= OnLevelLoaderStateChanged;
+            _levelSceneLoader = UnityEngine.Object.FindObjectOfType<LevelSceneLoader>();
 
-            SceneManager.sceneUnloaded += OnLoadingSceneUnloaded;
-            SceneManager.UnloadSceneAsync(LOADING_LEVEL_SCENE_NAME);
+            if (_levelSceneLoader == null) {
+                throw new NullReferenceException("LevelSceneLoader component was not find in loaded scene.");
+            }
+
+            _isLoadSceneLoaded = true;
+
+            _levelSceneLoader.StateChanged += OnLevelLoaderStateChanged;
+            _levelSceneLoader.LoadLevelSceneViaCoroutine(LEVEL_SCENE_NAME, LoadSceneMode.Additive);
         }
-    }
 
-    private void OnLoadingSceneUnloaded(Scene scene) {
-        if (scene.name != LOADING_LEVEL_SCENE_NAME)
-            return;
+        private void OnLevelLoaderStateChanged(LoadState loadState) {
+            if (loadState == LoadState.loadedAndActivated) {
+                _levelSceneLoader.StateChanged -= OnLevelLoaderStateChanged;
 
-        SceneManager.sceneUnloaded -= OnLoadingSceneUnloaded;
+                SceneManager.sceneUnloaded += OnLoadingSceneUnloaded;
+                SceneManager.UnloadSceneAsync(LOADING_LEVEL_SCENE_NAME);
+            }
+        }
 
-        _context.SetState(new GameplayState(_context));
+        private void OnLoadingSceneUnloaded(Scene scene) {
+            if (scene.name != LOADING_LEVEL_SCENE_NAME)
+                return;
+
+            SceneManager.sceneUnloaded -= OnLoadingSceneUnloaded;
+        }
     }
 }

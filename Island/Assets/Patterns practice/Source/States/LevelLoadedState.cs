@@ -1,11 +1,11 @@
 using UnityEngine;
 
 namespace AppManagement.FSM.States {
-    public class GamePauseState : IAppState {
+    public class LevelLoadedState : IAppState {
 
         private AppContext _context;
 
-        public GamePauseState(AppContext context) {
+        public LevelLoadedState(AppContext context) {
             _context = context;
         }
 
@@ -14,7 +14,9 @@ namespace AppManagement.FSM.States {
         }
 
         void IAppState.Update() {
-            if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (Input.anyKeyDown) {
+                UnityEngine.Object.FindObjectOfType<LevelSceneLoader>().ActivateScene();
+
                 _context.RequestStateTransition<GameplayState>();
             }
         }

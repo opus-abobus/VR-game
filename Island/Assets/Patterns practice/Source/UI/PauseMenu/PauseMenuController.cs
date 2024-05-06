@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AppManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class PauseMenuController : MonoBehaviour
     private GameObject _menuObject;
 
     private void Awake() {
-        AppManager.Instance.GamePaused += OnGamePaused;
+        AppEventBus.Instance.OnGamePaused += OnGamePaused;
+        AppEventBus.Instance.OnGameplay += OnGameplay;
 
         _resumeGame.onClick.AddListener(OnResumeGameClicked);
         _settingsButton.onClick.AddListener(OnSettingsClicked);
@@ -39,6 +41,7 @@ public class PauseMenuController : MonoBehaviour
 
     private void OnResumeGameClicked() {
         _menuObject.SetActive(false);
+
         AppManager.Instance.ResumeGame();
     }
 
@@ -50,7 +53,17 @@ public class PauseMenuController : MonoBehaviour
         _menuObject.SetActive(true);
     }
 
+    private void OnGameplay() {
+        _menuObject.SetActive(false);
+    }
+
     private void OnDestroy() {
-        AppManager.Instance.GamePaused -= OnGamePaused;
+        AppEventBus.Instance.OnGamePaused -= OnGamePaused;
+        AppEventBus.Instance.OnGameplay -= OnGameplay;
+
+        _resumeGame.onClick.RemoveAllListeners();
+        _settingsButton.onClick.RemoveAllListeners();
+        _exitApp.onClick.RemoveAllListeners();
+        _returnToMainMenu.onClick.RemoveAllListeners();
     }
 }

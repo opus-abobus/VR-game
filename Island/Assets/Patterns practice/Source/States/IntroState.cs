@@ -3,59 +3,61 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-public class IntroState : IAppState {
+namespace AppManagement.FSM.States {
+    public class IntroState : IAppState {
 
-    private readonly AppContext _context;
+        private readonly AppContext _context;
 
-    private const string SCENE_NAME = "Intro";
+        private const string SCENE_NAME = "Intro";
 
-    private VideoPlayer _videoPlayer;
-    private bool _isIntroStarted = false;
+        private VideoPlayer _videoPlayer;
+        private bool _isIntroStarted = false;
 
-    public IntroState(AppContext context) {
-        _context = context;
-    }
-
-    void IAppState.Enter() {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        SceneManager.LoadSceneAsync(SCENE_NAME, LoadSceneMode.Single);
-    }
-
-    void IAppState.Update() {
-        if (!_isIntroStarted)
-            return;
-
-        if ((Input.anyKey && _videoPlayer.isPlaying) || !_videoPlayer.isPlaying) {
-            _context.SetState(new LoadingMainMenuState(_context));
-        }
-    }
-
-    void IAppState.Exit() {
-        _videoPlayer.Pause();
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
-        if (scene.name != SCENE_NAME)
-            return;
-
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-
-        _videoPlayer = UnityEngine.Object.FindObjectOfType<VideoPlayer>();
-
-        if (_videoPlayer == null) {
-            throw new NullReferenceException("VideoPlayer was not find in loaded scene.");
+        public IntroState(AppContext context) {
+            _context = context;
         }
 
-        _videoPlayer.started += OnVideoClipStarted;
+        void IAppState.Enter() {
+            SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if (!_videoPlayer.playOnAwake)
-            _videoPlayer.Play();
-    }
+            SceneManager.LoadSceneAsync(SCENE_NAME, LoadSceneMode.Single);
+        }
 
-    private void OnVideoClipStarted(VideoPlayer videoPlayer) {
-        _videoPlayer.started -= OnVideoClipStarted;
+        void IAppState.Update() {
+            if (!_isIntroStarted)
+                return;
 
-        _isIntroStarted = true;
+            if ((Input.anyKey && _videoPlayer.isPlaying) || !_videoPlayer.isPlaying) {
+                _context.RequestStateTransition<LoadingMainMenuState>();
+            }
+        }
+
+        void IAppState.Exit() {
+            _videoPlayer.Pause();
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
+            if (scene.name != SCENE_NAME)
+                return;
+
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+
+            _videoPlayer = UnityEngine.Object.FindObjectOfType<VideoPlayer>();
+
+            if (_videoPlayer == null) {
+                throw new NullReferenceException("VideoPlayer was not find in loaded scene.");
+            }
+
+            _videoPlayer.started += OnVideoClipStarted;
+
+            if (!_videoPlayer.playOnAwake)
+                _videoPlayer.Play();
+        }
+
+        private void OnVideoClipStarted(VideoPlayer videoPlayer) {
+            _videoPlayer.started -= OnVideoClipStarted;
+
+            _isIntroStarted = true;
+        }
     }
 }
