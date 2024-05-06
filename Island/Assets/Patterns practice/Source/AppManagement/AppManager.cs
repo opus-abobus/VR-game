@@ -29,7 +29,7 @@ public class AppManager : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log(_appStateMachine.AppContext.CurrentState);
+        //Debug.Log(_appStateMachine.AppContext.CurrentState);
     }
 
     private void PlayIntro() {

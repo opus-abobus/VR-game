@@ -3,7 +3,7 @@ using UnityEngine;
 namespace AppManagement.FSM.States {
     public class GamePauseState : IAppState {
 
-        private AppContext _context;
+        private readonly AppContext _context;
 
         public GamePauseState(AppContext context) {
             _context = context;

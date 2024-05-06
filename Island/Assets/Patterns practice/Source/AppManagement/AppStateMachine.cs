@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AppManagement.FSM.States;
@@ -10,6 +9,8 @@ namespace AppManagement.FSM {
         public AppContext AppContext { get; private set; }
 
         private Dictionary<Type, IAppState> _states;
+
+        private bool _allowUpdateState;
 
         private AppEventBus _appEventBus;
 
@@ -32,10 +33,10 @@ namespace AppManagement.FSM {
         public void Init() {
             AppContext.stateEntered += OnEnteredState;
             AppContext.stateExit += OnExitState;
-            AppContext.stateTransitionRequested += AppContext_stateTransitionRequested;
+            AppContext.stateTransitionRequested += OnStateTransitionRequested;
         }
 
-        private void AppContext_stateTransitionRequested(Type nextStateType) {
+        private void OnStateTransitionRequested(Type nextStateType) {
             if (nextStateType != null) {
                 EnterState(nextStateType);
             }
@@ -43,8 +44,6 @@ namespace AppManagement.FSM {
                 throw new InvalidOperationException("Can not make transition on request. The type was null.");
             }
         }
-
-        private bool _allowUpdateState;
 
         private void OnEnteredState() {
             TriggerAppEvent(AppContext.CurrentState);
@@ -111,7 +110,7 @@ namespace AppManagement.FSM {
         private void OnDestroy() {
             AppContext.stateEntered -= OnEnteredState;
             AppContext.stateExit -= OnExitState;
-            AppContext.stateTransitionRequested -= AppContext_stateTransitionRequested;
+            AppContext.stateTransitionRequested -= OnStateTransitionRequested;
         }
     }
 }

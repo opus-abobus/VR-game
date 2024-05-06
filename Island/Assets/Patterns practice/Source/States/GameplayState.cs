@@ -3,7 +3,7 @@ using UnityEngine;
 namespace AppManagement.FSM.States {
     public class GameplayState : IAppState {
 
-        private AppContext _context;
+        private readonly AppContext _context;
 
         public GameplayState(AppContext context) {
             _context = context;
