@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class GamePauseState : IAppState {
 
     private AppContext _context;
@@ -11,7 +13,9 @@ public class GamePauseState : IAppState {
     }
 
     void IAppState.Update() {
-
+        if (Input.GetKey(KeyCode.Escape)) {
+            _context.SetState<GameplayState>();
+        }
     }
 
     void IAppState.Exit() {

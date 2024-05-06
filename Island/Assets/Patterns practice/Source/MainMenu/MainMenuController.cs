@@ -28,12 +28,20 @@ public class MainMenuController : MonoBehaviour
         _startNewGame.onClick.AddListener(OnNewGameClicked);
     }
 
+    private void OnDestroy() {
+        _quit.onClick.RemoveAllListeners();
+        _settings.onClick.RemoveAllListeners();
+        _loadLastSave.onClick.RemoveAllListeners();
+        _selectSaveToLoad.onClick.RemoveAllListeners();
+        _startNewGame.onClick.RemoveAllListeners();
+    }
+
     private void OnNewGameClicked() {
         AppManager.Instance.LoadLevel();
     }
 
     private void OnQuitClicked() {
-        Application.Quit();
+        AppManager.Instance.ExitApp();
     }
 
     private void OnSettingsClicked() {

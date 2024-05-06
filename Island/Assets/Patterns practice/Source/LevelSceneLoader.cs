@@ -38,8 +38,6 @@ public class LevelSceneLoader : MonoBehaviour
 
             SetProgress(_slider);
 
-            FindObjectOfType<AudioListener>().enabled = false;
-
             if (operation.progress >= 0.9f) {
                 _pressKeyText.gameObject.SetActive(true);
                 _slider.gameObject.SetActive(false);
@@ -56,8 +54,6 @@ public class LevelSceneLoader : MonoBehaviour
 
             yield return null;
         }
-
-        FindObjectOfType<AudioListener>().enabled = true;
 
         State = LoadState.loadedAndActivated;
         StateChanged?.Invoke(State);
