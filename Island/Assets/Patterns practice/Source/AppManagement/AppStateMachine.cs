@@ -52,15 +52,13 @@ namespace AppManagement.FSM {
         }
 
         private void TriggerAppEvent(IAppState state) {
-            if (AppContext.CurrentState == _states[typeof(LevelLoadedState)]) {
+            if (state == _states[typeof(LevelLoadedState)]) {
                 _appEventBus.TriggerGameLoaded();
             }
-
-            if (AppContext.CurrentState == _states[typeof(GameplayState)]) {
+            else if (state == _states[typeof(GameplayState)]) {
                 _appEventBus.TriggerGameplay();
             }
-
-            if (AppContext.CurrentState == _states[typeof(GamePauseState)]) {
+            else if (state == _states[typeof(GamePauseState)]) {
                 _appEventBus.TriggerGamePause();
             }
         }

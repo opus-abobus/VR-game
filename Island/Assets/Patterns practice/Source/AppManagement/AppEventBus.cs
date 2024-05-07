@@ -3,6 +3,8 @@ using System;
 namespace AppManagement {
     public class AppEventBus {
 
+        private AppEventBus() { }
+
         private static AppEventBus _instance;
         public static AppEventBus Instance {
             get {
