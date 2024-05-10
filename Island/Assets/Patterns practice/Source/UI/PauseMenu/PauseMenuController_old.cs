@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using AppManagement;
 
-public class PauseMenuController : MonoBehaviour
+public class PauseMenuController_old : MonoBehaviour
 {
     [SerializeField]
     private Button _resumeGame;
