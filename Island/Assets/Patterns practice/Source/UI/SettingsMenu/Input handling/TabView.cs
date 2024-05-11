@@ -1,29 +1,33 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class TabView : MonoBehaviour
-{
-    public event Action<Tab> TabAdded, TabRemoved;
+namespace UI.Navigation.Tabs {
 
-    public event Action Destroyed;
+    public class TabView : MonoBehaviour {
+        [SerializeField] public TextMeshProUGUI settingsHeader;
 
-    [HideInInspector]
-    public List<Tab> _tabs = new List<Tab>();
+        public event Action<Tab> TabAdded, TabRemoved;
 
-    public void AddTab(Tab tab) {
-        _tabs.Add(tab);
+        public event Action Destroyed;
 
-        TabAdded?.Invoke(tab);
-    }
+        [HideInInspector] public List<Tab> _tabs = new List<Tab>();
 
-    public void RemoveTab(Tab tab) {
-        _tabs.Remove(tab);
+        public void AddTab(Tab tab) {
+            _tabs.Add(tab);
 
-        TabRemoved?.Invoke(tab);
-    }
+            TabAdded?.Invoke(tab);
+        }
 
-    private void OnDestroy() {
-        Destroyed?.Invoke();
+        public void RemoveTab(Tab tab) {
+            _tabs.Remove(tab);
+
+            TabRemoved?.Invoke(tab);
+        }
+
+        private void OnDestroy() {
+            Destroyed?.Invoke();
+        }
     }
 }

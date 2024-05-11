@@ -1,45 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+using UI.WindowsManagement;
+using UI.Navigation.Tabs;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _settingsWindow, _saveSelectionWindow;
+    [SerializeField] private HomeButtonsController _homeButtonsController;
 
-    [SerializeField, Header("Set this as start window")]
-    private GameObject _homeWindow;
+    [SerializeField] private TabController _settingsNavigationController;
 
-    private GameObject _activeWindow;
-
-    [SerializeField]
-    private HomeButtonsController _homeButtonsController;
-
-    [SerializeField]
-    private TabController _settingsController;
+    [SerializeField] private WindowsManager _windowsManager;
 
     private void Awake() {
-        _homeWindow.SetActive(true);
-        _activeWindow = _homeWindow;
-
         InitHomeButtons();
 
-        _settingsController.Init();
+        _settingsNavigationController.Init();
+
+        _windowsManager.enabled = true;
     }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (_activeWindow == _settingsWindow) {
-                _settingsWindow.SetActive(false); // not really correct
-                _homeWindow.SetActive(true);
-                _activeWindow = _homeWindow;
-            }
-            else if (_activeWindow == _saveSelectionWindow) {
-                _saveSelectionWindow.SetActive(false);
-                _homeWindow.SetActive(true);
-                _activeWindow = _homeWindow;
-            }
+            _windowsManager.OpenPrevWindow();
         }
     }
 
@@ -78,22 +59,14 @@ public class MainMenuController : MonoBehaviour
     }
 
     private void OnSettingsClicked() {
-        _settingsController.Init();
-
-        _activeWindow.SetActive(false);
-
-        _settingsWindow.SetActive(true);
-
-        _activeWindow = _settingsWindow;
+        _windowsManager.OpenSettingsWindow();
     }
 
     private void OnLoadLastSaveClicked() {
-
+        _windowsManager.OpenSaveSelectionWindow();
     }
 
     private void OnSelectSaveClicked() {
-        _activeWindow.SetActive(false);
-        _saveSelectionWindow.SetActive(true);
-        _activeWindow = _saveSelectionWindow;
+        _windowsManager.OpenSaveSelectionWindow();
     }
 }

@@ -6,25 +6,25 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/outdated/Menu_old.unity
     guid: 4f98859260e873b4999a33605a61f2b9
-  - enabled: 0
-    path: Assets/Scenes/Main.unity
+  - enabled: 1
+    path: Assets/Scenes/MainLevel.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Patterns practice/Scenes/Boot.unity
+    path: Assets/Scenes/Boot.unity
     guid: 4dab24378b2dd3749a4039eb6210a8ea
   - enabled: 1
-    path: Assets/Patterns practice/Scenes/Intro.unity
+    path: Assets/Scenes/Intro.unity
     guid: 072b412b45f824d4182cde8deceec9b3
   - enabled: 1
-    path: Assets/Patterns practice/Scenes/MainMenu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: b81edf34e9476ce40aaa2bb5261a59de
   - enabled: 1
-    path: Assets/Patterns practice/Scenes/LevelLoading.unity
+    path: Assets/Scenes/LevelLoading.unity
     guid: 5f9be22091216a04788f6e91333ef7ef
   - enabled: 1
-    path: Assets/Patterns practice/Scenes/LevelTest.unity
+    path: Assets/Scenes/LevelTest.unity
     guid: 6a26354d1b4296d45b80efff66c8c301
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 6d2696c54096cd2479b7f33b9ae9497c,

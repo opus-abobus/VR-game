@@ -8,7 +8,7 @@ namespace AppManagement.FSM.States {
         private AppContext _context;
 
         private const string LOADING_LEVEL_SCENE_NAME = "LevelLoading";
-        private const string LEVEL_SCENE_NAME = "LevelTest";
+        private const string LEVEL_SCENE_NAME = "MainLevel";
         private bool _isLoadSceneLoaded = false;
 
         private LevelSceneLoader _levelSceneLoader;
