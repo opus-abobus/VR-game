@@ -1,12 +1,11 @@
-using TMPro;
 using UnityEngine;
 
 namespace UI.SettingsManagement {
     public class GraphicsFieldView : MonoBehaviour {
-        [SerializeField] public TMP_Dropdown screenRes;
-        [SerializeField] public TMP_Dropdown screenRatio;
-        [SerializeField] public TMP_Dropdown displayMode;
+        [SerializeField] public DropdownFieldView screenRes;
+        [SerializeField] public DropdownFieldView screenRatio;
+        [SerializeField] public DropdownFieldView displayMode;
 
-        [SerializeField] public TMP_Dropdown graphicsPreset;
+        [SerializeField] public DropdownFieldView graphicsPreset;
     }
 }
