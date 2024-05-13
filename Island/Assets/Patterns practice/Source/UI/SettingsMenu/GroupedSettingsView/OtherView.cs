@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace UI.SettingsManagement {
-    public class OtherFieldsView : MonoBehaviour {
+    public class OtherView : MonoBehaviour {
         [SerializeField] public ToggleFieldView skipIntroVideo;
         [SerializeField] public SliderFieldView fieldOfView;
 

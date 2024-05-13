@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using AppManagement.FSM;
 using AppManagement.FSM.States;
+using DataPersistence;
 
 [RequireComponent(typeof(AppStateMachine))]
 public class AppManager : MonoBehaviour
@@ -9,6 +10,9 @@ public class AppManager : MonoBehaviour
     public static AppManager Instance { get; private set; }
 
     private AppStateMachine _appStateMachine;
+
+    [SerializeField] private DataManager _dataManager;
+    public DataManager DataManager { get { return _dataManager; } }
 
     private void Awake() {
         if (Instance == null)

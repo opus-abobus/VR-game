@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace UI.SettingsManagement {
-    public class SoundFieldView : MonoBehaviour {
+    public class SoundView : MonoBehaviour {
         [SerializeField] public SliderFieldView totalVolume;
         [SerializeField] public SliderFieldView musicVolume;
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace UI.SettingsManagement {
-    public class GraphicsFieldView : MonoBehaviour {
+    public class GraphicsView : MonoBehaviour {
         [SerializeField] public DropdownFieldView screenRes;
         [SerializeField] public DropdownFieldView screenRatio;
         [SerializeField] public DropdownFieldView displayMode;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace UI.SettingsManagement {
-    public class InputFieldsView : MonoBehaviour {
+    public class InputView : MonoBehaviour {
         [SerializeField] public SliderFieldView mouseSensitivityX;
         [SerializeField] public SliderFieldView mouseSensitivityY;
 
