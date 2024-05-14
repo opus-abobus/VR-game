@@ -8,54 +8,60 @@ using UnityEngine.UI;
 
 namespace UI.SettingsManagement {
     public class SettingsController : MonoBehaviour {
+
         [SerializeField] private SettingsDataModel _model;
 
-        [SerializeField] private GraphicsView _graphicsView;
-        [SerializeField] private SoundView _soundView;
-        [SerializeField] private InputView _inputView;
-        [SerializeField] private GameplayView _gameplayView;
-        [SerializeField] private OtherView _otherView;
+        [SerializeField] private SettingsView _view;
 
         [SerializeField] private GameObject _commandPanel;
         [SerializeField] private Button _discardButton, _applyButton;
 
-        //public event Action SettingsUpdate;
+        private List<BaseFieldView> _unsavedViews;
 
         private void Awake() {
             Init();
         }
 
         private void Init() {
-            _model.ViewUpdated += OnViewDataChanged;
             _model.Init(AppManager.Instance.DataManager.SettingsData);
 
-            _model.SubscribeOnView();
+            _unsavedViews = new List<BaseFieldView>();
+
+            _view.FieldViewUpdated += OnViewUpdated;
+            _view.AddListeners();
 
             _applyButton.onClick.AddListener(OnApplyButtonClicked);
             _discardButton.onClick.AddListener(OnDiscardButtonClicked);
         }
 
-        private void OnViewDataChanged() {
+        private void OnViewUpdated<T>(T fieldView) where T : BaseFieldView {
+
+            if (!_unsavedViews.Contains(fieldView)) {
+                _unsavedViews.Add(fieldView);
+            }
+
+            _model.UpdateViewText(fieldView);
+
             _commandPanel.SetActive(true);
         }
 
         private void OnApplyButtonClicked() {
-            _model.SaveChanges();
+            _model.SaveChanges_WHOLE_SEARCH();
 
             _commandPanel.SetActive(false);
         }
 
         private void OnDiscardButtonClicked() {
-            _model.DiscardChanges();
+            _model.DiscardChanges(_unsavedViews);
 
             _commandPanel.SetActive(false);
         }
 
         private void OnDestroy() {
-            _model.UnsubscribeOnView();
+            _view?.RemoveListeners();
 
-            _applyButton?.onClick?.RemoveAllListeners();
-            _discardButton?.onClick?.RemoveAllListeners();
+            _applyButton?.onClick.RemoveAllListeners();
+            _discardButton?.onClick.RemoveAllListeners();
         }
     }
 }

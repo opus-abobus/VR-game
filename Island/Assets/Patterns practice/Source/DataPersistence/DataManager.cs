@@ -15,7 +15,7 @@ namespace DataPersistence {
 
         private string _formattedString;
 
-        [SerializeField] private SettingsData _settingsDataDefault;
+        private SettingsData _settingsDataDefault;
         private SettingsData _settingsData;
 
         private ISaveSystem _saveSystem;
@@ -51,15 +51,11 @@ namespace DataPersistence {
             settingsData.skipIntro = false;
 
             settingsData.fieldOfView = 60;
-            settingsData.fieldOfView_MIN = 50;
-            settingsData.fieldOfView_MAX = 100;
 
             settingsData.saveOnExit = true;
 
             settingsData.autosave = true;
-            settingsData.autoSaveIntervalInMinutes = 15;
-            settingsData.autoSaveIntervalInMinutes_MIN = 1;
-            settingsData.autoSaveIntervalInMinutes_MAX = 60;
+            settingsData.autoSaveIntervalInMinutes = 7;
         }
 
         private void Awake() {
