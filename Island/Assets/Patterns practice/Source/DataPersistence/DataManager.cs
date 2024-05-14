@@ -1,8 +1,4 @@
-using DataPersistence;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 namespace DataPersistence {
@@ -29,7 +25,7 @@ namespace DataPersistence {
             settingsData.screenResolution.height = Screen.height;
             settingsData.screenResolution.refreshRateRatio = Screen.currentResolution.refreshRateRatio;
 
-            settingsData.screenResolutions = Screen.resolutions.ToList();
+            settingsData.supportedScreenResolutions = Screen.resolutions;
 
             settingsData.fullScreenMode = Screen.fullScreenMode;
 
@@ -78,7 +74,6 @@ namespace DataPersistence {
             else {
                 _settingsData = _saveSystem.Load<SettingsData>(_formattedString);
             }
-
         }
 
         public SettingsData SaveSettings(ref SettingsData settingsData) {

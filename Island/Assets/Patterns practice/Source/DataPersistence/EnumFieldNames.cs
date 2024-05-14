@@ -1,38 +1,17 @@
-using System;
-
 namespace DataPersistence {
 
     using Category = SettingFieldCategoryAttribute.SettingsCategory;
 
-    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    public class SettingFieldCategoryAttribute : Attribute {
-        
-        public enum SettingsCategory {
-            None,
-            Graphics,
-            Sound,
-            Input,
-            Other
-        }
-
-        public SettingsCategory Category { get; }
-
-        public SettingFieldCategoryAttribute(SettingsCategory category) {
-            Category = category;
-        }
-    }
-
     public enum FieldName {
 
-        [SettingFieldCategory(Category.None)] UNDEFINED,
+        [SettingFieldCategory(Category.None)] 
+        UNDEFINED,
 
         [SettingFieldCategory(Category.Graphics)]
-        ScreenResolutions,
+        SupportedScreenResolutions,
 
         [SettingFieldCategory(Category.Graphics)]
         ScreenResolution,
-
-        //[SettingFieldCategory(Category.Graphics)] DisplayMode,
 
         [SettingFieldCategory(Category.Graphics)] 
         FullscreenMode,

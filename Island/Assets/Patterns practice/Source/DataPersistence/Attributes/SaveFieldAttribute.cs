@@ -1,6 +1,7 @@
 using System;
 
 namespace DataPersistence {
+
     [AttributeUsage(AttributeTargets.Field)]
     public class SaveFieldAttribute : Attribute {
 

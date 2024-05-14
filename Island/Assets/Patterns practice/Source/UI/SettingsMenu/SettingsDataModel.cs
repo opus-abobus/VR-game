@@ -14,8 +14,6 @@ namespace UI.SettingsManagement {
 
         private SettingsData _settingsData;
 
-        //public event Action ViewInitialized;
-
         public event Action DataModified;
 
         public FieldInfo[] fieldsInfo;
@@ -42,8 +40,6 @@ namespace UI.SettingsManagement {
                     }
                 }
             }
-
-            //ViewInitialized?.Invoke();
         }
 
         private void SetFieldView(BaseFieldView fieldView, FieldInfo fieldInfo, bool setConstraints = true) {
@@ -74,11 +70,11 @@ namespace UI.SettingsManagement {
                     sliderFieldView.slider.value = (float) fieldInfo.GetValue(_settingsData);
                 }
 
-                sliderFieldView.valueText.text = sliderFieldView.slider.value.ToString("F3");
+                sliderFieldView.valueText.text = sliderFieldView.slider.value.ToString(sliderFieldView.valueFormat);
             }
             // !!!
             else if (fieldView is DropdownFieldView dropdownFieldView) {
-                dropdownFieldView.dropdown.value = (int) fieldInfo.GetValue(_settingsData);
+                SetDropdown(dropdownFieldView, fieldInfo);
             }
 
             else if (fieldView is ToggleFieldView toggleFieldView) {
@@ -140,11 +136,10 @@ namespace UI.SettingsManagement {
         public void UpdateViewText(BaseFieldView fieldView) {
 
             if (fieldView is SliderFieldView sliderFieldView) {
-                sliderFieldView.valueText.text = sliderFieldView.slider.value.ToString("F3");
+                sliderFieldView.valueText.text = sliderFieldView.slider.value.ToString(sliderFieldView.valueFormat);
             }
         }
 
-        // Õ¿ƒŒ “ŒÀ‹ Œ »«Ã≈Õ≈ÕÕ€≈ œŒÀﬂ
         public void DiscardChanges(List<BaseFieldView> unsavedViews) {
 
             foreach (var view in unsavedViews) {
@@ -166,6 +161,25 @@ namespace UI.SettingsManagement {
             _settingsData = AppManager.Instance.DataManager.SaveSettings(ref _settingsData);
 
             DataModified?.Invoke();
+        }
+
+        private void SetDropdown(DropdownFieldView dropdownFieldView, FieldInfo fieldInfo) {
+            dropdownFieldView.dropdown.ClearOptions();
+
+            SaveFieldAttribute attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(SaveFieldAttribute)) as SaveFieldAttribute;
+
+            //if (attribute.fieldName == FieldName.Res)
+
+            Resolution[] resolutions = (Resolution[]) fieldInfo.GetValue(_settingsData);
+            //Resolution currentRes = () fieldInfo.GetValue(_settingsData);
+
+            //foreach (Resolution res in fieldInfo.GetValue)
+
+                dropdownFieldView.dropdown.AddOptions(new List<TMP_Dropdown.OptionData> {
+
+                });
+
+            dropdownFieldView.dropdown.SetValueWithoutNotify(0);
         }
     }
 }

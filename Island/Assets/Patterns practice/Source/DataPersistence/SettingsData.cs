@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DataPersistence {
@@ -6,12 +5,11 @@ namespace DataPersistence {
     [System.Serializable]
     public struct SettingsData {
         // Graphics
-        [HideInInspector] public List<Resolution> screenResolutions;
-        [HideInInspector] public Resolution screenResolution;
+        [HideInInspector, SaveField(FieldName.SupportedScreenResolutions)]
+        public Resolution[] supportedScreenResolutions;
 
-        //[SerializeField] private List<object> screenRatios;
-        //public List<DisplayMode> displayModes;
-        //public DisplayMode displayMode;
+        [HideInInspector, SaveField(FieldName.ScreenResolution)]
+        public Resolution screenResolution;
 
         [HideInInspector, SaveField(FieldName.FullscreenMode)] 
         public FullScreenMode fullScreenMode;
