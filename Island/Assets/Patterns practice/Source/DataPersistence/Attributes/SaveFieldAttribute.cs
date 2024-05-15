@@ -1,13 +1,14 @@
 using System;
 
-namespace DataPersistence {
-
+namespace DataPersistence
+{
     [AttributeUsage(AttributeTargets.Field)]
-    public class SaveFieldAttribute : Attribute {
-
+    public class SaveFieldAttribute : Attribute
+    {
         public FieldName fieldName;
 
-        public SaveFieldAttribute(FieldName fieldName) {
+        public SaveFieldAttribute(FieldName fieldName)
+        {
             this.fieldName = fieldName;
         }
     }

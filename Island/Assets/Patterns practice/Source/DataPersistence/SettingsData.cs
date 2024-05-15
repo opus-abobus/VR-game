@@ -1,17 +1,18 @@
 using UnityEngine;
 
-namespace DataPersistence {
-
+namespace DataPersistence
+{
     [System.Serializable]
-    public struct SettingsData {
+    public struct SettingsData
+    {
         // Graphics
-        [HideInInspector, SaveField(FieldName.SupportedScreenResolutions)]
-        public Resolution[] supportedScreenResolutions;
+        /*[HideInInspector, SaveField(FieldName.SupportedScreenResolutions)]
+        public Resolution[] SupportedScreenResolutions;*/
 
         [HideInInspector, SaveField(FieldName.ScreenResolution)]
-        public Resolution screenResolution;
+        public Resolution ScreenResolution;
 
-        [HideInInspector, SaveField(FieldName.FullscreenMode)] 
+        [HideInInspector, SaveField(FieldName.FullscreenMode)]
         public FullScreenMode fullScreenMode;
 
         //public List<GraphicsPreset> graphicsPresets;
@@ -19,44 +20,44 @@ namespace DataPersistence {
 
         // Sound
         [SaveField(FieldName.TotalVolume), ConstraintField(0.0f, 1.0f)]
-        public float totalVolume;
+        public float TotalVolume;
 
         [SaveField(FieldName.MusicVolume), ConstraintField(0.0f, 1.0f)]
-        public float musicVolume;
+        public float MusicVolume;
 
         [SaveField(FieldName.PlayerStepsVolume), ConstraintField(0.0f, 1.0f)]
-        public float playerStepsVolume;
+        public float PlayerStepsVolume;
 
         // Input
         [SaveField(FieldName.MouseSensX), ConstraintField(0.0f, 1.0f)]
-        public float mouseSensitivityX;
+        public float MouseSensitivityX;
 
         [SaveField(FieldName.MouseSensY), ConstraintField(0.0f, 1.0f)]
-        public float mouseSensitivityY;
+        public float MouseSensitivityY;
 
         // Key binds
-        [SaveField(FieldName.QuickSave)]
-        public KeyCode quickSave;
+        [SaveField(FieldName.QuickSaveKey)]
+        public KeyCode QuickSaveKey;
 
         // Gameplay
 
 
         // Other
         [SaveField(FieldName.SkipIntro)]
-        public bool skipIntro;
+        public bool SkipIntro;
 
         [SaveField(FieldName.FieldOfView), ConstraintField(50, 300)]
-        public int fieldOfView;
+        public int FieldOfView;
 
         //[SerializeField] private List<string> languages;
 
         [SaveField(FieldName.AutoSave)]
-        public bool autosave;
-        
+        public bool Autosave;
+
         [SaveField(FieldName.SaveOnExit)]
-        public bool saveOnExit;
+        public bool SaveOnExit;
 
         [SaveField(FieldName.AutoSaveIntervalInMinutes), ConstraintField(1, 60)]
-        public int autoSaveIntervalInMinutes;
+        public int AutoSaveIntervalInMinutes;
     }
 }

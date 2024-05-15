@@ -1,8 +1,10 @@
 using System.IO;
 using UnityEngine;
 
-namespace DataPersistence {
-    public class DataManager : MonoBehaviour {
+namespace DataPersistence
+{
+    public class DataManager : MonoBehaviour
+    {
         private const string
                 _gameSettingsFileName = "Game settings",
                 _gameplayFilename = "Gameplay data";
@@ -18,43 +20,40 @@ namespace DataPersistence {
 
         public SettingsData SettingsData { get { return _settingsData; } }
 
-        private static void SetDefaultSettingsData(ref SettingsData settingsData) {
-
+        private static void SetDefaultSettingsData(ref SettingsData settingsData)
+        {
             // Graphics
-            settingsData.screenResolution.width = Screen.width;
-            settingsData.screenResolution.height = Screen.height;
-            settingsData.screenResolution.refreshRateRatio = Screen.currentResolution.refreshRateRatio;
-
-            settingsData.supportedScreenResolutions = Screen.resolutions;
+            settingsData.ScreenResolution = Screen.currentResolution;
 
             settingsData.fullScreenMode = Screen.fullScreenMode;
 
             // Sound
-            settingsData.totalVolume = 1;
-            settingsData.musicVolume = 1;
-            settingsData.playerStepsVolume = 1;
+            settingsData.TotalVolume = 1;
+            settingsData.MusicVolume = 1;
+            settingsData.PlayerStepsVolume = 1;
 
             //Input
-            settingsData.mouseSensitivityX = 1;
-            settingsData.mouseSensitivityY = 1;
+            settingsData.MouseSensitivityX = 1;
+            settingsData.MouseSensitivityY = 1;
             // Key binds
-            settingsData.quickSave = KeyCode.F5;
+            settingsData.QuickSaveKey = KeyCode.F5;
 
             // Gameplay
 
 
             // Other
-            settingsData.skipIntro = false;
+            settingsData.SkipIntro = false;
 
-            settingsData.fieldOfView = 60;
+            settingsData.FieldOfView = 60;
 
-            settingsData.saveOnExit = true;
+            settingsData.SaveOnExit = true;
 
-            settingsData.autosave = true;
-            settingsData.autoSaveIntervalInMinutes = 7;
+            settingsData.Autosave = true;
+            settingsData.AutoSaveIntervalInMinutes = 5;
         }
 
-        private void Awake() {
+        private void Awake()
+        {
             DontDestroyOnLoad(this);
 
             _gameDataPath = Application.persistentDataPath;
@@ -62,7 +61,8 @@ namespace DataPersistence {
 
             _saveSystem = new XMLSaveSystem();
 
-            if (!File.Exists(_formattedString)) {
+            if (!File.Exists(_formattedString))
+            {
                 File.Create(_formattedString).Close();
 
                 SetDefaultSettingsData(ref _settingsDataDefault);
@@ -71,12 +71,14 @@ namespace DataPersistence {
 
                 _settingsData = _settingsDataDefault;
             }
-            else {
+            else
+            {
                 _settingsData = _saveSystem.Load<SettingsData>(_formattedString);
             }
         }
 
-        public SettingsData SaveSettings(ref SettingsData settingsData) {
+        public SettingsData SaveSettings(ref SettingsData settingsData)
+        {
             _settingsData = settingsData;
 
             _saveSystem.Save(_settingsData, _formattedString);

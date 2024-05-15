@@ -1,25 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI.Navigation.Tabs {
-
+namespace UI.Navigation.Tabs
+{
     [RequireComponent(typeof(TabView))]
-    public class TabModel : MonoBehaviour {
+    public class TabModel : MonoBehaviour
+    {
         [SerializeField, HideInInspector]
         private TabView _view;
 
         [SerializeField, HideInInspector]
         public Tab currentTab, previousTab;
 
-        public void Init() {
+        public void Init()
+        {
             _view = GetComponent<TabView>();
         }
 
-        public GameObject[] GetPanelsForTab(Tab tab) {
+        public GameObject[] GetPanelsForTab(Tab tab)
+        {
             List<GameObject> result = new List<GameObject>();
 
-            while (tab.parentTab != null) {
-                if (tab.childPanel != null) {
+            while (tab.parentTab != null)
+            {
+                if (tab.childPanel != null)
+                {
                     result.Add(tab.childPanel);
                 }
 
@@ -28,7 +33,8 @@ namespace UI.Navigation.Tabs {
                 tab = tab.parentTab;
             }
 
-            if (tab.childPanel != null) {
+            if (tab.childPanel != null)
+            {
                 result.Add(tab.childPanel);
             }
 
@@ -37,10 +43,12 @@ namespace UI.Navigation.Tabs {
             return result.ToArray();
         }
 
-        public GameObject[] GetNextPanelsToShow() {
+        public GameObject[] GetNextPanelsToShow()
+        {
             List<GameObject> result = new List<GameObject>();
 
-            if (currentTab.childPanel != null) {
+            if (currentTab.childPanel != null)
+            {
                 result.Add(currentTab.childPanel);
             }
             result.AddRange(currentTab.contents);
@@ -48,8 +56,10 @@ namespace UI.Navigation.Tabs {
             return result.ToArray();
         }
 
-        public GameObject[] GetNextPanelsToHide() {
-            if (previousTab == null) {
+        public GameObject[] GetNextPanelsToHide()
+        {
+            if (previousTab == null)
+            {
                 return null;
             }
 
@@ -58,12 +68,15 @@ namespace UI.Navigation.Tabs {
 
             List<GameObject> result = new List<GameObject>();
 
-            if (currentLevel < prevLevel) {
-                if (previousTab.childPanel != null) {
+            if (currentLevel < prevLevel)
+            {
+                if (previousTab.childPanel != null)
+                {
                     result.Add(previousTab.childPanel);
                 }
 
-                if (previousTab.parentTab != null && previousTab.parentTab.childPanel != null) {
+                if (previousTab.parentTab != null && previousTab.parentTab.childPanel != null)
+                {
                     result.AddRange(previousTab.parentTab.contents);
                     result.Add(previousTab.parentTab.childPanel);
                 }
@@ -71,9 +84,11 @@ namespace UI.Navigation.Tabs {
                 result.AddRange(previousTab.contents);
             }
 
-            else if (currentLevel == prevLevel) {
+            else if (currentLevel == prevLevel)
+            {
 
-                if (previousTab.childPanel != null) {
+                if (previousTab.childPanel != null)
+                {
                     result.Add(previousTab.childPanel);
                 }
 

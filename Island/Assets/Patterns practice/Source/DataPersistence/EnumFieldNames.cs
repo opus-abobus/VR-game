@@ -1,52 +1,52 @@
-namespace DataPersistence {
-
+namespace DataPersistence
+{
     using Category = SettingFieldCategoryAttribute.SettingsCategory;
 
-    public enum FieldName {
-
-        [SettingFieldCategory(Category.None)] 
+    public enum FieldName
+    {
+        [SettingFieldCategory(Category.None)]
         UNDEFINED,
 
-        [SettingFieldCategory(Category.Graphics)]
-        SupportedScreenResolutions,
+/*        [SettingFieldCategory(Category.Graphics)]
+        SupportedScreenResolutions,*/
 
         [SettingFieldCategory(Category.Graphics)]
         ScreenResolution,
 
-        [SettingFieldCategory(Category.Graphics)] 
+        [SettingFieldCategory(Category.Graphics)]
         FullscreenMode,
 
-        [SettingFieldCategory(Category.Graphics)] 
+        [SettingFieldCategory(Category.Graphics)]
         GraphicsPreset,
 
         // Sound
-        [SettingFieldCategory(Category.Sound)] 
+        [SettingFieldCategory(Category.Sound)]
         TotalVolume,
 
-        [SettingFieldCategory(Category.Sound)] 
+        [SettingFieldCategory(Category.Sound)]
         MusicVolume,
 
-        [SettingFieldCategory(Category.Sound)] 
+        [SettingFieldCategory(Category.Sound)]
         PlayerStepsVolume,
         //
 
         // Input
-        [SettingFieldCategory(Category.Input)] 
+        [SettingFieldCategory(Category.Input)]
         MouseSensX,
 
-        [SettingFieldCategory(Category.Input)] 
+        [SettingFieldCategory(Category.Input)]
         MouseSensY,
         //
         // Input key binds
-        [SettingFieldCategory(Category.Input)] 
-        QuickSave,
+        [SettingFieldCategory(Category.Input)]
+        QuickSaveKey,
         //
 
         // Other
-        [SettingFieldCategory(Category.Other)] 
+        [SettingFieldCategory(Category.Other)]
         SkipIntro,
 
-        [SettingFieldCategory(Category.Other)] 
+        [SettingFieldCategory(Category.Other)]
         FieldOfView,
 
         [SettingFieldCategory(Category.Other)]

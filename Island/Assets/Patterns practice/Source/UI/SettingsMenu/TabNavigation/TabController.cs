@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI.Navigation.Tabs {
-
+namespace UI.Navigation.Tabs
+{
     [RequireComponent(typeof(TabModel), typeof(TabView))]
-    public class TabController : MonoBehaviour {
+    public class TabController : MonoBehaviour
+    {
         [SerializeField, HideInInspector]
         private TabView _view;
 
@@ -13,7 +14,8 @@ namespace UI.Navigation.Tabs {
 
         private List<Tab> _tabs;
 
-        public void Init() {
+        public void Init()
+        {
             _view = GetComponent<TabView>();
             _model = GetComponent<TabModel>();
 
@@ -22,14 +24,17 @@ namespace UI.Navigation.Tabs {
             _model.Init();
 
             _model.currentTab = _model.previousTab = null;
-            ;
+
             _tabs = new List<Tab>();
 
             _view.TabAdded += OnTabAdded;
             _view.TabRemoved += OnTabRemoved;
-            _view.Destroyed += () => {
-                foreach (Tab tab in _tabs) {
-                    if (tab != null) {
+            _view.Destroyed += () =>
+            {
+                foreach (Tab tab in _tabs)
+                {
+                    if (tab != null)
+                    {
                         tab.TabClicked -= OnTabClicked;
                     }
                 }
@@ -38,23 +43,28 @@ namespace UI.Navigation.Tabs {
             };
         }
 
-        private void OnTabAdded(Tab addedTab) {
-            if (!_tabs.Contains(addedTab)) {
+        private void OnTabAdded(Tab addedTab)
+        {
+            if (!_tabs.Contains(addedTab))
+            {
                 _tabs.Add(addedTab);
 
                 addedTab.TabClicked += OnTabClicked;
             }
         }
 
-        private void OnTabRemoved(Tab removedTab) {
-            if (_tabs.Contains(removedTab)) {
+        private void OnTabRemoved(Tab removedTab)
+        {
+            if (_tabs.Contains(removedTab))
+            {
                 _tabs.Remove(removedTab);
 
                 removedTab.TabClicked -= OnTabClicked;
             }
         }
 
-        private void OnTabClicked(Tab tab) {
+        private void OnTabClicked(Tab tab)
+        {
             UpdateModel(tab);
 
             HidePanels();
@@ -64,11 +74,13 @@ namespace UI.Navigation.Tabs {
             UpdateHeader();
         }
 
-        private void UpdateModel(Tab tab) {
+        private void UpdateModel(Tab tab)
+        {
             Tab current = _model.currentTab;
             Tab prev = _model.previousTab;
 
-            if (current != tab) {
+            if (current != tab)
+            {
                 current = tab;
                 prev = _model.currentTab;
             }
@@ -76,51 +88,67 @@ namespace UI.Navigation.Tabs {
             _model.previousTab = prev;
         }
 
-        private void HidePanels() {
+        private void HidePanels()
+        {
             var panelsToHide = _model.GetNextPanelsToHide();
-            if (panelsToHide != null) {
-                foreach (var panel in panelsToHide) {
+            if (panelsToHide != null)
+            {
+                foreach (var panel in panelsToHide)
+                {
                     panel.SetActive(false);
                 }
             }
         }
 
-        private void ShowPanels() {
+        private void ShowPanels()
+        {
             var panelsToShow = _model.GetNextPanelsToShow();
-            if (panelsToShow != null) {
-                for (int i = 0; i < panelsToShow.Length; i++) {
+            if (panelsToShow != null)
+            {
+                for (int i = 0; i < panelsToShow.Length; i++)
+                {
                     panelsToShow[i].SetActive(true);
                 }
             }
         }
 
-        private void UpdateHeader() {
+        private void UpdateHeader()
+        {
             _view.settingsHeader.text = _model.currentTab.name;
         }
 
-        private void HideAllPanels() {
+        private void HideAllPanels()
+        {
             var panels = _model.GetPanelsForTab(_model.currentTab);
-            foreach (var panel in panels) {
+            foreach (var panel in panels)
+            {
                 panel.SetActive(false);
             }
 
             _view.settingsHeader.text = string.Empty;
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             HideAllPanels();
         }
 
-        private void OnDestroy() {
-            if (_view != null) {
+        private void OnDestroy()
+        {
+            if (_view != null)
+            {
                 _view.TabAdded -= OnTabAdded;
                 _view.TabRemoved -= OnTabRemoved;
             }
 
-            foreach (Tab tab in _tabs) {
-                if (tab != null) {
+            foreach (Tab tab in _tabs)
+            {
+                if (tab != null)
+                {
                     tab.TabClicked -= OnTabClicked;
                 }
+                else
+                    return;
             }
         }
     }
