@@ -46,7 +46,7 @@ namespace UI.SettingsManagement {
         }
 
         private void OnApplyButtonClicked() {
-            _model.SaveChanges_WHOLE_SEARCH();
+            _model.SaveChanges(_unsavedViews);
 
             _commandPanel.SetActive(false);
         }

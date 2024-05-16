@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/outdated/Menu_old.unity
     guid: 4f98859260e873b4999a33605a61f2b9
-  - enabled: 0
-    path: Assets/Scenes/MainLevel.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Boot.unity
     guid: 4dab24378b2dd3749a4039eb6210a8ea
@@ -23,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelLoading.unity
     guid: 5f9be22091216a04788f6e91333ef7ef
+  - enabled: 1
+    path: Assets/Scenes/MainLevel.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/Scenes/LevelTest.unity
     guid: 6a26354d1b4296d45b80efff66c8c301

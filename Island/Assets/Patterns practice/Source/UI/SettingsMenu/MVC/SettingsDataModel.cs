@@ -95,6 +95,7 @@ namespace UI.SettingsManagement
             }
         }
 
+        [Obsolete]
         public void SaveChanges_WHOLE_SEARCH()
         {
             foreach (BaseFieldView fieldView in _view.fields)
@@ -102,13 +103,31 @@ namespace UI.SettingsManagement
                 foreach (FieldInfo fieldInfo in fieldsInfo)
                 {
                     SaveFieldAttribute attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(SaveFieldAttribute)) as SaveFieldAttribute;
-
                     if (attribute != null && attribute.fieldName == fieldView.fieldName)
                     {
                         SetDataFromView(fieldInfo, fieldView);
                     }
                 }
             }
+
+            WriteDataOnDisk();
+        }
+
+        public void SaveChanges(List<BaseFieldView> unsavedFields)
+        {
+            foreach (var fieldView in unsavedFields)
+            {
+                foreach (FieldInfo fieldInfo in fieldsInfo)
+                {
+                    SaveFieldAttribute attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(SaveFieldAttribute)) as SaveFieldAttribute;
+                    if (attribute != null && attribute.fieldName == fieldView.fieldName)
+                    {
+                        SetDataFromView(fieldInfo, fieldView);
+                    }
+                }
+            }
+
+            unsavedFields.Clear();
 
             WriteDataOnDisk();
         }
@@ -135,21 +154,38 @@ namespace UI.SettingsManagement
             else if (fieldView is DropdownFieldView dropdownFieldView)
             {
                 SaveFieldAttribute attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(SaveFieldAttribute)) as SaveFieldAttribute;
-
-                if (attribute != null && attribute.fieldName == FieldName.ScreenResolution)
+                if (attribute != null) 
                 {
-                    string[] resParts = dropdownFieldView.dropdown.options[dropdownFieldView.dropdown.value].text
-                        .Split(new char[] { 'x', '@' });
+                    switch (attribute.fieldName)
+                    {
+                        case FieldName.ScreenResolution:
+                            {
+                                string[] resParts = dropdownFieldView.dropdown.options[dropdownFieldView.dropdown.value].text
+                                    .Split(new char[] { 'x', '@' });
 
-                    Resolution resolution = new Resolution();
-                    resolution.width = int.Parse(resParts[0].Trim());
-                    resolution.height = int.Parse(resParts[1].Trim());
-                    resolution.refreshRateRatio = Screen.currentResolution.refreshRateRatio;
-                    //int.Parse(resParts[2].Trim().Replace("Hz", "").Trim());
+                                Resolution resolution = new Resolution();
+                                resolution.width = int.Parse(resParts[0].Trim());
+                                resolution.height = int.Parse(resParts[1].Trim());
+                                resolution.refreshRateRatio = Screen.currentResolution.refreshRateRatio;
+                                //int.Parse(resParts[2].Trim().Replace("Hz", "").Trim());
 
-                    fieldInfo.SetValueDirect(dataRef, resolution);
+                                fieldInfo.SetValueDirect(dataRef, resolution);
 
-                    Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.ExclusiveFullScreen, resolution.refreshRateRatio);
+                                Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode, resolution.refreshRateRatio);
+
+                                break;
+                            }
+                        case FieldName.FullscreenMode:
+                            {
+                                FullScreenMode fSM = (FullScreenMode) Enum.Parse(typeof(FullScreenMode), 
+                                    dropdownFieldView.dropdown.options[dropdownFieldView.dropdown.value].text);
+                                fieldInfo.SetValueDirect(dataRef, fSM);
+
+                                Screen.fullScreenMode = fSM;
+
+                                break;
+                            }
+                    }
                 }
             }
 
@@ -166,7 +202,6 @@ namespace UI.SettingsManagement
 
         public void UpdateViewText(BaseFieldView fieldView)
         {
-
             if (fieldView is SliderFieldView sliderFieldView)
             {
                 sliderFieldView.valueText.text = sliderFieldView.slider.value.ToString(sliderFieldView.valueFormat);
@@ -203,30 +238,55 @@ namespace UI.SettingsManagement
             dropdownFieldView.dropdown.ClearOptions();
 
             SaveFieldAttribute attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(SaveFieldAttribute)) as SaveFieldAttribute;
-
-            if (attribute != null && attribute.fieldName == FieldName.ScreenResolution)
+            if (attribute != null)
             {
-                // perhaps, it's not necessary to save the current resolution or load it since it is already saved when applied
-                Resolution savedRes = (Resolution) fieldInfo.GetValue(_settingsData);
-
-                Resolution[] supportedRess = Screen.resolutions;
-
-                int i = -1;
-                bool isCurrentRes = false;
-
-                foreach (Resolution resolution in supportedRess)
+                switch (attribute.fieldName)
                 {
-                    dropdownFieldView.dropdown.options.Add(new TMP_Dropdown.OptionData(resolution.ToString(), null));
-                    
-                    if (!isCurrentRes)
-                    {
-                        ++i;
-                        if (resolution.Equals(savedRes))
-                            isCurrentRes = true;
-                    }
-                }
+                    case FieldName.ScreenResolution:
+                        {
+                            // perhaps, it's not necessary to save the current resolution or load it since it is already saved when applied
+                            Resolution savedRes = (Resolution) fieldInfo.GetValue(_settingsData);
 
-                dropdownFieldView.dropdown.value = i;
+                            Resolution[] supportedRess = Screen.resolutions;
+
+                            int i = -1;
+                            bool isCurrentRes = false;
+
+                            foreach (Resolution resolution in supportedRess)
+                            {
+                                dropdownFieldView.dropdown.options.Add(new TMP_Dropdown.OptionData(resolution.ToString(), null));
+
+                                if (!isCurrentRes)
+                                {
+                                    ++i;
+                                    if (resolution.Equals(savedRes))
+                                        isCurrentRes = true;
+                                }
+                            }
+
+                            dropdownFieldView.dropdown.value = i;
+
+                            break;
+                        }
+                    case FieldName.FullscreenMode:
+                        {
+                            dropdownFieldView.dropdown.AddOptions(new List<TMP_Dropdown.OptionData>{
+                                new TMP_Dropdown.OptionData(FullScreenMode.FullScreenWindow.ToString(), null),
+                                new TMP_Dropdown.OptionData(FullScreenMode.ExclusiveFullScreen.ToString(), null),
+                                new TMP_Dropdown.OptionData(FullScreenMode.Windowed.ToString(), null)
+                            });
+
+                            FullScreenMode savedFSM = (FullScreenMode) fieldInfo.GetValue(_settingsData);
+                            if (savedFSM == FullScreenMode.FullScreenWindow)
+                                dropdownFieldView.dropdown.value = 0;
+                            else if (savedFSM == FullScreenMode.ExclusiveFullScreen)
+                                dropdownFieldView.dropdown.value = 1;
+                            else if (savedFSM == FullScreenMode.Windowed)
+                                dropdownFieldView.dropdown.value = 2;
+
+                            break;
+                        }
+                }
             }
         }
     }

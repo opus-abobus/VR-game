@@ -1,11 +1,12 @@
 using System;
 
-namespace DataPersistence {
-
+namespace DataPersistence
+{
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    public class SettingFieldCategoryAttribute : Attribute {
-
-        public enum SettingsCategory {
+    public class SettingFieldCategoryAttribute : Attribute
+    {
+        public enum SettingsCategory
+        {
             None,
             Graphics,
             Sound,
@@ -15,7 +16,8 @@ namespace DataPersistence {
 
         public SettingsCategory Category { get; }
 
-        public SettingFieldCategoryAttribute(SettingsCategory category) {
+        public SettingFieldCategoryAttribute(SettingsCategory category)
+        {
             Category = category;
         }
     }

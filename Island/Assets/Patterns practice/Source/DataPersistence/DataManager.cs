@@ -25,7 +25,7 @@ namespace DataPersistence
             // Graphics
             settingsData.ScreenResolution = Screen.currentResolution;
 
-            settingsData.fullScreenMode = Screen.fullScreenMode;
+            settingsData.fullScreenMode = FullScreenMode.FullScreenWindow;
 
             // Sound
             settingsData.TotalVolume = 1;
@@ -66,6 +66,7 @@ namespace DataPersistence
                 File.Create(_formattedString).Close();
 
                 SetDefaultSettingsData(ref _settingsDataDefault);
+                Screen.fullScreenMode = _settingsDataDefault.fullScreenMode;
 
                 _saveSystem.Save(_settingsDataDefault, _formattedString);
 
