@@ -5,5 +5,5 @@ public class WindowView : MonoBehaviour
     [SerializeField] public GameObject home;
     [SerializeField] public GameObject settingsMain;
     [SerializeField] public GameObject saveSelection;
-    [SerializeField] public GameObject modalUnsavedChanges;
+    [SerializeField] public ModalWindowUnsavedChanges modalUnsavedChanges;
 }

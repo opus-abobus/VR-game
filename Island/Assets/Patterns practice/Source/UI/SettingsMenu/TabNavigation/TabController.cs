@@ -119,6 +119,9 @@ namespace UI.Navigation.Tabs
 
         private void HideAllPanels()
         {
+            if (_model.currentTab == null)
+                return;
+
             var panels = _model.GetPanelsForTab(_model.currentTab);
             foreach (var panel in panels)
             {

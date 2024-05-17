@@ -1,8 +1,7 @@
-using System;
-using UnityEngine;
 using AppManagement.FSM;
 using AppManagement.FSM.States;
 using DataPersistence;
+using UnityEngine;
 
 [RequireComponent(typeof(AppStateMachine))]
 public class AppManager : MonoBehaviour
@@ -14,10 +13,12 @@ public class AppManager : MonoBehaviour
     [SerializeField] private DataManager _dataManager;
     public DataManager DataManager { get { return _dataManager; } }
 
-    private void Awake() {
+    private void Awake()
+    {
         if (Instance == null)
             Instance = this;
-        else {
+        else
+        {
             Destroy(this);
             return;
         }
@@ -28,35 +29,43 @@ public class AppManager : MonoBehaviour
         _appStateMachine.Init();
     }
 
-    private void Start() {
+    private void Start()
+    {
         PlayIntro();
     }
 
-    private void Update() {
+    private void Update()
+    {
         //Debug.Log(_appStateMachine.AppContext.CurrentState);
     }
 
-    private void PlayIntro() {
+    private void PlayIntro()
+    {
         _appStateMachine.EnterState<IntroState>();
     }
 
-    public void LoadMainMenu() {
+    public void LoadMainMenu()
+    {
         _appStateMachine.EnterState<LoadingMainMenuState>();
     }
 
-    public void LoadLevel() {
+    public void LoadLevel()
+    {
         _appStateMachine.EnterState<LoadingLevelState>();
     }
 
-    public void PauseGame() {
+    public void PauseGame()
+    {
         _appStateMachine.EnterState<GamePauseState>();
     }
 
-    public void ResumeGame() {
+    public void ResumeGame()
+    {
         _appStateMachine.EnterState<GameplayState>();
     }
 
-    public void ExitApp() {
+    public void ExitApp()
+    {
         Application.Quit();
     }
 }

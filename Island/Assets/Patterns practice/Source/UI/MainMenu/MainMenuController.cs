@@ -1,6 +1,7 @@
 using UI.WindowsManagement;
 using UI.Navigation.Tabs;
 using UnityEngine;
+using UI.SettingsManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -10,7 +11,14 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] private WindowsManager _windowsManager;
 
-    private void Awake() {
+    [SerializeField] private SettingsController _settingsController;
+
+    private SettingsWindowMediator _settingsWindowMediator;
+
+    private void Awake()
+    {
+        _settingsWindowMediator = new SettingsWindowMediator(_settingsController, _windowsManager);
+
         InitHomeButtons();
 
         _settingsNavigationController.Init();
@@ -18,13 +26,16 @@ public class MainMenuController : MonoBehaviour
         _windowsManager.enabled = true;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             _windowsManager.OpenPrevWindow();
         }
     }
 
-    private void InitHomeButtons() {
+    private void InitHomeButtons()
+    {
         _homeButtonsController.OnQuitPress += OnQuitClicked;
 
         _homeButtonsController.OnSettingsWindow += OnSettingsClicked;
@@ -38,7 +49,8 @@ public class MainMenuController : MonoBehaviour
         _homeButtonsController.Init();
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         _homeButtonsController.OnQuitPress -= OnQuitClicked;
 
         _homeButtonsController.OnSettingsWindow -= OnSettingsClicked;
@@ -50,23 +62,28 @@ public class MainMenuController : MonoBehaviour
         _homeButtonsController.OnStartNewGamePress -= OnNewGameClicked;
     }
 
-    private void OnNewGameClicked() {
+    private void OnNewGameClicked()
+    {
         AppManager.Instance.LoadLevel();
     }
 
-    private void OnQuitClicked() {
+    private void OnQuitClicked()
+    {
         AppManager.Instance.ExitApp();
     }
 
-    private void OnSettingsClicked() {
+    private void OnSettingsClicked()
+    {
         _windowsManager.OpenSettingsWindow();
     }
 
-    private void OnLoadLastSaveClicked() {
+    private void OnLoadLastSaveClicked()
+    {
         _windowsManager.OpenSaveSelectionWindow();
     }
 
-    private void OnSelectSaveClicked() {
+    private void OnSelectSaveClicked()
+    {
         _windowsManager.OpenSaveSelectionWindow();
     }
 }

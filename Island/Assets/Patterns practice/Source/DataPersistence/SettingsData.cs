@@ -5,9 +5,6 @@ namespace DataPersistence
     [System.Serializable]
     public struct SettingsData
     {
-        // Graphics
-        /*[HideInInspector, SaveField(FieldName.SupportedScreenResolutions)]
-        public Resolution[] SupportedScreenResolutions;*/
 
         [HideInInspector, SaveField(FieldName.ScreenResolution)]
         public Resolution ScreenResolution;

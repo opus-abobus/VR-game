@@ -7,9 +7,6 @@ namespace DataPersistence
         [SettingFieldCategory(Category.None)]
         UNDEFINED,
 
-/*        [SettingFieldCategory(Category.Graphics)]
-        SupportedScreenResolutions,*/
-
         [SettingFieldCategory(Category.Graphics)]
         ScreenResolution,
 

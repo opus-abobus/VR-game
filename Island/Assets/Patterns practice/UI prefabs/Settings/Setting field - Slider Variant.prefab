@@ -425,8 +425,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldName: 0
   slider: {fileID: 6951740540094599039}
+  valueFormat: F2
   valueText: {fileID: 447989362616552623}
   suffix: {fileID: 1478669592780119595}
+  unsavedBorder: {fileID: 6959038744882973211}
 --- !u!114 &6951740540094599039 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2589481698403948730, guid: 96828773984d71a459ef1ba2d1cfa067,
@@ -439,3 +441,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6959038744882973211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2523524376181431774, guid: 96828773984d71a459ef1ba2d1cfa067,
+    type: 3}
+  m_PrefabInstance: {fileID: 4870120535280539589}
+  m_PrefabAsset: {fileID: 0}

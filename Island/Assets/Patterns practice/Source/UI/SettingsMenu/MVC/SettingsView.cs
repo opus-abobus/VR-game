@@ -1,7 +1,5 @@
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.SettingsManagement {
     public class SettingsView : MonoBehaviour {

@@ -692,10 +692,17 @@ MonoBehaviour:
   inputField: {fileID: 6242572405533258634}
   placeholder: {fileID: 1339591980756122330}
   text: {fileID: 492984856114874496}
+  unsavedBorder: {fileID: 6877000489258883058}
   keyBind: 0
 --- !u!224 &3451132964474171922 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6021801623393433662, guid: 96828773984d71a459ef1ba2d1cfa067,
+    type: 3}
+  m_PrefabInstance: {fileID: 8968179299054242348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6877000489258883058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2523524376181431774, guid: 96828773984d71a459ef1ba2d1cfa067,
     type: 3}
   m_PrefabInstance: {fileID: 8968179299054242348}
   m_PrefabAsset: {fileID: 0}

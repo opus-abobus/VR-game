@@ -35,12 +35,6 @@ public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
 
         State = GameStates.ACTIVE;
 
-/*#if UNITY_EDITOR
-        State = GameStates.ACTIVE;
-#else
-        State = GameStates.MENU;
-#endif*/
-
         OnInitialized?.Invoke();
 
         StartCoroutine(UpdateProcess());
@@ -83,8 +77,8 @@ public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
     }
 
     void OnBootstrapFinished() {
-        _pauseMenu.onPauseButtonClicked += OnPauseButtonClicked;
-        _pauseMenu.onResumeButtonClicked += OnResumeButtonClicked;
+        //_pauseMenu.onPauseButtonClicked += OnPauseButtonClicked;
+        //_pauseMenu.onResumeButtonClicked += OnResumeButtonClicked;
     }
 
     void OnPauseButtonClicked() {

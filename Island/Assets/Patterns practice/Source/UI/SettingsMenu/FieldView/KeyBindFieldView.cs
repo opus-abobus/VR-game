@@ -13,6 +13,8 @@ namespace UI.SettingsManagement
         [SerializeField] public TextMeshProUGUI placeholder;
         [SerializeField] public TextMeshProUGUI text;
 
+        [SerializeField] public GameObject unsavedBorder;
+
         [HideInInspector] public KeyCode keyBind;
 
         private bool _isWaitingForKey = false;

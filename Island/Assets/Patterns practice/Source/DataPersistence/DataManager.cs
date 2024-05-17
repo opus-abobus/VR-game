@@ -75,6 +75,8 @@ namespace DataPersistence
             else
             {
                 _settingsData = _saveSystem.Load<SettingsData>(_formattedString);
+                Screen.SetResolution(
+                    _settingsData.ScreenResolution.width, _settingsData.ScreenResolution.height, _settingsData.fullScreenMode);
             }
         }
 

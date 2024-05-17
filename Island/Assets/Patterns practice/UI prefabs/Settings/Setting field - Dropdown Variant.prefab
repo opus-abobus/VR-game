@@ -1404,6 +1404,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4267245789884263879}
   m_SourcePrefab: {fileID: 100100000, guid: 96828773984d71a459ef1ba2d1cfa067, type: 3}
+--- !u!1 &476058694890066117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2523524376181431774, guid: 96828773984d71a459ef1ba2d1cfa067,
+    type: 3}
+  m_PrefabInstance: {fileID: 2710622513703800091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1652674398183780188 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3706860840542904903, guid: 96828773984d71a459ef1ba2d1cfa067,
@@ -1430,3 +1436,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldName: 0
   dropdown: {fileID: 6589223370518590870}
+  unsavedBorder: {fileID: 476058694890066117}

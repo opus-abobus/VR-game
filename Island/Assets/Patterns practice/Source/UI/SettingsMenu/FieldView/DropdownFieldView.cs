@@ -6,6 +6,7 @@ namespace UI.SettingsManagement {
     public class DropdownFieldView : BaseFieldView {
 
         [SerializeField] public TMP_Dropdown dropdown;
+        [SerializeField] public GameObject unsavedBorder;
 
         public event Action<DropdownFieldView> ValueChanged;
 
