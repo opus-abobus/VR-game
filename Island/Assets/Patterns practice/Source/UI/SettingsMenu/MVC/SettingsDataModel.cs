@@ -101,7 +101,7 @@ namespace UI.SettingsManagement
             }
         }
 
-        [Obsolete("Use SaveChanges() on unsaved fields list instead.")]
+        [Obsolete("Use SaveChanges() instead.")]
         public void SaveChanges_WHOLE_SEARCH()
         {
             foreach (KeyValuePair<BaseFieldView, FieldInfo> fieldData in _fieldsData)
@@ -114,9 +114,9 @@ namespace UI.SettingsManagement
 
         public void SaveChanges(List<BaseFieldView> unsavedViews)
         {
-            foreach (BaseFieldView fieldView in unsavedViews)
+            for (int i = 0; i < unsavedViews.Count; i++)
             {
-                SetDataFromView(fieldView);
+                SetDataFromView(unsavedViews[i]);
             }
 
             unsavedViews.Clear();
@@ -146,7 +146,7 @@ namespace UI.SettingsManagement
             else if (fieldView is DropdownFieldView dropdownFieldView)
             {
                 SaveFieldAttribute attribute = Attribute.GetCustomAttribute(_fieldsData[fieldView], typeof(SaveFieldAttribute)) as SaveFieldAttribute;
-                if (attribute != null) 
+                if (attribute != null)
                 {
                     switch (attribute.fieldName)
                     {
@@ -169,7 +169,7 @@ namespace UI.SettingsManagement
                             }
                         case FieldName.FullscreenMode:
                             {
-                                FullScreenMode fSM = (FullScreenMode) Enum.Parse(typeof(FullScreenMode), 
+                                FullScreenMode fSM = (FullScreenMode) Enum.Parse(typeof(FullScreenMode),
                                     dropdownFieldView.dropdown.options[dropdownFieldView.dropdown.value].text);
                                 _fieldsData[fieldView].SetValueDirect(dataRef, fSM);
 
@@ -213,7 +213,7 @@ namespace UI.SettingsManagement
                 {
                     switch (attribute.fieldName)
                     {
-                        
+
                     }
                 }
             }
@@ -244,9 +244,9 @@ namespace UI.SettingsManagement
             if (unsavedViews == null || unsavedViews.Count == 0)
                 return;
 
-            foreach (BaseFieldView fieldView in unsavedViews)
+            for (int i = 0; i < unsavedViews.Count; i++)
             {
-                SetFieldView(fieldView, false);
+                SetFieldView(unsavedViews[i], false);
             }
 
             unsavedViews.Clear();
@@ -273,7 +273,7 @@ namespace UI.SettingsManagement
 
                             Resolution[] supportedRess = Screen.resolutions;
 
-                            int i = -1;
+                            int i = 0;
                             bool isCurrentRes = false;
 
                             foreach (Resolution resolution in supportedRess)
@@ -320,38 +320,62 @@ namespace UI.SettingsManagement
             {
                 if (sliderFieldView.slider.wholeNumbers)
                 {
-                    if (sliderFieldView.slider.value == (int) _fieldsData[updatedView].GetValue(_settingsData))
-                        return false;
-                    else
+                    if (!(sliderFieldView.slider.value == (int) _fieldsData[updatedView].GetValue(_settingsData)))
                         return true;
                 }
                 else
                 {
-                    if (sliderFieldView.slider.value == (float) _fieldsData[updatedView].GetValue(_settingsData))
-                        return false;
-                    else
+                    if (!(sliderFieldView.slider.value == (float) _fieldsData[updatedView].GetValue(_settingsData)))
                         return true;
                 }
             }
 
             else if (updatedView is DropdownFieldView dropdownFieldView)
             {
-                //if (dropdownFieldView.dropdown.options[dropdownFieldView.dropdown.value].text == )
+                SaveFieldAttribute attribute = Attribute.GetCustomAttribute(_fieldsData[dropdownFieldView], typeof(SaveFieldAttribute)) as SaveFieldAttribute;
+                if (attribute != null)
+                {
+                    switch (attribute.fieldName)
+                    {
+                        case FieldName.ScreenResolution:
+                            {
+                                string dropdownText = dropdownFieldView.dropdown.options[dropdownFieldView.dropdown.value].text;
+                                //Resolution res = (Resolution) _fieldsData[dropdownFieldView].GetValue(_settingsData);
+                                Resolution res = Screen.currentResolution;
+
+                                if (!(dropdownText == res.ToString()))
+                                {
+                                    return true;
+                                }
+
+                                break;
+                            }
+                        case FieldName.FullscreenMode:
+                            {
+                                string dropdownText = dropdownFieldView.dropdown.options[dropdownFieldView.dropdown.value].text;
+                                //FullScreenMode fSM = (FullScreenMode) _fieldsData[dropdownFieldView].GetValue(_settingsData);
+                                FullScreenMode fSM = Screen.fullScreenMode;
+
+                                if (!(dropdownText == fSM.ToString()))
+                                {
+                                    return true;
+                                }
+
+                                break;
+                            }
+                    }
+                }
             }
 
             else if (updatedView is ToggleFieldView toggleFieldView)
             {
-                if (toggleFieldView.toggle.isOn == (bool) _fieldsData[updatedView].GetValue(_settingsData))
-                    return false;
-                else
+                if (!(toggleFieldView.toggle.isOn == (bool) _fieldsData[updatedView].GetValue(_settingsData)))
                     return true;
             }
 
             else if (updatedView is KeyBindFieldView keyBindFieldView)
             {
-                if (keyBindFieldView.keyBind == (KeyCode) _fieldsData[updatedView].GetValue(_settingsData))
-                    return false;
-                else
+                if (!(keyBindFieldView.keyBind == (KeyCode) _fieldsData[updatedView].GetValue(_settingsData)))
                     return true;
             }
 

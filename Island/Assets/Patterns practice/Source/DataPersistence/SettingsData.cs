@@ -5,7 +5,6 @@ namespace DataPersistence
     [System.Serializable]
     public struct SettingsData
     {
-
         [HideInInspector, SaveField(FieldName.ScreenResolution)]
         public Resolution ScreenResolution;
 

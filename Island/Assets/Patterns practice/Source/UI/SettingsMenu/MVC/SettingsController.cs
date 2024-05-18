@@ -36,6 +36,9 @@ namespace UI.SettingsManagement
 
         public void ApplySettings()
         {
+            for (int i = 0; i < _unsavedFields.Count; i++)
+                ShowUnsavedBorder(_unsavedFields[i], false);
+
             _model.SaveChanges(_unsavedFields);
 
             HasUnsavedData = false;
@@ -43,6 +46,9 @@ namespace UI.SettingsManagement
 
         public void DiscardSettings()
         {
+            for (int i = 0; i < _unsavedFields.Count; i++)
+                ShowUnsavedBorder(_unsavedFields[i], false);
+
             _model.DiscardChanges(_unsavedFields);
 
             HasUnsavedData = false;
