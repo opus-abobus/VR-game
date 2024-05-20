@@ -112,7 +112,7 @@ public class FreeCameraController : MonoBehaviour {
     }
 
     void OnGameStateChanged() {
-        var gameState = GameManager.Instance.State;
+        var gameState = GameManager.Instance.CurrentState;
         switch (gameState) {
             case GameManager.GameStates.DEAD:
             case GameManager.GameStates.PAUSE: {

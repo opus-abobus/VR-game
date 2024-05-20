@@ -1,8 +1,9 @@
+using SceneManagement;
 using System;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
-using UnityEngine.SceneManagement;
+using LoadSceneMode = UnityEngine.SceneManagement.LoadSceneMode;
 
 namespace AppManagement.FSM.States
 {

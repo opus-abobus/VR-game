@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -9,121 +8,130 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSceneLoader : MonoBehaviour
+namespace SceneManagement
 {
-    public enum LoadState { none, loading, loadedAndNotActivated, loadedAndActivated }
-    public LoadState State { get; private set; } = LoadState.none;
+    public class LevelSceneLoader : MonoBehaviour
+    {
+        public enum LoadState { none, loading, loadedAndNotActivated, loadedAndActivated }
+        public LoadState State { get; private set; } = LoadState.none;
 
-    public event Action<LoadState> StateChanged;
+        public event Action<LoadState> StateChanged;
 
-    public event Action LoadedAndNotActivated;
-    public event Action LoadedAndActivated;
+        public event Action LoadedAndNotActivated;
+        public event Action LoadedAndActivated;
 
-    [SerializeField]
-    private Slider _slider;
+        [SerializeField]
+        private Slider _slider;
 
-    [SerializeField]
-    private TextMeshProUGUI _pressKeyText;
-    
-    private float _progress = 0;
+        [SerializeField]
+        private TextMeshProUGUI _pressKeyText;
 
-    private bool _activateSceneWhenLoaded = false;
+        private float _progress = 0;
 
-    public void LoadLevelSceneViaCoroutine(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single) {
-        StartCoroutine(LoadScene(sceneName, loadSceneMode));
-    }
+        private bool _activateSceneWhenLoaded = false;
 
-    private IEnumerator LoadScene(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single) {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-        operation.allowSceneActivation = false;
+        public void LoadLevelSceneViaCoroutine(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+        {
+            StartCoroutine(LoadScene(sceneName, loadSceneMode));
+        }
 
-        State = LoadState.loading;
-        StateChanged?.Invoke(State);
+        private IEnumerator LoadScene(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
+            operation.allowSceneActivation = false;
 
-        while (!operation.isDone) {
-            _progress = operation.progress * 1.1f;
+            State = LoadState.loading;
+            StateChanged?.Invoke(State);
 
-            SetProgress(_slider);
+            while (!operation.isDone)
+            {
+                _progress = operation.progress * 1.1f;
 
-            if (operation.progress >= 0.9f) {
-                _pressKeyText.gameObject.SetActive(true);
-                _slider.gameObject.SetActive(false);
+                SetProgress(_slider);
 
-                State = LoadState.loadedAndNotActivated;
-                StateChanged?.Invoke(State);
+                if (operation.progress >= 0.9f)
+                {
+                    _pressKeyText.gameObject.SetActive(true);
+                    _slider.gameObject.SetActive(false);
 
-                while (!_activateSceneWhenLoaded) {
-                    yield return null;
+                    State = LoadState.loadedAndNotActivated;
+                    StateChanged?.Invoke(State);
+
+                    while (!_activateSceneWhenLoaded)
+                    {
+                        yield return null;
+                    }
+
+                    operation.allowSceneActivation = true;
                 }
 
-                operation.allowSceneActivation = true;
-            }
-
-            yield return null;
-        }
-
-        State = LoadState.loadedAndActivated;
-        StateChanged?.Invoke(State);
-
-        yield return null;
-    }
-
-    public void LoadSceneAsync(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateSceneOnLoad)
-    {
-        StartCoroutine(LoadScene(sceneAssetRef, loadSceneMode, activateSceneOnLoad));
-    }
-
-    private IEnumerator LoadScene(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateSceneOnLoad)
-    {
-        AsyncOperationHandle<SceneInstance> handle = sceneAssetRef.LoadSceneAsync(loadSceneMode, activateSceneOnLoad);
-        while (handle.Status == AsyncOperationStatus.None)
-        {
-            _progress = NormalizeProgress(handle.PercentComplete);
-            SetProgress(_slider);
-            yield return null;
-        }
-
-        LoadedAndNotActivated?.Invoke();
-        _progress = handle.PercentComplete;
-        SetProgress(_slider);
-
-        _pressKeyText.gameObject.SetActive(true);
-        _slider.gameObject.SetActive(false);
-
-        if (!activateSceneOnLoad)
-        {
-            while (!_activateSceneWhenLoaded)
-            {
                 yield return null;
             }
 
-            _activateSceneWhenLoaded = false;
+            State = LoadState.loadedAndActivated;
+            StateChanged?.Invoke(State);
 
-            if (handle.Status == AsyncOperationStatus.Succeeded)
+            yield return null;
+        }
+
+        public void LoadSceneAsync(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateSceneOnLoad)
+        {
+            StartCoroutine(LoadScene(sceneAssetRef, loadSceneMode, activateSceneOnLoad));
+        }
+
+        private IEnumerator LoadScene(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateSceneOnLoad)
+        {
+            AsyncOperationHandle<SceneInstance> handle = sceneAssetRef.LoadSceneAsync(loadSceneMode, activateSceneOnLoad);
+            while (handle.Status == AsyncOperationStatus.None)
+            {
+                _progress = NormalizeProgress(handle.PercentComplete);
+                SetProgress(_slider);
+                yield return null;
+            }
+
+            LoadedAndNotActivated?.Invoke();
+            _progress = handle.PercentComplete;
+            SetProgress(_slider);
+
+            _pressKeyText.gameObject.SetActive(true);
+            _slider.gameObject.SetActive(false);
+
+            if (!activateSceneOnLoad)
+            {
+                while (!_activateSceneWhenLoaded)
+                {
+                    yield return null;
+                }
+
+                _activateSceneWhenLoaded = false;
+
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    LoadedAndActivated?.Invoke();
+                    yield return handle.Result.ActivateAsync();
+                }
+            }
+            else
             {
                 LoadedAndActivated?.Invoke();
-                yield return handle.Result.ActivateAsync();
             }
+
+            yield return null;
         }
-        else
+
+        private void SetProgress(Slider slider)
         {
-            LoadedAndActivated?.Invoke();
+            slider.value = _progress;
         }
 
-        yield return null;
-    }
+        public void CompleteSceneActivation()
+        {
+            _activateSceneWhenLoaded = true;
+        }
 
-    private void SetProgress(Slider slider) {
-        slider.value = _progress;
-    }
-
-    public void CompleteSceneActivation()
-    {
-        _activateSceneWhenLoaded = true;
-    }
-
-    private float NormalizeProgress(float operationHandleProgress)
-    {
-        return (operationHandleProgress - 0.9f) / (1.0f - 0.9f);
+        private float NormalizeProgress(float operationHandleProgress)
+        {
+            return (operationHandleProgress - 0.9f) / (1.0f - 0.9f);
+        }
     }
 }

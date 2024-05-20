@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
+public class GameManager : MonoBehaviour, GameplayBootstrap.IBootstrap
 {
     //<summary> Данный класс отвечает за управление состояниями игрового процесса
     //</summary>
@@ -15,85 +15,102 @@ public class GameManager : MonoBehaviour, Bootstrap.IBootstrap
     [SerializeField]
     private PauseMenu _pauseMenu;
 
-    public enum GameStates {
-        MENU,
+    public enum GameStates
+    {
         PAUSE,
         ACTIVE,
-        DEAD
+        DEAD,
+        EVACUATED
     }
-    public GameStates State { get; private set; }
 
-    void Bootstrap.IBootstrap.Initialize() {
-        if (_instance == null) {
+    public GameStates CurrentState { get; private set; }
+
+    void GameplayBootstrap.IBootstrap.Initialize()
+    {
+        if (_instance == null)
+        {
             _instance = this;
         }
-        else {
+        else
+        {
             Destroy(gameObject);
         }
 
-        Bootstrap.Instance.BootstrapFinished += OnBootstrapFinished;
+        GameplayBootstrap.Instance.BootstrapFinished += OnBootstrapFinished;
 
-        State = GameStates.ACTIVE;
+        CurrentState = GameStates.ACTIVE;
 
         OnInitialized?.Invoke();
 
         StartCoroutine(UpdateProcess());
     }
 
-    IEnumerator UpdateProcess() {
-        GameStates lastState = State;
-        while (true) {
-            switch (State) {
-                case GameStates.MENU: {
-                        
-                        break;
-                    }
-                case GameStates.ACTIVE: {
-                        if (Input.GetKeyDown(KeyCode.Escape)) {
-                            State = GameStates.PAUSE;
+    IEnumerator UpdateProcess()
+    {
+        GameStates prevState = CurrentState;
+        while (true)
+        {
+            switch (CurrentState)
+            {
+                case GameStates.ACTIVE:
+                    {
+                        if (Input.GetKeyDown(KeyCode.Escape))
+                        {
+                            CurrentState = GameStates.PAUSE;
                         }
                         break;
                     }
-                case GameStates.PAUSE: {
-                        if (Input.GetKeyDown(KeyCode.Escape)) {
-                            State = GameStates.ACTIVE;
+                case GameStates.PAUSE:
+                    {
+                        if (Input.GetKeyDown(KeyCode.Escape))
+                        {
+                            CurrentState = GameStates.ACTIVE;
                         }
                         break;
                     }
-                case GameStates.DEAD: {
+                case GameStates.DEAD:
+                    {
+
+                        break;
+                    }
+                case GameStates.EVACUATED:
+                    {
 
                         break;
                     }
             }
 
-            if (lastState != State) {
-                print("Game state changed to " + State);
+            if (prevState != CurrentState)
+            {
+                print("Game state changed to " + CurrentState);
                 OnGameStateChanged?.Invoke();
-                lastState = State;
+                prevState = CurrentState;
             }
 
             yield return null;
         }
     }
 
-    void OnBootstrapFinished() {
-        //_pauseMenu.onPauseButtonClicked += OnPauseButtonClicked;
-        //_pauseMenu.onResumeButtonClicked += OnResumeButtonClicked;
+    void OnBootstrapFinished()
+    {
+        _pauseMenu.onPauseButtonClicked += OnPauseButtonClicked;
+        _pauseMenu.onResumeButtonClicked += OnResumeButtonClicked;
+
+        GameplayBootstrap.Instance.BootstrapFinished -= OnBootstrapFinished;
     }
 
-    void OnPauseButtonClicked() {
-        State = GameStates.PAUSE;
+    void OnPauseButtonClicked()
+    {
+        CurrentState = GameStates.PAUSE;
     }
 
-    void OnResumeButtonClicked() {
-        State = GameStates.ACTIVE;
+    void OnResumeButtonClicked()
+    {
+        CurrentState = GameStates.ACTIVE;
     }
 
-    void OnMenuButtonClicked() {
-        State = GameStates.MENU;
-    }
-
-    private void OnDisable() {
-        Bootstrap.Instance.BootstrapFinished -= OnBootstrapFinished;
+    void OnMenuButtonClicked()
+    {
+        
     }
 }

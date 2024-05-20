@@ -192,45 +192,6 @@ namespace UI.SettingsManagement
             }
         }
 
-        public T GetDataFromView<T>(BaseFieldView fieldView) where T : struct
-        {
-            if (fieldView is SliderFieldView sliderFieldView)
-            {
-                if (sliderFieldView.slider.wholeNumbers)
-                {
-                    //fieldInfo.SetValueDirect(dataRef, (int) sliderFieldView.slider.value);
-                }
-                else
-                {
-                    //fieldInfo.SetValueDirect(dataRef, sliderFieldView.slider.value);
-                }
-            }
-
-            else if (fieldView is DropdownFieldView dropdownFieldView)
-            {
-                SaveFieldAttribute attribute = Attribute.GetCustomAttribute(_fieldsData[fieldView], typeof(SaveFieldAttribute)) as SaveFieldAttribute;
-                if (attribute != null)
-                {
-                    switch (attribute.fieldName)
-                    {
-
-                    }
-                }
-            }
-
-            else if (fieldView is ToggleFieldView toggleFieldView)
-            {
-                //fieldInfo.SetValueDirect(dataRef, toggleFieldView.toggle.isOn);
-            }
-
-            else if (fieldView is KeyBindFieldView keyBindFieldView)
-            {
-                return (T) _fieldsData[fieldView].GetValue(_settingsData);
-            }
-
-            return default;
-        }
-
         public void UpdateViewText(BaseFieldView fieldView)
         {
             if (fieldView is SliderFieldView sliderFieldView)

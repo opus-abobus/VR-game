@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSettingsManager : MonoBehaviour, Bootstrap.IBootstrap {
+public class GameSettingsManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
     public static GameSettingsManager Instance { get { return _instance; } }
 
     [SerializeField]
@@ -20,7 +20,7 @@ public class GameSettingsManager : MonoBehaviour, Bootstrap.IBootstrap {
 
     public event Action OnInitialized, OnActiveWorldSettingsChanged;
 
-    void Bootstrap.IBootstrap.Initialize() {
+    void GameplayBootstrap.IBootstrap.Initialize() {
         if (_instance == null) {
             _instance = this;
         }

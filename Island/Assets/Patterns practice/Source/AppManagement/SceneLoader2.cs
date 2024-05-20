@@ -6,66 +6,69 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader2
+namespace SceneManagement
 {
-    private TaskCompletionSource<bool> _activationTaskSource;
-
-    public event Action LoadedAndNotActivated;
-    public event Action LoadedAndActivated;
-    public event Action<float> ProgressUpdated;
-
-    public async Task<AsyncOperationHandle<SceneInstance>> LoadSceneAsync(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateOnLoad)
+    public class SceneLoader2
     {
-        AsyncOperationHandle<SceneInstance> loadScene = Addressables.LoadSceneAsync(sceneAssetRef, loadSceneMode, activateOnLoad);
+        private TaskCompletionSource<bool> _activationTaskSource;
 
-        TrackProgress(loadScene);
+        public event Action LoadedAndNotActivated;
+        public event Action LoadedAndActivated;
+        public event Action<float> ProgressUpdated;
 
-        while (loadScene.PercentComplete <= 0.89f)
+        public async Task<AsyncOperationHandle<SceneInstance>> LoadSceneAsync(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateOnLoad)
         {
-            await Task.Yield();
-        }
+            AsyncOperationHandle<SceneInstance> loadScene = Addressables.LoadSceneAsync(sceneAssetRef, loadSceneMode, activateOnLoad);
 
-        if (activateOnLoad)
-        {
-            await loadScene.Task;
+            TrackProgress(loadScene);
 
-            LoadedAndActivated?.Invoke();
-            return loadScene;
-        }
-        else
-        {
-            _activationTaskSource = new TaskCompletionSource<bool>();
-            await _activationTaskSource.Task;
-
-            AsyncOperation activateOperaton = loadScene.Result.ActivateAsync();
-
-            while (!activateOperaton.isDone)
+            while (loadScene.PercentComplete <= 0.89f)
             {
                 await Task.Yield();
             }
 
-            return loadScene;
+            if (activateOnLoad)
+            {
+                await loadScene.Task;
+
+                LoadedAndActivated?.Invoke();
+                return loadScene;
+            }
+            else
+            {
+                _activationTaskSource = new TaskCompletionSource<bool>();
+                await _activationTaskSource.Task;
+
+                AsyncOperation activateOperaton = loadScene.Result.ActivateAsync();
+
+                while (!activateOperaton.isDone)
+                {
+                    await Task.Yield();
+                }
+
+                return loadScene;
+            }
         }
-    }
 
-    public void CompleteSceneActivation()
-    {
-        _activationTaskSource?.TrySetResult(true);
-    }
-
-    private async void TrackProgress(AsyncOperationHandle<SceneInstance> loadScene)
-    {
-        while (!loadScene.IsDone)
+        public void CompleteSceneActivation()
         {
-            ProgressUpdated?.Invoke(loadScene.PercentComplete);
-            await Task.Yield();
+            _activationTaskSource?.TrySetResult(true);
         }
 
-        ProgressUpdated?.Invoke(1);
-    }
+        private async void TrackProgress(AsyncOperationHandle<SceneInstance> loadScene)
+        {
+            while (!loadScene.IsDone)
+            {
+                ProgressUpdated?.Invoke(NormilizeProgress(loadScene.PercentComplete));
+                await Task.Yield();
+            }
 
-    private float NormilizeProgress(float operationHandleProgress)
-    {
-        return (operationHandleProgress - 0.9f) / (1.0f - 0.9f);
+            ProgressUpdated?.Invoke(1);
+        }
+
+        private float NormilizeProgress(float operationHandleProgress)
+        {
+            return (operationHandleProgress - 0.9f) / (1.0f - 0.9f);
+        }
     }
 }

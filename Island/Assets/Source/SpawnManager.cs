@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
+public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
     private static SpawnManager _instance;
     public static SpawnManager Instance { get { return _instance; } }
 
@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour, Bootstrap.IBootstrap {
         void BeginSpawn();
     }
 
-    void Bootstrap.IBootstrap.Initialize() {
+    void GameplayBootstrap.IBootstrap.Initialize() {
         if (_instance == null) {
             _instance = this;
         }

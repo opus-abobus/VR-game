@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class HybridPlayerController : MonoBehaviour, Bootstrap.IBootstrap {
+public class HybridPlayerController : MonoBehaviour, GameplayBootstrap.IBootstrap {
     [SerializeField]
     private Transform _playerCamera;
 
@@ -54,7 +54,7 @@ public class HybridPlayerController : MonoBehaviour, Bootstrap.IBootstrap {
     private Vector2 _currentMouseDeltaVelocity = Vector2.zero;
     public bool IsFreeCamActive { get; private set; }
 
-    void Bootstrap.IBootstrap.Initialize() {
+    void GameplayBootstrap.IBootstrap.Initialize() {
         _controller = GetComponent<CharacterController>();
         _startRotCam = Vector3.zero;
         _headSpriteRenderer.enabled = false;
@@ -154,7 +154,7 @@ public class HybridPlayerController : MonoBehaviour, Bootstrap.IBootstrap {
     }
 
     void OnGameStateChanged() {
-        GameManager.GameStates gameState = GameManager.Instance.State;
+        GameManager.GameStates gameState = GameManager.Instance.CurrentState;
         switch (gameState) {
             case GameManager.GameStates.ACTIVE: {
                     if (!IsFreeCamActive)

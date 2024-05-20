@@ -1,8 +1,9 @@
+using SceneManagement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EndGameScreen : MonoBehaviour, Bootstrap.IBootstrap
+public class EndGameScreen : MonoBehaviour
 {
     [SerializeField] 
     private GameObject _screen_survived;
@@ -14,7 +15,7 @@ public class EndGameScreen : MonoBehaviour, Bootstrap.IBootstrap
         _startTimeScale = Time.timeScale;
     }
 
-    void Bootstrap.IBootstrap.Initialize() {
+    public void Initialize() {
         StartCoroutine(UpdateProcess());
     }
 
@@ -36,9 +37,12 @@ public class EndGameScreen : MonoBehaviour, Bootstrap.IBootstrap
         }
     }
 
-    public void LoadMenu() {
+    public async void LoadMenu() {
         Time.timeScale = _startTimeScale;
-        SceneManager.LoadScene("Menu");
+        //SceneManager.LoadScene("Menu");
+
+        SceneLoader2 sceneLoader = new SceneLoader2();
+        await sceneLoader.LoadSceneAsync(ScenesDatabase.Instance.MainMenu, LoadSceneMode.Single, true);
     }
 
     private bool _isActiveScreen = false;

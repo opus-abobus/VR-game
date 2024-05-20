@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class PlayerEating : MonoBehaviour, Bootstrap.IBootstrap
+public class PlayerEating : MonoBehaviour, GameplayBootstrap.IBootstrap
 {
     public event Action OnInitialized;
 
@@ -19,7 +19,7 @@ public class PlayerEating : MonoBehaviour, Bootstrap.IBootstrap
 
     private Dictionary<string, float> nutVals = new Dictionary<string, float>();
 
-    void Bootstrap.IBootstrap.Initialize() {
+    void GameplayBootstrap.IBootstrap.Initialize() {
         _settings = GameSettingsManager.Instance.ActiveWorldSettings;
 
         foreach (var tag in _tagsWithEatableObjects) {

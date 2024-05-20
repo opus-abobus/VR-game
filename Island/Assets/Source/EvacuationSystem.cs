@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
+public class EvacuationSystem : MonoBehaviour, GameplayBootstrap.IBootstrap
 {
     private static EvacuationSystem _instance;
     public static EvacuationSystem Instance { get { return _instance; } }
@@ -11,6 +11,8 @@ public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
     public event Action OnInitialized; 
 
     public bool _useGlobalSettings = true;
+
+    [SerializeField] private EndGameScreen _endGameScreen;
 
     public int _rocketChance = 25;
     public int _sosRocksChance = 1;
@@ -26,7 +28,7 @@ public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
     [HideInInspector] 
     public bool _isEvacuated = false;
 
-    void Bootstrap.IBootstrap.Initialize() {
+    void GameplayBootstrap.IBootstrap.Initialize() {
         if (_instance == null) {
             _instance = this;
         }
@@ -41,6 +43,8 @@ public class EvacuationSystem : MonoBehaviour, Bootstrap.IBootstrap
         /*GameSettings.instance.bonfireChance = 25;
         print("chance: " + GameSettings.instance.bonfireChance + "\ndur: " + GameSettings.instance.bonfireDuration);*/
 
+        _endGameScreen.Initialize();
+        
         OnInitialized?.Invoke();
     }
 

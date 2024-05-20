@@ -1,89 +1,92 @@
-using UI.WindowsManagement;
 using UI.Navigation.Tabs;
-using UnityEngine;
 using UI.SettingsManagement;
+using UI.WindowsManagement;
+using UnityEngine;
 
-public class MainMenuController : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private HomeButtonsController _homeButtonsController;
-
-    [SerializeField] private TabController _settingsNavigationController;
-
-    [SerializeField] private WindowsManager _windowsManager;
-
-    [SerializeField] private SettingsController _settingsController;
-
-    private SettingsWindowMediator _settingsWindowMediator;
-
-    private void Awake()
+    public class MainMenuController : MonoBehaviour
     {
-        _settingsWindowMediator = new SettingsWindowMediator(_settingsController, _windowsManager);
+        [SerializeField] private HomeButtonsController _homeButtonsController;
 
-        InitHomeButtons();
+        [SerializeField] private TabController _settingsNavigationController;
 
-        _settingsNavigationController.Init();
+        [SerializeField] private WindowsManager _windowsManager;
 
-        _windowsManager.enabled = true;
-    }
+        [SerializeField] private SettingsController _settingsController;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        private SettingsWindowMediator _settingsWindowMediator;
+
+        private void Awake()
         {
-            _windowsManager.OpenPrevWindow();
+            _settingsWindowMediator = new SettingsWindowMediator(_settingsController, _windowsManager);
+
+            InitHomeButtons();
+
+            _settingsNavigationController.Init();
+
+            _windowsManager.enabled = true;
         }
-    }
 
-    private void InitHomeButtons()
-    {
-        _homeButtonsController.OnQuitPress += OnQuitClicked;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _windowsManager.OpenPrevWindow();
+            }
+        }
 
-        _homeButtonsController.OnSettingsWindow += OnSettingsClicked;
+        private void InitHomeButtons()
+        {
+            _homeButtonsController.OnQuitPress += OnQuitClicked;
 
-        _homeButtonsController.OnLoadLastSavePress += OnLoadLastSaveClicked;
+            _homeButtonsController.OnSettingsWindow += OnSettingsClicked;
 
-        _homeButtonsController.OnSaveSelectionWindow += OnSelectSaveClicked;
+            _homeButtonsController.OnLoadLastSavePress += OnLoadLastSaveClicked;
 
-        _homeButtonsController.OnStartNewGamePress += OnNewGameClicked;
+            _homeButtonsController.OnSaveSelectionWindow += OnSelectSaveClicked;
 
-        _homeButtonsController.Init();
-    }
+            _homeButtonsController.OnStartNewGamePress += OnNewGameClicked;
 
-    private void OnDestroy()
-    {
-        _homeButtonsController.OnQuitPress -= OnQuitClicked;
+            _homeButtonsController.Init();
+        }
 
-        _homeButtonsController.OnSettingsWindow -= OnSettingsClicked;
+        private void OnDestroy()
+        {
+            _homeButtonsController.OnQuitPress -= OnQuitClicked;
 
-        _homeButtonsController.OnLoadLastSavePress -= OnLoadLastSaveClicked;
+            _homeButtonsController.OnSettingsWindow -= OnSettingsClicked;
 
-        _homeButtonsController.OnSaveSelectionWindow -= OnSelectSaveClicked;
+            _homeButtonsController.OnLoadLastSavePress -= OnLoadLastSaveClicked;
 
-        _homeButtonsController.OnStartNewGamePress -= OnNewGameClicked;
-    }
+            _homeButtonsController.OnSaveSelectionWindow -= OnSelectSaveClicked;
 
-    private void OnNewGameClicked()
-    {
-        AppManager.Instance.LoadLevel();
-    }
+            _homeButtonsController.OnStartNewGamePress -= OnNewGameClicked;
+        }
 
-    private void OnQuitClicked()
-    {
-        AppManager.Instance.ExitApp();
-    }
+        private void OnNewGameClicked()
+        {
+            AppManager.Instance.LoadLevel();
+        }
 
-    private void OnSettingsClicked()
-    {
-        _windowsManager.OpenSettingsWindow();
-    }
+        private void OnQuitClicked()
+        {
+            AppManager.Instance.ExitApp();
+        }
 
-    private void OnLoadLastSaveClicked()
-    {
-        _windowsManager.OpenSaveSelectionWindow();
-    }
+        private void OnSettingsClicked()
+        {
+            _windowsManager.OpenSettingsWindow();
+        }
 
-    private void OnSelectSaveClicked()
-    {
-        _windowsManager.OpenSaveSelectionWindow();
+        private void OnLoadLastSaveClicked()
+        {
+            _windowsManager.OpenSaveSelectionWindow();
+        }
+
+        private void OnSelectSaveClicked()
+        {
+            _windowsManager.OpenSaveSelectionWindow();
+        }
     }
 }

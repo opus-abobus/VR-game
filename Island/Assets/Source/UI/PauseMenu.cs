@@ -1,3 +1,4 @@
+using SceneManagement;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,7 +32,7 @@ public class PauseMenu : MonoBehaviour {
     }
 
     void OnGameStateChanged() {
-        switch (GameManager.Instance.State) {
+        switch (GameManager.Instance.CurrentState) {
             case GameManager.GameStates.ACTIVE: {
                     OnResumeButtonClicked();
                     break;
@@ -76,6 +77,9 @@ public class PauseMenu : MonoBehaviour {
     public void OnLoadMenuButtonClicked()
     {
         Time.timeScale = _startTimeScale;
-        SceneManager.LoadScene("Menu");
+        //SceneManager.LoadScene("Menu");
+
+        SceneLoader2 sceneLoader = new SceneLoader2();
+        sceneLoader.LoadSceneAsync(ScenesDatabase.Instance.MainMenu, LoadSceneMode.Single, true);
     }
 }
