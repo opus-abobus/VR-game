@@ -8,10 +8,13 @@ public class AppManager : MonoBehaviour
 {
     public static AppManager Instance { get; private set; }
 
+
     private AppStateMachine _appStateMachine;
+
 
     [SerializeField] private DataManager _dataManager;
     public DataManager DataManager { get { return _dataManager; } }
+
 
     private void Awake()
     {

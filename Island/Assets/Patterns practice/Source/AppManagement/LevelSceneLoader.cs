@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,6 +15,9 @@ public class LevelSceneLoader : MonoBehaviour
     public LoadState State { get; private set; } = LoadState.none;
 
     public event Action<LoadState> StateChanged;
+
+    public event Action LoadedAndNotActivated;
+    public event Action LoadedAndActivated;
 
     [SerializeField]
     private Slider _slider;
@@ -61,11 +68,62 @@ public class LevelSceneLoader : MonoBehaviour
         yield return null;
     }
 
-    public void ActivateScene() {
-        _activateSceneWhenLoaded = true;
+    public void LoadSceneAsync(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateSceneOnLoad)
+    {
+        StartCoroutine(LoadScene(sceneAssetRef, loadSceneMode, activateSceneOnLoad));
+    }
+
+    private IEnumerator LoadScene(AssetReference sceneAssetRef, LoadSceneMode loadSceneMode, bool activateSceneOnLoad)
+    {
+        AsyncOperationHandle<SceneInstance> handle = sceneAssetRef.LoadSceneAsync(loadSceneMode, activateSceneOnLoad);
+        while (handle.Status == AsyncOperationStatus.None)
+        {
+            _progress = NormalizeProgress(handle.PercentComplete);
+            SetProgress(_slider);
+            yield return null;
+        }
+
+        LoadedAndNotActivated?.Invoke();
+        _progress = handle.PercentComplete;
+        SetProgress(_slider);
+
+        _pressKeyText.gameObject.SetActive(true);
+        _slider.gameObject.SetActive(false);
+
+        if (!activateSceneOnLoad)
+        {
+            while (!_activateSceneWhenLoaded)
+            {
+                yield return null;
+            }
+
+            _activateSceneWhenLoaded = false;
+
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                LoadedAndActivated?.Invoke();
+                yield return handle.Result.ActivateAsync();
+            }
+        }
+        else
+        {
+            LoadedAndActivated?.Invoke();
+        }
+
+        yield return null;
     }
 
     private void SetProgress(Slider slider) {
         slider.value = _progress;
+    }
+
+    public void CompleteSceneActivation()
+    {
+        _activateSceneWhenLoaded = true;
+    }
+
+    private float NormalizeProgress(float operationHandleProgress)
+    {
+        return (operationHandleProgress - 0.9f) / (1.0f - 0.9f);
     }
 }

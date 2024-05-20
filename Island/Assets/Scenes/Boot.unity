@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -167,23 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cab1974879e9c4d9dfa3940d0837ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settingsDataDefault:
-    fullScreenMode: 0
-    totalVolume: 1
-    musicVolume: 1
-    playerStepsVolume: 1
-    mouseSensitivityX: 1
-    mouseSensitivityY: 1
-    quickSave: 286
-    skipIntro: 1
-    fieldOfView: 60
-    fieldOfView_MIN: 50
-    fieldOfView_MAX: 90
-    autosave: 0
-    saveOnExit: 0
-    autoSaveIntervalInMinutes: 15
-    autoSaveIntervalInMinutes_MIN: 1
-    autoSaveIntervalInMinutes_MAX: 60
 --- !u!1 &685937413
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,9 +224,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc915f1439ac61544bdb274cc190624c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1668386679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668386681}
+  - component: {fileID: 1668386680}
+  m_Layer: 0
+  m_Name: ScenesDatabase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1668386680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668386679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8556c94cbdca3de4ca5fd3b57b3cf25f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Intro:
+    m_AssetGUID: 072b412b45f824d4182cde8deceec9b3
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  MainMenu:
+    m_AssetGUID: b81edf34e9476ce40aaa2bb5261a59de
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  LevelLoading:
+    m_AssetGUID: 5f9be22091216a04788f6e91333ef7ef
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  MainLevel:
+    m_AssetGUID: 99c9720ab356a0642a771bea13969a05
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+--- !u!4 &1668386681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668386679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 685937415}
   - {fileID: 39403098}
+  - {fileID: 1668386681}

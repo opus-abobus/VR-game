@@ -1,28 +1,40 @@
 using UnityEngine;
 
-namespace AppManagement.FSM.States {
-    public class LevelLoadedState : IAppState {
-
+namespace AppManagement.FSM.States
+{
+    public class LevelLoadedState : IAppState
+    {
         private AppContext _context;
 
-        public LevelLoadedState(AppContext context) {
+        private LevelSceneLoader _sceneLoader;
+
+        public LevelLoadedState(AppContext context)
+        {
             _context = context;
         }
 
-        void IAppState.Enter() {
-
+        void IAppState.Enter()
+        {
+            _sceneLoader = UnityEngine.Object.FindObjectOfType<LevelSceneLoader>();
+            _sceneLoader.LoadedAndActivated += OnSceneActivated;
         }
 
-        void IAppState.Update() {
-            if (Input.anyKeyDown) {
-                UnityEngine.Object.FindObjectOfType<LevelSceneLoader>().ActivateScene();
-
-                _context.RequestStateTransition<GameplayState>();
+        void IAppState.Update()
+        {
+            if (Input.anyKeyDown)
+            {
+                _sceneLoader.CompleteSceneActivation();
             }
         }
 
-        void IAppState.Exit() {
+        void IAppState.Exit()
+        {
 
+        }
+
+        private void OnSceneActivated()
+        {
+            _context.RequestStateTransition<GameplayState>();
         }
     }
 }
