@@ -53,7 +53,15 @@ public class PlayerEating : MonoBehaviour, GameplayBootstrap.IBootstrap
             
             if (tag == item) {
                 _hungerSystem.Satiety += nutVals[tag];
-                Destroy(other.gameObject);
+
+                if (tag == "banana")
+                {
+                    BananaPool.Instance.Return(other.gameObject);
+                }
+                else
+                {
+                    Destroy(other.gameObject);
+                }
             }
         }
     }

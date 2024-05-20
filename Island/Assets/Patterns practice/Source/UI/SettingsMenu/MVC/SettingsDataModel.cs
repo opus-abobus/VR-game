@@ -230,11 +230,12 @@ namespace UI.SettingsManagement
                     case FieldName.ScreenResolution:
                         {
                             // perhaps, it's not necessary to save the current resolution or load it since it is already saved when applied
-                            Resolution savedRes = (Resolution) _fieldsData[dropdownFieldView].GetValue(_settingsData);
+                            //Resolution savedRes = (Resolution) _fieldsData[dropdownFieldView].GetValue(_settingsData);
+                            Resolution currentRes = Screen.currentResolution;
 
                             Resolution[] supportedRess = Screen.resolutions;
 
-                            int i = 0;
+                            int i = -1;
                             bool isCurrentRes = false;
 
                             foreach (Resolution resolution in supportedRess)
@@ -244,7 +245,7 @@ namespace UI.SettingsManagement
                                 if (!isCurrentRes)
                                 {
                                     ++i;
-                                    if (resolution.Equals(savedRes))
+                                    if (resolution.Equals(currentRes))
                                         isCurrentRes = true;
                                 }
                             }

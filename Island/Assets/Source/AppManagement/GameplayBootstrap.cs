@@ -22,6 +22,9 @@ public class GameplayBootstrap : MonoBehaviour
     [SerializeField]
     private PlayerEating _playerEating;
 
+    [SerializeField]
+    private BananaPool _bananaPool;
+
     private static GameplayBootstrap _instance;
     public static GameplayBootstrap Instance { get { return _instance; } }
 
@@ -39,6 +42,8 @@ public class GameplayBootstrap : MonoBehaviour
             Destroy(gameObject); 
             return;
         }
+
+        _bananaPool.Init();
 
         Queue<IBootstrap> bootQueue = new Queue<IBootstrap>();
         bootQueue.Enqueue(_gameManager);

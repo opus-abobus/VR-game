@@ -8,6 +8,8 @@ public class BananaDrop : MonoBehaviour
 
     public GameObject _banana;
 
+    private BananaPool _bananaPool;
+
     public event Action FallenFruit;
 
 /*    [SerializeField]
@@ -32,6 +34,8 @@ public class BananaDrop : MonoBehaviour
 
         WorldSettings.IBananaTreeSettings bananasSettings = GameSettingsManager.Instance.ActiveWorldSettings;
         _bananaAmount = UnityEngine.Random.Range(bananasSettings.MinBananasToDrop, bananasSettings.MaxBananasToDrop);
+
+        _bananaPool = BananaPool.Instance;
     }
 
     void AddThrowingObjects() {
@@ -72,8 +76,12 @@ public class BananaDrop : MonoBehaviour
 
         for (int i = 0; i < _bananaAmount; i++) {
             spawnPoint.y += _colliderSize.y / 2;
-            GameObject spawnedBanana = Instantiate(_banana, spawnPoint, UnityEngine.Random.rotation);
+            //GameObject spawnedBanana = Instantiate(_banana, spawnPoint, UnityEngine.Random.rotation);
+            GameObject spawnedBanana = _bananaPool.Get();
             spawnedBanana.transform.parent = gameObject.transform.parent;
+            spawnedBanana.transform.position = spawnPoint;
+            spawnedBanana.transform.rotation = UnityEngine.Random.rotation;
+            spawnedBanana.SetActive(true);
         }
     }
 }
