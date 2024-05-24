@@ -645,7 +645,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9184379160527092055}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6500282134357242516
 MonoBehaviour:
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4715464185943494869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 541d8d44ea23b704cbe6253cc18ab5c0, type: 3}
+  m_Script: {fileID: 11500000, guid: ab2f1a1249d03cb47b8e37883f813a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 763788026500162213}
@@ -789,7 +789,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9205996520099543074}
-  - {fileID: 6498773465483166892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -824,3 +823,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1986146258}
   - {fileID: 9184379160527092055}
+  - {fileID: 6498773465483166892}

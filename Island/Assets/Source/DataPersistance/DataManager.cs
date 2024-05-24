@@ -6,12 +6,12 @@ namespace DataPersistence
     public class DataManager : MonoBehaviour
     {
         private const string
-                _gameSettingsFileName = "Game settings",
-                _gameplayFilename = "Gameplay data";
+            GameSettingsFileName = "Game settings",
+            GameplayFilesDirName = "/Saves/";
 
         private string _gameDataPath;
 
-        private string _formattedString;
+        private string _gameSettingsPath;
 
         private SettingsData _settingsDataDefault;
         private SettingsData _settingsData;
@@ -56,35 +56,107 @@ namespace DataPersistence
         {
             DontDestroyOnLoad(this);
 
-            _gameDataPath = Application.persistentDataPath;
-            _formattedString = _gameDataPath + "/" + _gameSettingsFileName + ".xml";
+            _gameSettingsPath = Application.persistentDataPath + "/" + GameSettingsFileName + ".xml";
+            _gameDataPath = Application.persistentDataPath + GameplayFilesDirName;
 
             _saveSystem = new XMLSaveSystem();
 
-            if (!File.Exists(_formattedString))
-            {
-                File.Create(_formattedString).Close();
-
-                SetDefaultSettingsData(ref _settingsDataDefault);
-                Screen.fullScreenMode = _settingsDataDefault.fullScreenMode;
-
-                _saveSystem.Save(_settingsDataDefault, _formattedString);
-
-                _settingsData = _settingsDataDefault;
-            }
-            else
-            {
-                _settingsData = _saveSystem.Load<SettingsData>(_formattedString);
-            }
+            InitGameSettings();
+            InitGameplaySavesData();
         }
 
         public SettingsData SaveSettings(ref SettingsData settingsData)
         {
             _settingsData = settingsData;
 
-            _saveSystem.Save(_settingsData, _formattedString);
+            _saveSystem.Save(_settingsData, _gameSettingsPath);
 
             return _settingsData;
+        }
+
+        private void InitGameSettings()
+        {
+            if (!File.Exists(_gameSettingsPath))
+            {
+                File.Create(_gameSettingsPath).Close();
+
+                SetDefaultSettingsData(ref _settingsDataDefault);
+                Screen.fullScreenMode = _settingsDataDefault.fullScreenMode;
+
+                _saveSystem.Save(_settingsDataDefault, _gameSettingsPath);
+
+                _settingsData = _settingsDataDefault;
+            }
+            else
+            {
+                _settingsData = _saveSystem.Load<SettingsData>(_gameSettingsPath);
+            }
+        }
+
+        private void InitGameplaySavesData()
+        {
+            if (!Directory.Exists(_gameDataPath))
+            {
+                Directory.CreateDirectory(_gameDataPath);
+            }
+        }
+
+        public GameplayData[] GetSaves()
+        {
+            GameplayData[] result = new GameplayData[Directory.GetFiles(_gameDataPath, ".xml").Length];
+            if (result.Length == 0)
+            {
+                return null;
+            }
+
+            int i = 0;
+            foreach (string filePath in Directory.GetFiles(_gameDataPath, "*.xml"))
+            {
+                result[i] = _saveSystem.Load<GameplayData>(filePath);
+                i++;
+            }
+
+            return result;
+        }
+
+        public GameplayData GetSave(string saveFileName)
+        {
+            saveFileName = _gameDataPath + saveFileName + ".xml";
+
+            foreach (string filePath in Directory.GetFiles(_gameDataPath, "*.xml"))
+            {
+                if (saveFileName.Equals(filePath))
+                {
+                    return _saveSystem.Load<GameplayData>(filePath);
+                }
+            }
+
+            return null;
+        }
+
+        public GameplayData GetLastSave()
+        {
+            string[] files = Directory.GetFiles(_gameDataPath, "*.xml");
+            if (files.Length == 0)
+            {
+                return null;
+            }
+
+            string lastSavePath = files[0];
+            for (int i = 1; i < files.Length; i++)
+            {
+                if (File.GetCreationTime(files[i]) > File.GetCreationTime(lastSavePath))
+                {
+                    lastSavePath = files[i];
+                }
+            }
+
+            return _saveSystem.Load<GameplayData>(lastSavePath);
+        }
+
+        public void WriteSave(GameplayData gameplayData, string saveName)
+        {
+            _saveSystem.Save(gameplayData, _gameDataPath + saveName + ".xml");
         }
     }
 }

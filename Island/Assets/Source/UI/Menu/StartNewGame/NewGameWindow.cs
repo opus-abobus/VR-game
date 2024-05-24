@@ -2,6 +2,8 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static WorldSettings;
+using static WorldSettingsList;
 
 namespace UI.WindowsManagement
 {
@@ -14,12 +16,13 @@ namespace UI.WindowsManagement
 
         [SerializeField] private GameObject _windowObject;
 
-        //[SerializeField] private Sett
+        [SerializeField] private WorldSettingsList _difficultiesMap;
 
         private Window _window;
         public Window Window { get { return _window; } }
 
-        public event Action StartNewGameButtonClicked, BackButtonClicked;
+        public event Action<int> StartNewGameButtonClicked;
+        public event Action BackButtonClicked;
 
         public void Init()
         {
@@ -27,18 +30,32 @@ namespace UI.WindowsManagement
 
             _start.onClick.AddListener(OnNewGameButtonClicked);
             _back.onClick.AddListener(OnBackButtonClicked);
-
-            _difficultyDropdown.ClearOptions();
+            
+            InitDifficultiesDropdown();
         }
 
         private void OnNewGameButtonClicked()
         {
-            StartNewGameButtonClicked?.Invoke();
+            StartNewGameButtonClicked?.Invoke(_difficultyDropdown.value);
+
+            AppManager.Instance.LoadLevel();
         }
 
         private void OnBackButtonClicked()
         {
             BackButtonClicked?.Invoke();
+
+            _difficultyDropdown.value = 0;
+        }
+
+        private void InitDifficultiesDropdown()
+        {
+            _difficultyDropdown.ClearOptions();
+
+            foreach (WorldSettingsEntry entry in _difficultiesMap.entries)
+            {
+                _difficultyDropdown.options.Add(new TMP_Dropdown.OptionData(entry.WorldSettings.Difficulty.ToString(), null));
+            }
         }
     }
 }

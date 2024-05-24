@@ -1,3 +1,4 @@
+using DataPersistence;
 using System;
 using System.Collections;
 using TMPro;
@@ -30,11 +31,13 @@ namespace SceneManagement
 
         private bool _activateSceneWhenLoaded = false;
 
+        [Obsolete]
         public void LoadLevelSceneViaCoroutine(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
         {
             StartCoroutine(LoadScene(sceneName, loadSceneMode));
         }
 
+        [Obsolete]
         private IEnumerator LoadScene(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
@@ -119,11 +122,6 @@ namespace SceneManagement
             yield return null;
         }
 
-        private void SetProgress(Slider slider)
-        {
-            slider.value = _progress;
-        }
-
         public void CompleteSceneActivation()
         {
             _activateSceneWhenLoaded = true;
@@ -132,6 +130,11 @@ namespace SceneManagement
         private float NormalizeProgress(float operationHandleProgress)
         {
             return (operationHandleProgress - 0.9f) / (1.0f - 0.9f);
+        }
+
+        private void SetProgress(Slider slider)
+        {
+            slider.value = _progress;
         }
     }
 }

@@ -28,7 +28,8 @@ namespace DataPersistence
         {
             if (!File.Exists(fullSavePath))
             {
-                return;
+                //return;
+                File.Create(fullSavePath).Close();
             }
 
             XmlSerializer serializer = new XmlSerializer(typeof(TData));

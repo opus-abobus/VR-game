@@ -8,13 +8,11 @@ public class AppManager : MonoBehaviour
 {
     public static AppManager Instance { get; private set; }
 
-
     private AppStateMachine _appStateMachine;
 
 
     [SerializeField] private DataManager _dataManager;
     public DataManager DataManager { get { return _dataManager; } }
-
 
     private void Awake()
     {
@@ -34,8 +32,14 @@ public class AppManager : MonoBehaviour
 
     private void Start()
     {
-        //if (DataManager.G)
-        PlayIntro();
+        if (DataManager.SettingsData.SkipIntro)
+        {
+            LoadMainMenu();
+        }
+        else
+        {
+            PlayIntro();
+        }
     }
 
     private void Update()

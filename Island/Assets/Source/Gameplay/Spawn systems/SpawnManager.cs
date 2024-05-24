@@ -57,7 +57,6 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
         _berrySpawners = FindObjectsOfType<BerrySpawnManager>().ToList();
 
         while (!BananaTreeManager.HasStarted) {
-            //print("waiting for banana spawner");
             yield return null;
         }
         //print("banana spawner script has been started (should be initialized).");
@@ -65,11 +64,6 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
 
         OnInitialized?.Invoke();
 
-        //print("Banana spawners count: " + _bananaSpawners.Count);
-        //print("Coconut spawners count: " + _coconutSpawners.Count);
-        //print("Berry spawners count: " + _berrySpawners.Count);
-
-        //!
         StartAllSpawners();
 
         yield return null;

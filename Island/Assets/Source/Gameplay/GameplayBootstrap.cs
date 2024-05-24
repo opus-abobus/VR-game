@@ -1,3 +1,4 @@
+using DataPersistence;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,30 +31,44 @@ public class GameplayBootstrap : MonoBehaviour
 
     public event Action BootstrapFinished;
 
-    public interface IBootstrap {
+    public interface IBootstrap
+    {
         void Initialize();
     }
 
-    private void Awake() {
-        if (_instance == null) { 
-            _instance = this; 
+    public void Init(GameplayData gameplayData)
+    {
+        if (_instance == null)
+        {
+            _instance = this;
         }
-        else {
-            Destroy(gameObject); 
+        else
+        {
+            Destroy(gameObject);
             return;
         }
 
         _bananaPool.Init();
+        _gameSettingsManager.Initialize(gameplayData.difficultyID);
+
+        if (gameplayData != null)
+        {
+
+        }
+        else
+        {
+
+        }
 
         Queue<IBootstrap> bootQueue = new Queue<IBootstrap>();
         bootQueue.Enqueue(_gameManager);
-        bootQueue.Enqueue(_gameSettingsManager);
         bootQueue.Enqueue(_spawnManager);
         bootQueue.Enqueue(_evacuationSystem);
         bootQueue.Enqueue(_playerEating);
         bootQueue.Enqueue(_hybridPlayerController);
 
-        while (bootQueue.Count > 0) {
+        while (bootQueue.Count > 0)
+        {
             bootQueue.Dequeue().Initialize();
         }
 

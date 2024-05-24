@@ -31,6 +31,8 @@ namespace UI.WindowsManagement
 
             _view.modalUnsavedChanges.SaveButtonClicked += NotyfyMediator_OnSaveSettingsInModal;
             _view.modalUnsavedChanges.DiscardButtonClicked += NotyfyMediator_OnDiscardSettingsInModal;
+
+            _view.newGame.BackButtonClicked += OnNewGameWindow_BackButtonClicked;
         }
 
         private void OpenWindow(Window window, OpenWindowMode openWindowMode = OpenWindowMode.Single)
@@ -132,10 +134,17 @@ namespace UI.WindowsManagement
             _mediator.Notyfy(this, "DiscardSettingsDataInModal");
         }
 
+        private void OnNewGameWindow_BackButtonClicked()
+        {
+            GoHome();
+        }
+
         private void OnDestroy()
         {
             _view.modalUnsavedChanges.SaveButtonClicked -= NotyfyMediator_OnSaveSettingsInModal;
             _view.modalUnsavedChanges.DiscardButtonClicked -= NotyfyMediator_OnDiscardSettingsInModal;
+
+            _view.newGame.BackButtonClicked -= OnNewGameWindow_BackButtonClicked;
         }
     }
 }

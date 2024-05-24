@@ -1,14 +1,18 @@
 using System;
 
-namespace AppManagement {
-    public class AppEventBus {
-
+namespace AppManagement
+{
+    public class AppEventBus
+    {
         private AppEventBus() { }
 
         private static AppEventBus _instance;
-        public static AppEventBus Instance {
-            get {
-                if (_instance == null) {
+        public static AppEventBus Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
                     _instance = new AppEventBus();
                 }
 
@@ -16,17 +20,25 @@ namespace AppManagement {
             }
         }
 
-        public event Action OnGameLoaded, OnGamePaused, OnGameplay;
+        public event Action OnGameLoading, OnGameLoaded, OnGamePaused, OnGameplay;
 
-        public void TriggerGameLoaded() {
+        public void TriggerGameLoading()
+        {
+            OnGameLoading?.Invoke();
+        }
+
+        public void TriggerGameLoaded()
+        {
             OnGameLoaded?.Invoke();
         }
 
-        public void TriggerGamePause() {
+        public void TriggerGamePause()
+        {
             OnGamePaused?.Invoke();
         }
 
-        public void TriggerGameplay() {
+        public void TriggerGameplay()
+        {
             OnGameplay?.Invoke();
         }
     }

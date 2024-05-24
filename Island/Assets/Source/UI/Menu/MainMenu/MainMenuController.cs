@@ -1,3 +1,4 @@
+using DataPersistence;
 using UI.Navigation.Tabs;
 using UI.SettingsManagement;
 using UI.WindowsManagement;
@@ -83,7 +84,8 @@ namespace UI
 
         private void OnLoadLastSaveClicked()
         {
-            
+            CurrentSessionDataManager.Instance.SetData(AppManager.Instance.DataManager.GetLastSave());
+            AppManager.Instance.LoadLevel();
         }
 
         private void OnSelectSaveClicked()
