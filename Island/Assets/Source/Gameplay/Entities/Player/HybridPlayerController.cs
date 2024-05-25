@@ -1,8 +1,9 @@
+using DataPersistence.Gameplay;
 using System;
 using System.Collections;
 using UnityEngine;
 
-public class HybridPlayerController : MonoBehaviour, GameplayBootstrap.IBootstrap {
+public class HybridPlayerController : MonoBehaviour {
     [SerializeField]
     private Transform _playerCamera;
 
@@ -54,13 +55,29 @@ public class HybridPlayerController : MonoBehaviour, GameplayBootstrap.IBootstra
     private Vector2 _currentMouseDeltaVelocity = Vector2.zero;
     public bool IsFreeCamActive { get; private set; }
 
-    void GameplayBootstrap.IBootstrap.Initialize() {
+    [SerializeField] private LevelDataManager _levelDataManager;
+    private PlayerData _data;
+
+    private void OnGameSave(GameplayData data)
+    {
+        data.playerData.playerCameraTransform = 
+            new PlayerData.PlayerCameraTransform(_playerCamera.localEulerAngles);
+
+        data.playerData.playerPosition = transform.position;
+        data.playerData.playerRotation = transform.rotation;
+    }
+
+    public void Initialize(PlayerData data) {
+
+        _data = data;
+
+        _levelDataManager.OnGameSave += OnGameSave;
+
         _controller = GetComponent<CharacterController>();
         _startRotCam = Vector3.zero;
         _headSpriteRenderer.enabled = false;
 
         IsFreeCamActive = false;
-
         if (_freeCameraController == null)
             _allowFreeCamera = false;
         else
@@ -68,13 +85,24 @@ public class HybridPlayerController : MonoBehaviour, GameplayBootstrap.IBootstra
 
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
         _freeCameraController.OnFreeCamDisabled += OnFreeCamDisabled;
+    }
 
+    private void Start()
+    {
+        if (_data != null)
+        {
+            transform.position = _data.playerPosition;
+            transform.rotation = _data.playerRotation;
+            _playerCamera.localEulerAngles = _data.playerCameraTransform.localEulerAngles;
+
+            _cameraPitch = _playerCamera.localEulerAngles.x;
+        }
+        
         StartCoroutine(UpdateProcess());
     }
 
     IEnumerator UpdateProcess() {
-        yield return new WaitForEndOfFrame();
-        //print("updating player controller");
+        yield return new WaitForFixedUpdate();
 
         while (true) {
             if (_allowFreeCamera && Input.GetKeyDown(KeyCode.Alpha0)) {
@@ -136,6 +164,7 @@ public class HybridPlayerController : MonoBehaviour, GameplayBootstrap.IBootstra
         _cameraPitch = Mathf.Clamp(_cameraPitch, -90.0f, 90.0f);
 
         _playerCamera.localEulerAngles = Vector3.right * _cameraPitch;
+
         transform.Rotate(_currentMouseDelta.x * _mouseSensitivity * Vector3.up);
     }
     void UpdateMovement() {
@@ -181,8 +210,6 @@ public class HybridPlayerController : MonoBehaviour, GameplayBootstrap.IBootstra
         IsFreeCamActive = false;
         SetupTransformForFreeCamera(false);
 
-        //print("OnFreeCamDisabled");
-
         StopCoroutine(UpdateProcess());
         StartCoroutine(UpdateProcess());
     }
@@ -190,5 +217,10 @@ public class HybridPlayerController : MonoBehaviour, GameplayBootstrap.IBootstra
     private void OnDisable() {
         GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         _freeCameraController.OnFreeCamDisabled -= OnFreeCamDisabled;
+    }
+
+    private void OnDestroy()
+    {
+        _levelDataManager.OnGameSave -= OnGameSave;
     }
 }

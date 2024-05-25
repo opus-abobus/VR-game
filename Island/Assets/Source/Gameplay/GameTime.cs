@@ -1,3 +1,4 @@
+using DataPersistence.Gameplay;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,6 +36,20 @@ public class GameTime : MonoBehaviour
     //float _elapsedTime = 0f;
     private void Awake() {
         instance = this;
+
+        _levelDataManager.OnGameSave += OnGameSave;
+    }
+
+    [SerializeField] private LevelDataManager _levelDataManager;
+
+    public void SetSavedDayTime(float dayTimeProgress)
+    {
+        timeProgress = dayTimeProgress;
+    }
+
+    private void OnGameSave(GameplayData data)
+    {
+        data.dayTimeProgress = timeProgress;
     }
 
     private void Start() {
@@ -84,4 +99,9 @@ public class GameTime : MonoBehaviour
         string timeStr = hoursPart + ":" + minutesPart;
         print("time: " + timeStr);
     }*/
+
+    private void OnDestroy()
+    {
+        _levelDataManager.OnGameSave -= OnGameSave;
+    }
 }

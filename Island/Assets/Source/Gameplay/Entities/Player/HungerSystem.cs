@@ -1,5 +1,5 @@
+using DataPersistence.Gameplay;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,18 +17,18 @@ public class HungerSystem : MonoBehaviour
     [SerializeField, Range(0, 1f)] 
     private float startHealth = 1;
 
-    [SerializeField] 
+    [SerializeField]
     private Image healthBar;
-    [SerializeField] 
+    [SerializeField]
     private Image satietyBar;
 
     [SerializeField]
     private GameObject overlay;
-    [SerializeField] 
+    [SerializeField]
     private GameObject deathScreen;
 
     private bool isGameOver = false;
-    public bool IsGameOver { 
+    public bool IsGameOver {
         get { return isGameOver; }
         set { isGameOver = value; }
     }
@@ -40,12 +40,33 @@ public class HungerSystem : MonoBehaviour
     }
 
     private IEnumerator _StarvingProcess, _DamageFromStarvingProcess;
-    private void Awake() {
-        satiety = startSatiety;
-        health = startHealth;
+
+    [SerializeField] private LevelDataManager _levelDataManager;
+
+    public void Initialize(PlayerData.HungerSystemData data)
+    {
+        _levelDataManager.OnGameSave += OnGameSave;
+
+        if (data != null)
+        {
+            health = data.health;
+            satiety = data.satiety;
+        }
+        else
+        {
+            satiety = startSatiety;
+            health = startHealth;
+        }
+
         _StarvingProcess = StarvingProcess(); _DamageFromStarvingProcess = DamageFromStarvingProcess();
         StartCoroutine(_StarvingProcess);
     }
+
+    private void OnGameSave(GameplayData data)
+    {
+        data.playerData.hungerSystemData = new PlayerData.HungerSystemData(health, satiety);
+    }
+
     private void Start() {
         healthBar.fillAmount = health;
         satietyBar.fillAmount = satiety;
@@ -100,7 +121,6 @@ public class HungerSystem : MonoBehaviour
 
     private bool CrDmgRunning = false;
     IEnumerator DamageFromStarvingProcess() {
-        //print("start");
         CrDmgRunning = true;
         yield return new WaitForSeconds(secondsPerHealthPoint);
         while (true) {
@@ -120,5 +140,10 @@ public class HungerSystem : MonoBehaviour
 
         deathScreen.SetActive(true);
         overlay.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        _levelDataManager.OnGameSave -= OnGameSave;
     }
 }

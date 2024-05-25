@@ -35,8 +35,6 @@ public class FreeCameraController : MonoBehaviour {
     }
 
     void OnFreeCameraActivated() {
-        //print("OnFreeCameraActivated");
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -45,11 +43,11 @@ public class FreeCameraController : MonoBehaviour {
 
     private float _realTime;
     IEnumerator UpdateProcess() {
-        //print("started");
         Vector3 _startEulerAngles = Vector3.zero;
         Vector3 _startMousePosition = Vector3.zero;
 
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
+        yield return new WaitForFixedUpdate();
 
         while (true) {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Alpha0)) {

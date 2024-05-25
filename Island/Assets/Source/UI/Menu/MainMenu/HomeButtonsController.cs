@@ -31,6 +31,12 @@ public class HomeButtonsController : MonoBehaviour
         _startNewGame.onClick.AddListener(OnStartNewGameButton_Clicked);
 
         _selectSaveToLoad.onClick.AddListener(OnSelectSaveButton_Clicked);
+
+        if (AppManager.Instance.DataManager.GetLastSave() == null)
+        {
+            _loadLastSave.gameObject.SetActive(false);
+            _selectSaveToLoad.gameObject.SetActive(false);
+        }
     }
 
     private void OnSettingsButton_Clicked() {

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour, GameplayBootstrap.IBootstrap
+public class GameManager : MonoBehaviour
 {
     //<summary> Данный класс отвечает за управление состояниями игрового процесса
     //</summary>
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour, GameplayBootstrap.IBootstrap
 
     public GameStates CurrentState { get; private set; }
 
-    void GameplayBootstrap.IBootstrap.Initialize()
+    public void Initialize()
     {
         if (_instance == null)
         {
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour, GameplayBootstrap.IBootstrap
 
             if (prevState != CurrentState)
             {
-                print("Game state changed to " + CurrentState);
+                //print("Game state changed to " + CurrentState);
                 OnGameStateChanged?.Invoke();
                 prevState = CurrentState;
             }

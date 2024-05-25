@@ -1,3 +1,4 @@
+using DataPersistence.Gameplay;
 using System.IO;
 using UnityEngine;
 
@@ -103,7 +104,7 @@ namespace DataPersistence
 
         public GameplayData[] GetSaves()
         {
-            GameplayData[] result = new GameplayData[Directory.GetFiles(_gameDataPath, ".xml").Length];
+            GameplayData[] result = new GameplayData[Directory.GetFiles(_gameDataPath, "*.xml").Length];
             if (result.Length == 0)
             {
                 return null;

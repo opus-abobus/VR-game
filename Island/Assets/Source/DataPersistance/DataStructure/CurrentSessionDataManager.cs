@@ -1,34 +1,28 @@
+using DataPersistence.Gameplay;
 using System;
 using UI.WindowsManagement;
 using UnityEngine;
-using static WorldSettings;
 
 namespace DataPersistence
 {
     public class CurrentSessionDataManager : MonoBehaviour
     {
         [SerializeField] private NewGameWindow _newGameWindow;
-
-        public Difficulties CurrentDifficulty { get; private set; }
+        public bool IsNewGame { get; private set; } = true;
 
         private GameplayData _gameplayData;
 
         public GameplayData CurrentData { get { return _gameplayData; } }
 
-        public void GetData(string saveName)
-        {
-            _gameplayData = AppManager.Instance.DataManager.GetSave(saveName);
-        }
-
         public void SetData(GameplayData gameplayData)
         {
             _gameplayData = gameplayData;
+            IsNewGame = false;
         }
 
         public void SaveCurrentDataOnDisk()
         {
             AppManager.Instance.DataManager.WriteSave(_gameplayData, Environment.UserName + " [" + DateTime.Now.ToBinary() + "]");
-            print("dateTime of save: " + DateTime.Now.ToBinary());
         }
 
         private static CurrentSessionDataManager _instance;
