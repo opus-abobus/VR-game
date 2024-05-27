@@ -1,47 +1,48 @@
 using DataPersistence.Gameplay;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HungerSystem : MonoBehaviour
 {
-    [SerializeField, Tooltip("Сколько секунд пройдет, чтобы вычесть один процент сытости")] 
-    private int secondsPerPercentSatiety = 2;
+    [SerializeField, Tooltip("Начальная сытость"), Range(0, 1)]
+    private float _startSatiety = 1;
 
-    [SerializeField, Tooltip("Начальная сытость в процентах"), Range(0, 1)] 
-    private float startSatiety = 0.7f;
+    [SerializeField, Range(0, 1f)] private float _startHealth = 1;
 
-    [SerializeField] 
-    private int secondsPerHealthPoint = 2;
+    [SerializeField] private Image _healthBar;
+    [SerializeField] private Image _satietyBar;
 
-    [SerializeField, Range(0, 1f)] 
-    private float startHealth = 1;
-
-    [SerializeField]
-    private Image healthBar;
-    [SerializeField]
-    private Image satietyBar;
-
-    [SerializeField]
-    private GameObject overlay;
-    [SerializeField]
-    private GameObject deathScreen;
+    [SerializeField] private GameObject overlay;
+    [SerializeField] private GameObject deathScreen;
 
     private bool isGameOver = false;
-    public bool IsGameOver {
+    public bool IsGameOver
+    {
         get { return isGameOver; }
         set { isGameOver = value; }
     }
 
-    private float satiety, health;
-    public float Satiety {
-        get { return satiety; }
-        set { satiety = value; }
+    [SerializeField]
+    private float _satiety, _health;
+    public float Satiety
+    {
+        get 
+        { 
+            return Mathf.Clamp01(_satiety); 
+        }
+        set 
+        {
+            _satiety = Mathf.Clamp01(value);
+        }
     }
 
-    private IEnumerator _StarvingProcess, _DamageFromStarvingProcess;
-
     [SerializeField] private LevelDataManager _levelDataManager;
+
+    private WorldSettings _worldSettings;
+
+    private float _healthDepletionRate, _satietyDepletionRate;
+    private float _healthRestoreRateFromSatiety, _healthMaxThresholdFromSatiety,
+        _healthIncreaseFromSatietyThreshold;
 
     public void Initialize(PlayerData.HungerSystemData data)
     {
@@ -49,91 +50,80 @@ public class HungerSystem : MonoBehaviour
 
         if (data != null)
         {
-            health = data.health;
-            satiety = data.satiety;
+            _health = data.health;
+            _satiety = data.satiety;
         }
         else
         {
-            satiety = startSatiety;
-            health = startHealth;
+            _satiety = _startSatiety;
+            _health = _startHealth;
         }
 
-        _StarvingProcess = StarvingProcess(); _DamageFromStarvingProcess = DamageFromStarvingProcess();
-        StartCoroutine(_StarvingProcess);
+        _worldSettings = GameSettingsManager.Instance.ActiveWorldSettings;
+
+        _satietyDepletionRate = 1.0f / _worldSettings.satietyTime;
+        _healthDepletionRate = 1.0f / _worldSettings.healthDecreaseTimeFromStarving;
+        _healthRestoreRateFromSatiety = 1.0f / _worldSettings.healthIncreaseTimeFromSatiety;
+        _healthMaxThresholdFromSatiety = _worldSettings.healthMaxThresholdFromSatiety;
+        _healthIncreaseFromSatietyThreshold = _worldSettings.healthIncreaseFromSatietyThreshold;
     }
 
     private void OnGameSave(GameplayData data)
     {
-        data.playerData.hungerSystemData = new PlayerData.HungerSystemData(health, satiety);
+        data.playerData.hungerSystemData = new PlayerData.HungerSystemData(_health, _satiety);
     }
 
-    private void Start() {
-        healthBar.fillAmount = health;
-        satietyBar.fillAmount = satiety;
-    }
-
-    IEnumerator StarvingProcess() {
-        yield return new WaitForSeconds(secondsPerPercentSatiety);
-        while (true) {
-            satiety -= 0.01f;
-            yield return new WaitForSeconds(secondsPerPercentSatiety);
-        }
-    }
-    void UpdateSatietyBar() {
-        if (satiety > 0f) {
-            //satiety -= Time.deltaTime * 0.1f;
-            satietyBar.fillAmount = satiety;
-            StopCoroutine(_DamageFromStarvingProcess);
-        }
-        if (satiety > 1.0f) { satiety = 1.0f; }
-    }
-
-    private void Update() {
-        UpdateSatietyBar();
-        UpdateHealthBar();
+    private void Start()
+    {
+        _healthBar.fillAmount = _health;
+        _satietyBar.fillAmount = _satiety;
     }
 
     private bool isDead = false;
-    void UpdateHealthBar() {
-        if (health > 1.0f) { health = 1.0f; }
+    private bool _allowDecreaseSatiety = true;
 
-        if (satiety <= 0f) {
-            if (health <= 0f) {
-                if (!isDead) {
-                    StopCoroutine(_StarvingProcess); StopCoroutine(_DamageFromStarvingProcess); CrDmgRunning = false;
-                    StartCoroutine(ShowScreenOfPlayerDeath());
-                    isDead = true;
-                }
-            }
-            else {
-                if (!CrDmgRunning)
-                    StartCoroutine(_DamageFromStarvingProcess);
-            }
+    private void Update()
+    {
+        if (isGameOver)
+        {
+            return;
         }
-        else {
-            if (satiety > 0f) {
-                StopCoroutine(_DamageFromStarvingProcess); CrDmgRunning = false;
-            }
-                
+
+        if (_health < 0f)
+        {
+            isDead = true;
         }
-        healthBar.fillAmount = health;
+
+        if (isDead && !isGameOver)
+        {
+            ShowScreenOfPlayerDeath();
+            isGameOver = true;
+            return;
+        }
+
+        if (_allowDecreaseSatiety)
+        {
+            _satiety = _satiety - _satietyDepletionRate * Time.deltaTime > 0 ? 
+                _satiety - _satietyDepletionRate * Time.deltaTime : 0;
+        }
+
+        if (_satiety >= _healthIncreaseFromSatietyThreshold && _health < _healthIncreaseFromSatietyThreshold)
+        {
+            _health = Mathf.Clamp(_health + _healthRestoreRateFromSatiety * Time.deltaTime, 0, 
+                _healthMaxThresholdFromSatiety);
+        }
+        else if (_satiety <= 0.001f)
+        {
+            _health -= _healthDepletionRate * Time.deltaTime;
+        }
+
+        _satietyBar.fillAmount = _satiety;
+        _healthBar.fillAmount = _health;
     }
 
-    private bool CrDmgRunning = false;
-    IEnumerator DamageFromStarvingProcess() {
-        CrDmgRunning = true;
-        yield return new WaitForSeconds(secondsPerHealthPoint);
-        while (true) {
-            health -= 0.01f;
-            yield return new WaitForSeconds(secondsPerHealthPoint);
-        }
-    }
-
-    IEnumerator ShowScreenOfPlayerDeath() {
-        isGameOver = true;
-
+    private void ShowScreenOfPlayerDeath()
+    {
         Debug.Log("Player died from starving");
-        yield return null;
 
         Time.timeScale = 0;
         AudioListener.pause = true;

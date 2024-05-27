@@ -13,36 +13,41 @@ MonoBehaviour:
   m_Name: WorldSettings_explorer
   m_EditorClassIdentifier: 
   _difficulty: 0
-  _minBerriesOnStart: 53
+  _minBerriesOnStart: 60
   _maxBerriesOnStart: 100
-  _timeoutBerryRespawnInSeconds: 1317
-  _timeToRespawnBerryInSeconds: 9540
+  _timeoutBerryRespawnInSeconds: 180
+  _timeToRespawnBerryInSeconds: 300
   _useRandomBerryRespawnTime: 1
-  _minTimeToRespawnBerryInSeconds: 2633
-  _maxTimeToRespawnBerryInSeconds: 4606
+  _minTimeToRespawnBerryInSeconds: 260
+  _maxTimeToRespawnBerryInSeconds: 400
   _useRandomTreeStartScale: 1
-  _minTreeScale: 0.74
-  _maxTreeScale: 1.375
-  _timeToGrowthInSeconds: 12500
+  _minTreeScale: 0.855
+  _maxTreeScale: 1.764
+  _timeToGrowthInSeconds: 300
   _useRandomGrowthTime: 1
-  _minTimeToGrowthInSeconds: 11185
-  _maxTimeToGrowthInSeconds: 21054
+  _minTimeToGrowthInSeconds: 300
+  _maxTimeToGrowthInSeconds: 400
   _useRandomRipePhaseDuration: 1
-  _ripePhaseDurationInSeconds: 6580
-  _minPhaseRipeDurationInSeconds: 5264
-  _maxPhaseRipeDurationInSeconds: 8554
-  startRipeningMoment: 0.8
+  _ripePhaseDurationInSeconds: 120
+  _minPhaseRipeDurationInSeconds: 120
+  _maxPhaseRipeDurationInSeconds: 150
+  startRipeningMoment: 0.4
   _minBananasToDrop: 13
   _maxBananasToDrop: 26
   _minCoconutsOnStart: 1
   _maxCoconutsOnStart: 7
-  _minTimeToRespawnInSeconds: 7238
-  _maxTimeToRespawnInSeconds: 11843
-  _chanceToSpawnOnStart: 0.405
+  _minTimeToRespawnInSeconds: 1000
+  _maxTimeToRespawnInSeconds: 1500
+  _chanceToSpawnOnStart: 0.5
   _bonfireDuration: 100
-  _chanceTickRateInSeconds: 30
-  _signalGunsAmount: 1
-  _bonfiresAmount: 4
-  _nutritionalValue_Berry: 5
-  _nutritionalValue_Coconut: 22
-  _nutritionalValue_Banana: 15
+  _chanceTickRateInSeconds: 20
+  _signalGunsAmount: 4
+  _bonfiresAmount: 8
+  _nutritionalValue_Berry: 0.4
+  _nutritionalValue_Coconut: 0.5
+  _nutritionalValue_Banana: 0.6
+  satietyTime: 3600
+  healthIncreaseFromSatietyThreshold: 0.01
+  healthDecreaseTimeFromStarving: 600
+  healthIncreaseTimeFromSatiety: 300
+  healthMaxThresholdFromSatiety: 1

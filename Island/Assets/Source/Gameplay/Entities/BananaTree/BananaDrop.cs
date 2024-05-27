@@ -73,6 +73,8 @@ public class BananaDrop : MonoBehaviour
             spawnedBanana.transform.position = spawnPoint;
             spawnedBanana.transform.rotation = UnityEngine.Random.rotation;
             spawnedBanana.SetActive(true);
+
+            
         }
     }
 }

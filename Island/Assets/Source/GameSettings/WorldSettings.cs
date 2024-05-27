@@ -59,9 +59,9 @@ public class WorldSettings : ScriptableObject, WorldSettings.IBerriesSettings, W
         int BonfiresAmount { get; }
     }
     public interface INutritionSettings {
-        int BerryNutrVal { get; }
-        int CoconutNutrVal { get; }
-        int BananaNutrVal { get; }
+        float BerryNutrVal { get; }
+        float CoconutNutrVal { get; }
+        float BananaNutrVal { get; }
     }
     #endregion
 
@@ -225,16 +225,36 @@ public class WorldSettings : ScriptableObject, WorldSettings.IBerriesSettings, W
     #region Параметры питательности объектов еды
     [Header("Параметры питательности объектов еды")]
 
-    [SerializeField, Range(0, 100)]
-    private int _nutritionalValue_Berry = 5;
-    int INutritionSettings.BerryNutrVal { get { return _nutritionalValue_Berry; } }
+    [SerializeField, Range(0, 1)]
+    private float _nutritionalValue_Berry = 0.3f;
+    float INutritionSettings.BerryNutrVal { get { return _nutritionalValue_Berry; } }
 
-    [SerializeField, Range(0, 100)]
-    private int _nutritionalValue_Coconut = 5;
-    int INutritionSettings.CoconutNutrVal { get { return _nutritionalValue_Coconut; } }
+    [SerializeField, Range(0, 1)]
+    private float _nutritionalValue_Coconut = 0.3f;
+    float INutritionSettings.CoconutNutrVal { get { return _nutritionalValue_Coconut; } }
 
-    [SerializeField, Range(0, 100)]
-    private int _nutritionalValue_Banana = 5;
-    int INutritionSettings.BananaNutrVal { get { return _nutritionalValue_Banana; } }
+    [SerializeField, Range(0, 1)]
+    private float _nutritionalValue_Banana = 0.3f;
+    float INutritionSettings.BananaNutrVal { get { return _nutritionalValue_Banana; } }
+    #endregion
+
+    #region Параметры игрока
+    [Header("Параметры игрока")]
+
+    [Tooltip("Время в секундах, за которое сытость уменьшится с 1 до 0")]
+    public float satietyTime;
+
+    [Range(0, 1), Tooltip("Нижняя граница значения сытости, при которой начнет восстанавливаться здоровье")]
+    public float healthIncreaseFromSatietyThreshold;
+
+    [Tooltip("Время в секундах, за которое здоровье уменьшится с 1 до 0 в результате голодания")]
+    public float healthDecreaseTimeFromStarving;
+
+    [Tooltip("Время в секундах, за которое здоровье вырастет от 0 до 1 при определенной сытости")]
+    public float healthIncreaseTimeFromSatiety;
+
+    [Range(0, 1), Tooltip("Верхняя граница значения здоровья, до которой оно может восстанавливаться при насыщении")]
+    public float healthMaxThresholdFromSatiety;
+
     #endregion
 }

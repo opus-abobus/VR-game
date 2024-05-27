@@ -13,36 +13,41 @@ MonoBehaviour:
   m_Name: WorldSettings_medium
   m_EditorClassIdentifier: 
   _difficulty: 2
-  _minBerriesOnStart: 46
-  _maxBerriesOnStart: 100
-  _timeoutBerryRespawnInSeconds: 1317
-  _timeToRespawnBerryInSeconds: 9540
+  _minBerriesOnStart: 25
+  _maxBerriesOnStart: 30
+  _timeoutBerryRespawnInSeconds: 400
+  _timeToRespawnBerryInSeconds: 720
   _useRandomBerryRespawnTime: 1
-  _minTimeToRespawnBerryInSeconds: 2633
-  _maxTimeToRespawnBerryInSeconds: 4606
+  _minTimeToRespawnBerryInSeconds: 700
+  _maxTimeToRespawnBerryInSeconds: 800
   _useRandomTreeStartScale: 1
-  _minTreeScale: 0.74
-  _maxTreeScale: 1.375
-  _timeToGrowthInSeconds: 12500
+  _minTreeScale: 0.929
+  _maxTreeScale: 1.741
+  _timeToGrowthInSeconds: 2400
   _useRandomGrowthTime: 1
-  _minTimeToGrowthInSeconds: 11185
-  _maxTimeToGrowthInSeconds: 21054
+  _minTimeToGrowthInSeconds: 2200
+  _maxTimeToGrowthInSeconds: 2600
   _useRandomRipePhaseDuration: 1
-  _ripePhaseDurationInSeconds: 6580
-  _minPhaseRipeDurationInSeconds: 5264
-  _maxPhaseRipeDurationInSeconds: 8554
-  startRipeningMoment: 0.8
-  _minBananasToDrop: 13
-  _maxBananasToDrop: 26
-  _minCoconutsOnStart: 1
-  _maxCoconutsOnStart: 8
-  _minTimeToRespawnInSeconds: 7238
-  _maxTimeToRespawnInSeconds: 11843
-  _chanceToSpawnOnStart: 0.4
-  _bonfireDuration: 100
-  _chanceTickRateInSeconds: 30
-  _signalGunsAmount: 1
-  _bonfiresAmount: 4
-  _nutritionalValue_Berry: 5
-  _nutritionalValue_Coconut: 22
-  _nutritionalValue_Banana: 15
+  _ripePhaseDurationInSeconds: 720
+  _minPhaseRipeDurationInSeconds: 700
+  _maxPhaseRipeDurationInSeconds: 1400
+  startRipeningMoment: 0.72
+  _minBananasToDrop: 2
+  _maxBananasToDrop: 6
+  _minCoconutsOnStart: 0
+  _maxCoconutsOnStart: 5
+  _minTimeToRespawnInSeconds: 2000
+  _maxTimeToRespawnInSeconds: 2200
+  _chanceToSpawnOnStart: 0.3
+  _bonfireDuration: 75
+  _chanceTickRateInSeconds: 40
+  _signalGunsAmount: 2
+  _bonfiresAmount: 5
+  _nutritionalValue_Berry: 0.236
+  _nutritionalValue_Coconut: 0.302
+  _nutritionalValue_Banana: 0.295
+  satietyTime: 1200
+  healthIncreaseFromSatietyThreshold: 0.4
+  healthDecreaseTimeFromStarving: 120
+  healthIncreaseTimeFromSatiety: 1200
+  healthMaxThresholdFromSatiety: 0.5

@@ -10,7 +10,6 @@ public class GameObjectsRegistries : MonoBehaviour
 
     [SerializeField] private SpawnManager _spawnManager;
 
-    //private bool _isNewGame = true;
     [SerializeField] private LevelDataManager _levelDataManager;
 
     private void OnGameSave(GameplayData gameplayData)
@@ -39,11 +38,7 @@ public class GameObjectsRegistries : MonoBehaviour
         _bananaTrees = new Dictionary<string, BananaTreeManager>();
         _treeData = new Dictionary<string, BananaTreeData>();
 
-        if (data == null)
-        {
-            
-        }
-        else
+        if (data != null)
         {
             var treeData = data.bananaTreesData.data;
             foreach (var d in treeData)
@@ -55,10 +50,7 @@ public class GameObjectsRegistries : MonoBehaviour
 
     private void OnSpawnManagerInitialized()
     {
-        /*foreach (var tree in _bananaTrees.Values)
-        {
-            
-        }*/
+
     }
 
     public void Register<T>(GameObject gameObject, T component) where T : UnityEngine.Object
