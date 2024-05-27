@@ -32,6 +32,9 @@ public class GameplayBootstrap : MonoBehaviour
     [SerializeField]
     private GameTime _gameTime;
 
+    [SerializeField]
+    private GameObjectsRegistries _registries;
+
     private static GameplayBootstrap _instance;
     public static GameplayBootstrap Instance { get { return _instance; } }
 
@@ -61,11 +64,13 @@ public class GameplayBootstrap : MonoBehaviour
 
         if (isNewGame)
         {
+            _registries.Init(null);
             _hybridPlayerController.Initialize(null);
             _hungerSystem.Initialize(null);
         }
         else
         {
+            _registries.Init(gameplayData);
             _hybridPlayerController.Initialize(gameplayData.playerData);
             _hungerSystem.Initialize(gameplayData.playerData.hungerSystemData);
             _gameTime.SetSavedDayTime(gameplayData.dayTimeProgress);

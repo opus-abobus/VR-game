@@ -1,32 +1,64 @@
+using DataPersistence.Gameplay;
 using UnityEngine;
 using static SpawnManager;
 
 [RequireComponent(typeof(BananaTreeGrowth), typeof(BananaRipening))]
 public class BananaTreeManager : MonoBehaviour, ISpawner
 {
-    //[SerializeField]
     private BananaRipening _bananaRipening;
 
-    //[SerializeField]
     private BananaTreeGrowth _bananaTreeGrowth;
 
-    private ISpawner _spawner;
-
-    private void Awake() {
-        _spawner = this;
-    }
+    [SerializeField] private BananaDrop _bananaDrop;
 
     private bool _hasInitialized = false;
-    bool ISpawner.HasInitialized { get { return _hasInitialized; } }
 
     private static bool _hasStarted = false;
     public static bool HasStarted { get { return _hasStarted; } }
+
+/*    public void SetData(BananaTreeData data)
+    {
+        _bananaRipening.SetData();
+    }*/
+
+    public BananaTreeData GetData()
+    {
+        return new BananaTreeData(gameObject.name, _bananaRipening.GetData(), _bananaTreeGrowth.GetData());
+    }
 
     private void Start() {
         _hasStarted = true;
     }
 
-    void ISpawner.Init() {
+    public void Init(BananaTreeData data)
+    {
+        _bananaRipening = GetComponent<BananaRipening>();
+        _bananaTreeGrowth = GetComponent<BananaTreeGrowth>();
+
+        _bananaTreeGrowth.AllowRipening += OnAllowRipening;
+
+        _bananaDrop.Init();
+
+        if (data == null)
+        {
+            _bananaRipening.Init(null);
+            _bananaTreeGrowth.Init(null);
+        }
+        else
+        {
+            _bananaRipening.Init(data.ripeningData);
+            _bananaTreeGrowth.Init(data.growthData);
+
+            if (data.ripeningData.allowRipening == true)
+            {
+                OnAllowRipening();
+            }
+        }
+
+        _hasInitialized = true;
+    }
+
+/*    void ISpawner.Init() {
         _bananaRipening = GetComponent<BananaRipening>();
         _bananaTreeGrowth = GetComponent<BananaTreeGrowth>();
 
@@ -36,12 +68,12 @@ public class BananaTreeManager : MonoBehaviour, ISpawner
         _bananaTreeGrowth.AllowRipening += OnAllowRipening;
 
         _hasInitialized = true;
-    }
+    }*/
 
     void ISpawner.BeginSpawn() {
-        if (!_hasInitialized) {
+/*        if (!_hasInitialized) {
             _spawner.Init();
-        }
+        }*/
         _bananaTreeGrowth.StartGrowth();
     }
 

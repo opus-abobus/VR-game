@@ -13,6 +13,8 @@ namespace DataPersistence.Gameplay
 
         public float dayTimeProgress;
 
+        public BananaTreesData bananaTreesData;
+
         public GameplayData() {
             displayName = "New game started by " + Environment.UserName + " at " + DateTime.Now;
         }

@@ -1,3 +1,4 @@
+using DataPersistence.Gameplay;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -11,7 +12,6 @@ public class BananaTreeGrowth : MonoBehaviour
 
     [SerializeField, Range(0, 1)]
     private float _growningProgress = 0;
-    public float GrowningProgress { get { return _growningProgress; } }
 
     private Vector3 _startScale, _endScale;
 
@@ -20,43 +20,78 @@ public class BananaTreeGrowth : MonoBehaviour
     public bool HasGrown { get; private set; }
     public bool HasInitialized { get; private set; } = false;
 
-    public void Init() {
+    private float _startRipeningMoment;
+
+    public void SetData(BananaTreeData.BananaGrowthData data)
+    {
+        _allowGrowth = data.allowGrowth;
+        HasGrown = data.hasGrown;
+        _growningProgress = data.growthProgress;
+        _timeToGrowthInSeconds = data.timeToGrowthInSeconds;
+        _startScale = data.startScale;
+        _endScale = data.endScale;
+
+        transform.localScale = _startScale + (_endScale - _startScale) * _growningProgress;
+    }
+
+    public BananaTreeData.BananaGrowthData GetData()
+    {
+        return new BananaTreeData.BananaGrowthData(_allowGrowth, _growningProgress, _startScale, _endScale, 
+            _timeToGrowthInSeconds, HasGrown);
+    }
+
+    public void Init(BananaTreeData.BananaGrowthData data) {
         WorldSettings.IBananaTreeSettings bananasSettings = GameSettingsManager.Instance.ActiveWorldSettings;
+        _startRipeningMoment = bananasSettings.StartRipeningMoment;
 
-        if (bananasSettings.UseRandomTreeStartScale) {
-            _startScale = Vector3.one * UnityEngine.Random.Range(bananasSettings.MinTreeScale, bananasSettings.MaxTreeScale);
+        if (data != null)
+        {
+            SetData(data);
         }
-        else {
-            _startScale = Vector3.one * bananasSettings.MinTreeScale;
-        }
+        else
+        {
+            if (bananasSettings.UseRandomTreeStartScale)
+            {
+                _startScale = Vector3.one * UnityEngine.Random.Range(bananasSettings.MinTreeScale, bananasSettings.MaxTreeScale);
+            }
+            else
+            {
+                _startScale = Vector3.one * bananasSettings.MinTreeScale;
+            }
 
-        transform.localScale = _startScale;
-        _endScale = Vector3.one * bananasSettings.MaxTreeScale;
+            transform.localScale = _startScale;
+            _endScale = Vector3.one * bananasSettings.MaxTreeScale;
 
-        if (bananasSettings.UseRandomGrowthTime) {
-            _timeToGrowthInSeconds = UnityEngine.Random.Range(bananasSettings.MinTimeToGrowthInSeconds, bananasSettings.MaxTimeToGrowthInSeconds);
-        }
-        else {
-            _timeToGrowthInSeconds = bananasSettings.TimeToGrowthInSeconds;
+            if (bananasSettings.UseRandomGrowthTime)
+            {
+                _timeToGrowthInSeconds = UnityEngine.Random.Range(bananasSettings.MinTimeToGrowthInSeconds, bananasSettings.MaxTimeToGrowthInSeconds);
+            }
+            else
+            {
+                _timeToGrowthInSeconds = bananasSettings.TimeToGrowthInSeconds;
+            }
         }
 
         HasInitialized = true;
     }
 
     public void StartGrowth() {
+        if (HasGrown)
+        {
+            AllowRipening?.Invoke();
+        }
+
         if (HasGrown || !_allowGrowth) return;
 
-        if (!HasInitialized) {
+/*        if (!HasInitialized) {
             Init();
-        }
+        }*/
+
         StartCoroutine(GrowningProcess());
     }
 
     IEnumerator GrowningProcess() {
         bool ripeningFlag = false;
-
-        var settings = GameSettingsManager.Instance.ActiveWorldSettings as WorldSettings.IBananaTreeSettings;
-        float startRipeningMoment = settings.StartRipeningMoment;
 
         while (true) {
             if (_growningProgress >= 1) {
@@ -69,7 +104,7 @@ public class BananaTreeGrowth : MonoBehaviour
             transform.localScale = _startScale + (_endScale - _startScale) * _growningProgress;
 
             if (!ripeningFlag) {
-                if (_growningProgress >= startRipeningMoment) {
+                if (_growningProgress >= _startRipeningMoment) {
                     AllowRipening?.Invoke();
                     ripeningFlag = true;
                 }

@@ -4,26 +4,17 @@ using UnityEngine;
 
 public class BananaDrop : MonoBehaviour
 {
-    public int _maxBananasToSpawn = -1;
-
     public GameObject _banana;
 
     private BananaPool _bananaPool;
 
     public event Action FallenFruit;
 
-/*    [SerializeField]
-    private BananaRipening _bananaRipening;*/
-
     private int _bananaAmount = 0;
 
     private List <string> _tags;
 
     private Vector3 _colliderSize;
-
-    private void Awake() {
-        Init();
-    }
 
     public void Init() {
         _tags = new List<string>();

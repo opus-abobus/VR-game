@@ -8,7 +8,6 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     private bool _wasStartSpawn;
 
     private bool _hasInitialized = false;
-    bool SpawnManager.ISpawner.HasInitialized { get { return _hasInitialized; } }
 
     private Berry[] _spawnedBerries;
 
@@ -33,7 +32,7 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     //коллекция для хранения информации о точках, в которых был осуществлен спавн:
     //false - точка свободна, true - точка занята
     private Dictionary<int, bool> spawnPointsDictionary;
-    void SpawnManager.ISpawner.Init() {
+    public void Init() {
         _berriesSettings = GameSettingsManager.Instance.ActiveWorldSettings;
 
         _wasStartSpawn = false;
@@ -56,10 +55,10 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     }
 
     void SpawnManager.ISpawner.BeginSpawn() {
-        if (!_hasInitialized) {
+/*        if (!_hasInitialized) {
             SpawnManager.ISpawner _spawner = this;
             _spawner.Init();
-        }
+        }*/
 
         SpawnBerries();
         StartRespawn();

@@ -68,7 +68,6 @@ namespace UI
 
         private void OnNewGameClicked()
         {
-            //AppManager.Instance.LoadLevel();
             _windowsManager.OpenNewGameWindow();
         }
 

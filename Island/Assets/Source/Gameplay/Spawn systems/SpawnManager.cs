@@ -1,3 +1,4 @@
+using DataPersistence.Gameplay;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,9 +20,11 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
 
     public event Action OnInitialized;
 
+    [SerializeField] private GameObjectsRegistries _registries;
+
     public interface ISpawner {
-        bool HasInitialized { get; }
-        void Init();
+/*        bool HasInitialized { get; }
+        void Init();*/
         void BeginSpawn();
     }
 
@@ -43,24 +46,32 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
 
     IEnumerator InitProcess() {
         while (!CocountSpawner.HasStarted) {
-            //print("waiting for coco spawner");
             yield return null;
         }
-        //print("coconut spawner script has been started (should be initialized).");
         _coconutSpawners = FindObjectsOfType<CocountSpawner>().ToList();
+        foreach (var cocSpawner in _coconutSpawners)
+        {
+            cocSpawner.Init();
+        }
 
         while (!BerrySpawnManager.HasStarted) {
-            //print("waiting for berry spawner");
             yield return null;
         }
-        //print("berry spawner script has been started (should be initialized).");
         _berrySpawners = FindObjectsOfType<BerrySpawnManager>().ToList();
+        foreach (var berrySpawner in _berrySpawners)
+        {
+            berrySpawner.Init();
+        }
 
         while (!BananaTreeManager.HasStarted) {
             yield return null;
         }
-        //print("banana spawner script has been started (should be initialized).");
-        _bananaSpawners = FindObjectsOfType<BananaTreeManager>().ToList(); 
+        _bananaSpawners = FindObjectsOfType<BananaTreeManager>().ToList();
+        foreach (var ban in _bananaSpawners)
+        {
+            _registries.Register(ban.gameObject, ban);
+            ban.Init(_registries.GetData<BananaTreeData>(ban.gameObject.name));
+        }
 
         OnInitialized?.Invoke();
 
@@ -77,7 +88,7 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
 
     void StartSpawner(List<ISpawner> spawner) {
         foreach (var sp in spawner) {
-            sp.Init();
+            //sp.Init();
             sp.BeginSpawn();
         }
     }

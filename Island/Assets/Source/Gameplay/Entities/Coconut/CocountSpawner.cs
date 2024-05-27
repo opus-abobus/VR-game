@@ -28,7 +28,6 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
     private SpawnManager.ISpawner _spawner;
 
     private bool _hasInitialized = false;
-    bool SpawnManager.ISpawner.HasInitialized { get { return _hasInitialized; } }
 
     private static bool _hasStarted = false;
     public static bool HasStarted { get { return _hasStarted; } }
@@ -48,7 +47,7 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
         _hasStarted = true;
     }
 
-    void SpawnManager.ISpawner.Init() {
+    public void Init() {
         _meshRenderer.enabled = false;
 
         if (_coconut == null) {
@@ -75,9 +74,9 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
     }
 
     void SpawnManager.ISpawner.BeginSpawn() {
-        if (!_hasInitialized) {
+/*        if (!_hasInitialized) {
             _spawner.Init();
-        }
+        }*/
 
         _coconutSpawning = CocountSpawning();
         StartCoroutine(_coconutSpawning);

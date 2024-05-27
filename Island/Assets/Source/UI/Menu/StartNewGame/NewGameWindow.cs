@@ -2,7 +2,6 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static WorldSettings;
 using static WorldSettingsList;
 
 namespace UI.WindowsManagement
