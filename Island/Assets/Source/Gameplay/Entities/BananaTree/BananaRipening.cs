@@ -95,7 +95,8 @@ public class BananaRipening : MonoBehaviour
 
     public void OnBananaDrop() {
         _bananaPart.GetComponent<BananaDrop>().FallenFruit -= OnBananaDrop;
-        _isBananasFallen = true;
+        //_isBananasFallen = true;
+        _ripePhase = RipePhase.fallen;
     }
 
     public void StartRipening() {

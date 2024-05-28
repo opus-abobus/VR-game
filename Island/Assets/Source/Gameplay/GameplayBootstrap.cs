@@ -35,6 +35,9 @@ public class GameplayBootstrap : MonoBehaviour
     [SerializeField]
     private GameObjectsRegistries _registries;
 
+    [SerializeField]
+    private AddressableItems _addressableItems;
+
     private static GameplayBootstrap _instance;
     public static GameplayBootstrap Instance { get { return _instance; } }
 
@@ -56,6 +59,8 @@ public class GameplayBootstrap : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        _addressableItems.LoadAssets();
 
         _bananaPool.Init();
         _gameSettingsManager.Initialize(gameplayData.difficultyID);

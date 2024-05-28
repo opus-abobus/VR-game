@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
-    [SerializeField]
+
+    [SerializeField] private AssetReferenceGameObject _coconutPrefabRef;
     private GameObject _coconut;
 
-    //[SerializeField]
     private static Transform _parent;
 
     [SerializeField]
@@ -48,12 +48,9 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
     }
 
     public void Init() {
-        _meshRenderer.enabled = false;
+        _coconut = AddressableItems.Instance.GetPrefabByGUID(_coconutPrefabRef.AssetGUID);
 
-        if (_coconut == null) {
-            Debug.LogError("” спавнера кокосов отсутствует ссылка на кокос");
-            this.enabled = false;
-        }
+        _meshRenderer.enabled = false;
 
         _boundsSize = _meshRenderer.bounds.size / 2;
         Destroy(_meshRenderer);
@@ -102,9 +99,20 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
             GameObject _cocountInstance = Instantiate(_coconut, spawnPos, _coconut.transform.rotation);
             _cocountInstance.transform.parent = _parent;
             amount--;
+
+            _cocountInstance.GetComponent<CocountSplit>().SetRegistry(_registry);
+            _registry.Register(_cocountInstance, _coconutPrefabRef.AssetGUID);
         }
     }
+
     Vector3 MultiplyVectors(Vector3 v1, Vector3 v2) {
         return new Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+    }
+
+    private GameObjectsRegistries _registry;
+
+    public void SetRegistry(GameObjectsRegistries registries)
+    {
+        _registry = registries;
     }
 }

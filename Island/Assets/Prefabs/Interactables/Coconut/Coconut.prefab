@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 1017893720648844289}
   m_Layer: 0
   m_Name: Coconut
-  m_TagString: cocount
+  m_TagString: coconutUnbroken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -851,6 +851,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coconutUp: {fileID: 4330422335106794841}
   _coconutDown: {fileID: 3465292275209502153}
+  _coconutUpper:
+    m_AssetGUID: 06adb5963323bc04c836079af12ae1c0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _coconutLower:
+    m_AssetGUID: d898a1b107c545842928f29616f34ae8
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   coconutBroken: {fileID: 1657791282}
 --- !u!114 &2404892114248783574
 MonoBehaviour:

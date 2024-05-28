@@ -14,6 +14,7 @@ TagManager:
   - signalGun
   - signalRocket
   - lighter
+  - coconutUnbroken
   layers:
   - Default
   - TransparentFX

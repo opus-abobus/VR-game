@@ -15,6 +15,8 @@ namespace DataPersistence.Gameplay
 
         public BananaTreesData bananaTreesData;
 
+        public DynamicObjectsData dynamicObjectsData;
+
         public GameplayData() {
             displayName = "New game started by " + Environment.UserName + " at " + DateTime.Now;
         }
@@ -23,13 +25,6 @@ namespace DataPersistence.Gameplay
         {
             this.difficultyID = difficultyID;
             displayName = "New game started by " + Environment.UserName + " at " + DateTime.Now;
-        }
-
-        public GameplayData(string displayName, int difficultyID, PlayerData playerData)
-        {
-            this.displayName = displayName;
-            this.difficultyID = difficultyID;
-            this.playerData = playerData;
         }
     }
 }

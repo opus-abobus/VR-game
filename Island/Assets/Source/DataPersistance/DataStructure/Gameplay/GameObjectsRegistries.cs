@@ -12,7 +12,17 @@ public class GameObjectsRegistries : MonoBehaviour
 
     [SerializeField] private LevelDataManager _levelDataManager;
 
+    [SerializeField] private Transform _restoredObjectsRoot;
+    private Dictionary<GameObject, string> _dynamicObjects;
+
     private void OnGameSave(GameplayData gameplayData)
+    {
+        SaveBananaTreesData(gameplayData);
+
+        SaveDynamicObjectsData(gameplayData);
+    }
+
+    private void SaveBananaTreesData(GameplayData gameplayData)
     {
         BananaTreeData[] treeData = new BananaTreeData[_bananaTrees.Count];
         int i = 0;
@@ -25,25 +35,107 @@ public class GameObjectsRegistries : MonoBehaviour
         gameplayData.bananaTreesData = new BananaTreesData(treeData);
     }
 
+    private void SaveDynamicObjectsData(GameplayData gameplayData, bool saveVelocity = true)
+    {
+        DynamicObjectsData.ObjectData[] data = new DynamicObjectsData.ObjectData[_dynamicObjects.Count];
+        int i = 0;
+        foreach (KeyValuePair<GameObject, string> objData in _dynamicObjects)
+        {
+            Vector3 velocity = Vector3.zero, angularVelocity = Vector3.zero;
+            bool useGravityRB = false, isKinematicRB = false; 
+            if (objData.Key.TryGetComponent<Rigidbody>(out var rB))
+            {
+                if (saveVelocity)
+                {
+                    velocity = rB.velocity;
+                    angularVelocity = rB.angularVelocity;
+                }
+
+                useGravityRB = rB.useGravity;
+                isKinematicRB = rB.isKinematic;
+            }
+
+            bool isTriggerCol = false, isEnabledCol = false;
+            if (objData.Key.TryGetComponent<Collider>(out var rC))
+            {
+                isTriggerCol = rC.isTrigger;
+                isEnabledCol = rC.enabled;
+            }
+
+            data[i++] = new DynamicObjectsData.ObjectData(objData.Key.transform.position,
+                objData.Key.transform.lossyScale, objData.Key.transform.rotation, 
+                velocity, angularVelocity, useGravityRB, isKinematicRB, isTriggerCol,
+                isEnabledCol, objData.Value);
+        }
+        DynamicObjectsData dynamicObjectsData = new DynamicObjectsData(data);
+
+        gameplayData.dynamicObjectsData = dynamicObjectsData;
+    }
+
     public void Init(GameplayData data)
     {
         _levelDataManager.OnGameSave += OnGameSave;
 
         _spawnManager.OnInitialized += OnSpawnManagerInitialized;
 
-        //_isNewGame = CurrentSessionDataManager.Instance.IsNewGame;
-
         _inventoryRegistry = new Dictionary<string, InventorySlotController>();
-
+        _dynamicObjects = new Dictionary<GameObject, string>();
         _bananaTrees = new Dictionary<string, BananaTreeManager>();
         _treeData = new Dictionary<string, BananaTreeData>();
 
         if (data != null)
         {
-            var treeData = data.bananaTreesData.data;
-            foreach (var d in treeData)
+            RestoreBananaTreesData(data.bananaTreesData);
+
+            RestoreDynamicObjects(data.dynamicObjectsData);
+        }
+    }
+
+    private void RestoreBananaTreesData(BananaTreesData treesData)
+    {
+        var arrayData = treesData.data;
+        foreach (var data in arrayData)
+        {
+            _treeData.Add(data.objectName, data);
+        }
+    }
+
+    private void RestoreDynamicObjects(DynamicObjectsData dynamicObjectsData, bool restoreVelocity = true)
+    {
+        foreach (var data in dynamicObjectsData.objectDatas)
+        {
+            var prefab = AddressableItems.Instance.GetPrefabByGUID(data.prefabAssetGUID);
+            if (prefab != null)
             {
-                _treeData.Add(d.objectName, d);
+                GameObject @object = Instantiate(prefab, data.postiton, data.rotation);
+                @object.transform.localScale = data.scale;
+                @object.transform.parent = _restoredObjectsRoot;
+
+                if (@object.TryGetComponent<Rigidbody>(out var rB))
+                {
+                    rB.useGravity = data.useGravityRB;
+                    rB.isKinematic = data.isKinematicRB;
+
+                    if (restoreVelocity)
+                    {
+                        rB.velocity = data.velocity;
+                        rB.angularVelocity = data.angularVelocity;
+                    }
+                }
+
+                if (@object.TryGetComponent<Collider>(out var rC))
+                {
+                    rC.isTrigger = data.isTriggerCol;
+                    rC.enabled = data.isEnabledCol;
+                }
+
+                if (@object.TryGetComponent<BananaDrop>(out var fallingBananaPlot))
+                {
+                    fallingBananaPlot.Init();
+                    fallingBananaPlot.SetRegistries(this);
+                }
+
+                Register(@object, data.prefabAssetGUID);
             }
         }
     }
@@ -51,6 +143,14 @@ public class GameObjectsRegistries : MonoBehaviour
     private void OnSpawnManagerInitialized()
     {
 
+    }
+
+    public void Register(GameObject gameObject, string prefabPath)
+    {
+        if (!_dynamicObjects.ContainsKey(gameObject))
+        {
+            _dynamicObjects.Add(gameObject, prefabPath);
+        }
     }
 
     public void Register<T>(GameObject gameObject, T component) where T : UnityEngine.Object
@@ -63,6 +163,12 @@ public class GameObjectsRegistries : MonoBehaviour
         {
             _bananaTrees.Add(gameObject.name, component as BananaTreeManager);
         }
+    }
+
+    public void Unregister(GameObject gameObject)
+    {
+        if (_dynamicObjects.ContainsKey(gameObject))
+            _dynamicObjects.Remove(gameObject);
     }
 
     public void Unregister<T>(GameObject gameObject) where T : UnityEngine.Object

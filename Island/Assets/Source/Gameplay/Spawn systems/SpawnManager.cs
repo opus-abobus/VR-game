@@ -23,8 +23,6 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
     [SerializeField] private GameObjectsRegistries _registries;
 
     public interface ISpawner {
-/*        bool HasInitialized { get; }
-        void Init();*/
         void BeginSpawn();
     }
 
@@ -52,6 +50,7 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
         foreach (var cocSpawner in _coconutSpawners)
         {
             cocSpawner.Init();
+            cocSpawner.SetRegistry(_registries);
         }
 
         while (!BerrySpawnManager.HasStarted) {
@@ -61,6 +60,7 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
         foreach (var berrySpawner in _berrySpawners)
         {
             berrySpawner.Init();
+            berrySpawner.SetRegistry(_registries);
         }
 
         while (!BananaTreeManager.HasStarted) {
@@ -71,6 +71,7 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
         {
             _registries.Register(ban.gameObject, ban);
             ban.Init(_registries.GetData<BananaTreeData>(ban.gameObject.name));
+            ban.SetRegistry(_registries);
         }
 
         OnInitialized?.Invoke();
@@ -88,7 +89,6 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
 
     void StartSpawner(List<ISpawner> spawner) {
         foreach (var sp in spawner) {
-            //sp.Init();
             sp.BeginSpawn();
         }
     }

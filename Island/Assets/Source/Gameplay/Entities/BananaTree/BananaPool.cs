@@ -1,13 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class BananaPool : MonoBehaviour
 {
     public static BananaPool Instance { get; private set; }
 
     [SerializeField] private Transform _root;
-    [SerializeField] private GameObject _bananaPrefab;
     [SerializeField] private int _poolSize;
+
+    [SerializeField] private AssetReferenceGameObject _bananaPrefabRef;
+    private GameObject _bananaPrefab;
+
+    public string GetAssetGUID()
+    {
+        return _bananaPrefabRef.AssetGUID;
+    }
 
     private Stack<GameObject> _pool;
 
@@ -23,6 +31,7 @@ public class BananaPool : MonoBehaviour
             return;
         }
 
+        _bananaPrefab = AddressableItems.Instance.GetPrefabByGUID(_bananaPrefabRef.AssetGUID);
         InitPool();
     }
 

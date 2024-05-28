@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 {
@@ -15,8 +15,8 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     private Transform _spawnPointsRoot;
     private Vector3[] _spawnPoints;
 
-    [SerializeField]
-    private GameObject _spawnPrefab;
+    [SerializeField] private AssetReferenceGameObject _berryPrefabRef;
+    private GameObject _berryPrefab;
 
     [SerializeField]
     private Transform _parent;
@@ -33,6 +33,8 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     //false - точка свободна, true - точка занята
     private Dictionary<int, bool> spawnPointsDictionary;
     public void Init() {
+        _berryPrefab = AddressableItems.Instance.GetPrefabByGUID(_berryPrefabRef.AssetGUID);
+
         _berriesSettings = GameSettingsManager.Instance.ActiveWorldSettings;
 
         _wasStartSpawn = false;
@@ -46,7 +48,7 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 
             _hasInitialized = true;
             
-            SpawnBerries();
+            //SpawnBerries();
         }
         else {
             Debug.LogAssertion("У куста отсутствуют точки спавна ягод. Скрипт будет уничтожен");
@@ -55,11 +57,6 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     }
 
     void SpawnManager.ISpawner.BeginSpawn() {
-/*        if (!_hasInitialized) {
-            SpawnManager.ISpawner _spawner = this;
-            _spawner.Init();
-        }*/
-
         SpawnBerries();
         StartRespawn();
     }
@@ -163,7 +160,8 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
                 break;
             }
 
-            obj = Instantiate(_spawnPrefab, _spawnPoints[spawnPoint], Quaternion.identity, _parent);
+            obj = Instantiate(_berryPrefab, _spawnPoints[spawnPoint], Quaternion.identity, _parent);
+            _registry.Register(obj, _berryPrefabRef.AssetGUID);
 
             var berry = obj.GetComponent<Berry>();
             if (berry != null) {
@@ -192,5 +190,12 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 
     private void OnDisable() {
         StopAllCoroutines();
+    }
+
+    private GameObjectsRegistries _registry;
+
+    public void SetRegistry(GameObjectsRegistries registries)
+    {
+        _registry = registries;
     }
 }

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class BananaDrop : MonoBehaviour
 {
-    public GameObject _banana;
-
     private BananaPool _bananaPool;
 
     public event Action FallenFruit;
@@ -15,6 +14,14 @@ public class BananaDrop : MonoBehaviour
     private List <string> _tags;
 
     private Vector3 _colliderSize;
+
+    [SerializeField] private AssetReferenceGameObject _bananaPlotPrefabRef;
+
+    private GameObjectsRegistries _registries;
+    public void SetRegistries(GameObjectsRegistries registries)
+    {
+        _registries = registries;
+    }
 
     public void Init() {
         _tags = new List<string>();
@@ -33,7 +40,7 @@ public class BananaDrop : MonoBehaviour
         _tags.Add("banana");
         _tags.Add("berry");
         _tags.Add("rock");
-        _tags.Add("cocount"); _tags.Add("coconut");
+        _tags.Add("cocount"); _tags.Add("coconut"); _tags.Add("coconutUnbroken");
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -47,8 +54,12 @@ public class BananaDrop : MonoBehaviour
         }
     }
     private void DropBanana() {
+        FallenFruit?.Invoke();
+
         GetComponent<Rigidbody>().useGravity = true;
         GetComponent<BoxCollider>().isTrigger = false;
+
+        _registries.Register(gameObject, _bananaPlotPrefabRef.AssetGUID);
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -56,7 +67,7 @@ public class BananaDrop : MonoBehaviour
             Vector3 spawnPoint = collision.GetContact(0).point;
             SpawnBanana(spawnPoint);
 
-            FallenFruit?.Invoke();
+            _registries.Unregister(gameObject);
 
             Destroy(gameObject);
         }
@@ -67,14 +78,14 @@ public class BananaDrop : MonoBehaviour
 
         for (int i = 0; i < _bananaAmount; i++) {
             spawnPoint.y += _colliderSize.y / 2;
-            //GameObject spawnedBanana = Instantiate(_banana, spawnPoint, UnityEngine.Random.rotation);
+
             GameObject spawnedBanana = _bananaPool.Get();
             spawnedBanana.transform.parent = gameObject.transform.parent;
             spawnedBanana.transform.position = spawnPoint;
             spawnedBanana.transform.rotation = UnityEngine.Random.rotation;
             spawnedBanana.SetActive(true);
 
-            
+            _registries.Register(spawnedBanana, _bananaPool.GetAssetGUID());
         }
     }
 }

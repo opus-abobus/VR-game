@@ -21,25 +21,61 @@ MonoBehaviour:
     m_Address: MainMenu
     m_ReadOnly: 0
     m_SerializedLabels:
-    - default
+    - Scenes_primary
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f9be22091216a04788f6e91333ef7ef
     m_Address: LevelLoading
     m_ReadOnly: 0
     m_SerializedLabels:
-    - default
+    - Scenes_primary
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 072b412b45f824d4182cde8deceec9b3
     m_Address: Intro
     m_ReadOnly: 0
     m_SerializedLabels:
-    - default
+    - Scenes_primary
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 99c9720ab356a0642a771bea13969a05
     m_Address: MainLevel
     m_ReadOnly: 0
     m_SerializedLabels:
-    - default
+    - Scenes_primary
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 353413fb8930cfc4a94fc8438c8a24a9
+    m_Address: Berry
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 602f5f66d196cc24aa45bd9813012983
+    m_Address: Banana
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b64a4ae56956d044d99866339835aaa6
+    m_Address: Coconut
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d898a1b107c545842928f29616f34ae8
+    m_Address: CoconutDown
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06adb5963323bc04c836079af12ae1c0
+    m_Address: CoconutUp
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6650498c9cc4ee4faa062ce543e3854
+    m_Address: BananaPlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b4a41c0933ba29648ad510d87e5679b0, type: 2}

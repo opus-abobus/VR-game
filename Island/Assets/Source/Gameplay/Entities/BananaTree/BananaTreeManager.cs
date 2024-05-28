@@ -11,19 +11,17 @@ public class BananaTreeManager : MonoBehaviour, ISpawner
 
     [SerializeField] private BananaDrop _bananaDrop;
 
-    private bool _hasInitialized = false;
-
     private static bool _hasStarted = false;
     public static bool HasStarted { get { return _hasStarted; } }
-
-/*    public void SetData(BananaTreeData data)
-    {
-        _bananaRipening.SetData();
-    }*/
 
     public BananaTreeData GetData()
     {
         return new BananaTreeData(gameObject.name, _bananaRipening.GetData(), _bananaTreeGrowth.GetData());
+    }
+
+    public void SetRegistry(GameObjectsRegistries registries)
+    {
+        _bananaDrop.SetRegistries(registries);
     }
 
     private void Start() {
@@ -54,26 +52,9 @@ public class BananaTreeManager : MonoBehaviour, ISpawner
                 OnAllowRipening();
             }
         }
-
-        _hasInitialized = true;
     }
 
-/*    void ISpawner.Init() {
-        _bananaRipening = GetComponent<BananaRipening>();
-        _bananaTreeGrowth = GetComponent<BananaTreeGrowth>();
-
-        _bananaRipening.Init();
-        _bananaTreeGrowth.Init();
-
-        _bananaTreeGrowth.AllowRipening += OnAllowRipening;
-
-        _hasInitialized = true;
-    }*/
-
     void ISpawner.BeginSpawn() {
-/*        if (!_hasInitialized) {
-            _spawner.Init();
-        }*/
         _bananaTreeGrowth.StartGrowth();
     }
 

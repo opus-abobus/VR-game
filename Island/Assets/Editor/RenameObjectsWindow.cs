@@ -11,33 +11,36 @@ public class RenameObjectsWindow : EditorWindow
 
     private void OnGUI()
     {
-        if (GUILayout.Button("Find All Objects with BananaTreeIDMaker"))
+        if (GUILayout.Button("Find all banana trees with ObjectIDMaker"))
         {
-            FindAllBananaTreeIDMakers();
+            FindAllIDMakers<BananaTreeIDMaker>();
+        }
+        else if (GUILayout.Button("Find all inventory slots with ObjectIDMaker"))
+        {
+            FindAllIDMakers<InventorySlotIDMaker>();
         }
 
-        if (bananaTreeIDMakers != null && bananaTreeIDMakers.Length > 0)
+        if (_idMakers != null && _idMakers.Length > 0)
         {
             EditorGUILayout.LabelField("Found Objects", EditorStyles.boldLabel);
-            EditorGUILayout.TextArea("Banana tree count: " + bananaTreeIDMakers.Length);
+            EditorGUILayout.TextArea(_idMakers[0].GetType().Name + " count: " + _idMakers.Length);
 
             if (GUILayout.Button("Apply New Names"))
             {
-                ApplyNewNames();
+                ApplyIDToNames();
             }
         }
     }
 
-    private BananaTreeIDMaker[] bananaTreeIDMakers;
-
-    private void FindAllBananaTreeIDMakers()
+    private ObjectIDMaker[] _idMakers;
+    private void FindAllIDMakers<T>(bool includeInactive = true) where T : ObjectIDMaker
     {
-        bananaTreeIDMakers = FindObjectsOfType<BananaTreeIDMaker>();
+        _idMakers = FindObjectsOfType<T>(includeInactive);
     }
 
-    private void ApplyNewNames()
+    private void ApplyIDToNames()
     {
-        foreach (var obj in bananaTreeIDMakers)
+        foreach (var obj in _idMakers)
         {
             obj.gameObject.name = obj.GetHeadName() + " [" + GUID.Generate().ToString() + "]";
 
