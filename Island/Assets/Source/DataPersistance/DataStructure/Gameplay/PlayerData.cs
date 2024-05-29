@@ -46,13 +46,25 @@ namespace DataPersistence.Gameplay
         {
             public InventorySlotData[] slotsData;
 
+            public InventorySlotsData() { }
+            public InventorySlotsData(InventorySlotData[] data)
+            {
+                slotsData = data;
+            }
+
             [Serializable]
             public class InventorySlotData
             {
-                public int rowIndex;
-                public int columnIndex;
-                public bool isEmpty;
+                public string slotObjectName;
+                public DynamicObjectsData.ObjectData storedObjectData;
+                //public bool isEmpty;
                 
+                public InventorySlotData() { }
+                public InventorySlotData(string slotObjectName, DynamicObjectsData.ObjectData objectData)
+                {
+                    this.slotObjectName = slotObjectName;
+                    this.storedObjectData = objectData;
+                }
             }
         }
     }

@@ -1,16 +1,17 @@
 using DataPersistence.Gameplay;
 using System.Collections.Generic;
 using UnityEngine;
+using static DataPersistence.Gameplay.PlayerData.InventorySlotsData;
 
 public class GameObjectsRegistries : MonoBehaviour
 {
-    private Dictionary<string, InventorySlotController> _inventoryRegistry;
+    private Dictionary<string, InventorySlotData> _inventorySlotsData;
     private Dictionary<string, BananaTreeManager> _bananaTrees;
     private Dictionary<string, BananaTreeData> _treeData;
 
-    [SerializeField] private SpawnManager _spawnManager;
-
     [SerializeField] private LevelDataManager _levelDataManager;
+
+    [SerializeField] private InventoryPanelController _inventoryPanelController;
 
     [SerializeField] private Transform _restoredObjectsRoot;
     private Dictionary<GameObject, string> _dynamicObjects;
@@ -20,6 +21,8 @@ public class GameObjectsRegistries : MonoBehaviour
         SaveBananaTreesData(gameplayData);
 
         SaveDynamicObjectsData(gameplayData);
+
+        SaveInventoryData(gameplayData);
     }
 
     private void SaveBananaTreesData(GameplayData gameplayData)
@@ -72,22 +75,37 @@ public class GameObjectsRegistries : MonoBehaviour
         gameplayData.dynamicObjectsData = dynamicObjectsData;
     }
 
+    private void SaveInventoryData(GameplayData data)
+    {
+        data.playerData.inventorySlotsData = _inventoryPanelController.GetData();
+    }
+
+    public string GetDynamicObjectAssetGUID(GameObject gameObject)
+    {
+        if (_dynamicObjects.ContainsKey(gameObject))
+        {
+            return _dynamicObjects[gameObject];
+        }
+
+        return null;
+    }
+
     public void Init(GameplayData data)
     {
         _levelDataManager.OnGameSave += OnGameSave;
 
-        _spawnManager.OnInitialized += OnSpawnManagerInitialized;
-
-        _inventoryRegistry = new Dictionary<string, InventorySlotController>();
         _dynamicObjects = new Dictionary<GameObject, string>();
         _bananaTrees = new Dictionary<string, BananaTreeManager>();
         _treeData = new Dictionary<string, BananaTreeData>();
+        _inventorySlotsData = new Dictionary<string, InventorySlotData>();
 
         if (data != null)
         {
             RestoreBananaTreesData(data.bananaTreesData);
 
             RestoreDynamicObjects(data.dynamicObjectsData);
+
+            RestoreInventoryData(data.playerData.inventorySlotsData);
         }
     }
 
@@ -140,9 +158,17 @@ public class GameObjectsRegistries : MonoBehaviour
         }
     }
 
-    private void OnSpawnManagerInitialized()
+    private void RestoreInventoryData(PlayerData.InventorySlotsData data)
     {
+        foreach (var slotData in data.slotsData)
+        {
+            if (slotData != null && !_inventorySlotsData.ContainsKey(slotData.slotObjectName))
+            {
+                _inventorySlotsData.Add(slotData.slotObjectName, slotData);
+            }
+        }
 
+        _inventoryPanelController.SetData();
     }
 
     public void Register(GameObject gameObject, string prefabPath)
@@ -173,26 +199,10 @@ public class GameObjectsRegistries : MonoBehaviour
 
     public void Unregister<T>(GameObject gameObject) where T : UnityEngine.Object
     {
-        if (typeof(T) == typeof(InventorySlotController))
-        {
-
-        }
-        else if (typeof(T) == typeof(BananaTreeManager))
+        if (typeof(T) == typeof(BananaTreeManager))
         {
             if (_bananaTrees.ContainsKey(gameObject.name))
                 _bananaTrees.Remove(gameObject.name);
-        }
-    }
-
-    // not keys but components data
-    public void SetData<T>(T data)
-    {
-        if (typeof(T) == typeof(BananaTreeManager))
-        {
-            foreach (var tree in _bananaTrees)
-            {
-                //_bananaTrees.Add(key, );
-            }
         }
     }
 
@@ -206,18 +216,20 @@ public class GameObjectsRegistries : MonoBehaviour
                 return treeData as T;
             }
         }
+        else if (typeof(T) == typeof(InventorySlotData))
+        {
+            if (_inventorySlotsData.Count == 0) return default;
+            if (_inventorySlotsData.TryGetValue(key, out var slotData))
+            {
+                return slotData as T;
+            }
+        }
 
         return default;
     }
 
-    private void InitInventoryRegistry(PlayerData data)
-    {
-        
-    }
-
     private void OnDestroy()
     {
-        _spawnManager.OnInitialized -= OnSpawnManagerInitialized;
         _levelDataManager.OnGameSave -= OnGameSave;
     }
 }

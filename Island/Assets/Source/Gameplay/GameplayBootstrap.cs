@@ -33,6 +33,9 @@ public class GameplayBootstrap : MonoBehaviour
     private GameTime _gameTime;
 
     [SerializeField]
+    private InventoryPanelController _inventoryPanelController;
+
+    [SerializeField]
     private GameObjectsRegistries _registries;
 
     [SerializeField]
@@ -67,6 +70,8 @@ public class GameplayBootstrap : MonoBehaviour
 
         _gameManager.Initialize();
 
+        _inventoryPanelController.Init(_registries);
+
         if (isNewGame)
         {
             _registries.Init(null);
@@ -80,6 +85,7 @@ public class GameplayBootstrap : MonoBehaviour
             _hungerSystem.Initialize(gameplayData.playerData.hungerSystemData);
             _gameTime.SetSavedDayTime(gameplayData.dayTimeProgress);
         }
+
 
         Queue<IBootstrap> bootQueue = new Queue<IBootstrap>();
         bootQueue.Enqueue(_spawnManager);
