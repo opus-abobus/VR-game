@@ -21,7 +21,7 @@ public class InventorySlotController : MonoBehaviour {
     private GameObject _storedObject = null;
     private string _objectPrefabGUID = null;
 
-    private event Action onItemPlaced, onItemPickedUp;
+    private event Action ItemPlaced, ItemPickedUp;
 
     private GameObjectsRegistries _registry;
 
@@ -132,12 +132,12 @@ public class InventorySlotController : MonoBehaviour {
     }
 
     private void SubscribeAll() {
-        onItemPlaced += OnItemPlaced;
-        onItemPickedUp += OnItemPickedUp;
+        ItemPlaced += OnItemPlaced;
+        ItemPickedUp += OnItemPickedUp;
     }
     private void UnsubscribeAll() {
-        onItemPickedUp -= OnItemPickedUp;
-        onItemPlaced -= OnItemPlaced;
+        ItemPickedUp -= OnItemPickedUp;
+        ItemPlaced -= OnItemPlaced;
     }
 
     private void OnEnable() {
@@ -160,7 +160,7 @@ public class InventorySlotController : MonoBehaviour {
 
         _storedObject.SetActive(false);
 
-        onItemPlaced?.Invoke();
+        ItemPlaced?.Invoke();
     }
 
     public void OnHandPressedSlot() {
@@ -177,7 +177,7 @@ public class InventorySlotController : MonoBehaviour {
 
             _hand.AttachObject(_storedObject, GrabTypes.Grip, Hand.AttachmentFlags.VelocityMovement);
 
-            onItemPickedUp?.Invoke();
+            ItemPickedUp?.Invoke();
         }
     }
 

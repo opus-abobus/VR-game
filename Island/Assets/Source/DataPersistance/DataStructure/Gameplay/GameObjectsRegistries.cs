@@ -153,6 +153,11 @@ public class GameObjectsRegistries : MonoBehaviour
                     fallingBananaPlot.SetRegistries(this);
                 }
 
+                if (@object.TryGetComponent<CocountSplit>(out var cocountSplit))
+                {
+                    cocountSplit.SetRegistry(this);
+                }
+
                 Register(@object, data.prefabAssetGUID);
             }
         }
