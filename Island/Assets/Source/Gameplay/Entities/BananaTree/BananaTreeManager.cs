@@ -19,11 +19,6 @@ public class BananaTreeManager : MonoBehaviour, ISpawner
         return new BananaTreeData(gameObject.name, _bananaRipening.GetData(), _bananaTreeGrowth.GetData());
     }
 
-    public void SetRegistry(GameObjectsRegistries registries)
-    {
-        _bananaDrop.SetRegistries(registries);
-    }
-
     private void Start() {
         _hasStarted = true;
     }

@@ -19,8 +19,6 @@ public class PlayerEating : MonoBehaviour, GameplayBootstrap.IBootstrap
 
     private Dictionary<string, float> nutVals = new Dictionary<string, float>();
 
-    [SerializeField] private GameObjectsRegistries _registries;
-
     void GameplayBootstrap.IBootstrap.Initialize() {
         _settings = GameSettingsManager.Instance.ActiveWorldSettings;
 
@@ -65,7 +63,7 @@ public class PlayerEating : MonoBehaviour, GameplayBootstrap.IBootstrap
                     Destroy(other.gameObject);
                 }
 
-                _registries.Unregister(other.gameObject);
+                GameObjectsRegistries.Instance.Unregister(other.gameObject);
             }
         }
     }

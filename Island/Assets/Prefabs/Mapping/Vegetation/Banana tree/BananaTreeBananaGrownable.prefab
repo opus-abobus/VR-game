@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5045858847164333719}
   - component: {fileID: 2364181453385500321}
   - component: {fileID: 3568736707254614967}
-  - component: {fileID: 4841815526850499406}
+  - component: {fileID: 4946551191357144290}
   m_Layer: 0
   m_Name: BananaTreeBananaGrownable
   m_TagString: Untagged
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bananaDrop: {fileID: 967021448257535607}
---- !u!114 &4841815526850499406
+--- !u!114 &4946551191357144290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,10 +173,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5570298871915848747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ad4bb7dc4c2cc4b990c889cfe86077, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c3af1e9a9edcb408748447e5812d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headName: Banana tree
+  <HeadName>k__BackingField: Banana tree
 --- !u!1 &5592869015085161873
 GameObject:
   m_ObjectHideFlags: 0

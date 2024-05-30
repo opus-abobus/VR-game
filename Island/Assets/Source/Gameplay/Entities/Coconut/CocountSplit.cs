@@ -25,14 +25,14 @@ public class CocountSplit : MonoBehaviour
                 _coconutDown.SetActive(true);
                 _coconutUp.SetActive(true);
 
-                _registry.Register(_coconutDown, _coconutLower.AssetGUID);
-                _registry.Register(_coconutUp, _coconutUpper.AssetGUID);
+                GameObjectsRegistries.Instance.Register(_coconutDown, _coconutLower.AssetGUID);
+                GameObjectsRegistries.Instance.Register(_coconutUp, _coconutUpper.AssetGUID);
 
                 _coconutDown.transform.parent = coconutBroken;
                 _coconutUp.transform.parent = coconutBroken;
                 coconutBroken.parent = transform.parent;
 
-                _registry.Unregister(this.gameObject);
+                GameObjectsRegistries.Instance.Unregister(this.gameObject);
 
                 Destroy(this.gameObject);
             }
@@ -41,12 +41,5 @@ public class CocountSplit : MonoBehaviour
             }
             _wasDetachedFromHand = false;
         }
-    }
-
-    private GameObjectsRegistries _registry;
-
-    public void SetRegistry(GameObjectsRegistries registries)
-    {
-        _registry = registries;
     }
 }

@@ -18,15 +18,15 @@ namespace DataPersistence.Gameplay
     [Serializable]
     public class BananaTreeData
     {
-        public string objectName;
+        public string key;
 
         public BananaRipeningData ripeningData;
         public BananaGrowthData growthData;
 
         public BananaTreeData() { }
-        public BananaTreeData(string objectName, BananaRipeningData ripeningData, BananaGrowthData growthData)
+        public BananaTreeData(string key, BananaRipeningData ripeningData, BananaGrowthData growthData)
         {
-            this.objectName = objectName;
+            this.key = key;
             this.ripeningData = ripeningData;
             this.growthData = growthData;
         }

@@ -11,13 +11,9 @@ public class RenameObjectsWindow : EditorWindow
 
     private void OnGUI()
     {
-        if (GUILayout.Button("Find all banana trees with ObjectIDMaker"))
+        if (GUILayout.Button("Find all objects with ObjectIDMaker"))
         {
-            FindAllIDMakers<BananaTreeIDMaker>();
-        }
-        else if (GUILayout.Button("Find all inventory slots with ObjectIDMaker"))
-        {
-            FindAllIDMakers<InventorySlotIDMaker>();
+            FindAllIDMakers<ObjectIDMaker>();
         }
 
         if (_idMakers != null && _idMakers.Length > 0)
@@ -25,7 +21,7 @@ public class RenameObjectsWindow : EditorWindow
             EditorGUILayout.LabelField("Found Objects", EditorStyles.boldLabel);
             EditorGUILayout.TextArea(_idMakers[0].GetType().Name + " count: " + _idMakers.Length);
 
-            if (GUILayout.Button("Apply New Names"))
+            if (GUILayout.Button("Apply ID to names"))
             {
                 ApplyIDToNames();
             }
@@ -42,7 +38,7 @@ public class RenameObjectsWindow : EditorWindow
     {
         foreach (var obj in _idMakers)
         {
-            obj.gameObject.name = obj.GetHeadName() + " [" + GUID.Generate().ToString() + "]";
+            obj.gameObject.name = obj.HeadName + " [" + GUID.Generate().ToString() + "]";
 
             EditorUtility.SetDirty(obj.gameObject);
             UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(obj.gameObject.scene);

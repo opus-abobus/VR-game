@@ -7,7 +7,7 @@ public class InventoryPanelController : MonoBehaviour
 {
     [SerializeField] private Hand _hand;
 
-    private GameObjectsRegistries _registry;
+    [SerializeField] private GameObjectsRegistries _registry;
 
     private InventorySlotController[] _slotControllers;
 
@@ -15,14 +15,16 @@ public class InventoryPanelController : MonoBehaviour
 
     public static InventoryPanelController Instance { get; private set; }
 
-    public void Init(GameObjectsRegistries registry)
+    public void Init()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-
-        _registry = registry;
+        else
+        {
+            return;
+        }
 
         _slotControllers = gameObject.GetComponentsInChildren<InventorySlotController>(true);
         foreach (var slot in _slotControllers)

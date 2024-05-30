@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public abstract class ObjectIDMaker : MonoBehaviour
+public class ObjectIDMaker : MonoBehaviour
 {
-    [SerializeField] protected string _headName = string.Empty;
-
-    public string GetHeadName()
-    {
-        return _headName;
-    }
+    [field: SerializeField] public string HeadName { get; protected set; } = string.Empty;
 }

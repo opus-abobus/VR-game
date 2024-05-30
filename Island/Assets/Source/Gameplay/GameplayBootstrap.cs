@@ -70,7 +70,7 @@ public class GameplayBootstrap : MonoBehaviour
 
         _gameManager.Initialize();
 
-        _inventoryPanelController.Init(_registries);
+        _inventoryPanelController.Init();
 
         if (isNewGame)
         {
@@ -85,7 +85,6 @@ public class GameplayBootstrap : MonoBehaviour
             _hungerSystem.Initialize(gameplayData.playerData.hungerSystemData);
             _gameTime.SetSavedDayTime(gameplayData.dayTimeProgress);
         }
-
 
         Queue<IBootstrap> bootQueue = new Queue<IBootstrap>();
         bootQueue.Enqueue(_spawnManager);

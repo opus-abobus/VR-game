@@ -1,3 +1,4 @@
+using DataPersistence.Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,95 +8,118 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 {
     private bool _wasStartSpawn;
 
-    private bool _hasInitialized = false;
+    private BerrySpawnZone[] _spawnZoneControllers;
 
-    private Berry[] _spawnedBerries;
-
-    [SerializeField]
-    private Transform _spawnPointsRoot;
-    private Vector3[] _spawnPoints;
+    [SerializeField] private Transform _spawnPointsRoot;
 
     [SerializeField] private AssetReferenceGameObject _berryPrefabRef;
     private GameObject _berryPrefab;
 
-    [SerializeField]
-    private Transform _parent;
+    [SerializeField] private Transform _parent;
 
     private WorldSettings.IBerriesSettings _berriesSettings;
 
     //respawn properties
-    [SerializeField]
-    private bool _allowRespawnBerries = true;
-    [SerializeField]
-    private bool _useRandomAmount = false;
+    [SerializeField] private bool _allowRespawnBerries = true;
+    [SerializeField] private bool _useRandomAmount = false;
+
+    //private int _timeToRespawnInSeconds = -1;
 
     //коллекция для хранения информации о точках, в которых был осуществлен спавн:
-    //false - точка свободна, true - точка занята
-    private Dictionary<int, bool> spawnPointsDictionary;
-    public void Init() {
+    //ключ - индекс позиции, значение - зона спавна
+    private Dictionary<int, BerrySpawnZone> _spawnZones = new();
+    public void Init(BerryBushData data)
+    {
+        _registry = GameObjectsRegistries.Instance;
+
         _berryPrefab = AddressableItems.Instance.GetPrefabByGUID(_berryPrefabRef.AssetGUID);
 
         _berriesSettings = GameSettingsManager.Instance.ActiveWorldSettings;
 
-        _wasStartSpawn = false;
+        if (_spawnPointsRoot != null)
+        {
+            _spawnZoneControllers = _spawnPointsRoot.GetComponentsInChildren<BerrySpawnZone>();
+            if (_spawnZoneControllers != null && _spawnZoneControllers.Length > 0)
+            {
+                int i = 0;
+                foreach (var zone in _spawnZoneControllers)
+                {
+                    zone.BerryFell += OnBerryFell;
+                    zone.SetIndex(i);
+                    _spawnZones.Add(i++, zone);
+                }
+                if (data != null)
+                {
+                    _wasStartSpawn = data.wasStartSpawn;
 
-        if (_spawnPointsRoot != null) {
-
-            InitSpawnPoints();
-            InitSpawnPointsDictionary();
-
-            _spawnedBerries = new Berry[_spawnPoints.Length];
-
-            _hasInitialized = true;
-            
-            //SpawnBerries();
+                    foreach (var zoneData in data.zonesData)
+                    {
+                        if (_spawnZones.ContainsKey(zoneData.index))
+                        {
+                            if (zoneData.hasBerry) 
+                            {
+                                _spawnZones[zoneData.index].SetBerry(
+                                    Instantiate(_berryPrefab, _spawnZones[zoneData.index].transform.position, Quaternion.identity, _parent));
+                            }
+                            _spawnZones[zoneData.index].CooldownTimeLeft = zoneData.cooldownTimeLeft;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogAssertion("У куста отсутствуют точки спавна ягод. Скрипт будет уничтожен");
+                Destroy(this);
+            }
         }
-        else {
+        else
+        {
             Debug.LogAssertion("У куста отсутствуют точки спавна ягод. Скрипт будет уничтожен");
             Destroy(this);
         }
     }
 
-    void SpawnManager.ISpawner.BeginSpawn() {
+    private void OnBerryFell(int index, GameObject fallenBerry)
+    {
+        _registry.Register(fallenBerry, _berryPrefabRef.AssetGUID);
+        StartCoroutine(RespawnCooldown(index));
+    }
+
+    public BerryBushData GetData()
+    {
+        var spawnsZoneData = new BerrySpawnZoneData[_spawnZones.Count];
+        int i = 0;
+        bool hasBerry;
+        foreach (var data in _spawnZones)
+        {
+            hasBerry = data.Value.Berry == null ? false : true;
+            spawnsZoneData[i++] = new BerrySpawnZoneData(data.Key, hasBerry, data.Value.CooldownTimeLeft);
+        }
+
+        return new BerryBushData(gameObject.name, _wasStartSpawn, spawnsZoneData);
+    }
+
+    void SpawnManager.ISpawner.BeginSpawn()
+    {
         SpawnBerries();
         StartRespawn();
     }
 
-    public void StartRespawn() {
+    public void StartRespawn()
+    {
         StartCoroutine(RespawnBerries());
     }
 
-    void InitSpawnPoints() {
-        int length = _spawnPointsRoot.childCount;
-
-        if (length == 0) {
-            Debug.LogAssertion("У куста отсутствуют точки спавна ягод. Скрипт будет уничтожен");
-            Destroy(this);
-            return;
-        }
-
-        _spawnPoints = new Vector3[length];
-
-        for (int i = 0; i < length; i++) {
-            _spawnPoints[i] = _spawnPointsRoot.GetChild(i).position;
-        }
-    }
-
-    void InitSpawnPointsDictionary() {
-        spawnPointsDictionary = new Dictionary<int, bool>();
-        for (int i = 0; i < _spawnPoints.Length; i++) {
-            spawnPointsDictionary.Add(i, false);
-        }
-    }
-
-    IEnumerator RespawnBerries() {
+    IEnumerator RespawnBerries()
+    {
         yield return new WaitForEndOfFrame();
 
         int minTimeToRespawn = _berriesSettings.MinTimeToRespawnBerryInSeconds;
         int maxTimeToRespawn = _berriesSettings.MaxTimeToRespawnBerryInSeconds;
 
         int timeToRespawn;
-        while (true) {
+        while (true)
+        {
             if (!_allowRespawnBerries) yield return null;
 
             timeToRespawn = UnityEngine.Random.Range(minTimeToRespawn, maxTimeToRespawn);
@@ -104,41 +128,49 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
         }
     }
 
-    void GetValidAmountOfBerries(out int minBerriesOnStart, out int maxBerriesOnStart) {
+    void GetValidAmountOfBerries(out int minBerriesOnStart, out int maxBerriesOnStart)
+    {
         minBerriesOnStart = _berriesSettings.MinBerriesOnStart;
         maxBerriesOnStart = _berriesSettings.MaxBerriesOnStart;
 
         if (minBerriesOnStart < 0) minBerriesOnStart = 0;
         if (maxBerriesOnStart < 0) maxBerriesOnStart = 0;
 
-        if (minBerriesOnStart == maxBerriesOnStart) {
-            if (minBerriesOnStart < 0) 
+        if (minBerriesOnStart == maxBerriesOnStart)
+        {
+            if (minBerriesOnStart < 0)
                 minBerriesOnStart = maxBerriesOnStart = 0;
-            if (minBerriesOnStart > _spawnPoints.Length) 
-                minBerriesOnStart = maxBerriesOnStart = _spawnPoints.Length;
+            if (minBerriesOnStart > _spawnZones.Count)
+                minBerriesOnStart = maxBerriesOnStart = _spawnZones.Count;
             return;
         }
 
-        if (minBerriesOnStart > maxBerriesOnStart) {
-            if (minBerriesOnStart > _spawnPoints.Length) {
-                minBerriesOnStart = maxBerriesOnStart = _spawnPoints.Length;
+        if (minBerriesOnStart > maxBerriesOnStart)
+        {
+            if (minBerriesOnStart > _spawnZones.Count)
+            {
+                minBerriesOnStart = maxBerriesOnStart = _spawnZones.Count;
             }
-            else {
-                minBerriesOnStart = maxBerriesOnStart; 
+            else
+            {
+                minBerriesOnStart = maxBerriesOnStart;
             }
             return;
         }
 
-        if (maxBerriesOnStart > _spawnPoints.Length) maxBerriesOnStart = _spawnPoints.Length;
+        if (maxBerriesOnStart > _spawnZones.Count) maxBerriesOnStart = _spawnZones.Count;
     }
 
-    void SpawnBerries() {
+    void SpawnBerries()
+    {
         int spawnCount;
 
-        if (!_wasStartSpawn) {
-            if (_useRandomAmount) 
-                spawnCount = UnityEngine.Random.Range(0, _spawnPoints.Length + 1);
-            else {
+        if (!_wasStartSpawn)
+        {
+            if (_useRandomAmount)
+                spawnCount = UnityEngine.Random.Range(0, _spawnZones.Count + 1);
+            else
+            {
                 int minBerriesOnStart, maxBerriesOnStart;
                 GetValidAmountOfBerries(out minBerriesOnStart, out maxBerriesOnStart);
 
@@ -147,55 +179,84 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 
             _wasStartSpawn = true;
         }
-        else {
+        else
+        {
             spawnCount = 1;
         }
 
         int spawnPoint;
         GameObject obj;
 
-        while (spawnCount > 0) {
-            spawnPoint = ItemSpawnManager.GetFreeSpawnPoint(spawnPointsDictionary);
-            if (spawnPoint == -1) {
-                break;
+        while (spawnCount > 0)
+        {
+            spawnPoint = GetRandomFreeSpawnIndex();
+            if (spawnPoint == -1)
+            {
+                return;
             }
 
-            obj = Instantiate(_berryPrefab, _spawnPoints[spawnPoint], Quaternion.identity, _parent);
-            _registry.Register(obj, _berryPrefabRef.AssetGUID);
+            obj = Instantiate(_berryPrefab, _spawnZones[spawnPoint].transform.position, Quaternion.identity, _parent);
 
-            var berry = obj.GetComponent<Berry>();
-            if (berry != null) {
-                _spawnedBerries.SetValue(berry, spawnPoint);
-            }
-
-            // сохранение значения флага спавна в точке
-            spawnPointsDictionary[spawnPoint] = true;
-
-            if (_spawnedBerries[spawnPoint].IsFallen)
-                StartCoroutine(RespawnCooldown(spawnPoint));
+            _spawnZones[spawnPoint].SetBerry(obj);
 
             spawnCount--;
         }
     }
-    IEnumerator RespawnCooldown(int index) {
-        yield return new WaitForSeconds(_berriesSettings.TimeoutBerryRespawnInSeconds);
-        spawnPointsDictionary[index] = false;
+    IEnumerator RespawnCooldown(int index)
+    {
+        _spawnZones[index].CooldownTimeLeft = _berriesSettings.TimeoutBerryRespawnInSeconds;
+
+        while (true)
+        {
+            yield return null;
+            _spawnZones[index].CooldownTimeLeft -= Time.deltaTime;
+            if (_spawnZones[index].CooldownTimeLeft <= 0.001f)
+            {
+                break;
+            }
+        }
+    }
+
+    private int GetRandomFreeSpawnIndex()
+    {
+        List<int> freeIndexes = new();
+
+        foreach (var spawnZone in _spawnZones.Values)
+        {
+            if (spawnZone.Berry == null && spawnZone.CooldownTimeLeft <= 0.001f)
+            {
+                freeIndexes.Add(spawnZone.Index);
+            }
+        }
+
+        if (freeIndexes.Count > 0)
+            return freeIndexes[UnityEngine.Random.Range(0, freeIndexes.Count)];
+
+        return -1;
     }
 
     private static bool _hasStarted = false;
     public static bool HasStarted { get { return _hasStarted; } }
-    private void Start() {
+    private void Start()
+    {
         _hasStarted = true;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         StopAllCoroutines();
     }
 
     private GameObjectsRegistries _registry;
 
-    public void SetRegistry(GameObjectsRegistries registries)
+    private void OnDestroy()
     {
-        _registry = registries;
+        if (_spawnZoneControllers != null && _spawnZoneControllers.Length > 0)
+        {
+            foreach (var zone in _spawnZoneControllers)
+            {
+                zone.BerryFell -= OnBerryFell;
+            }
+        }
     }
 }

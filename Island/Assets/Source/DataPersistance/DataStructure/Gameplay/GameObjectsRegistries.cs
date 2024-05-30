@@ -5,24 +5,59 @@ using static DataPersistence.Gameplay.PlayerData.InventorySlotsData;
 
 public class GameObjectsRegistries : MonoBehaviour
 {
-    private Dictionary<string, InventorySlotData> _inventorySlotsData;
-    private Dictionary<string, BananaTreeManager> _bananaTrees;
-    private Dictionary<string, BananaTreeData> _treeData;
+    private Dictionary<string, InventorySlotData> _inventorySlotsData = new();
+
+    private Dictionary<string, BananaTreeManager> _bananaTrees = new();
+    private Dictionary<string, CocountSpawner> _coconutSpawners = new();
+    private Dictionary<string, BerrySpawnManager> _berrySpawners = new();
+
+    private Dictionary<string, BananaTreeData> _treeData = new();
+    private Dictionary<string, CoconutSpawnerData> _coconutSpawnersData = new();
+    private Dictionary<string, BerryBushData> _berrySpawnersData = new();
+
 
     [SerializeField] private LevelDataManager _levelDataManager;
 
     [SerializeField] private InventoryPanelController _inventoryPanelController;
 
     [SerializeField] private Transform _restoredObjectsRoot;
-    private Dictionary<GameObject, string> _dynamicObjects;
+    private Dictionary<GameObject, string> _dynamicObjects = new();
+
+    public static GameObjectsRegistries Instance { get; private set; }
 
     private void OnGameSave(GameplayData gameplayData)
     {
+        SaveCoconutSpawnersData(gameplayData);
         SaveBananaTreesData(gameplayData);
+        SaveBerrySpawnersData(gameplayData);
 
         SaveDynamicObjectsData(gameplayData);
 
         SaveInventoryData(gameplayData);
+    }
+
+    private void SaveCoconutSpawnersData(GameplayData gameplayData)
+    {
+        CoconutSpawnerData[] coconutSpawnersData = new CoconutSpawnerData[_coconutSpawners.Count];
+        int i = 0;
+        foreach (var coconut in _coconutSpawners.Values)
+        {
+            coconutSpawnersData[i++] = coconut.GetData();
+        }
+
+        gameplayData.coconutSpawnersData = new CoconutSpawnersData(coconutSpawnersData);
+    }
+
+    private void SaveBerrySpawnersData(GameplayData gameplayData)
+    {
+        BerryBushData[] bushData = new BerryBushData[_berrySpawners.Count];
+        int i = 0;
+        foreach (var bush in _berrySpawners.Values)
+        {
+            bushData[i++] = bush.GetData();
+        }
+
+        gameplayData.berryBushesData = new BerryBushesData(bushData);
     }
 
     private void SaveBananaTreesData(GameplayData gameplayData)
@@ -31,8 +66,7 @@ public class GameObjectsRegistries : MonoBehaviour
         int i = 0;
         foreach (var tree in _bananaTrees.Values)
         {
-            var data = tree.GetData();
-            treeData[i++] = new BananaTreeData(data.objectName, data.ripeningData, data.growthData);
+            treeData[i++] = tree.GetData();
         }
 
         gameplayData.bananaTreesData = new BananaTreesData(treeData);
@@ -92,20 +126,44 @@ public class GameObjectsRegistries : MonoBehaviour
 
     public void Init(GameplayData data)
     {
-        _levelDataManager.OnGameSave += OnGameSave;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            return;
+        }
 
-        _dynamicObjects = new Dictionary<GameObject, string>();
-        _bananaTrees = new Dictionary<string, BananaTreeManager>();
-        _treeData = new Dictionary<string, BananaTreeData>();
-        _inventorySlotsData = new Dictionary<string, InventorySlotData>();
+        _levelDataManager.OnGameSave += OnGameSave;
 
         if (data != null)
         {
             RestoreBananaTreesData(data.bananaTreesData);
+            RestoreBerrySpawnersData(data.berryBushesData);
+            RestoreCoconutSpawnerData(data.coconutSpawnersData);
 
             RestoreDynamicObjects(data.dynamicObjectsData);
 
             RestoreInventoryData(data.playerData.inventorySlotsData);
+        }
+    }
+
+    private void RestoreBerrySpawnersData(BerryBushesData berryBushesData)
+    {
+        var arrayData = berryBushesData.data;
+        foreach (var data in arrayData)
+        {
+            _berrySpawnersData.Add(data.key, data);
+        }
+    }
+
+    private void RestoreCoconutSpawnerData(CoconutSpawnersData coconutSpawnersData)
+    {
+        var arrayData = coconutSpawnersData.data;
+        foreach (var data in arrayData)
+        {
+            _coconutSpawnersData.Add(data.key, data);
         }
     }
 
@@ -114,7 +172,7 @@ public class GameObjectsRegistries : MonoBehaviour
         var arrayData = treesData.data;
         foreach (var data in arrayData)
         {
-            _treeData.Add(data.objectName, data);
+            _treeData.Add(data.key, data);
         }
     }
 
@@ -150,12 +208,6 @@ public class GameObjectsRegistries : MonoBehaviour
                 if (@object.TryGetComponent<BananaDrop>(out var fallingBananaPlot))
                 {
                     fallingBananaPlot.Init();
-                    fallingBananaPlot.SetRegistries(this);
-                }
-
-                if (@object.TryGetComponent<CocountSplit>(out var cocountSplit))
-                {
-                    cocountSplit.SetRegistry(this);
                 }
 
                 Register(@object, data.prefabAssetGUID);
@@ -184,15 +236,19 @@ public class GameObjectsRegistries : MonoBehaviour
         }
     }
 
-    public void Register<T>(GameObject gameObject, T component) where T : UnityEngine.Object
+    public void Register<T>(GameObject gameObject, T component) where T : UnityEngine.Component
     {
-        if (typeof(T) == typeof(InventorySlotController))
+        if (typeof(T) == typeof(CocountSpawner))
         {
-            
+            _coconutSpawners.Add(gameObject.name, component as CocountSpawner);
         }
         else if (typeof(T) == typeof(BananaTreeManager))
         {
             _bananaTrees.Add(gameObject.name, component as BananaTreeManager);
+        }
+        else if (typeof(T) == typeof(BerrySpawnManager))
+        {
+            _berrySpawners.Add(gameObject.name, component as BerrySpawnManager);
         }
     }
 
@@ -202,7 +258,7 @@ public class GameObjectsRegistries : MonoBehaviour
             _dynamicObjects.Remove(gameObject);
     }
 
-    public void Unregister<T>(GameObject gameObject) where T : UnityEngine.Object
+    public void Unregister<T>(GameObject gameObject) where T : UnityEngine.Component
     {
         if (typeof(T) == typeof(BananaTreeManager))
         {
@@ -227,6 +283,22 @@ public class GameObjectsRegistries : MonoBehaviour
             if (_inventorySlotsData.TryGetValue(key, out var slotData))
             {
                 return slotData as T;
+            }
+        }
+        else if (typeof(T) == typeof(CoconutSpawnerData))
+        {
+            if (_coconutSpawnersData.Count == 0) return default;
+            if (_coconutSpawnersData.TryGetValue(key, out var spawnerData))
+            {
+                return spawnerData as T;
+            }
+        }
+        else if (typeof(T) == typeof(BerryBushData))
+        {
+            if (_berrySpawnersData.Count == 0) return default;
+            if (_berrySpawnersData.TryGetValue(key, out var spawnerData))
+            {
+                return spawnerData as T;
             }
         }
 

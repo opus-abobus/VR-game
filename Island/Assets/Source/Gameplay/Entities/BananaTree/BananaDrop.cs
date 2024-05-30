@@ -17,13 +17,11 @@ public class BananaDrop : MonoBehaviour
 
     [SerializeField] private AssetReferenceGameObject _bananaPlotPrefabRef;
 
-    private GameObjectsRegistries _registries;
-    public void SetRegistries(GameObjectsRegistries registries)
-    {
-        _registries = registries;
-    }
+    private GameObjectsRegistries _registry;
 
     public void Init() {
+        _registry = GameObjectsRegistries.Instance;
+
         _tags = new List<string>();
         AddThrowingObjects();
 
@@ -59,7 +57,7 @@ public class BananaDrop : MonoBehaviour
         GetComponent<Rigidbody>().useGravity = true;
         GetComponent<BoxCollider>().isTrigger = false;
 
-        _registries.Register(gameObject, _bananaPlotPrefabRef.AssetGUID);
+        _registry.Register(gameObject, _bananaPlotPrefabRef.AssetGUID);
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -67,7 +65,7 @@ public class BananaDrop : MonoBehaviour
             Vector3 spawnPoint = collision.GetContact(0).point;
             SpawnBanana(spawnPoint);
 
-            _registries.Unregister(gameObject);
+            _registry.Unregister(gameObject);
 
             Destroy(gameObject);
         }
@@ -85,7 +83,7 @@ public class BananaDrop : MonoBehaviour
             spawnedBanana.transform.rotation = UnityEngine.Random.rotation;
             spawnedBanana.SetActive(true);
 
-            _registries.Register(spawnedBanana, _bananaPool.GetAssetGUID());
+            _registry.Register(spawnedBanana, _bananaPool.GetAssetGUID());
         }
     }
 }

@@ -14,6 +14,8 @@ namespace DataPersistence.Gameplay
         public float dayTimeProgress;
 
         public BananaTreesData bananaTreesData;
+        public CoconutSpawnersData coconutSpawnersData;
+        public BerryBushesData berryBushesData;
 
         public DynamicObjectsData dynamicObjectsData;
 

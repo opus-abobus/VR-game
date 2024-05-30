@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
 
     public event Action OnInitialized;
 
-    [SerializeField] private GameObjectsRegistries _registries;
+    [SerializeField] private GameObjectsRegistries _registry;
 
     public interface ISpawner {
         void BeginSpawn();
@@ -49,8 +49,8 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
         _coconutSpawners = FindObjectsOfType<CocountSpawner>().ToList();
         foreach (var cocSpawner in _coconutSpawners)
         {
-            cocSpawner.Init();
-            cocSpawner.SetRegistry(_registries);
+            _registry.Register(cocSpawner.PalmRootObject.gameObject, cocSpawner);
+            cocSpawner.Init(_registry.GetData<CoconutSpawnerData>(cocSpawner.PalmRootObject.name));
         }
 
         while (!BerrySpawnManager.HasStarted) {
@@ -59,8 +59,8 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
         _berrySpawners = FindObjectsOfType<BerrySpawnManager>().ToList();
         foreach (var berrySpawner in _berrySpawners)
         {
-            berrySpawner.Init();
-            berrySpawner.SetRegistry(_registries);
+            _registry.Register(berrySpawner.gameObject, berrySpawner);
+            berrySpawner.Init(_registry.GetData<BerryBushData>(berrySpawner.gameObject.name));
         }
 
         while (!BananaTreeManager.HasStarted) {
@@ -69,9 +69,8 @@ public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
         _bananaSpawners = FindObjectsOfType<BananaTreeManager>().ToList();
         foreach (var ban in _bananaSpawners)
         {
-            _registries.Register(ban.gameObject, ban);
-            ban.Init(_registries.GetData<BananaTreeData>(ban.gameObject.name));
-            ban.SetRegistry(_registries);
+            _registry.Register(ban.gameObject, ban);
+            ban.Init(_registry.GetData<BananaTreeData>(ban.gameObject.name));
         }
 
         OnInitialized?.Invoke();
