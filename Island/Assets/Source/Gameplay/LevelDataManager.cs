@@ -14,7 +14,7 @@ public class LevelDataManager : MonoBehaviour
     {
         if (CurrentSessionDataManager.Instance.IsNewGame)
         {
-            CurrentSessionDataManager.Instance.CurrentData.playerData = new PlayerData();
+            //CurrentSessionDataManager.Instance.CurrentData.playerData = new PlayerData();
         }
 
         _boostrap.Init(CurrentSessionDataManager.Instance.CurrentData, CurrentSessionDataManager.Instance.IsNewGame);

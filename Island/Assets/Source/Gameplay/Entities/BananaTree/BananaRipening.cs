@@ -1,7 +1,7 @@
-using DataPersistence.Gameplay;
 using System;
 using System.Collections;
 using UnityEngine;
+using static DataPersistence.Gameplay.BananaTreeManagerData;
 
 public class BananaRipening : MonoBehaviour
 {
@@ -27,70 +27,63 @@ public class BananaRipening : MonoBehaviour
 
     private bool _isBananasFallen = false;
 
-    public bool HasInitialized { get; private set; } = false;
+    private bool _isDataSet = false;
 
-    private void OnAllowRipening()
+/*    private void OnAllowRipening()
     {
         _allowRipening = true;
-    }
+    }*/
 
-    public void SetData(BananaTreeData.BananaRipeningData data)
+    public void SetData(RipeningData data)
     {
-        _allowRipening = data.allowRipening;
-        _ripePhase = data.ripePhase;
-        _ripeProgressPhase = data.ripeProgressPhase;
-        _phaseTimeInSeconds = data.phaseTimeInSeconds;
-        //_isBananasFallen = data.isBananaFallen;
-        _isBananasFallen = false;
-
-        if (_allowRipening)
-        {
-            _bananaPartPrefab = Instantiate(_bananaPart, _bananaPart.transform.position, _bananaPart.transform.rotation, _branch.transform);
-            _bananaPartPrefab.SetActive(false);
-
-            SetupForRipeState(_ripePhase);
-            RipeProcess();
-        }
-        else
-        {
-            this.enabled = false;
-        }
-    }
-
-    public BananaTreeData.BananaRipeningData GetData()
-    {
-        return new BananaTreeData.BananaRipeningData(_allowRipening, _ripePhase, _ripeProgressPhase, 
-            _phaseTimeInSeconds, _isBananasFallen);
-    }
-
-    public void Init(BananaTreeData.BananaRipeningData data) {
-        //---
-        _bananaPart.GetComponent<BananaDrop>().FallenFruit += OnBananaDrop;
-        GetComponent<BananaTreeGrowth>().AllowRipening += OnAllowRipening;
-        //---
-
         if (data != null)
         {
-            SetData(data);
-        }
-        else
-        {
-            SetRandomTreeState();
+            _allowRipening = data.allowRipening;
+            _ripePhase = data.ripePhase;
+            _ripeProgressPhase = data.ripeProgressPhase;
+            _phaseTimeInSeconds = data.phaseTimeInSeconds;
+            //_isBananasFallen = data.isBananaFallen;
+            _isBananasFallen = false;
 
-            WorldSettings.IBananaTreeSettings bananasSettings = GameSettingsManager.Instance.ActiveWorldSettings;
-            if (bananasSettings.UseRandomRipePhaseDuration)
+            if (_allowRipening)
             {
-                _phaseTimeInSeconds = UnityEngine.Random.Range(bananasSettings.MinPhaseRipeDurationInSeconds, bananasSettings.MaxPhaseRipeDurationInSeconds);
+                _bananaPartPrefab = Instantiate(_bananaPart, _bananaPart.transform.position, _bananaPart.transform.rotation, _branch.transform);
+                _bananaPartPrefab.SetActive(false);
+
+                SetupForRipePhase(_ripePhase);
+                RipeProcess();
             }
             else
             {
-                _phaseTimeInSeconds = bananasSettings.RipePhaseDurationInSeconds;
+                this.enabled = false;
             }
 
-            DetermineRipeState();
+            _isDataSet = true;
         }
+    }
 
-        HasInitialized = true;
+    public RipeningData GetData()
+    {
+        return new RipeningData(_allowRipening, _ripePhase, _ripeProgressPhase, 
+            _phaseTimeInSeconds, _isBananasFallen);
+    }
+
+    public void Init() {
+        //---
+        _bananaPart.GetComponent<BananaDrop>().FallenFruit += OnBananaDrop;
+
+        //GetComponent<BananaTreeGrowth>().AllowRipening += OnAllowRipening;
+        //---
+
+        WorldSettings.IBananaTreeSettings bananasSettings = GameSettingsManager.Instance.ActiveWorldSettings;
+        if (bananasSettings.UseRandomRipePhaseDuration)
+        {
+            _phaseTimeInSeconds = UnityEngine.Random.Range(bananasSettings.MinPhaseRipeDurationInSeconds, bananasSettings.MaxPhaseRipeDurationInSeconds);
+        }
+        else
+        {
+            _phaseTimeInSeconds = bananasSettings.RipePhaseDurationInSeconds;
+        }
     }
 
     public void OnBananaDrop() {
@@ -100,7 +93,18 @@ public class BananaRipening : MonoBehaviour
     }
 
     public void StartRipening() {
-        if (!_allowRipening) return;
+        //if (!_allowRipening) return;
+
+        if (!_isDataSet)
+        {
+            _bananaPartPrefab = Instantiate(_bananaPart, _bananaPart.transform.position, _bananaPart.transform.rotation, _branch.transform);
+            _bananaPartPrefab.SetActive(false);
+
+            SetRandomTreeState();
+            //DetermineRipeState();
+
+            SetupForRipePhase(_ripePhase);
+        }
 
         StopCoroutine(RipeningProcess());
         StartCoroutine(RipeningProcess());
@@ -132,6 +136,9 @@ public class BananaRipening : MonoBehaviour
                     _bananaPart.SetActive(true);
                     _branch.SetActive(false);
                     _unripeBananas.SetActive(false);
+
+                    _ripePhase = RipePhase.empty;
+
                     break;
                 }
             case 3:
@@ -140,6 +147,9 @@ public class BananaRipening : MonoBehaviour
                     _unripeBananas.SetActive(true);
                     _bananaPart.SetActive(false);
                     _branch.SetActive(false);
+
+                    _ripePhase = RipePhase.hasUnripePart;
+
                     break;
                 }
             case 5: {
@@ -147,6 +157,9 @@ public class BananaRipening : MonoBehaviour
                     _unripeBananas.SetActive(false);
                     _bananaPart.SetActive(true);
                     _branch.SetActive(true);
+
+                    _ripePhase = RipePhase.ripe;
+
                     break;
                 }
         }
@@ -216,7 +229,7 @@ public class BananaRipening : MonoBehaviour
         else Debug.LogAssertion("Состояние дерева не было определено");
     }
 
-    private void SetupForRipeState(RipePhase phase)
+    private void SetupForRipePhase(RipePhase phase)
     {
         _bananaPart.SetActive(false);
         _branch.SetActive(false);

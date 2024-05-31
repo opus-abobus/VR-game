@@ -63,7 +63,7 @@ public class PlayerEating : MonoBehaviour, GameplayBootstrap.IBootstrap
                     Destroy(other.gameObject);
                 }
 
-                GameObjectsRegistries.Instance.Unregister(other.gameObject);
+                GameObjectsRegistries.Instance.UnregisterObject(other.gameObject);
             }
         }
     }

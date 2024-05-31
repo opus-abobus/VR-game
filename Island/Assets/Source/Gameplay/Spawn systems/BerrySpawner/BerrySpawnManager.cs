@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using static DataPersistence.Gameplay.BerrySpawnManagerData;
 
 public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 {
@@ -28,7 +29,54 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
     //коллекция для хранения информации о точках, в которых был осуществлен спавн:
     //ключ - индекс позиции, значение - зона спавна
     private Dictionary<int, BerrySpawnZone> _spawnZones = new();
-    public void Init(BerryBushData data)
+
+    public SpawnerData GetData()
+    {
+        var spawnsZoneData = new BerrySpawnManagerData.BerrySpawnZoneData[_spawnZones.Count];
+        int i = 0;
+        bool hasBerry;
+        foreach (var data in _spawnZones)
+        {
+            hasBerry = data.Value.Berry == null ? false : true;
+            spawnsZoneData[i++] = new BerrySpawnManagerData.BerrySpawnZoneData(data.Key, hasBerry, data.Value.CooldownTimeLeft);
+        }
+
+        return new BerrySpawnManagerData(gameObject.name, _wasStartSpawn, spawnsZoneData);
+    }
+
+    public void SetData<TSpawnerData>(TSpawnerData tSpawnerData) where TSpawnerData : SpawnerData
+    {
+        var spawnerData = tSpawnerData as BerrySpawnManagerData;
+
+        if (spawnerData != null)
+        {
+            _wasStartSpawn = spawnerData.wasStartSpawn;
+
+            foreach (var zoneData in spawnerData.berrySpawnZonesData)
+            {
+                if (_spawnZones.ContainsKey(zoneData.index))
+                {
+                    if (zoneData.hasBerry)
+                    {
+                        _spawnZones[zoneData.index].SetBerry(
+                            Instantiate(_berryPrefab, _spawnZones[zoneData.index].transform.position, Quaternion.identity, _parent));
+                    }
+                    _spawnZones[zoneData.index].CooldownTimeLeft = zoneData.cooldownTimeLeft;
+                    if (_spawnZones[zoneData.index].CooldownTimeLeft > 0.001f)
+                    {
+                        StartCoroutine(RespawnCooldown(zoneData.index, _spawnZones[zoneData.index].CooldownTimeLeft));
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.LogAssertion("Trying to set null data");
+        }
+
+    }
+
+    public void Init()
     {
         _registry = GameObjectsRegistries.Instance;
 
@@ -48,23 +96,6 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
                     zone.SetIndex(i);
                     _spawnZones.Add(i++, zone);
                 }
-                if (data != null)
-                {
-                    _wasStartSpawn = data.wasStartSpawn;
-
-                    foreach (var zoneData in data.zonesData)
-                    {
-                        if (_spawnZones.ContainsKey(zoneData.index))
-                        {
-                            if (zoneData.hasBerry) 
-                            {
-                                _spawnZones[zoneData.index].SetBerry(
-                                    Instantiate(_berryPrefab, _spawnZones[zoneData.index].transform.position, Quaternion.identity, _parent));
-                            }
-                            _spawnZones[zoneData.index].CooldownTimeLeft = zoneData.cooldownTimeLeft;
-                        }
-                    }
-                }
             }
             else
             {
@@ -81,22 +112,11 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
 
     private void OnBerryFell(int index, GameObject fallenBerry)
     {
-        _registry.Register(fallenBerry, _berryPrefabRef.AssetGUID);
-        StartCoroutine(RespawnCooldown(index));
-    }
-
-    public BerryBushData GetData()
-    {
-        var spawnsZoneData = new BerrySpawnZoneData[_spawnZones.Count];
-        int i = 0;
-        bool hasBerry;
-        foreach (var data in _spawnZones)
+        _registry.RegisterObject(fallenBerry, _berryPrefabRef.AssetGUID, new Component[]
         {
-            hasBerry = data.Value.Berry == null ? false : true;
-            spawnsZoneData[i++] = new BerrySpawnZoneData(data.Key, hasBerry, data.Value.CooldownTimeLeft);
-        }
-
-        return new BerryBushData(gameObject.name, _wasStartSpawn, spawnsZoneData);
+            fallenBerry.transform, fallenBerry.GetComponent<Collider>(), fallenBerry.GetComponent<Rigidbody>()
+        });
+        StartCoroutine(RespawnCooldown(index, _berriesSettings.TimeoutBerryRespawnInSeconds));
     }
 
     void SpawnManager.ISpawner.BeginSpawn()
@@ -202,9 +222,9 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
             spawnCount--;
         }
     }
-    IEnumerator RespawnCooldown(int index)
+    IEnumerator RespawnCooldown(int index, float cooldownTimeInSeconds)
     {
-        _spawnZones[index].CooldownTimeLeft = _berriesSettings.TimeoutBerryRespawnInSeconds;
+        _spawnZones[index].CooldownTimeLeft = cooldownTimeInSeconds;
 
         while (true)
         {
@@ -233,13 +253,6 @@ public class BerrySpawnManager : MonoBehaviour, SpawnManager.ISpawner
             return freeIndexes[UnityEngine.Random.Range(0, freeIndexes.Count)];
 
         return -1;
-    }
-
-    private static bool _hasStarted = false;
-    public static bool HasStarted { get { return _hasStarted; } }
-    private void Start()
-    {
-        _hasStarted = true;
     }
 
     private void OnDisable()

@@ -13,7 +13,7 @@ public class BerrySpawnZone : MonoBehaviour
         Index = index;
     }
 
-    public GameObject Berry { get; private set; } = null;
+    [field: SerializeField] public GameObject Berry { get; private set; } = null;
 
     public void SetBerry(GameObject berryObject)
     {
@@ -29,26 +29,6 @@ public class BerrySpawnZone : MonoBehaviour
             Berry = null;
 
             BerryFell?.Invoke(Index, other.gameObject);
-        }
-    }
-}
-
-namespace DataPersistence.Gameplay
-{
-    [Serializable]
-    public class BerrySpawnZoneData
-    {
-        public int index;
-        public bool hasBerry;
-        public float cooldownTimeLeft;
-
-        public BerrySpawnZoneData() { }
-
-        public BerrySpawnZoneData(int index, bool hasBerry, float cooldownTimeLeft)
-        {
-            this.index = index;
-            this.hasBerry = hasBerry;
-            this.cooldownTimeLeft = cooldownTimeLeft;
         }
     }
 }

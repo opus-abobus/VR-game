@@ -28,21 +28,24 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
 
     private IEnumerator _coconutSpawning;
 
-    private SpawnManager.ISpawner _spawner;
+    private bool _wasStartSpawn = false;
 
-    private static bool _hasStarted = false;
-    public static bool HasStarted { get { return _hasStarted; } }
-
-    private bool _wasStartSpawn;
-
-    public CoconutSpawnerData GetData()
+    public SpawnerData GetData()
     {
         return new CoconutSpawnerData(PalmRootObject.name, _wasStartSpawn);
     }
 
-    private void Awake() {
-        _spawner = this;
+    public void SetData<TSpawnerData>(TSpawnerData tSpawnerData) where TSpawnerData : SpawnerData
+    {
+        var data = tSpawnerData as CoconutSpawnerData;
 
+        if (data != null)
+        {
+            _wasStartSpawn = data.wasStartSpawn;
+        }
+    }
+
+    private void Awake() {
         if (_parent == null) {
             _parent = GameObject.Find("SpawnedCoconuts").transform;
             if (_parent == null) {
@@ -51,24 +54,14 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
         }
     }
 
-    private void Start() {
-        _hasStarted = true;
-    }
-
-    public void Init(CoconutSpawnerData data) {
-
-        if (data != null)
-        {
-            _wasStartSpawn = data.wasStartSpawn;
-        }
-
+    public void Init()
+    {
         _registry = GameObjectsRegistries.Instance;
 
         _coconut = AddressableItems.Instance.GetPrefabByGUID(_coconutPrefabRef.AssetGUID);
 
-        _meshRenderer.enabled = false;
-
         _boundsSize = _meshRenderer.bounds.size / 2;
+        _meshRenderer.enabled = false;
         Destroy(_meshRenderer);
         Destroy(_meshFilter);
 
@@ -118,7 +111,9 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
             _cocountInstance.transform.parent = _parent;
             amount--;
 
-            _registry.Register(_cocountInstance, _coconutPrefabRef.AssetGUID);
+            _registry.RegisterObject(_cocountInstance, _coconutPrefabRef.AssetGUID, new Component[] { 
+                _cocountInstance.transform, _cocountInstance.GetComponent<Collider>(), _cocountInstance.GetComponent<Rigidbody>() 
+            });
         }
     }
 

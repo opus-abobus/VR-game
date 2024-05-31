@@ -90,6 +90,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2012279599344034025, guid: 353413fb8930cfc4a94fc8438c8a24a9,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012279599344034025, guid: 353413fb8930cfc4a94fc8438c8a24a9,
+        type: 3}
       propertyPath: m_Direction
       value: 1
       objectReference: {fileID: 0}
@@ -112,6 +117,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3617232150916534624}
+    - targetCorrespondingSourceObject: {fileID: 1438709704091104556, guid: 353413fb8930cfc4a94fc8438c8a24a9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6097083073716421565}
   m_SourcePrefab: {fileID: 100100000, guid: 353413fb8930cfc4a94fc8438c8a24a9, type: 3}
 --- !u!1 &6144971023619720775 stripped
 GameObject:
@@ -132,3 +141,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownTimeLeft: 0
+  <Berry>k__BackingField: {fileID: 0}
+--- !u!65 &6097083073716421565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144971023619720775}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.29954508, y: 0.2878899, z: 0.2994356}
+  m_Center: {x: 0.0037877709, y: 0, z: -0.006105706}

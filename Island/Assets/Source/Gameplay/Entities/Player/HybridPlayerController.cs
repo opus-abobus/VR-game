@@ -60,15 +60,15 @@ public class HybridPlayerController : MonoBehaviour {
 
     private void OnGameSave(GameplayData data)
     {
-        data.playerData.playerCameraTransform = 
+        data.playerData.playerCameraTransform =
             new PlayerData.PlayerCameraTransform(_playerCamera.localEulerAngles);
 
         data.playerData.playerPosition = transform.position;
         data.playerData.playerRotation = transform.rotation;
     }
 
-    public void Initialize(PlayerData data) {
-
+    public void Initialize(PlayerData data) 
+    {
         _data = data;
 
         _levelDataManager.OnGameSave += OnGameSave;
@@ -95,7 +95,7 @@ public class HybridPlayerController : MonoBehaviour {
             transform.rotation = _data.playerRotation;
             _playerCamera.localEulerAngles = _data.playerCameraTransform.localEulerAngles;
 
-            _cameraPitch = _playerCamera.localEulerAngles.x;
+            _cameraPitch = Mathf.Clamp(_playerCamera.localEulerAngles.x, -90.0f, 90.0f);
         }
         
         StartCoroutine(UpdateProcess());

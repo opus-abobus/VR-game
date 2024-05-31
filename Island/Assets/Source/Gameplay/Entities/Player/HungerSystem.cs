@@ -44,7 +44,7 @@ public class HungerSystem : MonoBehaviour
     private float _healthRestoreRateFromSatiety, _healthMaxThresholdFromSatiety,
         _healthIncreaseFromSatietyThreshold;
 
-    public void Initialize(PlayerData.HungerSystemData data)
+    public void Initialize(HungerSystemData data)
     {
         _levelDataManager.OnGameSave += OnGameSave;
 
@@ -70,7 +70,7 @@ public class HungerSystem : MonoBehaviour
 
     private void OnGameSave(GameplayData data)
     {
-        data.playerData.hungerSystemData = new PlayerData.HungerSystemData(_health, _satiety);
+        data.playerData.hungerSystemData = new HungerSystemData(_health, _satiety);
     }
 
     private void Start()

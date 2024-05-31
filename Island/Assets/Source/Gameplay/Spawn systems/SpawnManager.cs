@@ -2,93 +2,93 @@ using DataPersistence.Gameplay;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour, GameplayBootstrap.IBootstrap {
+public class SpawnManager : MonoBehaviour
+{
     private static SpawnManager _instance;
     public static SpawnManager Instance { get { return _instance; } }
 
-    private List<BananaTreeManager> _bananaSpawners;
-    public List<BananaTreeManager> BananaSpawners { get { return _bananaSpawners; } set { _bananaSpawners = value; } }
-
-    private List<BerrySpawnManager> _berrySpawners;
-    public List<BerrySpawnManager> BerrySpawners { get { return _berrySpawners; } set { _berrySpawners = value; } }
-
-    private List<CocountSpawner> _coconutSpawners;
-    public List<CocountSpawner> CocountSpawners { get { return _coconutSpawners; } set { _coconutSpawners = value; } }
+    private BananaTreeManager[] _bananaSpawners;
+    private BerrySpawnManager[] _berrySpawners;
+    private CocountSpawner[] _coconutSpawners;
 
     public event Action OnInitialized;
 
-    [SerializeField] private GameObjectsRegistries _registry;
+    private GameObjectsRegistries _registry;
 
-    public interface ISpawner {
+    private SpawnerData[] _spawnerData;
+
+    public interface ISpawner
+    {
         void BeginSpawn();
+        void SetData<TSpawnerData>(TSpawnerData data) where TSpawnerData : SpawnerData;
+        void Init();
+        SpawnerData GetData();
     }
 
-    void GameplayBootstrap.IBootstrap.Initialize() {
-        if (_instance == null) {
+    public void Initialize(SpawnerData[] spawnersData)
+    {
+        if (_instance == null)
+        {
             _instance = this;
         }
-        else {
+        else
+        {
             Destroy(gameObject);
             return;
         }
 
-        _bananaSpawners = new List<BananaTreeManager>();
-        _berrySpawners = new List<BerrySpawnManager>();
-        _coconutSpawners = new List<CocountSpawner>();
+        _registry = GameObjectsRegistries.Instance;
+
+        _spawnerData = spawnersData;
+
+        _coconutSpawners = FindObjectsOfType<CocountSpawner>();
+        _berrySpawners = FindObjectsOfType<BerrySpawnManager>();
+        _bananaSpawners = FindObjectsOfType<BananaTreeManager>();
 
         StartCoroutine(InitProcess());
     }
 
-    IEnumerator InitProcess() {
-        while (!CocountSpawner.HasStarted) {
-            yield return null;
-        }
-        _coconutSpawners = FindObjectsOfType<CocountSpawner>().ToList();
+    private IEnumerator InitProcess()
+    {
+        Dictionary<string, ISpawner> spawners = new();
+
         foreach (var cocSpawner in _coconutSpawners)
-        {
-            _registry.Register(cocSpawner.PalmRootObject.gameObject, cocSpawner);
-            cocSpawner.Init(_registry.GetData<CoconutSpawnerData>(cocSpawner.PalmRootObject.name));
-        }
-
-        while (!BerrySpawnManager.HasStarted) {
-            yield return null;
-        }
-        _berrySpawners = FindObjectsOfType<BerrySpawnManager>().ToList();
+            spawners.Add(cocSpawner.PalmRootObject.gameObject.name, cocSpawner);
         foreach (var berrySpawner in _berrySpawners)
-        {
-            _registry.Register(berrySpawner.gameObject, berrySpawner);
-            berrySpawner.Init(_registry.GetData<BerryBushData>(berrySpawner.gameObject.name));
-        }
-
-        while (!BananaTreeManager.HasStarted) {
-            yield return null;
-        }
-        _bananaSpawners = FindObjectsOfType<BananaTreeManager>().ToList();
+            spawners.Add(berrySpawner.gameObject.name, berrySpawner);
         foreach (var ban in _bananaSpawners)
-        {
-            _registry.Register(ban.gameObject, ban);
-            ban.Init(_registry.GetData<BananaTreeData>(ban.gameObject.name));
-        }
+            spawners.Add(ban.gameObject.name, ban);
 
+        if (_spawnerData != null && _spawnerData.Length > 0)
+        {
+            foreach (var data in _spawnerData)
+            {
+                if (spawners.ContainsKey(data.key))
+                {
+                    _registry.RegisterSpawner(data.key, spawners[data.key]);
+                    spawners[data.key].Init();
+                    spawners[data.key].SetData(data);
+                }
+            }
+        }
+        else
+        {
+            foreach (var spawner in spawners)
+            {
+                _registry.RegisterSpawner(spawner.Key, spawner.Value);
+                spawner.Value.Init();
+            }
+        }
+        
         OnInitialized?.Invoke();
 
-        StartAllSpawners();
+        foreach (var s in spawners.Values)
+        {
+            s.BeginSpawn();
+        }
 
         yield return null;
-    }
-
-    void StartAllSpawners() {
-        StartSpawner(_bananaSpawners.Cast<ISpawner>().ToList());
-        StartSpawner(_berrySpawners.Cast<ISpawner>().ToList());
-        StartSpawner(_coconutSpawners.Cast<ISpawner>().ToList());
-    }
-
-    void StartSpawner(List<ISpawner> spawner) {
-        foreach (var sp in spawner) {
-            sp.BeginSpawn();
-        }
     }
 }

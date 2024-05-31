@@ -11,42 +11,44 @@ public class BananaTreeManager : MonoBehaviour, ISpawner
 
     [SerializeField] private BananaDrop _bananaDrop;
 
-    private static bool _hasStarted = false;
-    public static bool HasStarted { get { return _hasStarted; } }
+    private bool _allowRipening;
 
-    public BananaTreeData GetData()
+    public SpawnerData GetData()
     {
-        return new BananaTreeData(gameObject.name, _bananaRipening.GetData(), _bananaTreeGrowth.GetData());
+        return new BananaTreeManagerData(gameObject.name, _bananaRipening.GetData(), _bananaTreeGrowth.GetData());
     }
 
-    private void Start() {
-        _hasStarted = true;
-    }
-
-    public void Init(BananaTreeData data)
+    public void SetData<TSpawnerData>(TSpawnerData tSpawnerData) where TSpawnerData : SpawnerData
     {
-        _bananaRipening = GetComponent<BananaRipening>();
-        _bananaTreeGrowth = GetComponent<BananaTreeGrowth>();
+        var data = tSpawnerData as BananaTreeManagerData;
 
-        _bananaTreeGrowth.AllowRipening += OnAllowRipening;
-
-        _bananaDrop.Init();
-
-        if (data == null)
+        if (data != null)
         {
-            _bananaRipening.Init(null);
-            _bananaTreeGrowth.Init(null);
-        }
-        else
-        {
-            _bananaRipening.Init(data.ripeningData);
-            _bananaTreeGrowth.Init(data.growthData);
+            _bananaRipening.SetData(data.ripeningData);
+            _bananaTreeGrowth.SetData(data.growthData);
 
             if (data.ripeningData.allowRipening == true)
             {
                 OnAllowRipening();
             }
         }
+        else
+        {
+            //_bananaRipening.SetData(null);
+            //_bananaTreeGrowth.SetData(null);
+        }
+    }
+
+    public void Init()
+    {
+        _bananaRipening = GetComponent<BananaRipening>();
+        _bananaTreeGrowth = GetComponent<BananaTreeGrowth>();
+
+        _bananaRipening.Init();
+
+        _bananaTreeGrowth.AllowRipening += OnAllowRipening;
+
+        _bananaTreeGrowth.Init();
     }
 
     void ISpawner.BeginSpawn() {

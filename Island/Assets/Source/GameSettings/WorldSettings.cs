@@ -32,6 +32,10 @@ public class WorldSettings : ScriptableObject, WorldSettings.IBerriesSettings, W
         bool UseRandomGrowthTime { get; }
         float MinTimeToGrowthInSeconds { get; }
         float MaxTimeToGrowthInSeconds { get; }
+        float StartGrowthProgres { get; }
+        bool UseRandomStartGrowthProgress { get; }
+        float MinStartGrowthProgress { get; }
+        float MaxStartGrowthProgress { get; }
 
         bool UseRandomRipePhaseDuration { get; }
         float RipePhaseDurationInSeconds { get; }
@@ -128,6 +132,23 @@ public class WorldSettings : ScriptableObject, WorldSettings.IBerriesSettings, W
     [SerializeField, Range(2, 100000)]
     private float _maxTimeToGrowthInSeconds;
     float IBananaTreeSettings.MaxTimeToGrowthInSeconds { get { return _maxTimeToGrowthInSeconds; } }
+
+    [SerializeField, Range(0, 1)]
+    private float _startGrowthProgress = 0;
+    float IBananaTreeSettings.StartGrowthProgres { get { return _startGrowthProgress; } }
+
+    [SerializeField]
+    private bool _useRandomStartGrowthProgress;
+    bool IBananaTreeSettings.UseRandomStartGrowthProgress { get { return _useRandomStartGrowthProgress; } }
+
+    [SerializeField, Range(0, 1)]
+    private float _minStartGrowthProgress;
+    float IBananaTreeSettings.MinStartGrowthProgress { get { return _minStartGrowthProgress; } }
+
+    [SerializeField, Range(0, 1)]
+    private float _maxStartGrowthProgress;
+    float IBananaTreeSettings.MaxStartGrowthProgress { get { return _maxStartGrowthProgress; } }
+
     #endregion
 
     #region Настройки скорости созревания банановых пальм

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace DataPersistence.Gameplay
 {
@@ -9,15 +10,18 @@ namespace DataPersistence.Gameplay
 
         public int difficultyID;
 
-        public PlayerData playerData;
+        public PlayerData playerData = new();
 
-        public float dayTimeProgress;
+        public GameTimeData gameTimeData = new();
 
-        public BananaTreesData bananaTreesData;
-        public CoconutSpawnersData coconutSpawnersData;
-        public BerryBushesData berryBushesData;
+        public ObjectData[] gameObjectsData;
 
-        public DynamicObjectsData dynamicObjectsData;
+        public SpawnerData[] spawnersData;
+
+        public T GetSpawnerData<T>(string key) where T : SpawnerData
+        {
+            return spawnersData.FirstOrDefault(x => x.key == key) as T;
+        }
 
         public GameplayData() {
             displayName = "New game started by " + Environment.UserName + " at " + DateTime.Now;

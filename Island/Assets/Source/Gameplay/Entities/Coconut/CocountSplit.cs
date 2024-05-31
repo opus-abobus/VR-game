@@ -25,14 +25,21 @@ public class CocountSplit : MonoBehaviour
                 _coconutDown.SetActive(true);
                 _coconutUp.SetActive(true);
 
-                GameObjectsRegistries.Instance.Register(_coconutDown, _coconutLower.AssetGUID);
-                GameObjectsRegistries.Instance.Register(_coconutUp, _coconutUpper.AssetGUID);
+                GameObjectsRegistries.Instance.RegisterObject(_coconutDown, _coconutLower.AssetGUID, new Component[]
+                {
+                    _coconutDown.transform, _coconutDown.GetComponent<Collider>(), _coconutDown.GetComponent<Rigidbody>()
+                });
+
+                GameObjectsRegistries.Instance.RegisterObject(_coconutUp, _coconutUpper.AssetGUID, new Component[]
+                {
+                    _coconutUp.transform, _coconutUp.GetComponent<Collider>(), _coconutUp.GetComponent<Rigidbody>()
+                });
 
                 _coconutDown.transform.parent = coconutBroken;
                 _coconutUp.transform.parent = coconutBroken;
                 coconutBroken.parent = transform.parent;
 
-                GameObjectsRegistries.Instance.Unregister(this.gameObject);
+                GameObjectsRegistries.Instance.UnregisterObject(this.gameObject);
 
                 Destroy(this.gameObject);
             }

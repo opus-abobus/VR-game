@@ -1,21 +1,21 @@
+using DataPersistence.Gameplay;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
-using static DataPersistence.Gameplay.PlayerData;
-using static DataPersistence.Gameplay.PlayerData.InventorySlotsData;
+using static DataPersistence.Gameplay.InventoryData;
 
 public class InventoryPanelController : MonoBehaviour
 {
     [SerializeField] private Hand _hand;
 
-    [SerializeField] private GameObjectsRegistries _registry;
-
     private InventorySlotController[] _slotControllers;
 
     [field: SerializeField] public Sprite FallbackItemSprite { get; private set; }
 
+    [SerializeField] private LevelDataManager _levelDataManager;
+
     public static InventoryPanelController Instance { get; private set; }
 
-    public void Init()
+    public void Init(InventoryData data)
     {
         if (Instance == null)
         {
@@ -26,22 +26,24 @@ public class InventoryPanelController : MonoBehaviour
             return;
         }
 
+        _levelDataManager.OnGameSave += OnGameSave;
+
         _slotControllers = gameObject.GetComponentsInChildren<InventorySlotController>(true);
         foreach (var slot in _slotControllers)
         {
-            slot.Init(_registry);
+            if (data != null)
+                slot.Init(data.GetSlotData(slot.gameObject.name));
+            else
+                slot.Init(null);
         }
     }
 
-    public void SetData()
+    private void OnGameSave(GameplayData gameplayData)
     {
-        foreach (var slot in _slotControllers)
-        {
-            slot.SetData(_registry.GetData<InventorySlotData>(slot.gameObject.name));
-        }
+        gameplayData.playerData.inventoryData = GetData();
     }
 
-    public InventorySlotsData GetData()
+    public InventoryData GetData()
     {
         InventorySlotData[] slotsData = new InventorySlotData[_slotControllers.Length];
         int i = 0;
@@ -50,7 +52,7 @@ public class InventoryPanelController : MonoBehaviour
             slotsData[i++] = slot.GetData();
         }
 
-        return new InventorySlotsData(slotsData);
+        return new InventoryData(slotsData);
     }
 
     public bool ReadyToPlace { get; set; } = true;
@@ -61,5 +63,10 @@ public class InventoryPanelController : MonoBehaviour
         {
             ReadyToPlace = true;
         }
+    }
+
+    private void OnDestroy()
+    {
+        _levelDataManager.OnGameSave -= OnGameSave;
     }
 }

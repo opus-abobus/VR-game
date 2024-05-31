@@ -70,24 +70,27 @@ public class GameplayBootstrap : MonoBehaviour
 
         _gameManager.Initialize();
 
-        _inventoryPanelController.Init();
-
         if (isNewGame)
         {
             _registries.Init(null);
             _hybridPlayerController.Initialize(null);
             _hungerSystem.Initialize(null);
+            _gameTime.Init(null);
+            _inventoryPanelController.Init(null);
         }
         else
         {
             _registries.Init(gameplayData);
             _hybridPlayerController.Initialize(gameplayData.playerData);
             _hungerSystem.Initialize(gameplayData.playerData.hungerSystemData);
-            _gameTime.SetSavedDayTime(gameplayData.dayTimeProgress);
+            _gameTime.Init(gameplayData.gameTimeData);
+            _inventoryPanelController.Init(gameplayData.playerData.inventoryData);
         }
 
+        _spawnManager.Initialize(gameplayData.spawnersData);
+
+
         Queue<IBootstrap> bootQueue = new Queue<IBootstrap>();
-        bootQueue.Enqueue(_spawnManager);
         bootQueue.Enqueue(_evacuationSystem);
         bootQueue.Enqueue(_playerEating);
 

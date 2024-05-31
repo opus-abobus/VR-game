@@ -1,8 +1,5 @@
 using DataPersistence.Gameplay;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 //[ExecuteInEditMode]
@@ -42,14 +39,17 @@ public class GameTime : MonoBehaviour
 
     [SerializeField] private LevelDataManager _levelDataManager;
 
-    public void SetSavedDayTime(float dayTimeProgress)
+    public void Init(GameTimeData gameTimeData)
     {
-        timeProgress = dayTimeProgress;
+        if (gameTimeData != null)
+        {
+            timeProgress = gameTimeData.dayTimeProgress;
+        }
     }
 
     private void OnGameSave(GameplayData data)
     {
-        data.dayTimeProgress = timeProgress;
+        data.gameTimeData = new GameTimeData(timeProgress);
     }
 
     private void Start() {

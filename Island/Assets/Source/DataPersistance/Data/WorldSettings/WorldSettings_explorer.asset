@@ -27,11 +27,15 @@ MonoBehaviour:
   _useRandomGrowthTime: 1
   _minTimeToGrowthInSeconds: 300
   _maxTimeToGrowthInSeconds: 400
+  _startGrowthProgress: 0.6
+  _useRandomStartGrowthProgress: 1
+  _minStartGrowthProgress: 0.4
+  _maxStartGrowthProgress: 1
   _useRandomRipePhaseDuration: 1
   _ripePhaseDurationInSeconds: 120
   _minPhaseRipeDurationInSeconds: 120
   _maxPhaseRipeDurationInSeconds: 150
-  startRipeningMoment: 0.4
+  startRipeningMoment: 0.2
   _minBananasToDrop: 13
   _maxBananasToDrop: 26
   _minCoconutsOnStart: 1

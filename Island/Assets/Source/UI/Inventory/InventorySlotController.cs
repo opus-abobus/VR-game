@@ -1,9 +1,10 @@
 using DataPersistence.Gameplay;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
-using static DataPersistence.Gameplay.PlayerData.InventorySlotsData;
+using static DataPersistence.Gameplay.InventoryData;
 
 public class InventorySlotController : MonoBehaviour {
 
@@ -29,33 +30,33 @@ public class InventorySlotController : MonoBehaviour {
     {
         if (_objectPrefabGUID != null && _storedObject != null)
         {
-            Vector3 velocty = Vector3.zero, angularVelocity = Vector3.zero;
-            bool useGravityRb = false, isKinematicRb = false;
+            int i = 0;
+            List<ComponentData> componentsList = new()
+            {
+                new TransformData()
+            };
+            componentsList[i++].SetDataFromComponent(_storedObject.transform);
+
             if (_storedObject.TryGetComponent<Rigidbody>(out var rB))
             {
-                velocty = rB.velocity;
-                angularVelocity = rB.angularVelocity;
-                useGravityRb = rB.useGravity;
-                isKinematicRb = rB.isKinematic;
+                componentsList.Add(new RigidbodyData());
+                componentsList[i++].SetDataFromComponent(rB);
             }
 
-            bool isTriggerCol = false, isEnabledCol = false;
             if (_storedObject.TryGetComponent<Collider>(out var Col))
             {
-                isTriggerCol = Col.isTrigger;
-                isEnabledCol = Col.enabled;
+                componentsList.Add(new ColliderData());
+                componentsList[i++].SetDataFromComponent(Col);
             }
 
-            var objectData = new DynamicObjectsData.ObjectData(_storedObject.transform.position, _storedObject.transform.lossyScale, 
-                _storedObject.transform.rotation, velocty, angularVelocity, useGravityRb, isKinematicRb, isTriggerCol, isEnabledCol,
-                _objectPrefabGUID);
+            var objectData = new ObjectData(_objectPrefabGUID, componentsList.ToArray());
 
             return new InventorySlotData(gameObject.name, objectData);
         }
         else
         {
-            return null;
-            //return new InventorySlotData();
+            //return null;
+            return new InventorySlotData(null, null);
         }
     }
 
@@ -63,7 +64,7 @@ public class InventorySlotController : MonoBehaviour {
     {
         if (data != null)
         {
-            _objectPrefabGUID = data.storedObjectData.prefabAssetGUID;
+            _objectPrefabGUID = data.objectData.prefabAssetGUID;
             if (!string.IsNullOrEmpty(_objectPrefabGUID))
             {
                 _storedObject = Instantiate(AddressableItems.Instance.GetPrefabByGUID(_objectPrefabGUID));
@@ -87,14 +88,16 @@ public class InventorySlotController : MonoBehaviour {
         }
     }
 
-    public void Init(GameObjectsRegistries registry)
+    public void Init(InventorySlotData data)
     {
         _uIElement = GetComponent<UIElement>();
         _image = GetComponent<Image>();
         _emptySlotSprite = _image.sprite;
         _oldColor = _image.color;
 
-        _registry = registry;
+        _registry = GameObjectsRegistries.Instance;
+
+        SetData(data);
     }
 
     private void SetImageForSlot(Sprite sprite) {
@@ -123,11 +126,14 @@ public class InventorySlotController : MonoBehaviour {
 
     private void OnItemPlaced() {
         _objectPrefabGUID = _registry.GetDynamicObjectAssetGUID(_storedObject);
-        _registry.Unregister(_storedObject);
+        _registry.UnregisterObject(_storedObject);
     }
 
     private void OnItemPickedUp() {
-        _registry.Register(_storedObject, _objectPrefabGUID);
+        _registry.RegisterObject(_storedObject, _objectPrefabGUID, new Component[]
+        {
+            _storedObject.transform, _storedObject.GetComponent<Collider>(), _storedObject.GetComponent<Rigidbody>()
+        });
         _objectPrefabGUID = null;
     }
 
