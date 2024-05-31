@@ -77,6 +77,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - items
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fae16f88c950e5044a3d1691a5c5e5ba
+    m_Address: Rock_Interactable
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89a0291f86ef3e142b0fbaa919e6d6e7
+    m_Address: Rock_Interactable2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 266dc7741eeddb44db5a379c6b742ac2
+    m_Address: Rock_Interactable3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fea5db81ba3153649b6b77b570548b78
+    m_Address: Rock_Interactable4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b4a41c0933ba29648ad510d87e5679b0, type: 2}
   m_SchemaSet:

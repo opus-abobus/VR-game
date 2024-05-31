@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7734924202771963852}
   - component: {fileID: 7734924202771963853}
   - component: {fileID: 1158173022467042304}
+  - component: {fileID: 277506166841698045}
   m_Layer: 0
   m_Name: Rock_Interactable4
   m_TagString: rock
@@ -272,3 +273,20 @@ MonoBehaviour:
   velocityAverageFrames: 5
   angularVelocityAverageFrames: 11
   estimateOnAwake: 0
+--- !u!114 &277506166841698045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464313159474897560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e6680272e8b874185d115b6bb41e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabRef:
+    m_AssetGUID: fea5db81ba3153649b6b77b570548b78
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

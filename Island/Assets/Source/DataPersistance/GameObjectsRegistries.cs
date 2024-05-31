@@ -35,20 +35,22 @@ public class GameObjectsRegistries : MonoBehaviour
         {
             if (objData.Key == null) continue;
 
-            int cIndex = 0;
-
             var components = objData.Value.Item2;
-            ComponentData[] componentsData = new ComponentData[components.Length];
+
+            List<ComponentData> componentsData = new List<ComponentData>();
 
             if (components != null && components.Length > 0)
             {
                 foreach (var c in components)
                 {
-                    componentsData[cIndex++] = ComponentData.GetDataFromComponent(c);
+                    if (ComponentData.GetDataFromComponent(c) != null)
+                    {
+                        componentsData.Add(ComponentData.GetDataFromComponent(c));
+                    }
                 }
             }
 
-            data[i++] = new ObjectData(objData.Value.Item1, componentsData);
+            data[i++] = new ObjectData(objData.Value.Item1, componentsData.ToArray());
         }
 
         gameplayData.gameObjectsData = data;
@@ -83,7 +85,7 @@ public class GameObjectsRegistries : MonoBehaviour
         }
     }
 
-    private void RestoreDynamicObjects(ObjectData[] gameObjectsData, bool restoreVelocity = true)
+    private void RestoreDynamicObjects(ObjectData[] gameObjectsData)
     {
         foreach (var data in gameObjectsData)
         {
