@@ -17,7 +17,7 @@ public class Bonfire : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) {
         if (!_isFired && collision.gameObject.tag == "lighter") {
-            if (collision.gameObject.GetComponent<Lighter>()._isFired) {
+            if (collision.gameObject.GetComponent<Lighter>().Fired) {
                 _isFired = true;
                 _particleSystem.Play();
                 _audioSource.Play();

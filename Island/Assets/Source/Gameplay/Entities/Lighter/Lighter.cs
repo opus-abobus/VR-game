@@ -4,31 +4,71 @@ using Valve.VR.InteractionSystem;
 
 public class Lighter : MonoBehaviour
 {
-    [SerializeField] Interactable _interactable;
-    [SerializeField] ParticleSystem _particleSystem;
+    //[SerializeField] private SteamVR_Action_Boolean _fireLighterAction;
 
-    public SteamVR_Action_Boolean _fireLighterAction;
+    [SerializeField] private ParticleSystem _particleSystem;
 
-    private void Update() {
-        if (_interactable.attachedToHand != null) {
-            SteamVR_Input_Sources hand = _interactable.attachedToHand.handType;
+    private Interactable _interactable;
+    
+    private void Awake()
+    {
+        _interactable = GetComponent<Interactable>();
 
-            if (_fireLighterAction[hand].stateDown || Input.GetKeyDown(KeyCode.F)) {
-                if (_isFired) {
+        if (_interactable != null)
+        {
+            _interactable.onAttachedToHand += OnAttached;
+            _interactable.onDetachedFromHand += OnDetached;
+        }
+    }
+
+    private bool _isUseable = false;
+    private bool _isFired = false;
+
+    public bool Fired { get { return _isFired; } }
+
+    private void OnAttached(Hand hand)
+    {
+        _isUseable = true;
+    }
+
+    private void OnDetached(Hand hand)
+    {
+        _isUseable = false;
+    }
+
+    private void Update()
+    {
+        if (_isUseable)
+        {
+            //SteamVR_Input_Sources hand = _interactable.attachedToHand.handType;
+            //if (_fireLighterAction[hand].stateDown || Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (_isFired)
+                {
                     _isFired = false;
                     _particleSystem.Stop();
                 }
-                else {
+                else
+                {
                     _isFired = true;
                     _particleSystem.Play();
                 }
             }
         }
-        else {
+        else
+        {
             _isFired = false;
             _particleSystem.Stop();
         }
     }
 
-   [HideInInspector] public bool _isFired = false;
+    private void OnDestroy()
+    {
+        if (_interactable != null)
+        {
+            _interactable.onAttachedToHand -= OnAttached;
+            _interactable.onDetachedFromHand -= OnDetached;
+        }
+    }
 }

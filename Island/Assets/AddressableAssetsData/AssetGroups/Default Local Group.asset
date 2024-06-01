@@ -101,6 +101,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - items
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc56ae1764ebcdc47bffe066821a83cf
+    m_Address: Lighter
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7af430257fb11445b5e96f6ec0f6016
+    m_Address: Bonfire
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d669b94a12774864a8cc1ae9d3d53fdb
+    m_Address: SignalGun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - items
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b4a41c0933ba29648ad510d87e5679b0, type: 2}
   m_SchemaSet:

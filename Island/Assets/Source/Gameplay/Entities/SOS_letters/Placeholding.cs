@@ -16,7 +16,7 @@ public class Placeholding : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         string tag = other.tag;
         var interactable = other.GetComponent<Interactable>();
-        if ((tag == "rock" || tag == "cocount" || tag == "coconut") && 
+        if ((tag == "rock" || tag == "coconutUnbroken") &&
             interactable != null && interactable.attachedToHand != null &&
             interactable.attachedToHand.currentAttachedObject != null &&
             tag == other.GetComponent<Interactable>().attachedToHand.currentAttachedObject.tag) {

@@ -61,6 +61,7 @@ public class WorldSettings : ScriptableObject, WorldSettings.IBerriesSettings, W
         int ChanceTickRateInSeconds { get; }
         int SignalGunsAmount { get; }
         int BonfiresAmount { get; }
+        int LightersAmount { get; }
     }
     public interface INutritionSettings {
         float BerryNutrVal { get; }
@@ -214,15 +215,15 @@ public class WorldSettings : ScriptableObject, WorldSettings.IBerriesSettings, W
     #region Параметры предметов для эвакуации
     [Header("Параметры предметов для эвакуации")]
 
-    [Range(0, 100)]
+    [SerializeField, Range(0, 100)]
     private int _rocketChance = 1;
     int IEvacSettings.RocketChance { get { return _rocketChance; } }
 
-    [Range(0, 100)]
+    [SerializeField, Range(0, 100)]
     private int _sosRocksChance = 1;
     int IEvacSettings.SosRocksChance { get { return _sosRocksChance; } }
 
-    [Range(0, 100)]
+    [SerializeField, Range(0, 100)]
     private int _bonfireChance = 1;
     int IEvacSettings.BonfireChance { get { return _bonfireChance; } }
 
@@ -241,6 +242,11 @@ public class WorldSettings : ScriptableObject, WorldSettings.IBerriesSettings, W
     [SerializeField]
     private int _bonfiresAmount = 4;
     int IEvacSettings.BonfiresAmount { get { return _bonfiresAmount; } }
+
+    [SerializeField]
+    private int _lightersAmount = 2;
+    int IEvacSettings.LightersAmount { get { return _lightersAmount; } }
+
     #endregion
 
     #region Параметры питательности объектов еды

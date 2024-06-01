@@ -43,10 +43,14 @@ MonoBehaviour:
   _minTimeToRespawnInSeconds: 1000
   _maxTimeToRespawnInSeconds: 1500
   _chanceToSpawnOnStart: 0.5
+  _rocketChance: 100
+  _sosRocksChance: 5
+  _bonfireChance: 1
   _bonfireDuration: 100
   _chanceTickRateInSeconds: 20
   _signalGunsAmount: 4
   _bonfiresAmount: 8
+  _lightersAmount: 2
   _nutritionalValue_Berry: 0.4
   _nutritionalValue_Coconut: 0.5
   _nutritionalValue_Banana: 0.6

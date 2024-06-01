@@ -12,6 +12,8 @@ public class SpawnManager : MonoBehaviour
     private BananaTreeManager[] _bananaSpawners;
     private BerrySpawnManager[] _berrySpawners;
     private CocountSpawner[] _coconutSpawners;
+    private RockSpawner[] _rockSpawners;
+    private ItemSpawnManager[] _itemSpawners;
 
     public event Action OnInitialized;
 
@@ -46,6 +48,8 @@ public class SpawnManager : MonoBehaviour
         _coconutSpawners = FindObjectsOfType<CocountSpawner>();
         _berrySpawners = FindObjectsOfType<BerrySpawnManager>();
         _bananaSpawners = FindObjectsOfType<BananaTreeManager>();
+        _rockSpawners = FindObjectsOfType<RockSpawner>();
+        _itemSpawners = FindObjectsOfType<ItemSpawnManager>();
 
         StartCoroutine(InitProcess());
     }
@@ -60,6 +64,10 @@ public class SpawnManager : MonoBehaviour
             spawners.Add(berrySpawner.gameObject.name, berrySpawner);
         foreach (var ban in _bananaSpawners)
             spawners.Add(ban.gameObject.name, ban);
+        foreach (var rockSpawner in _rockSpawners)
+            spawners.Add(rockSpawner.gameObject.name, rockSpawner);
+        foreach (var itemSpawner in _itemSpawners)
+            spawners.Add(itemSpawner.gameObject.name, itemSpawner);
 
         if (_spawnerData != null && _spawnerData.Length > 0)
         {

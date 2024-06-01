@@ -7,6 +7,8 @@ namespace DataPersistence.Gameplay
     [XmlInclude(typeof(BananaTreeManagerData))]
     [XmlInclude(typeof(CoconutSpawnerData))]
     [XmlInclude(typeof(BerrySpawnManagerData))]
+    [XmlInclude(typeof(ItemSpawnerManagerData))]
+    [XmlInclude(typeof(RockSpawnerData))]
     public abstract class SpawnerData : MonoBehaviourData
     {
         public string key;
