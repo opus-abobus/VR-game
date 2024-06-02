@@ -14,6 +14,8 @@ namespace DataPersistence.Gameplay
 
         public GameTimeData gameTimeData = new();
 
+        public SOS_ManagerData SOS_ManagerData = new();
+
         public ObjectData[] gameObjectsData;
 
         public SpawnerData[] spawnersData;

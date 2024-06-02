@@ -100,7 +100,7 @@ public class GameObjectsRegistries : MonoBehaviour
                     component.SetDataToGameObject(@object);
                 }
 
-                RegisterObject(@object, data.prefabAssetGUID);
+                RegisterObject(@object, data.prefabAssetGUID, @object.GetComponents<Component>());
             }
         }
     }

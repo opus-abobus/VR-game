@@ -138,9 +138,9 @@ GameObject:
   - component: {fileID: 2653068738913421354}
   - component: {fileID: 597774727}
   - component: {fileID: 7081922616287156930}
-  - component: {fileID: 1914913135175732981}
+  - component: {fileID: 8775414477451942270}
   m_Layer: 5
-  m_Name: Button (Legacy) (5)
+  m_Name: Inventory slot [8eb2612caa692d643aa9e630b265f5ad]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,10 +160,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7081922616277910114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 155.23, y: -104.159996}
-  m_SizeDelta: {x: 53.45, y: 49.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &597774732
 CanvasRenderer:
@@ -389,7 +389,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &1914913135175732981
+--- !u!114 &8775414477451942270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,10 +398,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 597774725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e2bc27299575498356982c0b22d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c3af1e9a9edcb408748447e5812d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headName: Inventory slot
+  <HeadName>k__BackingField: Inventory slot
 --- !u!1 &690374858
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,9 +569,9 @@ GameObject:
   - component: {fileID: 2653068739021572132}
   - component: {fileID: 705860088}
   - component: {fileID: 7081922616162392784}
-  - component: {fileID: 8084437362487646571}
+  - component: {fileID: 3987252519946736340}
   m_Layer: 5
-  m_Name: Button (Legacy) (4)
+  m_Name: Inventory slot [9b81be5d60bbcba409e04f0c4e09f09f]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,10 +591,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7081922616277910114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 93.87999, y: -104.159996}
-  m_SizeDelta: {x: 53.45, y: 49.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &705860093
 CanvasRenderer:
@@ -820,7 +820,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &8084437362487646571
+--- !u!114 &3987252519946736340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -829,10 +829,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 705860086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e2bc27299575498356982c0b22d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c3af1e9a9edcb408748447e5812d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headName: Inventory slot
+  <HeadName>k__BackingField: Inventory slot
 --- !u!1 &831186023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,9 +1002,9 @@ GameObject:
   - component: {fileID: 2653068739727556410}
   - component: {fileID: 1411835636}
   - component: {fileID: 7081922618074230226}
-  - component: {fileID: 2293829180493280229}
+  - component: {fileID: 5166722655114980747}
   m_Layer: 5
-  m_Name: Button (Legacy) (3)
+  m_Name: Inventory slot [adfcd46c1901ee7439af640a2daccea3]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1024,10 +1024,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7081922616277910114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32.52999, y: -104.159996}
-  m_SizeDelta: {x: 53.45, y: 49.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1411835641
 CanvasRenderer:
@@ -1253,7 +1253,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &2293829180493280229
+--- !u!114 &5166722655114980747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1262,10 +1262,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1411835634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e2bc27299575498356982c0b22d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c3af1e9a9edcb408748447e5812d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headName: Inventory slot
+  <HeadName>k__BackingField: Inventory slot
 --- !u!1 &1443283428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,9 +1283,9 @@ GameObject:
   - component: {fileID: 2653068739759003658}
   - component: {fileID: 1443283430}
   - component: {fileID: 7081922618109872866}
-  - component: {fileID: 4076336381432768356}
+  - component: {fileID: 3728932489576911671}
   m_Layer: 5
-  m_Name: Button (Legacy) (1)
+  m_Name: Inventory slot [1d9d3eb8a0ae3044e9a21e2ca5bf64b3]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1305,10 +1305,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7081922616277910114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 93.87999, y: -33.759995}
-  m_SizeDelta: {x: 53.45, y: 49.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1443283435
 CanvasRenderer:
@@ -1534,7 +1534,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &4076336381432768356
+--- !u!114 &3728932489576911671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1543,10 +1543,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443283428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e2bc27299575498356982c0b22d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c3af1e9a9edcb408748447e5812d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headName: Inventory slot
+  <HeadName>k__BackingField: Inventory slot
 --- !u!1 &1803542959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,9 +1712,9 @@ GameObject:
   - component: {fileID: 2653068740454978354}
   - component: {fileID: 2139261674}
   - component: {fileID: 7081922617430114778}
-  - component: {fileID: 3893395613607072126}
+  - component: {fileID: 5856700136815821446}
   m_Layer: 5
-  m_Name: Button (Legacy) (2)
+  m_Name: Inventory slot [4e8d7c4319c74e742ab30d376a84218e]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1734,10 +1734,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7081922616277910114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 155.23, y: -33.759995}
-  m_SizeDelta: {x: 53.45, y: 49.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2139261679
 CanvasRenderer:
@@ -1963,7 +1963,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &3893395613607072126
+--- !u!114 &5856700136815821446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1972,10 +1972,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2139261672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e2bc27299575498356982c0b22d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c3af1e9a9edcb408748447e5812d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headName: Inventory slot
+  <HeadName>k__BackingField: Inventory slot
 --- !u!1 &359701467562008418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2046,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hand: {fileID: 7081922616138207824}
   _hungerSystem: {fileID: 9216028824873523787}
-  _registries: {fileID: 0}
 --- !u!1 &399577238760325498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,8 +2478,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 3583810813
-  m_fontColor: {r: 0.990566, g: 0.61209506, b: 0.61209506, a: 0.8352941}
+    rgba: 4278240255
+  m_fontColor: {r: 1, g: 0.76640606, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2497,8 +2496,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.8
-  m_fontSizeBase: 13.8
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2507,7 +2506,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 30.7
+  m_characterSpacing: 15
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2557,7 +2556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7613794730011445546
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2677,7 +2676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7278497069831643166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2778,19 +2777,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7981631685514815468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EscapeMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5087269804598288019
 GameObject:
   m_ObjectHideFlags: 0
@@ -3620,6 +3607,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hand: {fileID: 7081922616138207824}
+  <FallbackItemSprite>k__BackingField: {fileID: 21300000, guid: 9cf8afadb082d124385efa5380214d27,
+    type: 3}
+  _levelDataManager: {fileID: 0}
 --- !u!1 &7081922616299403303
 GameObject:
   m_ObjectHideFlags: 0
@@ -4004,9 +3994,9 @@ GameObject:
   - component: {fileID: 7081922616685100367}
   - component: {fileID: 5087269805045605521}
   - component: {fileID: 191460988}
-  - component: {fileID: 7089946707055148428}
+  - component: {fileID: 1575868128148687562}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Inventory slot [62808afaf0f38814bbf2bfc29a285e00]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4026,10 +4016,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7081922616277910114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32.52999, y: -33.759995}
-  m_SizeDelta: {x: 53.45, y: 49.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7081922616685100352
 CanvasRenderer:
@@ -4255,7 +4245,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &7089946707055148428
+--- !u!114 &1575868128148687562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4264,10 +4254,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7081922616685100361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e2bc27299575498356982c0b22d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c3af1e9a9edcb408748447e5812d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _headName: Inventory slot
+  <HeadName>k__BackingField: Inventory slot
 --- !u!1 &7081922616720466065
 GameObject:
   m_ObjectHideFlags: 0
@@ -5117,6 +5107,7 @@ GameObject:
   - component: {fileID: 6101228385787518669}
   - component: {fileID: 2946842166076343009}
   - component: {fileID: 1523705892811604858}
+  - component: {fileID: 8967424429469354654}
   m_Layer: 0
   m_Name: Hybrid_player
   m_TagString: Untagged
@@ -5134,8 +5125,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7081922616221297837}
   - {fileID: 6093299717601894245}
@@ -5373,24 +5364,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7081922617802539465}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b64830dc43ebf04a8a288f991eef87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseFootstepSounds: []
-  _darkGroundFootstepSounds: []
-  _darkMountainsFootstepSounds: []
-  _darkSandFootstepSounds: []
-  _grassFootstepSounds: []
-  _groundFootstepSounds: []
-  _lightGrassFootstepSounds: []
-  _mountainsFootstepSounds: []
-  _sandFootstepSounds: []
-  _woodFootstepSounds: []
+  _baseFootstepSounds:
+  - {fileID: 8300000, guid: 752adf85de15e284ebf55d376e1f4276, type: 3}
+  _darkGroundFootstepSounds:
+  - {fileID: 8300000, guid: 47832b56ccba5bc408b1d5aac1871746, type: 3}
+  - {fileID: 8300000, guid: 6478d7fb30f301b4fa8f74d5d1dad094, type: 3}
+  - {fileID: 8300000, guid: 203ac8b6f07070e4f93f1c1a6fff06c3, type: 3}
+  - {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
+  _darkMountainsFootstepSounds:
+  - {fileID: 8300000, guid: 1f0199a4c6005ec4abbb302f71bc036d, type: 3}
+  _darkSandFootstepSounds:
+  - {fileID: 8300000, guid: e3edc2a270af5c04886ab9c5fa4fced6, type: 3}
+  _grassFootstepSounds:
+  - {fileID: 8300000, guid: 9c0c1f9411026f749bcb3746cd557bec, type: 3}
+  _groundFootstepSounds:
+  - {fileID: 8300000, guid: 61abfb7bb17151f458862ef823ac0932, type: 3}
+  _lightGrassFootstepSounds:
+  - {fileID: 8300000, guid: 9c0c1f9411026f749bcb3746cd557bec, type: 3}
+  _mountainsFootstepSounds:
+  - {fileID: 8300000, guid: e3cfcb32689b274419ac73380ea96888, type: 3}
+  _sandFootstepSounds:
+  - {fileID: 8300000, guid: 557e96b16076cb84285c90941906b44c, type: 3}
+  _woodFootstepSounds:
+  - {fileID: 8300000, guid: c41fb169b2991c247a5466e00faa6639, type: 3}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   _footstepDelay: 0.5
   _minVolume: 0.3
   _maxVolume: 0.5
@@ -5406,7 +5410,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b397693b938ee9a42a0fe1f86c70b6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screen_survived: {fileID: 399577238760325498}
+  _screen_survived: {fileID: 5135110604186817358}
+  _timeToExit: 2
+--- !u!114 &8967424429469354654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081922617802539465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5811a834f8d87014ebc35558a5ac4575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerSystem: {fileID: 9216028824873523787}
+  _screen: {fileID: 2080674228350906676}
+  _timeToExit: 2
 --- !u!1 &7081922617816007327
 GameObject:
   m_ObjectHideFlags: 0
@@ -5556,7 +5576,6 @@ GameObject:
   - component: {fileID: 8953390450952167521}
   - component: {fileID: 1169929621913882991}
   - component: {fileID: 2049447014671946036}
-  - component: {fileID: 1422512718}
   m_Layer: 5
   m_Name: DeathScreen
   m_TagString: Untagged
@@ -5621,21 +5640,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1422512718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8804483266042474405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1732ebf1cb50e2344af6869a9ed9e3ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hungerSystem: {fileID: 9216028824873523787}
-  image: {fileID: 2049447014671946036}
-  fadeTime: 10
 --- !u!1001 &2826043965477435167
 PrefabInstance:
   m_ObjectHideFlags: 0

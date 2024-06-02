@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketShot : MonoBehaviour
@@ -11,7 +9,7 @@ public class RocketShot : MonoBehaviour
             if (other.name == "RocketZone") {
                 print("detected");
                 EvacuationSystem.Instance.AddEvacItem(EvacuationSystem.EvacItem.TypesOfItems.rocket);
-                isFired = false;
+                //isFired = false;
             }
         }
     }

@@ -27,6 +27,10 @@ MonoBehaviour:
   _useRandomGrowthTime: 1
   _minTimeToGrowthInSeconds: 2200
   _maxTimeToGrowthInSeconds: 4800
+  _startGrowthProgress: 0
+  _useRandomStartGrowthProgress: 0
+  _minStartGrowthProgress: 0
+  _maxStartGrowthProgress: 0
   _useRandomRipePhaseDuration: 1
   _ripePhaseDurationInSeconds: 900
   _minPhaseRipeDurationInSeconds: 700
@@ -39,14 +43,18 @@ MonoBehaviour:
   _minTimeToRespawnInSeconds: 7238
   _maxTimeToRespawnInSeconds: 11843
   _chanceToSpawnOnStart: 0.4
+  _rocketChance: 1
+  _sosRocksChance: 1
+  _bonfireChance: 1
   _bonfireDuration: 60
   _chanceTickRateInSeconds: 30
   _signalGunsAmount: 1
   _bonfiresAmount: 4
+  _lightersAmount: 2
   _nutritionalValue_Berry: 0.157
   _nutritionalValue_Coconut: 0.26
   _nutritionalValue_Banana: 0.232
-  satietyTime: 720
+  satietyTime: 600
   healthIncreaseFromSatietyThreshold: 0.6
   healthDecreaseTimeFromStarving: 60
   healthIncreaseTimeFromSatiety: 1500

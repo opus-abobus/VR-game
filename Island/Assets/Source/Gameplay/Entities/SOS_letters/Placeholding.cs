@@ -1,30 +1,43 @@
 using System;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
-using static SOS_Manager;
+using static DataPersistence.Gameplay.SOS_ManagerData;
 
-public class Placeholding : MonoBehaviour {
-    public event Action OnPlaceholding;
+public class Placeholding : MonoBehaviour
+{
+    public event Action<Placeholding> ItemPlaced;
 
-    private ISosLetters _sosLetters;
+    public int index;
+    public bool itemPlaced;
 
-    private void Awake() {
-        _sosLetters = GetComponentInParent<SOS_Manager>();
-        OnPlaceholding += _sosLetters.UpdatePlaceholderCount;
+    public void SetData(PlaceholdingData data)
+    {
+        if (data != null)
+        {
+            itemPlaced = data.isOccupied;
+            index = data.index;
+        }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    public PlaceholdingData GetData()
+    {
+        return new PlaceholdingData(index, itemPlaced);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         string tag = other.tag;
         var interactable = other.GetComponent<Interactable>();
-        if ((tag == "rock" || tag == "coconutUnbroken") &&
+        if (((tag == "rock" || tag == "coconutUnbroken") &&
             interactable != null && interactable.attachedToHand != null &&
             interactable.attachedToHand.currentAttachedObject != null &&
-            tag == other.GetComponent<Interactable>().attachedToHand.currentAttachedObject.tag) {
+            tag == other.GetComponent<Interactable>().attachedToHand.currentAttachedObject.tag) || (itemPlaced &&
+            tag == "rock" || tag == "coconutUnbroken"))
+        {
 
-            OnPlaceholding.Invoke();
-            OnPlaceholding -= _sosLetters.UpdatePlaceholderCount;
-
-            other.GetComponent<Interactable>().attachedToHand.DetachObject(other.GetComponent<Interactable>().attachedToHand.currentAttachedObject);
+            if (!itemPlaced)
+                other.GetComponent<Interactable>().attachedToHand.DetachObject(
+                    other.GetComponent<Interactable>().attachedToHand.currentAttachedObject);
 
             Destroy(other.GetComponent<VelocityEstimator>());
             Destroy(other.GetComponent<Throwable>());
@@ -33,6 +46,12 @@ public class Placeholding : MonoBehaviour {
             other.transform.parent = this.transform;
             other.transform.localPosition = Vector3.zero;
             other.transform.localRotation = Quaternion.identity;
+
+            if (!itemPlaced)
+            {
+                itemPlaced = true;
+                ItemPlaced?.Invoke(this);
+            }
 
             Destroy(other.attachedRigidbody);
             Destroy(GetComponent<MeshRenderer>());

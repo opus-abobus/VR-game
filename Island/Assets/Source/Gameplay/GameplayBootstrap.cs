@@ -36,6 +36,9 @@ public class GameplayBootstrap : MonoBehaviour
     private InventoryPanelController _inventoryPanelController;
 
     [SerializeField]
+    private SOS_Manager _sosManager;
+
+    [SerializeField]
     private GameObjectsRegistries _registries;
 
     [SerializeField]
@@ -77,6 +80,7 @@ public class GameplayBootstrap : MonoBehaviour
             _hungerSystem.Initialize(null);
             _gameTime.Init(null);
             _inventoryPanelController.Init(null);
+            _sosManager.Init(null);
         }
         else
         {
@@ -85,6 +89,7 @@ public class GameplayBootstrap : MonoBehaviour
             _hungerSystem.Initialize(gameplayData.playerData.hungerSystemData);
             _gameTime.Init(gameplayData.gameTimeData);
             _inventoryPanelController.Init(gameplayData.playerData.inventoryData);
+            _sosManager.Init(gameplayData.SOS_ManagerData);
         }
 
         _spawnManager.Initialize(gameplayData.spawnersData);

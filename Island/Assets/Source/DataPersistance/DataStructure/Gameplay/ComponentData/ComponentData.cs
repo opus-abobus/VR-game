@@ -32,6 +32,16 @@ namespace DataPersistence.Gameplay
                     rigidbody.velocity, rigidbody.angularVelocity);
             }
 
+            if (component is SignalGun signalGun)
+            {
+                return new SignalGunData(signalGun.IsLoaded, signalGun.rocketFireEffectTimeLeft);
+            }
+
+            if (component is Bonfire bonfire)
+            {
+                return new BonfireData(bonfire._isFired);
+            }
+
             return null;
         }
     }

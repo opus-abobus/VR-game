@@ -154,7 +154,7 @@ public class EvacuationSystem : MonoBehaviour, GameplayBootstrap.IBootstrap
     }
 
     public void AddEvacItem(EvacItem.TypesOfItems type, Bonfire bonfire = null, bool useGlobalSettings = true) {
-        if (_evacItems == null || _evacItems.Count == 0) {
+        if (_evacItems == null) {
             _evacItems = new List<EvacItem>();
         }
 
