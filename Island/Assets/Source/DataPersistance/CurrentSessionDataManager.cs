@@ -22,7 +22,7 @@ namespace DataPersistence
 
         public void SaveCurrentDataOnDisk()
         {
-            AppManager.Instance.DataManager.WriteSave(_gameplayData, Environment.UserName + " [" + DateTime.Now.ToBinary() + "]");
+            AppManager.Instance.DataManager.WriteSave(_gameplayData);
         }
 
         private static CurrentSessionDataManager _instance;

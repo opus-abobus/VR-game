@@ -5274,13 +5274,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -5348,7 +5350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22b8510b2032ee4ba2826d15e1caa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteInInvenory: {fileID: 21300000, guid: 5e3de6b14f6ffde42880647f45987c06, type: 3}
+  _spriteInInvenory: {fileID: 21300000, guid: d921437da9499d24ebe5ee064482b173, type: 3}
 --- !u!114 &2772939391602831252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5558,12 +5560,14 @@ MonoBehaviour:
   audioSource: {fileID: 2772939391602831263}
   rocketParticleSystem: {fileID: 2772939391504466515}
   rocketFireEffectDuration: 20
+  rocketFireEffectTimeLeft: 0
   explosionForce: 40000
   fireAction:
     actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
   rocket: {fileID: 2772939390781011720}
   bottomPart: {fileID: 2772939391134334314}
+  IsLoaded: 1
 --- !u!82 &2772939391602831263
 AudioSource:
   m_ObjectHideFlags: 0

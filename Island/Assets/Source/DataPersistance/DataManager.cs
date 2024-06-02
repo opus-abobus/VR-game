@@ -1,4 +1,6 @@
 using DataPersistence.Gameplay;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -102,6 +104,8 @@ namespace DataPersistence
             }
         }
 
+        private Dictionary<GameplayData, string> _gameplayDataPathsNoExt = new();
+
         public GameplayData[] GetSaves()
         {
             GameplayData[] result = new GameplayData[Directory.GetFiles(_gameDataPath, "*.xml").Length];
@@ -110,14 +114,31 @@ namespace DataPersistence
                 return null;
             }
 
+            _gameplayDataPathsNoExt.Clear();
+
             int i = 0;
             foreach (string filePath in Directory.GetFiles(_gameDataPath, "*.xml"))
             {
                 result[i] = _saveSystem.Load<GameplayData>(filePath);
+
+                _gameplayDataPathsNoExt.Add(result[i], filePath.Substring(0, filePath.Length - 4));
+
                 i++;
             }
 
             return result;
+        }
+
+        public Texture2D GetScreenCaptureFromSave(GameplayData gameplayData, int width, int height)
+        {
+            byte[] bytes = File.ReadAllBytes(_gameplayDataPathsNoExt[gameplayData]);
+            if (bytes == null || bytes.Length == 0)
+                return null;
+
+            Texture2D texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+            texture.LoadImage(bytes);
+
+            return texture;
         }
 
         public GameplayData GetSave(string saveFileName)
@@ -155,9 +176,20 @@ namespace DataPersistence
             return _saveSystem.Load<GameplayData>(lastSavePath);
         }
 
-        public void WriteSave(GameplayData gameplayData, string saveName)
+        public void WriteSave(GameplayData gameplayData, bool takeScreenCapture = true)
         {
+            var dateNow = DateTime.Now.ToBinary();
+
+            string saveName = Environment.UserName + " [" + dateNow + "] - " + 
+                GameSettingsManager.Instance.ActiveWorldSettings.Difficulty;
+
             _saveSystem.Save(gameplayData, _gameDataPath + saveName + ".xml");
+
+            if (takeScreenCapture)
+            {
+                string captureName = saveName;
+                ScreenCapture.CaptureScreenshot(_gameDataPath + saveName);
+            }
         }
     }
 }

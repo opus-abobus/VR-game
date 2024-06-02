@@ -1,6 +1,5 @@
 using DataPersistence.Gameplay;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
@@ -30,26 +29,16 @@ public class InventorySlotController : MonoBehaviour {
     {
         if (_objectPrefabGUID != null && _storedObject != null)
         {
+            var components = _storedObject.GetComponents<Component>();
+            var componentsData = new ComponentData[components.Length];
+
             int i = 0;
-            List<ComponentData> componentsList = new()
+            foreach (var c in components)
             {
-                new TransformData()
-            };
-            componentsList[i++].SetDataFromComponent(_storedObject.transform);
-
-            if (_storedObject.TryGetComponent<Rigidbody>(out var rB))
-            {
-                componentsList.Add(new RigidbodyData());
-                componentsList[i++].SetDataFromComponent(rB);
+                componentsData[i++] = ComponentData.GetDataFromComponent(c);
             }
 
-            if (_storedObject.TryGetComponent<Collider>(out var Col))
-            {
-                componentsList.Add(new ColliderData());
-                componentsList[i++].SetDataFromComponent(Col);
-            }
-
-            var objectData = new ObjectData(_objectPrefabGUID, componentsList.ToArray());
+            var objectData = new ObjectData(_objectPrefabGUID, componentsData);
 
             return new InventorySlotData(gameObject.name, objectData);
         }
@@ -78,6 +67,11 @@ public class InventorySlotController : MonoBehaviour {
                 {
                     SetImageForSlot(InventoryPanelController.Instance.FallbackItemSprite);
                 }
+
+/*                foreach (var cData in _storedObjectComponentsData)
+                {
+                    cData.SetDataToGameObject(_storedObject);
+                }*/
 
                 _isEmpty = false;
             }
@@ -124,8 +118,20 @@ public class InventorySlotController : MonoBehaviour {
         }
     }
 
+    //private ComponentData[] _storedObjectComponentsData;
+
     private void OnItemPlaced() {
         _objectPrefabGUID = _registry.GetDynamicObjectAssetGUID(_storedObject);
+
+/*        var components = _storedObject.GetComponents<Component>();
+        _storedObjectComponentsData = new ComponentData[components.Length];
+
+        int i = 0;
+        foreach (var c in components)
+        {
+            _storedObjectComponentsData[i++] = ComponentData.GetDataFromComponent(c);
+        }*/
+
         _registry.UnregisterObject(_storedObject);
     }
 
@@ -134,6 +140,9 @@ public class InventorySlotController : MonoBehaviour {
         {
             _storedObject.transform, _storedObject.GetComponent<Collider>(), _storedObject.GetComponent<Rigidbody>()
         });
+
+        //_storedObjectComponentsData = null;
+
         _objectPrefabGUID = null;
     }
 
