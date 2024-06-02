@@ -9,7 +9,9 @@ public class HybridPlayerController : MonoBehaviour {
 
     [Header("Настройки управления игроком")]
     [SerializeField, Range(1.0f, 10.0f)]
-    float _mouseSensitivity = 4.0f;
+    float _mouseSensitivityFactor = 10.0f;
+
+    private float _mouseSensitivityX, _mouseSensitivityY;
 
     [SerializeField]
     float _walkSpeed = 6.0f;
@@ -55,13 +57,15 @@ public class HybridPlayerController : MonoBehaviour {
     private Vector2 _currentMouseDeltaVelocity = Vector2.zero;
     public bool IsFreeCamActive { get; private set; }
 
+    public event Action Move;
+
     [SerializeField] private LevelDataManager _levelDataManager;
     private PlayerData _data;
 
     private void OnGameSave(GameplayData data)
     {
         data.playerData.playerCameraTransform =
-            new PlayerData.PlayerCameraTransform(_playerCamera.localEulerAngles);
+            new PlayerData.PlayerCameraTransform(_cameraPitch);
 
         data.playerData.playerPosition = transform.position;
         data.playerData.playerRotation = transform.rotation;
@@ -93,11 +97,16 @@ public class HybridPlayerController : MonoBehaviour {
         {
             transform.position = _data.playerPosition;
             transform.rotation = _data.playerRotation;
-            _playerCamera.localEulerAngles = _data.playerCameraTransform.localEulerAngles;
 
-            _cameraPitch = Mathf.Clamp(_playerCamera.localEulerAngles.x, -90.0f, 90.0f);
+            _cameraPitch = _data.playerCameraTransform.cameraPitch;
+            _playerCamera.localEulerAngles = Vector3.right * _cameraPitch;
         }
-        
+
+        _mouseSensitivityX = AppManager.Instance.DataManager.SettingsData.MouseSensitivityX * _mouseSensitivityFactor;
+        _mouseSensitivityY = AppManager.Instance.DataManager.SettingsData.MouseSensitivityY * _mouseSensitivityFactor;
+
+        _playerCamera.GetComponent<Camera>().fieldOfView = AppManager.Instance.DataManager.SettingsData.FieldOfView;
+
         StartCoroutine(UpdateProcess());
     }
 
@@ -160,12 +169,12 @@ public class HybridPlayerController : MonoBehaviour {
 
         _currentMouseDelta = Vector2.SmoothDamp(_currentMouseDelta, targetMouseDelta, ref _currentMouseDeltaVelocity, _mouseSmoothTime);
 
-        _cameraPitch -= _currentMouseDelta.y * _mouseSensitivity;
+        _cameraPitch -= _currentMouseDelta.y * _mouseSensitivityY;
         _cameraPitch = Mathf.Clamp(_cameraPitch, -90.0f, 90.0f);
 
         _playerCamera.localEulerAngles = Vector3.right * _cameraPitch;
 
-        transform.Rotate(_currentMouseDelta.x * _mouseSensitivity * Vector3.up);
+        transform.Rotate(_currentMouseDelta.x * _mouseSensitivityX * Vector3.up);
     }
     void UpdateMovement() {
         Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -180,6 +189,11 @@ public class HybridPlayerController : MonoBehaviour {
 
         Vector3 velocity = (transform.forward * _currentDir.y + transform.right * _currentDir.x) * _walkSpeed + Vector3.up * _velocityY;
         _controller.Move(velocity * Time.deltaTime);
+
+        if (_controller.isGrounded && (velocity.x > 0.1f || velocity.z > 0.1f))
+        {
+            Move?.Invoke();
+        }
     }
 
     void OnGameStateChanged() {

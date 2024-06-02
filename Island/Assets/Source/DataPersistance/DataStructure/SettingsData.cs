@@ -42,7 +42,7 @@ namespace DataPersistence
         [SaveField(FieldName.SkipIntro)]
         public bool SkipIntro;
 
-        [SaveField(FieldName.FieldOfView), ConstraintField(50, 300)]
+        [SaveField(FieldName.FieldOfView), ConstraintField(50, 100)]
         public int FieldOfView;
 
         //[SerializeField] private List<string> languages;

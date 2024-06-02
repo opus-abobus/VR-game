@@ -44,8 +44,8 @@ MonoBehaviour:
   _maxTimeToRespawnInSeconds: 1500
   _chanceToSpawnOnStart: 0.5
   _rocketChance: 100
-  _sosRocksChance: 5
-  _bonfireChance: 1
+  _sosRocksChance: 30
+  _bonfireChance: 20
   _bonfireDuration: 100
   _chanceTickRateInSeconds: 20
   _signalGunsAmount: 4

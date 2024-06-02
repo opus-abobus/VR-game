@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WorldSettings_easy
   m_EditorClassIdentifier: 
   _difficulty: 1
-  _minBerriesOnStart: 50
-  _maxBerriesOnStart: 90
+  _minBerriesOnStart: 40
+  _maxBerriesOnStart: 80
   _timeoutBerryRespawnInSeconds: 300
   _timeToRespawnBerryInSeconds: 600
   _useRandomBerryRespawnTime: 1
@@ -27,11 +27,15 @@ MonoBehaviour:
   _useRandomGrowthTime: 1
   _minTimeToGrowthInSeconds: 1160
   _maxTimeToGrowthInSeconds: 1900
+  _startGrowthProgress: 0
+  _useRandomStartGrowthProgress: 1
+  _minStartGrowthProgress: 0.629
+  _maxStartGrowthProgress: 1
   _useRandomRipePhaseDuration: 1
   _ripePhaseDurationInSeconds: 720
   _minPhaseRipeDurationInSeconds: 700
   _maxPhaseRipeDurationInSeconds: 1400
-  startRipeningMoment: 0.5
+  startRipeningMoment: 0.734
   _minBananasToDrop: 7
   _maxBananasToDrop: 10
   _minCoconutsOnStart: 1
@@ -39,10 +43,14 @@ MonoBehaviour:
   _minTimeToRespawnInSeconds: 1500
   _maxTimeToRespawnInSeconds: 3000
   _chanceToSpawnOnStart: 0.4
+  _rocketChance: 85
+  _sosRocksChance: 25
+  _bonfireChance: 18
   _bonfireDuration: 90
   _chanceTickRateInSeconds: 35
   _signalGunsAmount: 2
   _bonfiresAmount: 6
+  _lightersAmount: 2
   _nutritionalValue_Berry: 0.275
   _nutritionalValue_Coconut: 0.317
   _nutritionalValue_Banana: 0.302

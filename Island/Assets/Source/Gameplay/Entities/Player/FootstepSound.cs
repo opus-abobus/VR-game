@@ -25,70 +25,72 @@ public class FootstepSound : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = AppManager.Instance.DataManager.SettingsData.PlayerStepsVolume;
+
+        _hybridPlayerController.Move += OnPlayerMove;
     }
 
-    private void Update()
+    [SerializeField] private HybridPlayerController _hybridPlayerController;
+
+    private void OnPlayerMove()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Time.time - _lastFootstepTime >= _footstepDelay)
         {
-            if (Time.time - _lastFootstepTime >= _footstepDelay)
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 0.5f, _groundLayer))
             {
-                if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 0.5f, _groundLayer))
+                Renderer renderer = hitInfo.collider.gameObject.GetComponent<Renderer>();
+                if (renderer != null)
                 {
-                    Renderer renderer = hitInfo.collider.gameObject.GetComponent<Renderer>();
-                    if (renderer != null)
+                    Material material = renderer.material;
+                    AudioClip[] footstepSounds;
+
+                    string materialName = material.name;
+
+                    switch (materialName)
                     {
-                        Material material = renderer.material;
-                        AudioClip[] footstepSounds;
 
-                        string materialName = material.name;
+                        case "Base (Instance)":
+                            footstepSounds = _baseFootstepSounds;
+                            break;
+                        case "DarkGround (Instance)":
+                            footstepSounds = _darkGroundFootstepSounds;
+                            break;
+                        case "DarkMountains (Instance)":
+                            footstepSounds = _darkMountainsFootstepSounds;
+                            break;
+                        case "DarkSand (Instance)":
+                            footstepSounds = _darkSandFootstepSounds;
+                            break;
+                        case "Grass (Instance)":
+                            footstepSounds = _grassFootstepSounds;
+                            break;
+                        case "Ground (Instance)":
+                            footstepSounds = _groundFootstepSounds;
+                            break;
+                        case "LightGrass (Instance)":
+                            footstepSounds = _lightGrassFootstepSounds;
+                            break;
+                        case "Mountains (Instance)":
+                            footstepSounds = _mountainsFootstepSounds;
+                            break;
+                        case "Sand (Instance)":
+                            footstepSounds = _sandFootstepSounds;
+                            break;
+                        case "Wood (Instance)":
+                            footstepSounds = _woodFootstepSounds;
+                            break;
+                        default:
+                            return;
+                    }
 
-                        switch (materialName)
-                        {
+                    if (footstepSounds.Length > 0)
+                    {
+                        int randomIndex = Random.Range(0, footstepSounds.Length);
+                        float randomVolume = Random.Range(_minVolume, _maxVolume);
 
-                            case "Base (Instance)":
-                                footstepSounds = _baseFootstepSounds;
-                                break;
-                            case "DarkGround (Instance)":
-                                footstepSounds = _darkGroundFootstepSounds;
-                                break;
-                            case "DarkMountains (Instance)":
-                                footstepSounds = _darkMountainsFootstepSounds;
-                                break;
-                            case "DarkSand (Instance)":
-                                footstepSounds = _darkSandFootstepSounds;
-                                break;
-                            case "Grass (Instance)":
-                                footstepSounds = _grassFootstepSounds;
-                                break;
-                            case "Ground (Instance)":
-                                footstepSounds = _groundFootstepSounds;
-                                break;
-                            case "LightGrass (Instance)":
-                                footstepSounds = _lightGrassFootstepSounds;
-                                break;
-                            case "Mountains (Instance)":
-                                footstepSounds = _mountainsFootstepSounds;
-                                break;
-                            case "Sand (Instance)":
-                                footstepSounds = _sandFootstepSounds;
-                                break;
-                            case "Wood (Instance)":
-                                footstepSounds = _woodFootstepSounds;
-                                break;  
-                            default:
-                                return;
-                        }
-
-                        if (footstepSounds.Length > 0)
-                        {
-                            int randomIndex = Random.Range(0, footstepSounds.Length);
-                            float randomVolume = Random.Range(_minVolume, _maxVolume);
-
-                            AudioClip footstepSound = footstepSounds[randomIndex];
-                            _audioSource.PlayOneShot(footstepSound, randomVolume);
-                            _lastFootstepTime = Time.time;
-                        }
+                        AudioClip footstepSound = footstepSounds[randomIndex];
+                        _audioSource.PlayOneShot(footstepSound, randomVolume);
+                        _lastFootstepTime = Time.time;
                     }
                 }
             }

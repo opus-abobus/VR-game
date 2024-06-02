@@ -18,12 +18,12 @@ namespace DataPersistence.Gameplay
         [Serializable]
         public class PlayerCameraTransform
         {
-            public Vector3 localEulerAngles;
+            public float cameraPitch;
 
             public PlayerCameraTransform() { }
-            public PlayerCameraTransform(Vector3 localEulerAngles)
+            public PlayerCameraTransform(float cameraPitch)
             {
-                this.localEulerAngles = localEulerAngles;
+                this.cameraPitch = cameraPitch;
             }
         }
     }

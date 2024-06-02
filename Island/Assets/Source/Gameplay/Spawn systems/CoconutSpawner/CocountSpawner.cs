@@ -69,7 +69,9 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
         _minTimeToSpawn = settings.MinTimeToRespawnInSeconds;
         _maxTimeToSpawn = settings.MaxTimeToRespawnInSeconds;
 
-        if (Random.Range(0f, 1) <= settings.ChanceToSpawnOnStart) {
+        float rnd = Random.value;
+
+        if (rnd <= settings.ChanceToSpawnOnStart) {
             _cocountsOnStart = Random.Range(settings.MinCoconutsOnStart, settings.MaxCoconutsOnStart);
         }
         else {
@@ -97,9 +99,9 @@ public class CocountSpawner : MonoBehaviour, SpawnManager.ISpawner {
 
         while (true)
         {
-            SpawnCocount();
             int timeToSpawn = Random.Range(_minTimeToSpawn, _maxTimeToSpawn + 1);
             yield return new WaitForSeconds(timeToSpawn);
+            SpawnCocount();
         }
     }
 

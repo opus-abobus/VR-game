@@ -14,6 +14,12 @@ public class LevelDataManager : MonoBehaviour
 
     public event Action<GameplayData> OnGameSave;
 
+    private bool _autosaveAllowed, _saveOnExit;
+    private int _autosaveIntervalInMin;
+
+    [SerializeField] private PauseMenuController _pauseMenuController;
+    [SerializeField] private GameObject _pauseCanvas;
+
     private void Awake()
     {
         if (CurrentSessionDataManager.Instance.IsNewGame)
@@ -22,6 +28,28 @@ public class LevelDataManager : MonoBehaviour
         }
 
         _boostrap.Init(CurrentSessionDataManager.Instance.CurrentData, CurrentSessionDataManager.Instance.IsNewGame);
+
+        _autosaveAllowed = AppManager.Instance.DataManager.SettingsData.Autosave;
+        _saveOnExit = AppManager.Instance.DataManager.SettingsData.SaveOnExit;
+        _autosaveIntervalInMin = AppManager.Instance.DataManager.SettingsData.AutoSaveIntervalInMinutes;
+
+        _pauseMenuController.GameplayExit += OnGameplayExit;
+    }
+
+    private void Start()
+    {
+        if (_autosaveAllowed)
+            StartCoroutine(AutosaveProcess());
+    }
+
+    private void OnGameplayExit()
+    {
+        if (_saveOnExit)
+        {
+            _pauseCanvas.SetActive(false);
+
+            SaveGame(": " + GameSettingsManager.Instance.ActiveWorldSettings.Difficulty + " - exitSave");
+        }
     }
 
     private void Update()
@@ -68,5 +96,23 @@ public class LevelDataManager : MonoBehaviour
         }
 
         _allowSave = true;
+    }
+
+    private IEnumerator AutosaveProcess()
+    {
+        var wait = new WaitForSeconds(_autosaveIntervalInMin * 60);
+
+        while (true)
+        {
+            yield return wait;
+
+            if (_allowSave)
+                SaveGame(": " + GameSettingsManager.Instance.ActiveWorldSettings.Difficulty + " - autosave");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        _pauseMenuController.GameplayExit -= OnGameplayExit;
     }
 }

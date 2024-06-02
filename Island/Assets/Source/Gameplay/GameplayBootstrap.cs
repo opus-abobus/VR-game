@@ -104,6 +104,8 @@ public class GameplayBootstrap : MonoBehaviour
             bootQueue.Dequeue().Initialize();
         }
 
+        AudioListener.volume = AppManager.Instance.DataManager.SettingsData.TotalVolume;
+
         BootstrapFinished?.Invoke();
     }
 }

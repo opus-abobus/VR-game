@@ -27,22 +27,30 @@ MonoBehaviour:
   _useRandomGrowthTime: 1
   _minTimeToGrowthInSeconds: 2200
   _maxTimeToGrowthInSeconds: 2600
+  _startGrowthProgress: 0
+  _useRandomStartGrowthProgress: 1
+  _minStartGrowthProgress: 0.326
+  _maxStartGrowthProgress: 0.616
   _useRandomRipePhaseDuration: 1
   _ripePhaseDurationInSeconds: 720
   _minPhaseRipeDurationInSeconds: 700
   _maxPhaseRipeDurationInSeconds: 1400
-  startRipeningMoment: 0.72
+  startRipeningMoment: 0.488
   _minBananasToDrop: 2
   _maxBananasToDrop: 6
   _minCoconutsOnStart: 0
-  _maxCoconutsOnStart: 5
+  _maxCoconutsOnStart: 4
   _minTimeToRespawnInSeconds: 2000
   _maxTimeToRespawnInSeconds: 2200
-  _chanceToSpawnOnStart: 0.3
+  _chanceToSpawnOnStart: 0.282
+  _rocketChance: 77
+  _sosRocksChance: 18
+  _bonfireChance: 10
   _bonfireDuration: 75
   _chanceTickRateInSeconds: 40
   _signalGunsAmount: 2
   _bonfiresAmount: 5
+  _lightersAmount: 2
   _nutritionalValue_Berry: 0.236
   _nutritionalValue_Coconut: 0.302
   _nutritionalValue_Banana: 0.295

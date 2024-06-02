@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using AppManagement;
+using System;
 
 public class PauseMenuController : MonoBehaviour
 {
+    public event Action GameplayExit;
+
     [SerializeField]
     private Button _resumeGame;
 
@@ -31,9 +34,12 @@ public class PauseMenuController : MonoBehaviour
 
     private void OnReturnToMainMenuClicked() {
         //AppManager.Instance.LoadMainMenu();
+        GameplayExit?.Invoke();
     }
 
     private void OnExitAppClicked() {
+        GameplayExit?.Invoke();
+
         AppManager.Instance.ExitApp();
     }
 

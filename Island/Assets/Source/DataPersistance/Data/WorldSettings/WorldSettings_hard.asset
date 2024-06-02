@@ -28,9 +28,9 @@ MonoBehaviour:
   _minTimeToGrowthInSeconds: 2200
   _maxTimeToGrowthInSeconds: 4800
   _startGrowthProgress: 0
-  _useRandomStartGrowthProgress: 0
+  _useRandomStartGrowthProgress: 1
   _minStartGrowthProgress: 0
-  _maxStartGrowthProgress: 0
+  _maxStartGrowthProgress: 0.399
   _useRandomRipePhaseDuration: 1
   _ripePhaseDurationInSeconds: 900
   _minPhaseRipeDurationInSeconds: 700
@@ -42,10 +42,10 @@ MonoBehaviour:
   _maxCoconutsOnStart: 3
   _minTimeToRespawnInSeconds: 7238
   _maxTimeToRespawnInSeconds: 11843
-  _chanceToSpawnOnStart: 0.4
-  _rocketChance: 1
-  _sosRocksChance: 1
-  _bonfireChance: 1
+  _chanceToSpawnOnStart: 0.1
+  _rocketChance: 69
+  _sosRocksChance: 15
+  _bonfireChance: 8
   _bonfireDuration: 60
   _chanceTickRateInSeconds: 30
   _signalGunsAmount: 1
